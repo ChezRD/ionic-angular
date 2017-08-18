@@ -665,7 +665,7 @@
         VirtualScroll.prototype.scrollUpdate = function (ev) {
             var _this = this;
             // set the scroll top from the scroll event
-            this._data.scrollTop = ev.scrollTop;
+            this._data.scrollTop = ev ? ev.scrollTop : 0;
             // there is a queue system so that we can
             // spread out the work over multiple frames
             var /** @type {?} */ queue = this._queue;
