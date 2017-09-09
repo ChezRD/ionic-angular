@@ -425,7 +425,7 @@
          */
         DeepLinker.prototype._loadViewForSegment = function (navContainer, segment, done) {
             if (!segment) {
-                return done();
+                return done(false, false);
             }
             if (nav_util_1.isTabs(navContainer) || (nav_util_1.isTab(navContainer) && navContainer.parent)) {
                 var /** @type {?} */ tabs = (((nav_util_1.isTabs(navContainer) ? navContainer : navContainer.parent)));
@@ -437,7 +437,7 @@
                     updateUrl: false,
                     animate: false
                 }, true);
-                return done();
+                return done(false, false);
             }
             var /** @type {?} */ navController = ((navContainer));
             var /** @type {?} */ numViews = navController.length() - 1;
@@ -451,7 +451,7 @@
                     if (i === numViews) {
                         // this is the last view in the stack and it's the same
                         // as the segment so there's no change needed
-                        return done();
+                        return done(false, false);
                     }
                     else {
                         // it's not the exact view as the end

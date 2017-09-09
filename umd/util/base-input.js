@@ -235,6 +235,7 @@ var __extends = (this && this.__extends) || (function () {
             this._form && this._form.unsetAsFocused(this);
             this._setFocus(false);
             this.ionBlur.emit(this);
+            this._onTouched && this._onTouched();
         };
         /**
          * @hidden

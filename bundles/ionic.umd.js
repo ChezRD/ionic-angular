@@ -23170,6 +23170,7 @@ function requestIonicCallback(functionToLazy) {
  * | `popoverEnter`           | `string`            | The name of the transition to use while a popover is presented.                                                                                  |
  * | `popoverLeave`           | `string`            | The name of the transition to use while a popover is dismissed.                                                                                  |
  * | `spinner`                | `string`            | The default spinner to use when a name is not defined.                                                                                           |
+ * | `statusbarPadding`       | `boolean`           | Whether to hide extra padding for statusbar.                                                                                                     |
  * | `swipeBackEnabled`       | `boolean`           | Whether native iOS swipe to go back functionality is enabled.                                                                                    |
  * | `tabsHighlight`          | `boolean`           | Whether to show a highlight line under the tab when it is selected.                                                                              |
  * | `tabsLayout`             | `string`            | The layout to use for all tabs. Available options: `"icon-top"`, `"icon-start"`, `"icon-end"`, `"icon-bottom"`, `"icon-hide"`, `"title-hide"`.   |
@@ -23458,6 +23459,8 @@ var ConfigToken = new OpaqueToken('USERCONFIG');
  *
  * \@usage
  * ```ts
+ * import { NavParams } from 'ionic-angular';
+ *
  * export class MyClass{
  *  constructor(public navParams: NavParams){
  *    // userParams is an object we have in our nav-parameters
@@ -23484,6 +23487,8 @@ var NavParams = (function () {
      * Get the value of a nav-parameter for the current view
      *
      * ```ts
+     * import { NavParams } from 'ionic-angular';
+     *
      * export class MyClass{
      *  constructor(public navParams: NavParams){
      *    // userParams is an object we have in our nav-parameters
@@ -24715,7 +24720,7 @@ var QueryParams = (function () {
  *
  * \@Component({...})
  * export MyPage {
- *   constructor(public plt: Platform) {
+ *   constructor(public platform: Platform) {
  *
  *   }
  * }
@@ -24830,8 +24835,8 @@ var Platform = (function () {
      *
      * \@Component({...})
      * export MyPage {
-     *   constructor(public plt: Platform) {
-     *     if (this.plt.is('ios')) {
+     *   constructor(public platform: Platform) {
+     *     if (this.platform.is('ios')) {
      *       // This will only print when on iOS
      *       console.log('I am an iOS device!');
      *     }
@@ -24870,9 +24875,9 @@ var Platform = (function () {
      *
      * \@Component({...})
      * export MyPage {
-     *   constructor(public plt: Platform) {
+     *   constructor(public platform: Platform) {
      *     // This will print an array of the current platforms
-     *     console.log(this.plt.platforms());
+     *     console.log(this.platform.platforms());
      *   }
      * }
      * ```
@@ -24891,10 +24896,10 @@ var Platform = (function () {
      *
      * \@Component({...})
      * export MyPage {
-     *   constructor(public plt: Platform) {
+     *   constructor(public platform: Platform) {
      *     // This will print an object containing
      *     // all of the platforms and their versions
-     *     console.log(plt.versions());
+     *     console.log(platform.versions());
      *   }
      * }
      * ```
@@ -24937,8 +24942,8 @@ var Platform = (function () {
      *
      * \@Component({...})
      * export MyApp {
-     *   constructor(public plt: Platform) {
-     *     this.plt.ready().then((readySource) => {
+     *   constructor(public platform: Platform) {
+     *     this.platform.ready().then((readySource) => {
      *       console.log('Platform ready from', readySource);
      *       // Platform now ready, execute any required native code
      *     });
@@ -29016,7 +29021,7 @@ var DeepLinker = (function () {
      */
     DeepLinker.prototype._loadViewForSegment = function (navContainer, segment, done) {
         if (!segment) {
-            return done();
+            return done(false, false);
         }
         if (isTabs(navContainer) || (isTab(navContainer) && navContainer.parent)) {
             var /** @type {?} */ tabs = (((isTabs(navContainer) ? navContainer : navContainer.parent)));
@@ -29028,7 +29033,7 @@ var DeepLinker = (function () {
                 updateUrl: false,
                 animate: false
             }, true);
-            return done();
+            return done(false, false);
         }
         var /** @type {?} */ navController = ((navContainer));
         var /** @type {?} */ numViews = navController.length() - 1;
@@ -29042,7 +29047,7 @@ var DeepLinker = (function () {
                 if (i === numViews) {
                     // this is the last view in the stack and it's the same
                     // as the segment so there's no change needed
-                    return done();
+                    return done(false, false);
                 }
                 else {
                     // it's not the exact view as the end
@@ -41533,6 +41538,7 @@ var BaseInput = (function (_super) {
         this._form && this._form.unsetAsFocused(this);
         this._setFocus(false);
         this.ionBlur.emit(this);
+        this._onTouched && this._onTouched();
     };
     /**
      * @hidden
@@ -42896,7 +42902,7 @@ var EventEmitterProxy = (function (_super) {
  * The Content component provides an easy to use content area with
  * some useful methods to control the scrollable area. There should
  * only be one content in a single view component. If additional scrollable
- * elements are need, use [ionScroll](../../scroll/Scroll).
+ * elements are needed, use [ionScroll](../../scroll/Scroll).
  *
  *
  * The content area can also implement pull-to-refresh with the
@@ -46748,6 +46754,8 @@ var __extends$47 = (undefined && undefined.__extends) || (function () {
  * to serialize and pass within JSON objects, and sending databases a standardized
  * format which it can be easily parsed if need be.
  *
+ * To create an ISO datetime string for the current date and time, e.g. use `const currentDate = (new Date()).toISOString();`.
+ *
  * An ISO format can be used as a simple year, or just the hour and minute, or get more
  * detailed down to the millisecond and timezone. Any of the ISO formats below can be used,
  * and after a user selects a new value, Ionic will continue to use the same ISO format
@@ -46780,7 +46788,7 @@ var __extends$47 = (undefined && undefined.__extends) || (function () {
  * ## Min and Max Datetimes
  *
  * Dates are infinite in either direction, so for a user's selection there should be at
- * least some form of restricting the dates that can be selected. Be default, the maximum
+ * least some form of restricting the dates that can be selected. By default, the maximum
  * date is to the end of the current year, and the minimum date is from the beginning
  * of the year that was 100 years ago.
  *
@@ -54551,7 +54559,7 @@ var Modal = (function (_super) {
  *
  * When a modal (or any other overlay such as an alert or actionsheet) is
  * "presented" to a nav controller, the overlay is added to the app's root nav.
- * After the modal has been presented, from within the component instance The
+ * After the modal has been presented, from within the component instance, the
  * modal can later be closed or "dismissed" by using the ViewController's
  * `dismiss` method. Additionally, you can dismiss any overlay by using `pop`
  * on the root nav controller. Modals are not reusable. When a modal is dismissed
@@ -54642,6 +54650,25 @@ var Modal = (function (_super) {
  *    this.viewCtrl.dismiss(data);
  *  }
  *
+ * }
+ * ```
+ *
+ * A common issue is that a developer may try to implement navigation in a modal, but when you try NavController.push(),
+ * you will notice that the status bar on iOS gets cut off. The proper way to implement navigation in a modal is to
+ * make the modal component a navigation container, and set the root page to the page you want to show in your modal.
+ *
+ * ```ts
+ * \@Component({
+ *   template: '<ion-nav [root]="rootPage" [rootParams]="rootParams"></ion-nav>'
+ * })
+ * export class MyModalWrapper {
+ *   rootPage = 'MyModalContentPage'; // This is the page you want your modal to display
+ *   rootParams;
+ *
+ *   constructor(navParams: NavParams, private viewCtrl: ViewController) {
+ *       this.rootParams = Object.assign({}, navParams.data, {viewCtrl: viewCtrl});
+ *       // This line will send the view controller into your child views, so you can dismiss the modals from there.
+ *   }
  * }
  * ```
  * \@demo /docs/demos/src/modal/
@@ -54826,8 +54853,8 @@ NavPopAnchor.ctorParameters = function () { return [
  *   template: `<button ion-button [navPush]="pushPage" [navParams]="params">Go</button>`
  * })
  * class MyPage {
- *   params: Object;
  *   pushPage: any;
+ *   params: Object;
  *   constructor(){
  *     this.pushPage = LoginPage;
  *     this.params = { id: 42 };
@@ -60869,8 +60896,8 @@ function resetZoomEvents(s, plt) {
         }
     }
     else if (s._touchEvents.start === 'touchstart') {
-        for (var /** @type {?} */ i_1 = 0; i_1 < slides.length; i_1++) {
-            slide = slides[i_1];
+        for (var /** @type {?} */ i = 0; i < slides.length; i++) {
+            slide = slides[i];
             // touchstart
             plt.registerListener(slide, s._touchEvents.start, function (ev) {
                 onGestureStart(s, plt, ev);
@@ -60890,8 +60917,8 @@ function resetZoomEvents(s, plt) {
         onTouchStart(s, plt, ev);
     });
     unRegs.push(function () { touchStartSub.unsubscribe(); });
-    for (var /** @type {?} */ i_2 = 0; i_2 < slides.length; i_2++) {
-        slide = slides[i_2];
+    for (var /** @type {?} */ i = 0; i < slides.length; i++) {
+        slide = slides[i];
         if (slide.querySelector('.' + CLS.zoomContainer)) {
             plt.registerListener(slide, 's.touchEvents.move', function (ev) {
                 onTouchMove(s, plt, ev);
@@ -61582,8 +61609,10 @@ function destroyLoop(s) {
     eachChild(s._wrapper, '.' + CLS.slide + '.' + CLS.slideDuplicate, function (ele) {
         ele.parentElement.removeChild(ele);
     });
-    for (var /** @type {?} */ i = 0; i < s._slides.length; i++) {
-        s._slides[i].removeAttribute('data-swiper-slide-index');
+    if (s._slides) {
+        for (var /** @type {?} */ i = 0; i < s._slides.length; i++) {
+            s._slides[i].removeAttribute('data-swiper-slide-index');
+        }
     }
 }
 /**
@@ -64842,11 +64871,12 @@ var Tabs = (function (_super) {
         return '';
     };
     /**
-     * @param {?} secondaryId
+     * @param {?=} secondaryId
      * @param {?=} fallbackIndex
      * @return {?}
      */
     Tabs.prototype._getSelectedTabIndex = function (secondaryId, fallbackIndex) {
+        if (secondaryId === void 0) { secondaryId = ''; }
         if (fallbackIndex === void 0) { fallbackIndex = 0; }
         // we found a segment which probably represents which tab to select
         var /** @type {?} */ indexMatch = secondaryId.match(/tab-(\d+)/);
@@ -65159,7 +65189,10 @@ var Tab = (function (_super) {
                     if (i === numViews) {
                         // this is the last view in the stack and it's the same
                         // as the segment so there's no change needed
-                        return done();
+                        if (done) {
+                            done(false, false);
+                        }
+                        return;
                     }
                     else {
                         // it's not the exact view as the end
@@ -65183,7 +65216,10 @@ var Tab = (function (_super) {
             this._dom.read(function () {
                 _this.resize();
             });
-            return done();
+            if (done) {
+                done(false, false);
+            }
+            return;
         }
     };
     /**
@@ -66359,7 +66395,7 @@ var __extends$89 = (undefined && undefined.__extends) || (function () {
  * \@name Header
  * \@description
  * Header is a parent component that holds the navbar and toolbar component.
- * It's important to note that `ion-header` needs to be the one of the three root elements of a page
+ * It's important to note that `ion-header` needs to be one of the three root elements of a page
  *
  * \@usage
  *

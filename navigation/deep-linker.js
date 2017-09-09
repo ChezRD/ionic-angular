@@ -1,4 +1,4 @@
-import { DIRECTION_BACK, convertToViews, isNav, isTab, isTabs, } from './nav-util';
+import { DIRECTION_BACK, convertToViews, isNav, isTab, isTabs } from './nav-util';
 import { isArray, isPresent } from '../util/util';
 import { formatUrlPart } from './url-serializer';
 import { ViewController } from './view-controller';
@@ -414,7 +414,7 @@ var DeepLinker = (function () {
      */
     DeepLinker.prototype._loadViewForSegment = function (navContainer, segment, done) {
         if (!segment) {
-            return done();
+            return done(false, false);
         }
         if (isTabs(navContainer) || (isTab(navContainer) && navContainer.parent)) {
             var /** @type {?} */ tabs = (((isTabs(navContainer) ? navContainer : navContainer.parent)));
@@ -426,7 +426,7 @@ var DeepLinker = (function () {
                 updateUrl: false,
                 animate: false
             }, true);
-            return done();
+            return done(false, false);
         }
         var /** @type {?} */ navController = ((navContainer));
         var /** @type {?} */ numViews = navController.length() - 1;
@@ -440,7 +440,7 @@ var DeepLinker = (function () {
                 if (i === numViews) {
                     // this is the last view in the stack and it's the same
                     // as the segment so there's no change needed
-                    return done();
+                    return done(false, false);
                 }
                 else {
                     // it's not the exact view as the end

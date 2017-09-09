@@ -7,6 +7,8 @@
  *
  * @usage
  * ```ts
+ * import { NavParams } from 'ionic-angular';
+ *
  * export class MyClass{
  *  constructor(public navParams: NavParams){
  *    // userParams is an object we have in our nav-parameters
@@ -31,6 +33,8 @@ export declare class NavParams {
      * Get the value of a nav-parameter for the current view
      *
      * ```ts
+     * import { NavParams } from 'ionic-angular';
+     *
      * export class MyClass{
      *  constructor(public navParams: NavParams){
      *    // userParams is an object we have in our nav-parameters

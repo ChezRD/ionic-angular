@@ -1,6 +1,6 @@
 {
   "name": "ionic-angular",
-  "version": "3.6.0-clone-201708231346",
+  "version": "3.6.1-clone-201709092216",
   "description": "A powerful framework for building mobile and progressive web apps with JavaScript and Angular",
   "keywords": [
     "ionic",
@@ -30,7 +30,7 @@
     "@angular/http": "4.1.3",
     "@angular/platform-browser": "4.1.3",
     "@angular/platform-browser-dynamic": "4.1.3",
-    "rxjs": "5.4.3",
+    "rxjs": "5.4.0",
     "zone.js": "0.8.12"
   }
 }

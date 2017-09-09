@@ -264,7 +264,10 @@ var Tab = (function (_super) {
                     if (i === numViews) {
                         // this is the last view in the stack and it's the same
                         // as the segment so there's no change needed
-                        return done();
+                        if (done) {
+                            done(false, false);
+                        }
+                        return;
                     }
                     else {
                         // it's not the exact view as the end
@@ -288,7 +291,10 @@ var Tab = (function (_super) {
             this._dom.read(function () {
                 _this.resize();
             });
-            return done();
+            if (done) {
+                done(false, false);
+            }
+            return;
         }
     };
     /**
