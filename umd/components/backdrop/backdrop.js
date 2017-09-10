@@ -34,7 +34,7 @@
          * @return {?}
          */
         Backdrop.prototype.setElementClass = function (className, add) {
-            this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
+            this._renderer.addClass(this._elementRef.nativeElement, className);
         };
         return Backdrop;
     }());
@@ -53,7 +53,7 @@
      */
     Backdrop.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
     ]; };
     exports.Backdrop = Backdrop;
     function Backdrop_tsickle_Closure_declarations() {

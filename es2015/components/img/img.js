@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, Optional, Renderer, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, Optional, Renderer2, ViewEncapsulation } from '@angular/core';
 import { Content } from '../content/content';
 import { DomController } from '../../platform/dom-controller';
 import { isPresent, isTrueProperty } from '../../util/util';
@@ -219,8 +219,10 @@ export class Img {
     _isLoaded(isLoaded) {
         const /** @type {?} */ renderer = this._renderer;
         const /** @type {?} */ ele = this._elementRef.nativeElement;
-        renderer.setElementClass(ele, 'img-loaded', isLoaded);
-        renderer.setElementClass(ele, 'img-unloaded', !isLoaded);
+        if (isLoaded) {
+            renderer.addClass(ele, 'img-loaded');
+            renderer.removeClass(ele, 'img-unloaded');
+        }
     }
     /**
      * \@internal
@@ -231,8 +233,8 @@ export class Img {
         const /** @type {?} */ imgEle = this._img;
         const /** @type {?} */ renderer = this._renderer;
         if (imgEle && imgEle.src !== srcAttr) {
-            renderer.setElementAttribute(this._img, 'src', srcAttr);
-            renderer.setElementAttribute(this._img, 'alt', this.alt);
+            renderer.setAttribute(this._img, 'src', srcAttr);
+            renderer.setAttribute(this._img, 'alt', this.alt);
         }
     }
     /**
@@ -331,11 +333,11 @@ export class Img {
             this._dom.write(() => {
                 if (this._w !== this._wQ) {
                     this._w = this._wQ;
-                    renderer.setElementStyle(wrapperEle, 'width', this._w);
+                    renderer.setStyle(wrapperEle, 'width', this._w);
                 }
                 if (this._h !== this._hQ) {
                     this._h = this._hQ;
-                    renderer.setElementStyle(wrapperEle, 'height', this._h);
+                    renderer.setStyle(wrapperEle, 'height', this._h);
                 }
             });
         }
@@ -373,7 +375,7 @@ Img.decorators = [
  */
 Img.ctorParameters = () => [
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: Platform, },
     { type: Content, decorators: [{ type: Optional },] },
     { type: DomController, },

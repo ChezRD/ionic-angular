@@ -83,7 +83,12 @@
          * @return {?}
          */
         ClickBlock.prototype._setElementClass = function (className, add) {
-            this.renderer.setElementClass(this.elementRef.nativeElement, className, add);
+            if (add) {
+                this.renderer.addClass(this.elementRef.nativeElement, className);
+            }
+            else {
+                this.renderer.removeClass(this.elementRef.nativeElement, className);
+            }
         };
         return ClickBlock;
     }());
@@ -100,7 +105,7 @@
         { type: config_1.Config, },
         { type: platform_1.Platform, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
     ]; };
     exports.ClickBlock = ClickBlock;
     function ClickBlock_tsickle_Closure_declarations() {

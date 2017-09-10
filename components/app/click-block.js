@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Inject, Renderer, forwardRef } from '@angular/core';
+import { Directive, ElementRef, forwardRef, Inject, Renderer2 } from '@angular/core';
 import { App } from '../app/app';
 import { Config } from '../../config/config';
 import { Platform } from '../../platform/platform';
@@ -72,7 +72,12 @@ var ClickBlock = (function () {
      * @return {?}
      */
     ClickBlock.prototype._setElementClass = function (className, add) {
-        this.renderer.setElementClass(this.elementRef.nativeElement, className, add);
+        if (add) {
+            this.renderer.addClass(this.elementRef.nativeElement, className);
+        }
+        else {
+            this.renderer.removeClass(this.elementRef.nativeElement, className);
+        }
     };
     return ClickBlock;
 }());
@@ -90,7 +95,7 @@ ClickBlock.ctorParameters = function () { return [
     { type: Config, },
     { type: Platform, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ]; };
 function ClickBlock_tsickle_Closure_declarations() {
     /** @type {?} */

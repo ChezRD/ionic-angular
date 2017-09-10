@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Renderer, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2, ViewEncapsulation } from '@angular/core';
 import { Config } from '../../config/config';
 import { BLOCK_ALL, GestureController } from '../../gestures/gesture-controller';
 import { isDefined, isUndefined } from '../../util/util';
@@ -23,12 +23,12 @@ export class LoadingCmp {
         (void 0) /* assert */;
         this.gestureBlocker = gestureCtrl.createBlocker(BLOCK_ALL);
         this.d = params.data;
-        renderer.setElementClass(_elementRef.nativeElement, `loading-${_config.get('mode')}`, true);
+        renderer.addClass(_elementRef.nativeElement, `loading-${_config.get('mode')}`);
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(cssClass => {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
+                    renderer.addClass(_elementRef.nativeElement, cssClass);
             });
         }
         this.id = (++loadingIds);
@@ -126,7 +126,7 @@ LoadingCmp.ctorParameters = () => [
     { type: ElementRef, },
     { type: GestureController, },
     { type: NavParams, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ];
 LoadingCmp.propDecorators = {
     'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],

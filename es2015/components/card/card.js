@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer } from '@angular/core';
+import { Directive, ElementRef, Renderer2 } from '@angular/core';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
 /**
@@ -25,7 +25,7 @@ Card.decorators = [
 Card.ctorParameters = () => [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ];
 function Card_tsickle_Closure_declarations() {
     /** @type {?} */

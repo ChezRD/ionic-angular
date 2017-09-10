@@ -69,7 +69,7 @@ var __extends = (this && this.__extends) || (function () {
     Note.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
     ]; };
     exports.Note = Note;
     function Note_tsickle_Closure_declarations() {

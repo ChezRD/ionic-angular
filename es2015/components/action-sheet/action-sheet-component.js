@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Renderer, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2, ViewEncapsulation } from '@angular/core';
 import { BLOCK_ALL, GestureController } from '../../gestures/gesture-controller';
 import { Config } from '../../config/config';
 import { KEY_ESCAPE } from '../../platform/key';
@@ -22,12 +22,12 @@ export class ActionSheetCmp {
         this.gestureBlocker = gestureCtrl.createBlocker(BLOCK_ALL);
         this.d = params.data;
         this.mode = config.get('mode');
-        renderer.setElementClass(_elementRef.nativeElement, `action-sheet-${this.mode}`, true);
+        renderer.addClass(_elementRef.nativeElement, `action-sheet-${this.mode}`);
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(cssClass => {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
+                    renderer.addClass(_elementRef.nativeElement, cssClass);
             });
         }
         this.id = (++actionSheetIds);
@@ -187,7 +187,7 @@ ActionSheetCmp.ctorParameters = () => [
     { type: ElementRef, },
     { type: GestureController, },
     { type: NavParams, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ];
 ActionSheetCmp.propDecorators = {
     'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],

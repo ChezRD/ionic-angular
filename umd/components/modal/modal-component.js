@@ -45,7 +45,7 @@
                 opts.cssClass.split(' ').forEach(function (cssClass) {
                     // Make sure the class isn't whitespace, otherwise it throws exceptions
                     if (cssClass.trim() !== '')
-                        _renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
+                        _renderer.addClass(_elementRef.nativeElement, cssClass);
                 });
             }
         }
@@ -93,7 +93,7 @@
          * @return {?}
          */
         ModalCmp.prototype._setCssClass = function (componentRef, className) {
-            this._renderer.setElementClass(componentRef.location.nativeElement, className, true);
+            this._renderer.addClass(componentRef.location.nativeElement, className);
         };
         /**
          * @return {?}
@@ -138,7 +138,7 @@
      */
     ModalCmp.ctorParameters = function () { return [
         { type: core_1.ComponentFactoryResolver, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: core_1.ElementRef, },
         { type: nav_params_1.NavParams, },
         { type: view_controller_1.ViewController, },

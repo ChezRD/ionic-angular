@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { ChangeDetectionStrategy, Component, ElementRef, Renderer } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Renderer2 } from '@angular/core';
 import { Config } from '../../config/config';
 import { ToolbarBase } from './toolbar-base';
 /**
@@ -137,7 +137,7 @@ Toolbar.decorators = [
 Toolbar.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ]; };
 function Toolbar_tsickle_Closure_declarations() {
     /** @type {?} */

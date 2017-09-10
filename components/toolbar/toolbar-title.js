@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, Optional, Renderer, ViewEncapsulation, forwardRef, } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Optional, Inject, Renderer2, ViewEncapsulation } from '@angular/core';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
 import { Navbar } from './navbar';
@@ -89,7 +89,7 @@ ToolbarTitle.decorators = [
 ToolbarTitle.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: Toolbar, decorators: [{ type: Optional },] },
     { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
 ]; };

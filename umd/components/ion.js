@@ -77,7 +77,12 @@
          * @return {?}
          */
         Ion.prototype.setElementClass = function (className, isAdd) {
-            this._renderer.setElementClass(this._elementRef.nativeElement, className, isAdd);
+            if (isAdd) {
+                this._renderer.addClass(this._elementRef.nativeElement, className);
+            }
+            else {
+                this._renderer.removeClass(this._elementRef.nativeElement, className);
+            }
         };
         /**
          * @hidden
@@ -86,7 +91,7 @@
          * @return {?}
          */
         Ion.prototype.setElementAttribute = function (attributeName, attributeValue) {
-            this._renderer.setElementAttribute(this._elementRef.nativeElement, attributeName, attributeValue);
+            this._renderer.setAttribute(this._elementRef.nativeElement, attributeName, attributeValue);
         };
         /**
          * @hidden
@@ -95,7 +100,7 @@
          * @return {?}
          */
         Ion.prototype.setElementStyle = function (property, value) {
-            this._renderer.setElementStyle(this._elementRef.nativeElement, property, value);
+            this._renderer.setStyle(this._elementRef.nativeElement, property, value);
         };
         /**
          * @hidden

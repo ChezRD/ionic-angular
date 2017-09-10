@@ -1044,7 +1044,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: core_1.NgZone, },
         { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
     ]; };
     Slides.propDecorators = {
         'autoplay': [{ type: core_1.Input },],

@@ -1,4 +1,4 @@
-import { AfterContentInit, ElementRef, NgZone, OnDestroy, Renderer } from '@angular/core';
+import { AfterContentInit, NgZone, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 import { Config } from '../../config/config';
 import { DomController } from '../../platform/dom-controller';
 import { Form, IonicTapInput } from '../../util/form';
@@ -58,7 +58,7 @@ export declare class Toggle extends BaseInput<boolean> implements IonicTapInput,
      * @input {boolean} If true, the element is selected.
      */
     checked: boolean;
-    constructor(form: Form, config: Config, _plt: Platform, elementRef: ElementRef, renderer: Renderer, _haptic: Haptic, item: Item, _gestureCtrl: GestureController, _domCtrl: DomController, _zone: NgZone);
+    constructor(form: Form, config: Config, _plt: Platform, elementRef: ElementRef, renderer: Renderer2, _haptic: Haptic, item: Item, _gestureCtrl: GestureController, _domCtrl: DomController, _zone: NgZone);
     /**
      * @hidden
      */

@@ -68,7 +68,7 @@ var __extends = (this && this.__extends) || (function () {
     Footer.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
     ]; };
     exports.Footer = Footer;

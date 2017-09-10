@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Renderer, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { isNumber, isPresent, isString } from '../../util/util';
 import { Config } from '../../config/config';
 import { BLOCK_ALL, GestureController, } from '../../gestures/gesture-controller';
@@ -24,10 +24,10 @@ var PickerCmp = (function () {
         this._gestureBlocker = gestureCtrl.createBlocker(BLOCK_ALL);
         this.d = params.data;
         this.mode = config.get('mode');
-        renderer.setElementClass(_elementRef.nativeElement, "picker-" + this.mode, true);
+        renderer.addClass(_elementRef.nativeElement, "picker-" + this.mode);
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(function (cssClass) {
-                renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
+                renderer.addClass(_elementRef.nativeElement, cssClass);
             });
         }
         this.id = (++pickerIds);
@@ -228,7 +228,7 @@ PickerCmp.ctorParameters = function () { return [
     { type: Config, },
     { type: GestureController, },
     { type: NavParams, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ]; };
 PickerCmp.propDecorators = {
     '_cols': [{ type: ViewChildren, args: [PickerColumnCmp,] },],

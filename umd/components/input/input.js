@@ -672,7 +672,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: form_1.Form, },
         { type: app_1.App, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: content_1.Content, decorators: [{ type: core_1.Optional },] },
         { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
         { type: forms_1.NgControl, decorators: [{ type: core_1.Optional },] },

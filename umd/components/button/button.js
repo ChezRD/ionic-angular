@@ -432,7 +432,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: undefined, decorators: [{ type: core_1.Attribute, args: ['ion-button',] },] },
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
     ]; };
     Button.propDecorators = {
         'large': [{ type: core_1.Input },],

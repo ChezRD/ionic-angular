@@ -1,4 +1,4 @@
-import { Attribute, Directive, ElementRef, Input, Renderer } from '@angular/core';
+import { Attribute, Directive, ElementRef, Renderer2, Input } from '@angular/core';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
 /**
@@ -99,7 +99,7 @@ Label.decorators = [
 Label.ctorParameters = () => [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: undefined, decorators: [{ type: Attribute, args: ['floating',] },] },
     { type: undefined, decorators: [{ type: Attribute, args: ['stacked',] },] },
     { type: undefined, decorators: [{ type: Attribute, args: ['fixed',] },] },

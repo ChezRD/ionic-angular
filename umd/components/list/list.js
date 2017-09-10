@@ -151,7 +151,7 @@ var __extends = (this && this.__extends) || (function () {
     List.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: platform_1.Platform, },
         { type: gesture_controller_1.GestureController, },
         { type: dom_controller_1.DomController, },

@@ -1,4 +1,4 @@
-import { ElementRef, QueryList, Renderer } from '@angular/core';
+import { ElementRef, QueryList, Renderer2 } from '@angular/core';
 import { Button } from '../button/button';
 import { Config } from '../../config/config';
 import { Form } from '../../util/form';
@@ -283,7 +283,7 @@ export declare class Item extends Ion {
      * @hidden
      */
     labelId: string;
-    constructor(form: Form, config: Config, elementRef: ElementRef, renderer: Renderer, reorder: ItemReorder);
+    constructor(form: Form, config: Config, elementRef: ElementRef, renderer: Renderer2, reorder: ItemReorder);
     /**
      * @hidden
      */

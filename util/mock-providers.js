@@ -527,7 +527,7 @@ var MockRenderer = (function () {
      * @param {?} val
      * @return {?}
      */
-    MockRenderer.prototype.setElementAttribute = function (renderElement, name, val) {
+    MockRenderer.prototype.setAttribute = function (renderElement, name, val) {
         if (name === null) {
             renderElement.removeAttribute(name);
         }
@@ -538,16 +538,18 @@ var MockRenderer = (function () {
     /**
      * @param {?} renderElement
      * @param {?} className
-     * @param {?} isAdd
      * @return {?}
      */
-    MockRenderer.prototype.setElementClass = function (renderElement, className, isAdd) {
-        if (isAdd) {
-            renderElement.classList.add(className);
-        }
-        else {
-            renderElement.classList.remove(className);
-        }
+    MockRenderer.prototype.addClass = function (renderElement, className) {
+        renderElement.classList.add(className);
+    };
+    /**
+     * @param {?} renderElement
+     * @param {?} className
+     * @return {?}
+     */
+    MockRenderer.prototype.removeClass = function (renderElement, className) {
+        renderElement.classList.remove(className);
     };
     /**
      * @param {?} renderElement
@@ -555,7 +557,7 @@ var MockRenderer = (function () {
      * @param {?} styleValue
      * @return {?}
      */
-    MockRenderer.prototype.setElementStyle = function (renderElement, styleName, styleValue) {
+    MockRenderer.prototype.setStyle = function (renderElement, styleName, styleValue) {
         renderElement.style[styleName] = styleValue;
     };
     return MockRenderer;

@@ -102,7 +102,12 @@
          * @return {?}
          */
         FabList.prototype.setElementClass = function (className, add) {
-            this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
+            if (add) {
+                this._renderer.addClass(this._elementRef.nativeElement, className);
+            }
+            else {
+                this._renderer.removeClass(this._elementRef.nativeElement, className);
+            }
         };
         return FabList;
     }());
@@ -116,7 +121,7 @@
      */
     FabList.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: config_1.Config, },
         { type: platform_1.Platform, },
     ]; };

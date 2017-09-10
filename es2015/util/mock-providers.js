@@ -490,7 +490,7 @@ export class MockRenderer {
      * @param {?} val
      * @return {?}
      */
-    setElementAttribute(renderElement, name, val) {
+    setAttribute(renderElement, name, val) {
         if (name === null) {
             renderElement.removeAttribute(name);
         }
@@ -501,16 +501,18 @@ export class MockRenderer {
     /**
      * @param {?} renderElement
      * @param {?} className
-     * @param {?} isAdd
      * @return {?}
      */
-    setElementClass(renderElement, className, isAdd) {
-        if (isAdd) {
-            renderElement.classList.add(className);
-        }
-        else {
-            renderElement.classList.remove(className);
-        }
+    addClass(renderElement, className) {
+        renderElement.classList.add(className);
+    }
+    /**
+     * @param {?} renderElement
+     * @param {?} className
+     * @return {?}
+     */
+    removeClass(renderElement, className) {
+        renderElement.classList.remove(className);
     }
     /**
      * @param {?} renderElement
@@ -518,7 +520,7 @@ export class MockRenderer {
      * @param {?} styleValue
      * @return {?}
      */
-    setElementStyle(renderElement, styleName, styleValue) {
+    setStyle(renderElement, styleName, styleValue) {
         renderElement.style[styleName] = styleValue;
     }
 }

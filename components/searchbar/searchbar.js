@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Component, ElementRef, EventEmitter, Input, Optional, Output, Renderer, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Optional, Output, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Config } from '../../config/config';
 import { BaseInput } from '../../util/base-input';
@@ -367,7 +367,8 @@ var Searchbar = (function (_super) {
      * @return {?}
      */
     Searchbar.prototype.setFocus = function () {
-        this._renderer.invokeElementMethod(this._searchbarInput.nativeElement, 'focus');
+        var /** @type {?} */ onElement = this._renderer.selectRootElement(this._searchbarInput.nativeElement);
+        onElement.focus();
     };
     return Searchbar;
 }(BaseInput));
@@ -407,7 +408,7 @@ Searchbar.ctorParameters = function () { return [
     { type: Config, },
     { type: Platform, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: NgControl, decorators: [{ type: Optional },] },
 ]; };
 Searchbar.propDecorators = {

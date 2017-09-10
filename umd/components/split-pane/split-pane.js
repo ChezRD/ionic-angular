@@ -377,7 +377,12 @@ var __extends = (this && this.__extends) || (function () {
          * @return {?}
          */
         SplitPane.prototype.setElementClass = function (className, add) {
-            this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
+            if (add) {
+                this._renderer.addClass(this._elementRef.nativeElement, className);
+            }
+            else {
+                this._renderer.removeClass(this._elementRef.nativeElement, className);
+            }
         };
         /**
          * @hidden
@@ -387,8 +392,10 @@ var __extends = (this && this.__extends) || (function () {
          */
         SplitPane.prototype._setPaneCSSClass = function (elementRef, isMain) {
             var /** @type {?} */ ele = elementRef.nativeElement;
-            this._renderer.setElementClass(ele, 'split-pane-main', isMain);
-            this._renderer.setElementClass(ele, 'split-pane-side', !isMain);
+            if (isMain) {
+                this._renderer.addClass(ele, 'split-pane-main');
+                this._renderer.removeClass(ele, 'split-pane-side');
+            }
         };
         /**
          * @hidden
@@ -422,7 +429,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: platform_1.Platform, },
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
     ]; };
     SplitPane.propDecorators = {
         '_setchildren': [{ type: core_1.ContentChildren, args: [RootNode, { descendants: false },] },],

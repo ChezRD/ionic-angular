@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Directive, ElementRef, Optional, Renderer } from '@angular/core';
+import { Directive, ElementRef, Optional, Renderer2 } from '@angular/core';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
 import { ViewController } from '../../navigation/view-controller';
@@ -58,7 +58,7 @@ Footer.decorators = [
 Footer.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: ViewController, decorators: [{ type: Optional },] },
 ]; };
 function Footer_tsickle_Closure_declarations() {

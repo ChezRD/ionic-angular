@@ -1,4 +1,4 @@
-import { ElementRef, QueryList, Renderer } from '@angular/core';
+import { QueryList, ElementRef, Renderer2 } from '@angular/core';
 import { Config } from '../../config/config';
 import { Platform } from '../../platform/platform';
 import { FabButton } from './fab';
@@ -33,7 +33,7 @@ export declare class FabList {
     _visible: boolean;
     _fabs: FabButton[];
     _mode: string;
-    constructor(_elementRef: ElementRef, _renderer: Renderer, config: Config, _plt: Platform);
+    constructor(_elementRef: ElementRef, _renderer: Renderer2, config: Config, _plt: Platform);
     _setbuttons: QueryList<FabButton>;
     /**
      * @hidden

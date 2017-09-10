@@ -1,4 +1,4 @@
-import { ContentChildren, Directive, ElementRef, EventEmitter, Input, NgZone, Output, Renderer, forwardRef } from '@angular/core';
+import { ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, Output, NgZone, Renderer2 } from '@angular/core';
 import { Ion } from '../ion';
 import { isTrueProperty } from '../../util/util';
 import { Config } from '../../config/config';
@@ -335,7 +335,12 @@ export class SplitPane extends Ion {
      * @return {?}
      */
     setElementClass(className, add) {
-        this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
+        if (add) {
+            this._renderer.addClass(this._elementRef.nativeElement, className);
+        }
+        else {
+            this._renderer.removeClass(this._elementRef.nativeElement, className);
+        }
     }
     /**
      * @hidden
@@ -345,8 +350,10 @@ export class SplitPane extends Ion {
      */
     _setPaneCSSClass(elementRef, isMain) {
         const /** @type {?} */ ele = elementRef.nativeElement;
-        this._renderer.setElementClass(ele, 'split-pane-main', isMain);
-        this._renderer.setElementClass(ele, 'split-pane-side', !isMain);
+        if (isMain) {
+            this._renderer.addClass(ele, 'split-pane-main');
+            this._renderer.removeClass(ele, 'split-pane-side');
+        }
     }
     /**
      * @hidden
@@ -379,7 +386,7 @@ SplitPane.ctorParameters = () => [
     { type: Platform, },
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ];
 SplitPane.propDecorators = {
     '_setchildren': [{ type: ContentChildren, args: [RootNode, { descendants: false },] },],

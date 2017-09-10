@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectorRef, ElementRef, OnDestroy, Renderer } from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { Config } from '../../config/config';
 import { DomController } from '../../platform/dom-controller';
@@ -148,7 +148,7 @@ export declare class Range extends BaseInput<any> implements AfterContentInit, C
      * will return `null`.
      */
     readonly ratioUpper: number;
-    constructor(form: Form, _haptic: Haptic, item: Item, config: Config, _plt: Platform, elementRef: ElementRef, renderer: Renderer, _dom: DomController, _cd: ChangeDetectorRef);
+    constructor(form: Form, _haptic: Haptic, item: Item, config: Config, _plt: Platform, elementRef: ElementRef, renderer: Renderer2, _dom: DomController, _cd: ChangeDetectorRef);
     /**
      * @hidden
      */

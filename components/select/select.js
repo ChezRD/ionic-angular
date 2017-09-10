@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, Optional, Output, Renderer, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChildren, ElementRef, EventEmitter, Input, HostListener, Optional, Output, Renderer2, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ActionSheet } from '../action-sheet/action-sheet';
 import { Alert } from '../alert/alert';
@@ -512,7 +512,7 @@ Select.ctorParameters = function () { return [
     { type: Form, },
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: Item, decorators: [{ type: Optional },] },
     { type: DeepLinker, },
 ]; };

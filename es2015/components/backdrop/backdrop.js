@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer } from '@angular/core';
+import { Directive, ElementRef, Renderer2 } from '@angular/core';
 /**
  * @hidden
  */
@@ -23,7 +23,7 @@ export class Backdrop {
      * @return {?}
      */
     setElementClass(className, add) {
-        this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
+        this._renderer.addClass(this._elementRef.nativeElement, className);
     }
 }
 Backdrop.decorators = [
@@ -41,7 +41,7 @@ Backdrop.decorators = [
  */
 Backdrop.ctorParameters = () => [
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
 ];
 function Backdrop_tsickle_Closure_declarations() {
     /** @type {?} */

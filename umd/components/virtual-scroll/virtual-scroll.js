@@ -731,7 +731,7 @@
         VirtualScroll.prototype._setHeight = function (newVirtualHeight) {
             if (newVirtualHeight !== this._vHeight) {
                 // ******** DOM WRITE ****************
-                this._renderer.setElementStyle(this._elementRef.nativeElement, 'height', newVirtualHeight > 0 ? newVirtualHeight + 'px' : '');
+                this._renderer.setStyle(this._elementRef.nativeElement, 'height', newVirtualHeight > 0 ? newVirtualHeight + 'px' : '');
                 this._vHeight = newVirtualHeight;
                 (void 0) /* console.debug */;
             }
@@ -754,7 +754,12 @@
          * @return {?}
          */
         VirtualScroll.prototype.setElementClass = function (className, add) {
-            this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
+            if (add) {
+                this._renderer.addClass(this._elementRef.nativeElement, className);
+            }
+            else {
+                this._renderer.removeClass(this._elementRef.nativeElement, className);
+            }
         };
         /**
          * @hidden
@@ -780,7 +785,7 @@
     VirtualScroll.ctorParameters = function () { return [
         { type: core_1.IterableDiffers, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: core_1.NgZone, },
         { type: core_1.ChangeDetectorRef, },
         { type: content_1.Content, },

@@ -344,7 +344,12 @@
          * @return {?}
          */
         ItemReorder.prototype.setElementClass = function (classname, add) {
-            this._rendered.setElementClass(this._element, classname, add);
+            if (add) {
+                this._rendered.addClass(this._element, classname);
+            }
+            else {
+                this._rendered.removeClass(this._element, classname);
+            }
         };
         /**
          * @hidden
@@ -372,7 +377,7 @@
         { type: platform_1.Platform, },
         { type: dom_controller_1.DomController, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: core_1.NgZone, },
         { type: content_1.Content, decorators: [{ type: core_1.Optional },] },
     ]; };

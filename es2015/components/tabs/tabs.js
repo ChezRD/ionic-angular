@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Optional, Output, Renderer, ViewChild, ViewContainerRef, ViewEncapsulation, forwardRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, Output, Optional, Renderer2, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 import { App } from '../app/app';
@@ -8,7 +8,7 @@ import { Ion } from '../ion';
 import { isBlank, isPresent } from '../../util/util';
 import { Keyboard } from '../../platform/keyboard';
 import { NavController } from '../../navigation/nav-controller';
-import { DIRECTION_SWITCH, getComponent } from '../../navigation/nav-util';
+import { getComponent, DIRECTION_SWITCH } from '../../navigation/nav-util';
 import { formatUrlPart } from '../../navigation/url-serializer';
 import { RootNode } from '../split-pane/split-pane';
 import { Platform } from '../../platform/platform';
@@ -619,7 +619,7 @@ Tabs.ctorParameters = () => [
     { type: Config, },
     { type: ElementRef, },
     { type: Platform, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: DeepLinker, },
     { type: Keyboard, },
 ];

@@ -48,7 +48,7 @@ var __extends = (this && this.__extends) || (function () {
     CardTitle.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
     ]; };
     exports.CardTitle = CardTitle;
     function CardTitle_tsickle_Closure_declarations() {

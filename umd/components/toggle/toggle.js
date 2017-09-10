@@ -262,7 +262,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: config_1.Config, },
         { type: platform_1.Platform, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: haptic_1.Haptic, },
         { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
         { type: gesture_controller_1.GestureController, },

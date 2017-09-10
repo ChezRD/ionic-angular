@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ContentChild, Directive, ElementRef, EventEmitter, Input, Output, Renderer } from '@angular/core';
+import { ChangeDetectorRef, ContentChild, Directive, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListHeader } from '../list/list-header';
 import { isCheckedProperty, isTrueProperty } from '../../util/util';
@@ -178,7 +178,7 @@ var RadioGroup = (function () {
      * @return {?}
      */
     RadioGroup.prototype._setActive = function (radioButton) {
-        this._renderer.setElementAttribute(this._elementRef.nativeElement, 'aria-activedescendant', radioButton.id);
+        this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-activedescendant', radioButton.id);
     };
     /**
      * @hidden
@@ -220,7 +220,7 @@ var RadioGroup = (function () {
                 if (!header.id) {
                     header.id = 'rg-hdr-' + this.id;
                 }
-                this._renderer.setElementAttribute(this._elementRef.nativeElement, 'aria-describedby', header.id);
+                this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-describedby', header.id);
             }
         },
         enumerable: true,
@@ -269,7 +269,7 @@ RadioGroup.decorators = [
  * @nocollapse
  */
 RadioGroup.ctorParameters = function () { return [
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: ElementRef, },
     { type: ChangeDetectorRef, },
 ]; };

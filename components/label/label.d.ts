@@ -1,4 +1,4 @@
-import { ElementRef, Renderer } from '@angular/core';
+import { ElementRef, Renderer2 } from '@angular/core';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
 /**
@@ -56,7 +56,7 @@ export declare class Label extends Ion {
      * @hidden
      */
     type: string;
-    constructor(config: Config, elementRef: ElementRef, renderer: Renderer, isFloating: string, isStacked: string, isFixed: string, isInset: string);
+    constructor(config: Config, elementRef: ElementRef, renderer: Renderer2, isFloating: string, isStacked: string, isFixed: string, isInset: string);
     /**
      * @hidden
      */

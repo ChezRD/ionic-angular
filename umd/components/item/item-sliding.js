@@ -422,11 +422,16 @@
         /**
          * @hidden
          * @param {?} cssClass
-         * @param {?} shouldAdd
+         * @param {?} add
          * @return {?}
          */
-        ItemSliding.prototype.setElementClass = function (cssClass, shouldAdd) {
-            this._renderer.setElementClass(this._elementRef.nativeElement, cssClass, shouldAdd);
+        ItemSliding.prototype.setElementClass = function (cssClass, add) {
+            if (add) {
+                this._renderer.addClass(this._elementRef.nativeElement, cssClass);
+            }
+            else {
+                this._renderer.removeClass(this._elementRef.nativeElement, cssClass);
+            }
         };
         return ItemSliding;
     }());
@@ -444,7 +449,7 @@
     ItemSliding.ctorParameters = function () { return [
         { type: list_1.List, decorators: [{ type: core_1.Optional },] },
         { type: platform_1.Platform, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: core_1.ElementRef, },
         { type: core_1.NgZone, },
     ]; };

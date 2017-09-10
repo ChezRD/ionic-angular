@@ -651,7 +651,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
         { type: platform_1.Platform, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: deep_linker_1.DeepLinker, },
         { type: keyboard_1.Keyboard, },
     ]; };

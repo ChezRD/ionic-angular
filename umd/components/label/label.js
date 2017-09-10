@@ -131,7 +131,7 @@ var __extends = (this && this.__extends) || (function () {
     Label.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: undefined, decorators: [{ type: core_1.Attribute, args: ['floating',] },] },
         { type: undefined, decorators: [{ type: core_1.Attribute, args: ['stacked',] },] },
         { type: undefined, decorators: [{ type: core_1.Attribute, args: ['fixed',] },] },

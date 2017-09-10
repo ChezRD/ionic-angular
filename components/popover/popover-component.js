@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ElementRef, HostListener, Renderer, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, HostListener, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { Config } from '../../config/config';
 import { KEY_ESCAPE } from '../../platform/key';
 import { NavParams } from '../../navigation/nav-params';
@@ -29,12 +29,12 @@ var PopoverCmp = (function () {
         this.moduleLoader = moduleLoader;
         this._gestureBlocker = gestureCtrl.createBlocker(BLOCK_ALL);
         this.d = _navParams.data.opts;
-        _renderer.setElementClass(_elementRef.nativeElement, "popover-" + _config.get('mode'), true);
+        _renderer.addClass(_elementRef.nativeElement, "popover-" + _config.get('mode'));
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(function (cssClass) {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    _renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
+                    _renderer.addClass(_elementRef.nativeElement, cssClass);
             });
         }
         this.id = (++popoverIds);
@@ -84,7 +84,7 @@ var PopoverCmp = (function () {
      * @return {?}
      */
     PopoverCmp.prototype._setCssClass = function (componentRef, className) {
-        this._renderer.setElementClass(componentRef.location.nativeElement, className, true);
+        this._renderer.addClass(componentRef.location.nativeElement, className);
     };
     /**
      * @return {?}
@@ -133,7 +133,7 @@ PopoverCmp.decorators = [
 PopoverCmp.ctorParameters = function () { return [
     { type: ComponentFactoryResolver, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: Config, },
     { type: NavParams, },
     { type: ViewController, },

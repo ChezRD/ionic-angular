@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, Input, NgZone, Optional, Output, Renderer } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, NgZone, Renderer2, Optional, Output } from '@angular/core';
 import { Content } from '../content/content';
 import { DomController } from '../../platform/dom-controller';
 import { isTrueProperty, reorderArray } from '../../util/util';
@@ -321,7 +321,12 @@ export class ItemReorder {
      * @return {?}
      */
     setElementClass(classname, add) {
-        this._rendered.setElementClass(this._element, classname, add);
+        if (add) {
+            this._rendered.addClass(this._element, classname);
+        }
+        else {
+            this._rendered.removeClass(this._element, classname);
+        }
     }
     /**
      * @hidden
@@ -348,7 +353,7 @@ ItemReorder.ctorParameters = () => [
     { type: Platform, },
     { type: DomController, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: NgZone, },
     { type: Content, decorators: [{ type: Optional },] },
 ];

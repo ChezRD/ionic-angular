@@ -378,7 +378,8 @@ var __extends = (this && this.__extends) || (function () {
          * @return {?}
          */
         Searchbar.prototype.setFocus = function () {
-            this._renderer.invokeElementMethod(this._searchbarInput.nativeElement, 'focus');
+            var /** @type {?} */ onElement = this._renderer.selectRootElement(this._searchbarInput.nativeElement);
+            onElement.focus();
         };
         return Searchbar;
     }(base_input_1.BaseInput));
@@ -417,7 +418,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: config_1.Config, },
         { type: platform_1.Platform, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: forms_1.NgControl, decorators: [{ type: core_1.Optional },] },
     ]; };
     Searchbar.propDecorators = {

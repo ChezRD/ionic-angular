@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, NgZone, QueryList, Renderer } from '@angular/core';
+import { ElementRef, EventEmitter, QueryList, Renderer2, NgZone } from '@angular/core';
 import { Item } from './item';
 import { List } from '../list/list';
 import { Platform } from '../../platform/platform';
@@ -145,7 +145,7 @@ export declare class ItemSliding {
      *
      */
     ionDrag: EventEmitter<ItemSliding>;
-    constructor(list: List, _plt: Platform, _renderer: Renderer, _elementRef: ElementRef, _zone: NgZone);
+    constructor(list: List, _plt: Platform, _renderer: Renderer2, _elementRef: ElementRef, _zone: NgZone);
     _itemOptions: QueryList<ItemOptions>;
     /**
      * @hidden
@@ -215,5 +215,5 @@ export declare class ItemSliding {
     /**
      * @hidden
      */
-    setElementClass(cssClass: string, shouldAdd: boolean): void;
+    setElementClass(cssClass: string, add: boolean): void;
 }

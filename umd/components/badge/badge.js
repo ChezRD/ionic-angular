@@ -52,7 +52,7 @@ var __extends = (this && this.__extends) || (function () {
     Badge.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
     ]; };
     exports.Badge = Badge;
     function Badge_tsickle_Closure_declarations() {

@@ -189,7 +189,7 @@
          * @return {?}
          */
         RadioGroup.prototype._setActive = function (radioButton) {
-            this._renderer.setElementAttribute(this._elementRef.nativeElement, 'aria-activedescendant', radioButton.id);
+            this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-activedescendant', radioButton.id);
         };
         /**
          * @hidden
@@ -231,7 +231,7 @@
                     if (!header.id) {
                         header.id = 'rg-hdr-' + this.id;
                     }
-                    this._renderer.setElementAttribute(this._elementRef.nativeElement, 'aria-describedby', header.id);
+                    this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-describedby', header.id);
                 }
             },
             enumerable: true,
@@ -279,7 +279,7 @@
      * @nocollapse
      */
     RadioGroup.ctorParameters = function () { return [
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
     ]; };

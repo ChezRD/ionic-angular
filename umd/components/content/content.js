@@ -910,7 +910,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: platform_1.Platform, },
         { type: dom_controller_1.DomController, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: app_1.App, },
         { type: keyboard_1.Keyboard, },
         { type: core_1.NgZone, },

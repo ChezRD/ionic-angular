@@ -40,12 +40,12 @@
             this.moduleLoader = moduleLoader;
             this._gestureBlocker = gestureCtrl.createBlocker(gesture_controller_1.BLOCK_ALL);
             this.d = _navParams.data.opts;
-            _renderer.setElementClass(_elementRef.nativeElement, "popover-" + _config.get('mode'), true);
+            _renderer.addClass(_elementRef.nativeElement, "popover-" + _config.get('mode'));
             if (this.d.cssClass) {
                 this.d.cssClass.split(' ').forEach(function (cssClass) {
                     // Make sure the class isn't whitespace, otherwise it throws exceptions
                     if (cssClass.trim() !== '')
-                        _renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
+                        _renderer.addClass(_elementRef.nativeElement, cssClass);
                 });
             }
             this.id = (++popoverIds);
@@ -95,7 +95,7 @@
          * @return {?}
          */
         PopoverCmp.prototype._setCssClass = function (componentRef, className) {
-            this._renderer.setElementClass(componentRef.location.nativeElement, className, true);
+            this._renderer.addClass(componentRef.location.nativeElement, className);
         };
         /**
          * @return {?}
@@ -143,7 +143,7 @@
     PopoverCmp.ctorParameters = function () { return [
         { type: core_1.ComponentFactoryResolver, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: config_1.Config, },
         { type: nav_params_1.NavParams, },
         { type: view_controller_1.ViewController, },

@@ -31,7 +31,7 @@
          */
         function Slide(elementRef, renderer, _slides) {
             this._slides = _slides;
-            renderer.setElementClass(elementRef.nativeElement, 'swiper-slide', true);
+            renderer.addClass(elementRef.nativeElement, 'swiper-slide');
             _slides.update(10);
         }
         /**
@@ -58,7 +58,7 @@
      */
     Slide.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: slides_1.Slides, },
     ]; };
     exports.Slide = Slide;

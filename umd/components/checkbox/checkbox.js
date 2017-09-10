@@ -179,7 +179,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: form_1.Form, },
         { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
     ]; };
     Checkbox.propDecorators = {
         'checked': [{ type: core_1.Input },],

@@ -1,4 +1,4 @@
-import { AfterContentInit, ElementRef, EventEmitter, OnDestroy, Renderer } from '@angular/core';
+import { AfterContentInit, ElementRef, EventEmitter, OnDestroy, Renderer2 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { Config } from '../../config/config';
 import { Picker } from '../picker/picker';
@@ -371,7 +371,7 @@ export declare class DateTime extends BaseInput<DateTimeData> implements AfterCo
      * @output {any} Emitted when the datetime selection was cancelled.
      */
     ionCancel: EventEmitter<any>;
-    constructor(form: Form, config: Config, elementRef: ElementRef, renderer: Renderer, item: Item, _pickerCtrl: PickerController);
+    constructor(form: Form, config: Config, elementRef: ElementRef, renderer: Renderer2, item: Item, _pickerCtrl: PickerController);
     /**
      * @hidden
      */

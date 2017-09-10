@@ -1,4 +1,4 @@
-import { ElementRef, Renderer } from '@angular/core';
+import { ElementRef, Renderer2 } from '@angular/core';
 import { Config } from '../../config/config';
 import { DomController } from '../../platform/dom-controller';
 import { GestureController } from '../../gestures/gesture-controller';
@@ -46,7 +46,7 @@ export declare class List extends Ion {
     private _enableSliding;
     private _containsSlidingItems;
     private _slidingGesture;
-    constructor(config: Config, elementRef: ElementRef, renderer: Renderer, _plt: Platform, _gestureCtrl: GestureController, _domCtrl: DomController);
+    constructor(config: Config, elementRef: ElementRef, renderer: Renderer2, _plt: Platform, _gestureCtrl: GestureController, _domCtrl: DomController);
     /**
      * @input {boolean} If true, the sliding items will be enabled.
      */

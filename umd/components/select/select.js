@@ -522,7 +522,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: form_1.Form, },
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: core_1.Renderer2, },
         { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
         { type: deep_linker_1.DeepLinker, },
     ]; };

@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ElementRef, Inject, OpaqueToken, Renderer, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, Inject, OpaqueToken, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { App } from './app';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
@@ -36,7 +36,7 @@ export class IonicApp extends Ion {
         // into Ionic's root component
         const /** @type {?} */ factory = this._cfr.resolveComponentFactory(this._userCmp);
         const /** @type {?} */ componentRef = this._viewport.createComponent(factory);
-        this._renderer.setElementClass(componentRef.location.nativeElement, 'app-root', true);
+        this._renderer.addClass(componentRef.location.nativeElement, 'app-root');
         componentRef.changeDetectorRef.detectChanges();
         // set the mode class name
         // ios/md/wp
@@ -169,7 +169,7 @@ IonicApp.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [AppRootToken,] },] },
     { type: ComponentFactoryResolver, },
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: Config, },
     { type: Platform, },
     { type: App, },

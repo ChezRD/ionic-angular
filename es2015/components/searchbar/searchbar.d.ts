@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, Renderer } from '@angular/core';
+import { ElementRef, EventEmitter, Renderer2 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Config } from '../../config/config';
 import { BaseInput } from '../../util/base-input';
@@ -83,7 +83,7 @@ export declare class Searchbar extends BaseInput<string> {
      * @output {event} Emitted when the clear input button is clicked.
      */
     ionClear: EventEmitter<UIEvent>;
-    constructor(config: Config, _plt: Platform, elementRef: ElementRef, renderer: Renderer, ngControl: NgControl);
+    constructor(config: Config, _plt: Platform, elementRef: ElementRef, renderer: Renderer2, ngControl: NgControl);
     _searchbarInput: ElementRef;
     _searchbarIcon: ElementRef;
     _cancelButton: ElementRef;
