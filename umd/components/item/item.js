@@ -469,7 +469,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: form_1.Form, },
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
         { type: item_reorder_1.ItemReorder, decorators: [{ type: core_1.Optional },] },
     ]; };
     Item.propDecorators = {

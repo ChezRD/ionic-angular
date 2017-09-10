@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ContentChild, Directive, ElementRef, Input, IterableDiffers, NgZone, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, ContentChild, Directive, ElementRef, Input, IterableDiffers, NgZone, Renderer } from '@angular/core';
 import { adjustRendered, calcDimensions, estimateHeight, initReadNodes, populateNodeData, processRecords, updateDimensions, updateNodeContext, writeToNodes } from './virtual-util';
 import { Config } from '../../config/config';
 import { Content } from '../content/content';
@@ -700,7 +700,7 @@ export class VirtualScroll {
     _setHeight(newVirtualHeight) {
         if (newVirtualHeight !== this._vHeight) {
             // ******** DOM WRITE ****************
-            this._renderer.setStyle(this._elementRef.nativeElement, 'height', newVirtualHeight > 0 ? newVirtualHeight + 'px' : '');
+            this._renderer.setElementStyle(this._elementRef.nativeElement, 'height', newVirtualHeight > 0 ? newVirtualHeight + 'px' : '');
             this._vHeight = newVirtualHeight;
             (void 0) /* console.debug */;
         }
@@ -723,12 +723,7 @@ export class VirtualScroll {
      * @return {?}
      */
     setElementClass(className, add) {
-        if (add) {
-            this._renderer.addClass(this._elementRef.nativeElement, className);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, className);
-        }
+        this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     }
     /**
      * @hidden
@@ -753,7 +748,7 @@ VirtualScroll.decorators = [
 VirtualScroll.ctorParameters = () => [
     { type: IterableDiffers, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: NgZone, },
     { type: ChangeDetectorRef, },
     { type: Content, },

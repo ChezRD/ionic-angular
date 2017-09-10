@@ -1,4 +1,4 @@
-import { ComponentFactoryResolver, ElementRef, Renderer2, ViewContainerRef } from '@angular/core';
+import { ComponentFactoryResolver, ElementRef, Renderer, ViewContainerRef } from '@angular/core';
 import { NavParams } from '../../navigation/nav-params';
 import { ViewController } from '../../navigation/view-controller';
 import { BlockerDelegate, GestureController } from '../../gestures/gesture-controller';
@@ -8,7 +8,7 @@ import { ModuleLoader } from '../../util/module-loader';
  */
 export declare class ModalCmp {
     _cfr: ComponentFactoryResolver;
-    _renderer: Renderer2;
+    _renderer: Renderer;
     _elementRef: ElementRef;
     _navParams: NavParams;
     _viewCtrl: ViewController;
@@ -17,7 +17,7 @@ export declare class ModalCmp {
     _bdDismiss: boolean;
     _enabled: boolean;
     _gestureBlocker: BlockerDelegate;
-    constructor(_cfr: ComponentFactoryResolver, _renderer: Renderer2, _elementRef: ElementRef, _navParams: NavParams, _viewCtrl: ViewController, gestureCtrl: GestureController, moduleLoader: ModuleLoader);
+    constructor(_cfr: ComponentFactoryResolver, _renderer: Renderer, _elementRef: ElementRef, _navParams: NavParams, _viewCtrl: ViewController, gestureCtrl: GestureController, moduleLoader: ModuleLoader);
     ionViewPreLoad(): void;
     _viewWillEnter(): void;
     _viewDidLeave(): void;

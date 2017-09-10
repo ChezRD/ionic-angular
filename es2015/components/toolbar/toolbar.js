@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Renderer } from '@angular/core';
 import { Config } from '../../config/config';
 import { ToolbarBase } from './toolbar-base';
 /**
@@ -123,7 +123,7 @@ Toolbar.decorators = [
 Toolbar.ctorParameters = () => [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ];
 function Toolbar_tsickle_Closure_declarations() {
     /** @type {?} */

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, ContentChild, ElementRef, EventEmitter, forwardRef, Optional, Output, Renderer2, ViewEncapsulation, NgZone } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, ContentChildren, ElementRef, EventEmitter, NgZone, Optional, Output, Renderer, ViewEncapsulation, forwardRef } from '@angular/core';
 import { swipeShouldReset } from '../../util/util';
 import { Item } from './item';
 import { List } from '../list/list';
@@ -404,16 +404,11 @@ export class ItemSliding {
     /**
      * @hidden
      * @param {?} cssClass
-     * @param {?} add
+     * @param {?} shouldAdd
      * @return {?}
      */
-    setElementClass(cssClass, add) {
-        if (add) {
-            this._renderer.addClass(this._elementRef.nativeElement, cssClass);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, cssClass);
-        }
+    setElementClass(cssClass, shouldAdd) {
+        this._renderer.setElementClass(this._elementRef.nativeElement, cssClass, shouldAdd);
     }
 }
 ItemSliding.decorators = [
@@ -433,7 +428,7 @@ ItemSliding.decorators = [
 ItemSliding.ctorParameters = () => [
     { type: List, decorators: [{ type: Optional },] },
     { type: Platform, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ElementRef, },
     { type: NgZone, },
 ];

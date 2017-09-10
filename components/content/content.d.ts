@@ -1,4 +1,4 @@
-import { AfterViewInit, ElementRef, EventEmitter, NgZone, OnDestroy, Renderer2 } from '@angular/core';
+import { AfterViewInit, ElementRef, EventEmitter, NgZone, OnDestroy, Renderer } from '@angular/core';
 import { App } from '../app/app';
 import { Config } from '../../config/config';
 import { DomController } from '../../platform/dom-controller';
@@ -308,7 +308,7 @@ export declare class Content extends Ion implements OnDestroy, AfterViewInit, IC
      * @output {ScrollEvent} Emitted when scrolling ends.
      */
     ionScrollEnd: EventEmitterProxy<ScrollEvent>;
-    constructor(config: Config, _plt: Platform, _dom: DomController, elementRef: ElementRef, renderer: Renderer2, _app: App, _keyboard: Keyboard, _zone: NgZone, viewCtrl: ViewController, navCtrl: NavController);
+    constructor(config: Config, _plt: Platform, _dom: DomController, elementRef: ElementRef, renderer: Renderer, _app: App, _keyboard: Keyboard, _zone: NgZone, viewCtrl: ViewController, navCtrl: NavController);
     /**
      * @hidden
      */

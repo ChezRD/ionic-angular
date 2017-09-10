@@ -58,12 +58,7 @@ export class Ion {
      * @return {?}
      */
     setElementClass(className, isAdd) {
-        if (isAdd) {
-            this._renderer.addClass(this._elementRef.nativeElement, className);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, className);
-        }
+        this._renderer.setElementClass(this._elementRef.nativeElement, className, isAdd);
     }
     /**
      * @hidden
@@ -72,7 +67,7 @@ export class Ion {
      * @return {?}
      */
     setElementAttribute(attributeName, attributeValue) {
-        this._renderer.setAttribute(this._elementRef.nativeElement, attributeName, attributeValue);
+        this._renderer.setElementAttribute(this._elementRef.nativeElement, attributeName, attributeValue);
     }
     /**
      * @hidden
@@ -81,7 +76,7 @@ export class Ion {
      * @return {?}
      */
     setElementStyle(property, value) {
-        this._renderer.setStyle(this._elementRef.nativeElement, property, value);
+        this._renderer.setElementStyle(this._elementRef.nativeElement, property, value);
     }
     /**
      * @hidden

@@ -8,11 +8,11 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Input, EventEmitter, ReflectiveInjector } from '@angular/core';
-import { convertToViews, DIRECTION_BACK, DIRECTION_FORWARD, INIT_ZINDEX, STATE_NEW, STATE_INITIALIZED, STATE_ATTACHED, STATE_DESTROYED } from './nav-util';
+import { EventEmitter, Input, ReflectiveInjector } from '@angular/core';
+import { DIRECTION_BACK, DIRECTION_FORWARD, INIT_ZINDEX, STATE_ATTACHED, STATE_DESTROYED, STATE_INITIALIZED, STATE_NEW, convertToViews, } from './nav-util';
 import { setZIndex } from './nav-util';
 import { isBlank, isNumber, isPresent, isTrueProperty } from '../util/util';
-import { isViewController, ViewController } from './view-controller';
+import { ViewController, isViewController } from './view-controller';
 import { Ion } from '../components/ion';
 import { NavController } from './nav-controller';
 import { NavParams } from './nav-params';
@@ -584,7 +584,7 @@ var NavControllerBase = (function (_super) {
             // the ElementRef of the actual ion-page created
             var /** @type {?} */ pageElement = componentRef.location.nativeElement;
             // ******** DOM WRITE ****************
-            this._renderer.addClass(pageElement, view._cssClass);
+            this._renderer.setElementClass(pageElement, view._cssClass, true);
         }
         componentRef.changeDetectorRef.detectChanges();
         // successfully finished loading the entering view

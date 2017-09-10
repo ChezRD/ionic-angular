@@ -60,7 +60,7 @@ var __extends = (this && this.__extends) || (function () {
             // into Ionic's root component
             var /** @type {?} */ factory = this._cfr.resolveComponentFactory(this._userCmp);
             var /** @type {?} */ componentRef = this._viewport.createComponent(factory);
-            this._renderer.addClass(componentRef.location.nativeElement, 'app-root');
+            this._renderer.setElementClass(componentRef.location.nativeElement, 'app-root', true);
             componentRef.changeDetectorRef.detectChanges();
             // set the mode class name
             // ios/md/wp
@@ -196,7 +196,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: undefined, decorators: [{ type: core_1.Inject, args: [exports.AppRootToken,] },] },
         { type: core_1.ComponentFactoryResolver, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
         { type: config_1.Config, },
         { type: platform_1.Platform, },
         { type: app_1.App, },

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, Optional, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, Optional, Renderer, ViewEncapsulation } from '@angular/core';
 import { Content } from '../content/content';
 import { DomController } from '../../platform/dom-controller';
 import { isPresent, isTrueProperty } from '../../util/util';
@@ -224,10 +224,8 @@ var Img = (function () {
     Img.prototype._isLoaded = function (isLoaded) {
         var /** @type {?} */ renderer = this._renderer;
         var /** @type {?} */ ele = this._elementRef.nativeElement;
-        if (isLoaded) {
-            renderer.addClass(ele, 'img-loaded');
-            renderer.removeClass(ele, 'img-unloaded');
-        }
+        renderer.setElementClass(ele, 'img-loaded', isLoaded);
+        renderer.setElementClass(ele, 'img-unloaded', !isLoaded);
     };
     /**
      * \@internal
@@ -238,8 +236,8 @@ var Img = (function () {
         var /** @type {?} */ imgEle = this._img;
         var /** @type {?} */ renderer = this._renderer;
         if (imgEle && imgEle.src !== srcAttr) {
-            renderer.setAttribute(this._img, 'src', srcAttr);
-            renderer.setAttribute(this._img, 'alt', this.alt);
+            renderer.setElementAttribute(this._img, 'src', srcAttr);
+            renderer.setElementAttribute(this._img, 'alt', this.alt);
         }
     };
     Object.defineProperty(Img.prototype, "top", {
@@ -363,11 +361,11 @@ var Img = (function () {
             this._dom.write(function () {
                 if (_this._w !== _this._wQ) {
                     _this._w = _this._wQ;
-                    renderer.setStyle(wrapperEle, 'width', _this._w);
+                    renderer.setElementStyle(wrapperEle, 'width', _this._w);
                 }
                 if (_this._h !== _this._hQ) {
                     _this._h = _this._hQ;
-                    renderer.setStyle(wrapperEle, 'height', _this._h);
+                    renderer.setElementStyle(wrapperEle, 'height', _this._h);
                 }
             });
         }
@@ -408,7 +406,7 @@ Img.decorators = [
  */
 Img.ctorParameters = function () { return [
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Platform, },
     { type: Content, decorators: [{ type: Optional },] },
     { type: DomController, },

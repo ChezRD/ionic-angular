@@ -29,13 +29,13 @@
             this._config = _config;
             this._elementRef = _elementRef;
             this.dismissTimeout = undefined;
-            renderer.addClass(_elementRef.nativeElement, "toast-" + _config.get('mode'));
+            renderer.setElementClass(_elementRef.nativeElement, "toast-" + _config.get('mode'), true);
             this.d = params.data;
             if (this.d.cssClass) {
                 this.d.cssClass.split(' ').forEach(function (cssClass) {
                     // Make sure the class isn't whitespace, otherwise it throws exceptions
                     if (cssClass.trim() !== '')
-                        renderer.addClass(_elementRef.nativeElement, cssClass);
+                        renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
                 });
             }
             this.id = (++toastIds);
@@ -117,7 +117,7 @@
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
         { type: nav_params_1.NavParams, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
     ]; };
     exports.ToastCmp = ToastCmp;
     function ToastCmp_tsickle_Closure_declarations() {

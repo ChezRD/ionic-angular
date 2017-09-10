@@ -95,7 +95,7 @@ var __extends = (this && this.__extends) || (function () {
     TabButton.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
     ]; };
     TabButton.propDecorators = {
         'tab': [{ type: core_1.Input },],

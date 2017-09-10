@@ -1,4 +1,4 @@
-import { ContentChildren, Directive, ElementRef, Renderer2 } from '@angular/core';
+import { ContentChildren, Directive, ElementRef, Renderer } from '@angular/core';
 import { Config } from '../../config/config';
 import { isTrueProperty } from '../../util/util';
 import { Platform } from '../../platform/platform';
@@ -91,12 +91,7 @@ var FabList = (function () {
      * @return {?}
      */
     FabList.prototype.setElementClass = function (className, add) {
-        if (add) {
-            this._renderer.addClass(this._elementRef.nativeElement, className);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, className);
-        }
+        this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     };
     return FabList;
 }());
@@ -111,7 +106,7 @@ FabList.decorators = [
  */
 FabList.ctorParameters = function () { return [
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Config, },
     { type: Platform, },
 ]; };

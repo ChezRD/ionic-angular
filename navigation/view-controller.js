@@ -248,7 +248,7 @@ var ViewController = (function () {
             this._isHidden = !shouldShow;
             var /** @type {?} */ value = (shouldShow ? null : '');
             // ******** DOM WRITE ****************
-            renderer.setAttribute(this.pageRef().nativeElement, 'hidden', value);
+            renderer.setElementAttribute(this.pageRef().nativeElement, 'hidden', value);
         }
     };
     /**
@@ -271,7 +271,7 @@ var ViewController = (function () {
             var /** @type {?} */ pageRef = this.pageRef();
             if (pageRef) {
                 // ******** DOM WRITE ****************
-                renderer.setStyle(pageRef.nativeElement, 'z-index', ((zIndex)));
+                renderer.setElementStyle(pageRef.nativeElement, 'z-index', ((zIndex)));
             }
         }
     };
@@ -520,8 +520,8 @@ var ViewController = (function () {
                 // ensure the element is cleaned up for when the view pool reuses this element
                 // ******** DOM WRITE ****************
                 var /** @type {?} */ cmpEle = this._cmp.location.nativeElement;
-                renderer.setAttribute(cmpEle, 'class', null);
-                renderer.setAttribute(cmpEle, 'style', null);
+                renderer.setElementAttribute(cmpEle, 'class', null);
+                renderer.setElementAttribute(cmpEle, 'style', null);
             }
             // completely destroy this component. boom.
             this._cmp.destroy();

@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { ContentChildren, Directive, ElementRef, Optional, Renderer2 } from '@angular/core';
+import { ContentChildren, Directive, ElementRef, Optional, Renderer } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Config } from '../../config/config';
 import { BaseInput } from '../../util/base-input';
@@ -125,7 +125,7 @@ Segment.decorators = [
 Segment.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: NgControl, decorators: [{ type: Optional },] },
 ]; };
 Segment.propDecorators = {

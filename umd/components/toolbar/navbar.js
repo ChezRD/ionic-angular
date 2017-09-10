@@ -178,7 +178,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: nav_controller_1.NavController, decorators: [{ type: core_1.Optional },] },
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
     ]; };
     Navbar.propDecorators = {
         'hideBackButton': [{ type: core_1.Input },],

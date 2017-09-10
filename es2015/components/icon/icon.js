@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, Renderer } from '@angular/core';
 import { isTrueProperty } from '../../util/util';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
@@ -202,7 +202,7 @@ Icon.decorators = [
 Icon.ctorParameters = () => [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ];
 Icon.propDecorators = {
     'name': [{ type: Input },],

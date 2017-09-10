@@ -34,12 +34,12 @@
             (void 0) /* assert */;
             this.gestureBlocker = gestureCtrl.createBlocker(gesture_controller_1.BLOCK_ALL);
             this.d = params.data;
-            renderer.addClass(_elementRef.nativeElement, "loading-" + _config.get('mode'));
+            renderer.setElementClass(_elementRef.nativeElement, "loading-" + _config.get('mode'), true);
             if (this.d.cssClass) {
                 this.d.cssClass.split(' ').forEach(function (cssClass) {
                     // Make sure the class isn't whitespace, otherwise it throws exceptions
                     if (cssClass.trim() !== '')
-                        renderer.addClass(_elementRef.nativeElement, cssClass);
+                        renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
                 });
             }
             this.id = (++loadingIds);
@@ -139,7 +139,7 @@
         { type: core_1.ElementRef, },
         { type: gesture_controller_1.GestureController, },
         { type: nav_params_1.NavParams, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
     ]; };
     LoadingCmp.propDecorators = {
         'keyUp': [{ type: core_1.HostListener, args: ['body:keyup', ['$event'],] },],

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Renderer, ViewEncapsulation } from '@angular/core';
 import { Slides } from './slides';
 /**
  * \@name Slide
@@ -20,7 +20,7 @@ export class Slide {
      */
     constructor(elementRef, renderer, _slides) {
         this._slides = _slides;
-        renderer.addClass(elementRef.nativeElement, 'swiper-slide');
+        renderer.setElementClass(elementRef.nativeElement, 'swiper-slide', true);
         _slides.update(10);
     }
     /**
@@ -46,7 +46,7 @@ Slide.decorators = [
  */
 Slide.ctorParameters = () => [
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Slides, },
 ];
 function Slide_tsickle_Closure_declarations() {

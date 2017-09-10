@@ -595,7 +595,7 @@ var __extends = (this && this.__extends) || (function () {
                 // the ElementRef of the actual ion-page created
                 var /** @type {?} */ pageElement = componentRef.location.nativeElement;
                 // ******** DOM WRITE ****************
-                this._renderer.addClass(pageElement, view._cssClass);
+                this._renderer.setElementClass(pageElement, view._cssClass, true);
             }
             componentRef.changeDetectorRef.detectChanges();
             // successfully finished loading the entering view

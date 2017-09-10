@@ -1,4 +1,4 @@
-import { ElementRef, Renderer2 } from '@angular/core';
+import { ElementRef, Renderer } from '@angular/core';
 import { Config } from '../config/config';
 /**
  * Base class for all Ionic components. Exposes some common functionality
@@ -12,7 +12,7 @@ export declare class Ion {
     /** @hidden */
     _elementRef: ElementRef;
     /** @hidden */
-    _renderer: Renderer2;
+    _renderer: Renderer;
     /** @hidden */
     _color: string;
     /** @hidden */
@@ -31,7 +31,7 @@ export declare class Ion {
      * For more information, see [Platform Styles](/docs/theming/platform-specific-styles).
      */
     mode: string;
-    constructor(config: Config, elementRef: ElementRef, renderer: Renderer2, componentName?: string);
+    constructor(config: Config, elementRef: ElementRef, renderer: Renderer, componentName?: string);
     /** @hidden */
     setElementClass(className: string, isAdd: boolean): void;
     /** @hidden */

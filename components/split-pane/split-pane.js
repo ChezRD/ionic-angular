@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, Output, NgZone, Renderer2 } from '@angular/core';
+import { ContentChildren, Directive, ElementRef, EventEmitter, Input, NgZone, Output, Renderer, forwardRef } from '@angular/core';
 import { Ion } from '../ion';
 import { isTrueProperty } from '../../util/util';
 import { Config } from '../../config/config';
@@ -366,12 +366,7 @@ var SplitPane = (function (_super) {
      * @return {?}
      */
     SplitPane.prototype.setElementClass = function (className, add) {
-        if (add) {
-            this._renderer.addClass(this._elementRef.nativeElement, className);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, className);
-        }
+        this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     };
     /**
      * @hidden
@@ -381,10 +376,8 @@ var SplitPane = (function (_super) {
      */
     SplitPane.prototype._setPaneCSSClass = function (elementRef, isMain) {
         var /** @type {?} */ ele = elementRef.nativeElement;
-        if (isMain) {
-            this._renderer.addClass(ele, 'split-pane-main');
-            this._renderer.removeClass(ele, 'split-pane-side');
-        }
+        this._renderer.setElementClass(ele, 'split-pane-main', isMain);
+        this._renderer.setElementClass(ele, 'split-pane-side', !isMain);
     };
     /**
      * @hidden
@@ -419,7 +412,7 @@ SplitPane.ctorParameters = function () { return [
     { type: Platform, },
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 SplitPane.propDecorators = {
     '_setchildren': [{ type: ContentChildren, args: [RootNode, { descendants: false },] },],

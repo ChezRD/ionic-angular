@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, NgZone, Optional, Output, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, NgZone, Optional, Output, Renderer, ViewEncapsulation } from '@angular/core';
 import { Config } from '../../config/config';
 import { enableKeyboardControl } from './swiper/swiper-keyboard';
 import { Ion } from '../ion';
@@ -1034,7 +1034,7 @@ Slides.ctorParameters = function () { return [
     { type: NgZone, },
     { type: ViewController, decorators: [{ type: Optional },] },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 Slides.propDecorators = {
     'autoplay': [{ type: Input },],

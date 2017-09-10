@@ -35,10 +35,10 @@
             this._gestureBlocker = gestureCtrl.createBlocker(gesture_controller_1.BLOCK_ALL);
             this.d = params.data;
             this.mode = config.get('mode');
-            renderer.addClass(_elementRef.nativeElement, "picker-" + this.mode);
+            renderer.setElementClass(_elementRef.nativeElement, "picker-" + this.mode, true);
             if (this.d.cssClass) {
                 this.d.cssClass.split(' ').forEach(function (cssClass) {
-                    renderer.addClass(_elementRef.nativeElement, cssClass);
+                    renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
                 });
             }
             this.id = (++pickerIds);
@@ -238,7 +238,7 @@
         { type: config_1.Config, },
         { type: gesture_controller_1.GestureController, },
         { type: nav_params_1.NavParams, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
     ]; };
     PickerCmp.propDecorators = {
         '_cols': [{ type: core_1.ViewChildren, args: [picker_column_1.PickerColumnCmp,] },],

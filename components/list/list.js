@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, Renderer } from '@angular/core';
 import { Config } from '../../config/config';
 import { DomController } from '../../platform/dom-controller';
 import { GestureController } from '../../gestures/gesture-controller';
@@ -141,7 +141,7 @@ List.decorators = [
 List.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Platform, },
     { type: GestureController, },
     { type: DomController, },

@@ -1,4 +1,4 @@
-import { ElementRef, OnDestroy, Renderer2 } from '@angular/core';
+import { ElementRef, OnDestroy, Renderer } from '@angular/core';
 import { Img as IImg } from './img-interface';
 import { Content } from '../content/content';
 import { DomController } from '../../platform/dom-controller';
@@ -122,7 +122,7 @@ export declare class Img implements OnDestroy, IImg {
     canRequest: boolean;
     /** @hidden */
     canRender: boolean;
-    constructor(_elementRef: ElementRef, _renderer: Renderer2, _plt: Platform, _content: Content, _dom: DomController);
+    constructor(_elementRef: ElementRef, _renderer: Renderer, _plt: Platform, _content: Content, _dom: DomController);
     /**
      * @input {string} The source of the image.
      */

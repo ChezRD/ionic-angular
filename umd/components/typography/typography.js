@@ -86,7 +86,7 @@ var __extends = (this && this.__extends) || (function () {
     Typography.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
     ]; };
     exports.Typography = Typography;
     function Typography_tsickle_Closure_declarations() {

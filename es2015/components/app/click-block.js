@@ -1,4 +1,4 @@
-import { Directive, ElementRef, forwardRef, Inject, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Inject, Renderer, forwardRef } from '@angular/core';
 import { App } from '../app/app';
 import { Config } from '../../config/config';
 import { Platform } from '../../platform/platform';
@@ -70,12 +70,7 @@ export class ClickBlock {
      * @return {?}
      */
     _setElementClass(className, add) {
-        if (add) {
-            this.renderer.addClass(this.elementRef.nativeElement, className);
-        }
-        else {
-            this.renderer.removeClass(this.elementRef.nativeElement, className);
-        }
+        this.renderer.setElementClass(this.elementRef.nativeElement, className, add);
     }
 }
 ClickBlock.decorators = [
@@ -91,7 +86,7 @@ ClickBlock.ctorParameters = () => [
     { type: Config, },
     { type: Platform, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ];
 function ClickBlock_tsickle_Closure_declarations() {
     /** @type {?} */

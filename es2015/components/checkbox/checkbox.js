@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, Optional, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, Optional, Renderer, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Config } from '../../config/config';
 import { isTrueProperty } from '../../util/util';
@@ -152,7 +152,7 @@ Checkbox.ctorParameters = () => [
     { type: Form, },
     { type: Item, decorators: [{ type: Optional },] },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ];
 Checkbox.propDecorators = {
     'checked': [{ type: Input },],

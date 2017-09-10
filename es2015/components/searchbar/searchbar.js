@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Optional, Output, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Optional, Output, Renderer, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Config } from '../../config/config';
 import { BaseInput } from '../../util/base-input';
@@ -329,8 +329,7 @@ export class Searchbar extends BaseInput {
      * @return {?}
      */
     setFocus() {
-        let /** @type {?} */ onElement = this._renderer.selectRootElement(this._searchbarInput.nativeElement);
-        onElement.focus();
+        this._renderer.invokeElementMethod(this._searchbarInput.nativeElement, 'focus');
     }
 }
 Searchbar.decorators = [
@@ -368,7 +367,7 @@ Searchbar.ctorParameters = () => [
     { type: Config, },
     { type: Platform, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: NgControl, decorators: [{ type: Optional },] },
 ];
 Searchbar.propDecorators = {

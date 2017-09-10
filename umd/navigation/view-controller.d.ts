@@ -1,4 +1,4 @@
-import { ComponentRef, ElementRef, EventEmitter, Renderer2 } from '@angular/core';
+import { ComponentRef, ElementRef, EventEmitter, Renderer } from '@angular/core';
 import { NavController } from './nav-controller';
 import { NavOptions } from './nav-util';
 import { NavParams } from './nav-params';
@@ -158,7 +158,7 @@ export declare class ViewController {
      * @hidden
      * DOM WRITE
      */
-    _domShow(shouldShow: boolean, renderer: Renderer2): void;
+    _domShow(shouldShow: boolean, renderer: Renderer): void;
     /**
      * @hidden
      */
@@ -167,7 +167,7 @@ export declare class ViewController {
      * @hidden
      * DOM WRITE
      */
-    _setZIndex(zIndex: number, renderer: Renderer2): void;
+    _setZIndex(zIndex: number, renderer: Renderer): void;
     /**
      * @returns {ElementRef} Returns the Page's ElementRef.
      */
@@ -272,7 +272,7 @@ export declare class ViewController {
      * @hidden
      * DOM WRITE
      */
-    _destroy(renderer: Renderer2): void;
+    _destroy(renderer: Renderer): void;
     /**
      * @hidden
      */

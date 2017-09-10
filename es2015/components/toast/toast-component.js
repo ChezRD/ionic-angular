@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Renderer } from '@angular/core';
 import { Config } from '../../config/config';
 import { NavParams } from '../../navigation/nav-params';
 import { ViewController } from '../../navigation/view-controller';
@@ -18,13 +18,13 @@ export class ToastCmp {
         this._config = _config;
         this._elementRef = _elementRef;
         this.dismissTimeout = undefined;
-        renderer.addClass(_elementRef.nativeElement, `toast-${_config.get('mode')}`);
+        renderer.setElementClass(_elementRef.nativeElement, `toast-${_config.get('mode')}`, true);
         this.d = params.data;
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(cssClass => {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    renderer.addClass(_elementRef.nativeElement, cssClass);
+                    renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
             });
         }
         this.id = (++toastIds);
@@ -104,7 +104,7 @@ ToastCmp.ctorParameters = () => [
     { type: Config, },
     { type: ElementRef, },
     { type: NavParams, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ];
 function ToastCmp_tsickle_Closure_declarations() {
     /** @type {?} */

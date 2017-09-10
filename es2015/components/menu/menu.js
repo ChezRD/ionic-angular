@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, ContentChild, ElementRef, EventEmitter, forwardRef, Input, Output, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, ElementRef, EventEmitter, Input, Output, Renderer, ViewChild, ViewEncapsulation, forwardRef } from '@angular/core';
 import { App } from '../app/app';
 import { Backdrop } from '../backdrop/backdrop';
 import { Config } from '../../config/config';
 import { Content } from '../content/content';
 import { DomController } from '../../platform/dom-controller';
-import { GestureController, GESTURE_GO_BACK_SWIPE } from '../../gestures/gesture-controller';
-import { isTrueProperty, isRightSide } from '../../util/util';
+import { GESTURE_GO_BACK_SWIPE, GestureController, } from '../../gestures/gesture-controller';
+import { isRightSide, isTrueProperty } from '../../util/util';
 import { Keyboard } from '../../platform/keyboard';
 import { MenuContentGesture } from './menu-gestures';
 import { MenuController } from '../app/menu-controller';
@@ -660,12 +660,7 @@ export class Menu {
      * @return {?}
      */
     setElementClass(className, add) {
-        if (add) {
-            this._renderer.addClass(this._elementRef.nativeElement, className);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, className);
-        }
+        this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     }
     /**
      * @hidden
@@ -674,7 +669,7 @@ export class Menu {
      * @return {?}
      */
     setElementAttribute(attributeName, value) {
-        this._renderer.setAttribute(this._elementRef.nativeElement, attributeName, value);
+        this._renderer.setElementAttribute(this._elementRef.nativeElement, attributeName, value);
     }
     /**
      * @hidden
@@ -718,7 +713,7 @@ Menu.ctorParameters = () => [
     { type: ElementRef, },
     { type: Config, },
     { type: Platform, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Keyboard, },
     { type: GestureController, },
     { type: DomController, },

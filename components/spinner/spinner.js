@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { ChangeDetectionStrategy, Component, ElementRef, Input, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, Renderer, ViewEncapsulation } from '@angular/core';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
 import { isTrueProperty } from '../../util/util';
@@ -245,7 +245,7 @@ Spinner.decorators = [
 Spinner.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 Spinner.propDecorators = {
     'name': [{ type: Input },],

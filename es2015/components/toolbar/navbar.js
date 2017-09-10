@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, Optional, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Input, Optional, Renderer } from '@angular/core';
 import { App } from '../app/app';
 import { Config } from '../../config/config';
 import { isTrueProperty } from '../../util/util';
@@ -150,7 +150,7 @@ Navbar.ctorParameters = () => [
     { type: NavController, decorators: [{ type: Optional },] },
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ];
 Navbar.propDecorators = {
     'hideBackButton': [{ type: Input },],

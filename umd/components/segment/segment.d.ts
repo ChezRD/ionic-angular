@@ -1,4 +1,4 @@
-import { AfterContentInit, ElementRef, QueryList, Renderer2 } from '@angular/core';
+import { AfterContentInit, ElementRef, QueryList, Renderer } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Config } from '../../config/config';
 import { BaseInput } from '../../util/base-input';
@@ -64,7 +64,7 @@ export declare class Segment extends BaseInput<string> implements AfterContentIn
      * @hidden
      */
     _buttons: QueryList<SegmentButton>;
-    constructor(config: Config, elementRef: ElementRef, renderer: Renderer2, ngControl: NgControl);
+    constructor(config: Config, elementRef: ElementRef, renderer: Renderer, ngControl: NgControl);
     /**
      * @hidden
      */

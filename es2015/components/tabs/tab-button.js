@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, Renderer2 } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, Renderer } from '@angular/core';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
 /**
@@ -71,7 +71,7 @@ TabButton.decorators = [
 TabButton.ctorParameters = () => [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ];
 TabButton.propDecorators = {
     'tab': [{ type: Input },],

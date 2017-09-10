@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ComponentRef, ElementRef, NgZone, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, ComponentRef, ElementRef, NgZone, Renderer } from '@angular/core';
 import { Location } from '@angular/common';
 import { App } from '../components/app/app';
 import { Config } from '../config/config';
@@ -100,12 +100,11 @@ export declare class ClassList {
 export declare function mockElementRef(): ElementRef;
 export declare function mockElementRefEle(ele: any): ElementRef;
 export declare class MockRenderer {
-    setAttribute(renderElement: MockElement, name: string, val: any): void;
-    addClass(renderElement: MockElement, className: string): void;
-    removeClass(renderElement: MockElement, className: string): void;
-    setStyle(renderElement: MockElement, styleName: string, styleValue: string): void;
+    setElementAttribute(renderElement: MockElement, name: string, val: any): void;
+    setElementClass(renderElement: MockElement, className: string, isAdd: boolean): void;
+    setElementStyle(renderElement: MockElement, styleName: string, styleValue: string): void;
 }
-export declare function mockRenderer(): Renderer2;
+export declare function mockRenderer(): Renderer;
 export declare function mockLocation(): Location;
 export declare function mockView(component?: any, data?: any): ViewController;
 export declare function mockViews(nav: NavControllerBase, views: ViewController[]): void;

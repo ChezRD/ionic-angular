@@ -68,7 +68,7 @@ var __extends = (this && this.__extends) || (function () {
      */
     ListHeader.ctorParameters = function () { return [
         { type: config_1.Config, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
         { type: core_1.ElementRef, },
         { type: undefined, decorators: [{ type: core_1.Attribute, args: ['id',] },] },
     ]; };

@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Component, ComponentFactoryResolver, ElementRef, Inject, OpaqueToken, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, Inject, OpaqueToken, Renderer, ViewChild, ViewContainerRef } from '@angular/core';
 import { App } from './app';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
@@ -49,7 +49,7 @@ var IonicApp = (function (_super) {
         // into Ionic's root component
         var /** @type {?} */ factory = this._cfr.resolveComponentFactory(this._userCmp);
         var /** @type {?} */ componentRef = this._viewport.createComponent(factory);
-        this._renderer.addClass(componentRef.location.nativeElement, 'app-root');
+        this._renderer.setElementClass(componentRef.location.nativeElement, 'app-root', true);
         componentRef.changeDetectorRef.detectChanges();
         // set the mode class name
         // ios/md/wp
@@ -186,7 +186,7 @@ IonicApp.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [AppRootToken,] },] },
     { type: ComponentFactoryResolver, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Config, },
     { type: Platform, },
     { type: App, },

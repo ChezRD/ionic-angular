@@ -1,7 +1,7 @@
-import { ElementRef, EventEmitter, NgZone, Renderer2 } from '@angular/core';
+import { ElementRef, EventEmitter, NgZone, Renderer } from '@angular/core';
 import { Content } from '../content/content';
 import { DomController } from '../../platform/dom-controller';
-import { ItemReorderGestureDelegate, ItemReorderGesture } from './item-reorder-gesture';
+import { ItemReorderGesture, ItemReorderGestureDelegate } from './item-reorder-gesture';
 import { Platform } from '../../platform/platform';
 export declare class ReorderIndexes {
     from: number;
@@ -152,7 +152,7 @@ export declare class ItemReorder implements ItemReorderGestureDelegate {
      * @input {string} Which side of the view the ion-reorder should be placed. Default `"end"`.
      */
     side: 'start' | 'end';
-    constructor(_plt: Platform, _dom: DomController, elementRef: ElementRef, _rendered: Renderer2, _zone: NgZone, _content: Content);
+    constructor(_plt: Platform, _dom: DomController, elementRef: ElementRef, _rendered: Renderer, _zone: NgZone, _content: Content);
     /**
      * @hidden
      */

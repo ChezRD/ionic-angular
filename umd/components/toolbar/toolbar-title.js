@@ -99,7 +99,7 @@ var __extends = (this && this.__extends) || (function () {
     ToolbarTitle.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
         { type: toolbar_1.Toolbar, decorators: [{ type: core_1.Optional },] },
         { type: navbar_1.Navbar, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [core_1.forwardRef(function () { return navbar_1.Navbar; }),] },] },
     ]; };

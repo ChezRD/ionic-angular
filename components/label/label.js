@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Attribute, Directive, ElementRef, Renderer2, Input } from '@angular/core';
+import { Attribute, Directive, ElementRef, Input, Renderer } from '@angular/core';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
 /**
@@ -121,7 +121,7 @@ Label.decorators = [
 Label.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: undefined, decorators: [{ type: Attribute, args: ['floating',] },] },
     { type: undefined, decorators: [{ type: Attribute, args: ['stacked',] },] },
     { type: undefined, decorators: [{ type: Attribute, args: ['fixed',] },] },

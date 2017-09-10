@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer, ViewEncapsulation } from '@angular/core';
 import { Config } from '../../config/config';
 import { NON_TEXT_INPUT_REGEX } from '../../util/dom';
 import { BLOCK_ALL, GestureController } from '../../gestures/gesture-controller';
@@ -30,12 +30,12 @@ export class AlertCmp {
         this.d = params.data;
         this.mode = this.d.mode || config.get('mode');
         this.keyboardResizes = config.getBoolean('keyboardResizes', false);
-        _renderer.addClass(_elementRef.nativeElement, `alert-${this.mode}`);
+        _renderer.setElementClass(_elementRef.nativeElement, `alert-${this.mode}`, true);
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(cssClass => {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    _renderer.addClass(_elementRef.nativeElement, cssClass);
+                    _renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
             });
         }
         this.id = (++alertIds);
@@ -105,7 +105,7 @@ export class AlertCmp {
             // the alert up high because we need to leave space for the virtual keboard
             // this also helps prevent the layout getting all messed up from
             // the browser trying to scroll the input into a safe area
-            this._renderer.addClass(this._elementRef.nativeElement, 'alert-top');
+            this._renderer.setElementClass(this._elementRef.nativeElement, 'alert-top', true);
         }
     }
     /**
@@ -328,7 +328,7 @@ AlertCmp.ctorParameters = () => [
     { type: Config, },
     { type: GestureController, },
     { type: NavParams, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Platform, },
 ];
 AlertCmp.propDecorators = {

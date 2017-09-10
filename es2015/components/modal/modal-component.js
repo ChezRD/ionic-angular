@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ElementRef, HostListener, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, HostListener, Renderer, ViewChild, ViewContainerRef } from '@angular/core';
 import { KEY_ESCAPE } from '../../platform/key';
 import { NavParams } from '../../navigation/nav-params';
 import { ViewController } from '../../navigation/view-controller';
@@ -34,7 +34,7 @@ export class ModalCmp {
             opts.cssClass.split(' ').forEach((cssClass) => {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    _renderer.addClass(_elementRef.nativeElement, cssClass);
+                    _renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
             });
         }
     }
@@ -82,7 +82,7 @@ export class ModalCmp {
      * @return {?}
      */
     _setCssClass(componentRef, className) {
-        this._renderer.addClass(componentRef.location.nativeElement, className);
+        this._renderer.setElementClass(componentRef.location.nativeElement, className, true);
     }
     /**
      * @return {?}
@@ -126,7 +126,7 @@ ModalCmp.decorators = [
  */
 ModalCmp.ctorParameters = () => [
     { type: ComponentFactoryResolver, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ElementRef, },
     { type: NavParams, },
     { type: ViewController, },

@@ -337,7 +337,7 @@ var __extends = (this && this.__extends) || (function () {
                 // add the .tab-subpage css class to tabs pages that should act like subpages
                 var /** @type {?} */ pageEleRef = viewCtrl.pageRef();
                 if (pageEleRef) {
-                    this._renderer.addClass(pageEleRef.nativeElement, 'tab-subpage');
+                    this._renderer.setElementClass(pageEleRef.nativeElement, 'tab-subpage', true);
                 }
             }
         };
@@ -427,7 +427,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: platform_1.Platform, },
         { type: core_1.ElementRef, },
         { type: core_1.NgZone, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
         { type: core_1.ComponentFactoryResolver, },
         { type: core_1.ChangeDetectorRef, },
         { type: gesture_controller_1.GestureController, },

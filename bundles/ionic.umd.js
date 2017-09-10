@@ -23753,7 +23753,7 @@ var ViewController = (function () {
             this._isHidden = !shouldShow;
             var /** @type {?} */ value = (shouldShow ? null : '');
             // ******** DOM WRITE ****************
-            renderer.setAttribute(this.pageRef().nativeElement, 'hidden', value);
+            renderer.setElementAttribute(this.pageRef().nativeElement, 'hidden', value);
         }
     };
     /**
@@ -23776,7 +23776,7 @@ var ViewController = (function () {
             var /** @type {?} */ pageRef = this.pageRef();
             if (pageRef) {
                 // ******** DOM WRITE ****************
-                renderer.setStyle(pageRef.nativeElement, 'z-index', ((zIndex)));
+                renderer.setElementStyle(pageRef.nativeElement, 'z-index', ((zIndex)));
             }
         }
     };
@@ -24025,8 +24025,8 @@ var ViewController = (function () {
                 // ensure the element is cleaned up for when the view pool reuses this element
                 // ******** DOM WRITE ****************
                 var /** @type {?} */ cmpEle = this._cmp.location.nativeElement;
-                renderer.setAttribute(cmpEle, 'class', null);
-                renderer.setAttribute(cmpEle, 'style', null);
+                renderer.setElementAttribute(cmpEle, 'class', null);
+                renderer.setElementAttribute(cmpEle, 'style', null);
             }
             // completely destroy this component. boom.
             this._cmp.destroy();
@@ -27979,12 +27979,7 @@ var Ion = (function () {
      * @return {?}
      */
     Ion.prototype.setElementClass = function (className, isAdd) {
-        if (isAdd) {
-            this._renderer.addClass(this._elementRef.nativeElement, className);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, className);
-        }
+        this._renderer.setElementClass(this._elementRef.nativeElement, className, isAdd);
     };
     /**
      * @hidden
@@ -27993,7 +27988,7 @@ var Ion = (function () {
      * @return {?}
      */
     Ion.prototype.setElementAttribute = function (attributeName, attributeValue) {
-        this._renderer.setAttribute(this._elementRef.nativeElement, attributeName, attributeValue);
+        this._renderer.setElementAttribute(this._elementRef.nativeElement, attributeName, attributeValue);
     };
     /**
      * @hidden
@@ -28002,7 +27997,7 @@ var Ion = (function () {
      * @return {?}
      */
     Ion.prototype.setElementStyle = function (property, value) {
-        this._renderer.setStyle(this._elementRef.nativeElement, property, value);
+        this._renderer.setElementStyle(this._elementRef.nativeElement, property, value);
     };
     /**
      * @hidden
@@ -31619,7 +31614,7 @@ var NavControllerBase = (function (_super) {
             // the ElementRef of the actual ion-page created
             var /** @type {?} */ pageElement = componentRef.location.nativeElement;
             // ******** DOM WRITE ****************
-            this._renderer.addClass(pageElement, view._cssClass);
+            this._renderer.setElementClass(pageElement, view._cssClass, true);
         }
         componentRef.changeDetectorRef.detectChanges();
         // successfully finished loading the entering view
@@ -32539,7 +32534,7 @@ OverlayPortal.ctorParameters = function () { return [
     { type: Platform, },
     { type: ElementRef, },
     { type: NgZone, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ComponentFactoryResolver, },
     { type: GestureController, },
     { type: TransitionController, },
@@ -32596,7 +32591,7 @@ var IonicApp = (function (_super) {
         // into Ionic's root component
         var /** @type {?} */ factory = this._cfr.resolveComponentFactory(this._userCmp);
         var /** @type {?} */ componentRef = this._viewport.createComponent(factory);
-        this._renderer.addClass(componentRef.location.nativeElement, 'app-root');
+        this._renderer.setElementClass(componentRef.location.nativeElement, 'app-root', true);
         componentRef.changeDetectorRef.detectChanges();
         // set the mode class name
         // ios/md/wp
@@ -32732,7 +32727,7 @@ IonicApp.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Inject, args: [AppRootToken,] },] },
     { type: ComponentFactoryResolver, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Config, },
     { type: Platform, },
     { type: App, },
@@ -32772,12 +32767,12 @@ var ActionSheetCmp = (function () {
         this.gestureBlocker = gestureCtrl.createBlocker(BLOCK_ALL);
         this.d = params.data;
         this.mode = config.get('mode');
-        renderer.addClass(_elementRef.nativeElement, "action-sheet-" + this.mode);
+        renderer.setElementClass(_elementRef.nativeElement, "action-sheet-" + this.mode, true);
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(function (cssClass) {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    renderer.addClass(_elementRef.nativeElement, cssClass);
+                    renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
             });
         }
         this.id = (++actionSheetIds);
@@ -32939,7 +32934,7 @@ ActionSheetCmp.ctorParameters = function () { return [
     { type: ElementRef, },
     { type: GestureController, },
     { type: NavParams, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 ActionSheetCmp.propDecorators = {
     'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
@@ -33350,12 +33345,12 @@ var AlertCmp = (function () {
         this.d = params.data;
         this.mode = this.d.mode || config.get('mode');
         this.keyboardResizes = config.getBoolean('keyboardResizes', false);
-        _renderer.addClass(_elementRef.nativeElement, "alert-" + this.mode);
+        _renderer.setElementClass(_elementRef.nativeElement, "alert-" + this.mode, true);
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(function (cssClass) {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    _renderer.addClass(_elementRef.nativeElement, cssClass);
+                    _renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
             });
         }
         this.id = (++alertIds);
@@ -33426,7 +33421,7 @@ var AlertCmp = (function () {
             // the alert up high because we need to leave space for the virtual keboard
             // this also helps prevent the layout getting all messed up from
             // the browser trying to scroll the input into a safe area
-            this._renderer.addClass(this._elementRef.nativeElement, 'alert-top');
+            this._renderer.setElementClass(this._elementRef.nativeElement, 'alert-top', true);
         }
     };
     /**
@@ -33650,7 +33645,7 @@ AlertCmp.ctorParameters = function () { return [
     { type: Config, },
     { type: GestureController, },
     { type: NavParams, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Platform, },
 ]; };
 AlertCmp.propDecorators = {
@@ -34211,7 +34206,7 @@ var Backdrop = (function () {
      * @return {?}
      */
     Backdrop.prototype.setElementClass = function (className, add) {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
+        this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     };
     return Backdrop;
 }());
@@ -34230,7 +34225,7 @@ Backdrop.decorators = [
  */
 Backdrop.ctorParameters = function () { return [
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 var __extends$30 = (undefined && undefined.__extends) || (function () {
@@ -34273,7 +34268,7 @@ Badge.decorators = [
 Badge.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 var __extends$31 = (undefined && undefined.__extends) || (function () {
@@ -34695,7 +34690,7 @@ Button.ctorParameters = function () { return [
     { type: undefined, decorators: [{ type: Attribute, args: ['ion-button',] },] },
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 Button.propDecorators = {
     'large': [{ type: Input },],
@@ -34748,7 +34743,7 @@ Card.decorators = [
 Card.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 var __extends$33 = (undefined && undefined.__extends) || (function () {
@@ -34787,7 +34782,7 @@ CardContent.decorators = [
 CardContent.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 var __extends$34 = (undefined && undefined.__extends) || (function () {
@@ -34826,7 +34821,7 @@ CardHeader.decorators = [
 CardHeader.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 var __extends$35 = (undefined && undefined.__extends) || (function () {
@@ -34865,7 +34860,7 @@ CardTitle.decorators = [
 CardTitle.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 var __extends$38 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
@@ -41922,7 +41917,7 @@ Icon.decorators = [
 Icon.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 Icon.propDecorators = {
     'name': [{ type: Input },],
@@ -42051,7 +42046,7 @@ Label.decorators = [
 Label.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: undefined, decorators: [{ type: Attribute, args: ['floating',] },] },
     { type: undefined, decorators: [{ type: Attribute, args: ['stacked',] },] },
     { type: undefined, decorators: [{ type: Attribute, args: ['fixed',] },] },
@@ -43758,7 +43753,7 @@ Content.ctorParameters = function () { return [
     { type: Platform, },
     { type: DomController, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: App, },
     { type: Keyboard, },
     { type: NgZone, },
@@ -44409,12 +44404,7 @@ var ItemReorder = (function () {
      * @return {?}
      */
     ItemReorder.prototype.setElementClass = function (classname, add) {
-        if (add) {
-            this._rendered.addClass(this._element, classname);
-        }
-        else {
-            this._rendered.removeClass(this._element, classname);
-        }
+        this._rendered.setElementClass(this._element, classname, add);
     };
     /**
      * @hidden
@@ -44442,7 +44432,7 @@ ItemReorder.ctorParameters = function () { return [
     { type: Platform, },
     { type: DomController, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: NgZone, },
     { type: Content, decorators: [{ type: Optional },] },
 ]; };
@@ -44904,7 +44894,7 @@ Item.ctorParameters = function () { return [
     { type: Form, },
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ItemReorder, decorators: [{ type: Optional },] },
 ]; };
 Item.propDecorators = {
@@ -45077,7 +45067,7 @@ Checkbox.ctorParameters = function () { return [
     { type: Form, },
     { type: Item, decorators: [{ type: Optional },] },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 Checkbox.propDecorators = {
     'checked': [{ type: Input },],
@@ -45205,7 +45195,7 @@ Chip.decorators = [
 Chip.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 /**
@@ -45740,10 +45730,10 @@ var PickerCmp = (function () {
         this._gestureBlocker = gestureCtrl.createBlocker(BLOCK_ALL);
         this.d = params.data;
         this.mode = config.get('mode');
-        renderer.addClass(_elementRef.nativeElement, "picker-" + this.mode);
+        renderer.setElementClass(_elementRef.nativeElement, "picker-" + this.mode, true);
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(function (cssClass) {
-                renderer.addClass(_elementRef.nativeElement, cssClass);
+                renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
             });
         }
         this.id = (++pickerIds);
@@ -45943,7 +45933,7 @@ PickerCmp.ctorParameters = function () { return [
     { type: Config, },
     { type: GestureController, },
     { type: NavParams, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 PickerCmp.propDecorators = {
     '_cols': [{ type: ViewChildren, args: [PickerColumnCmp,] },],
@@ -47322,7 +47312,7 @@ DateTime.ctorParameters = function () { return [
     { type: Form, },
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Item, decorators: [{ type: Optional },] },
     { type: PickerController, decorators: [{ type: Optional },] },
 ]; };
@@ -47495,7 +47485,7 @@ FabButton.decorators = [
 FabButton.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 /**
@@ -47586,12 +47576,7 @@ var FabList = (function () {
      * @return {?}
      */
     FabList.prototype.setElementClass = function (className, add) {
-        if (add) {
-            this._renderer.addClass(this._elementRef.nativeElement, className);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, className);
-        }
+        this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     };
     return FabList;
 }());
@@ -47605,7 +47590,7 @@ FabList.decorators = [
  */
 FabList.ctorParameters = function () { return [
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Config, },
     { type: Platform, },
 ]; };
@@ -48658,10 +48643,8 @@ var Img = (function () {
     Img.prototype._isLoaded = function (isLoaded) {
         var /** @type {?} */ renderer = this._renderer;
         var /** @type {?} */ ele = this._elementRef.nativeElement;
-        if (isLoaded) {
-            renderer.addClass(ele, 'img-loaded');
-            renderer.removeClass(ele, 'img-unloaded');
-        }
+        renderer.setElementClass(ele, 'img-loaded', isLoaded);
+        renderer.setElementClass(ele, 'img-unloaded', !isLoaded);
     };
     /**
      * \@internal
@@ -48672,8 +48655,8 @@ var Img = (function () {
         var /** @type {?} */ imgEle = this._img;
         var /** @type {?} */ renderer = this._renderer;
         if (imgEle && imgEle.src !== srcAttr) {
-            renderer.setAttribute(this._img, 'src', srcAttr);
-            renderer.setAttribute(this._img, 'alt', this.alt);
+            renderer.setElementAttribute(this._img, 'src', srcAttr);
+            renderer.setElementAttribute(this._img, 'alt', this.alt);
         }
     };
     Object.defineProperty(Img.prototype, "top", {
@@ -48797,11 +48780,11 @@ var Img = (function () {
             this._dom.write(function () {
                 if (_this._w !== _this._wQ) {
                     _this._w = _this._wQ;
-                    renderer.setStyle(wrapperEle, 'width', _this._w);
+                    renderer.setElementStyle(wrapperEle, 'width', _this._w);
                 }
                 if (_this._h !== _this._hQ) {
                     _this._h = _this._hQ;
-                    renderer.setStyle(wrapperEle, 'height', _this._h);
+                    renderer.setElementStyle(wrapperEle, 'height', _this._h);
                 }
             });
         }
@@ -48841,7 +48824,7 @@ Img.decorators = [
  */
 Img.ctorParameters = function () { return [
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Platform, },
     { type: Content, decorators: [{ type: Optional },] },
     { type: DomController, },
@@ -50084,7 +50067,7 @@ TextInput.ctorParameters = function () { return [
     { type: Form, },
     { type: App, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Content, decorators: [{ type: Optional },] },
     { type: Item, decorators: [{ type: Optional },] },
     { type: NgControl, decorators: [{ type: Optional },] },
@@ -50358,7 +50341,7 @@ ItemDivider.decorators = [
 ItemDivider.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 /**
@@ -50728,7 +50711,7 @@ List.decorators = [
 List.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Platform, },
     { type: GestureController, },
     { type: DomController, },
@@ -51144,16 +51127,11 @@ var ItemSliding = (function () {
     /**
      * @hidden
      * @param {?} cssClass
-     * @param {?} add
+     * @param {?} shouldAdd
      * @return {?}
      */
-    ItemSliding.prototype.setElementClass = function (cssClass, add) {
-        if (add) {
-            this._renderer.addClass(this._elementRef.nativeElement, cssClass);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, cssClass);
-        }
+    ItemSliding.prototype.setElementClass = function (cssClass, shouldAdd) {
+        this._renderer.setElementClass(this._elementRef.nativeElement, cssClass, shouldAdd);
     };
     return ItemSliding;
 }());
@@ -51171,7 +51149,7 @@ ItemSliding.decorators = [
 ItemSliding.ctorParameters = function () { return [
     { type: List, decorators: [{ type: Optional },] },
     { type: Platform, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ElementRef, },
     { type: NgZone, },
 ]; };
@@ -51281,7 +51259,7 @@ ListHeader.decorators = [
  */
 ListHeader.ctorParameters = function () { return [
     { type: Config, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ElementRef, },
     { type: undefined, decorators: [{ type: Attribute, args: ['id',] },] },
 ]; };
@@ -51304,12 +51282,12 @@ var LoadingCmp = (function () {
         (void 0) /* assert */;
         this.gestureBlocker = gestureCtrl.createBlocker(BLOCK_ALL);
         this.d = params.data;
-        renderer.addClass(_elementRef.nativeElement, "loading-" + _config.get('mode'));
+        renderer.setElementClass(_elementRef.nativeElement, "loading-" + _config.get('mode'), true);
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(function (cssClass) {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    renderer.addClass(_elementRef.nativeElement, cssClass);
+                    renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
             });
         }
         this.id = (++loadingIds);
@@ -51409,7 +51387,7 @@ LoadingCmp.ctorParameters = function () { return [
     { type: ElementRef, },
     { type: GestureController, },
     { type: NavParams, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 LoadingCmp.propDecorators = {
     'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
@@ -52297,12 +52275,7 @@ var SplitPane = (function (_super) {
      * @return {?}
      */
     SplitPane.prototype.setElementClass = function (className, add) {
-        if (add) {
-            this._renderer.addClass(this._elementRef.nativeElement, className);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, className);
-        }
+        this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     };
     /**
      * @hidden
@@ -52312,10 +52285,8 @@ var SplitPane = (function (_super) {
      */
     SplitPane.prototype._setPaneCSSClass = function (elementRef, isMain) {
         var /** @type {?} */ ele = elementRef.nativeElement;
-        if (isMain) {
-            this._renderer.addClass(ele, 'split-pane-main');
-            this._renderer.removeClass(ele, 'split-pane-side');
-        }
+        this._renderer.setElementClass(ele, 'split-pane-main', isMain);
+        this._renderer.setElementClass(ele, 'split-pane-side', !isMain);
     };
     /**
      * @hidden
@@ -52349,7 +52320,7 @@ SplitPane.ctorParameters = function () { return [
     { type: Platform, },
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 SplitPane.propDecorators = {
     '_setchildren': [{ type: ContentChildren, args: [RootNode, { descendants: false },] },],
@@ -52560,7 +52531,7 @@ Nav.ctorParameters = function () { return [
     { type: Platform, },
     { type: ElementRef, },
     { type: NgZone, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ComponentFactoryResolver, },
     { type: GestureController, },
     { type: TransitionController, },
@@ -53243,12 +53214,7 @@ var Menu = (function () {
      * @return {?}
      */
     Menu.prototype.setElementClass = function (className, add) {
-        if (add) {
-            this._renderer.addClass(this._elementRef.nativeElement, className);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, className);
-        }
+        this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     };
     /**
      * @hidden
@@ -53257,7 +53223,7 @@ var Menu = (function () {
      * @return {?}
      */
     Menu.prototype.setElementAttribute = function (attributeName, value) {
-        this._renderer.setAttribute(this._elementRef.nativeElement, attributeName, value);
+        this._renderer.setElementAttribute(this._elementRef.nativeElement, attributeName, value);
     };
     /**
      * @hidden
@@ -53302,7 +53268,7 @@ Menu.ctorParameters = function () { return [
     { type: ElementRef, },
     { type: Config, },
     { type: Platform, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Keyboard, },
     { type: GestureController, },
     { type: DomController, },
@@ -53586,7 +53552,7 @@ Navbar.ctorParameters = function () { return [
     { type: NavController, decorators: [{ type: Optional },] },
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 Navbar.propDecorators = {
     'hideBackButton': [{ type: Input },],
@@ -54242,7 +54208,7 @@ var ModalCmp = (function () {
             opts.cssClass.split(' ').forEach(function (cssClass) {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    _renderer.addClass(_elementRef.nativeElement, cssClass);
+                    _renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
             });
         }
     }
@@ -54290,7 +54256,7 @@ var ModalCmp = (function () {
      * @return {?}
      */
     ModalCmp.prototype._setCssClass = function (componentRef, className) {
-        this._renderer.addClass(componentRef.location.nativeElement, className);
+        this._renderer.setElementClass(componentRef.location.nativeElement, className, true);
     };
     /**
      * @return {?}
@@ -54335,7 +54301,7 @@ ModalCmp.decorators = [
  */
 ModalCmp.ctorParameters = function () { return [
     { type: ComponentFactoryResolver, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ElementRef, },
     { type: NavParams, },
     { type: ViewController, },
@@ -55045,7 +55011,7 @@ Note.decorators = [
 Note.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 /**
@@ -55180,12 +55146,12 @@ var PopoverCmp = (function () {
         this.moduleLoader = moduleLoader;
         this._gestureBlocker = gestureCtrl.createBlocker(BLOCK_ALL);
         this.d = _navParams.data.opts;
-        _renderer.addClass(_elementRef.nativeElement, "popover-" + _config.get('mode'));
+        _renderer.setElementClass(_elementRef.nativeElement, "popover-" + _config.get('mode'), true);
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(function (cssClass) {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    _renderer.addClass(_elementRef.nativeElement, cssClass);
+                    _renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
             });
         }
         this.id = (++popoverIds);
@@ -55235,7 +55201,7 @@ var PopoverCmp = (function () {
      * @return {?}
      */
     PopoverCmp.prototype._setCssClass = function (componentRef, className) {
-        this._renderer.addClass(componentRef.location.nativeElement, className);
+        this._renderer.setElementClass(componentRef.location.nativeElement, className, true);
     };
     /**
      * @return {?}
@@ -55283,7 +55249,7 @@ PopoverCmp.decorators = [
 PopoverCmp.ctorParameters = function () { return [
     { type: ComponentFactoryResolver, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Config, },
     { type: NavParams, },
     { type: ViewController, },
@@ -55965,7 +55931,7 @@ var RadioGroup = (function () {
      * @return {?}
      */
     RadioGroup.prototype._setActive = function (radioButton) {
-        this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-activedescendant', radioButton.id);
+        this._renderer.setElementAttribute(this._elementRef.nativeElement, 'aria-activedescendant', radioButton.id);
     };
     /**
      * @hidden
@@ -56007,7 +55973,7 @@ var RadioGroup = (function () {
                 if (!header.id) {
                     header.id = 'rg-hdr-' + this.id;
                 }
-                this._renderer.setAttribute(this._elementRef.nativeElement, 'aria-describedby', header.id);
+                this._renderer.setElementAttribute(this._elementRef.nativeElement, 'aria-describedby', header.id);
             }
         },
         enumerable: true,
@@ -56055,7 +56021,7 @@ RadioGroup.decorators = [
  * @nocollapse
  */
 RadioGroup.ctorParameters = function () { return [
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ElementRef, },
     { type: ChangeDetectorRef, },
 ]; };
@@ -56301,7 +56267,7 @@ RadioButton.ctorParameters = function () { return [
     { type: Form, },
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Item, decorators: [{ type: Optional },] },
     { type: RadioGroup, decorators: [{ type: Optional },] },
 ]; };
@@ -56925,7 +56891,7 @@ Range.ctorParameters = function () { return [
     { type: Config, },
     { type: Platform, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: DomController, },
     { type: ChangeDetectorRef, },
 ]; };
@@ -58104,8 +58070,7 @@ var Searchbar = (function (_super) {
      * @return {?}
      */
     Searchbar.prototype.setFocus = function () {
-        var /** @type {?} */ onElement = this._renderer.selectRootElement(this._searchbarInput.nativeElement);
-        onElement.focus();
+        this._renderer.invokeElementMethod(this._searchbarInput.nativeElement, 'focus');
     };
     return Searchbar;
 }(BaseInput));
@@ -58144,7 +58109,7 @@ Searchbar.ctorParameters = function () { return [
     { type: Config, },
     { type: Platform, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: NgControl, decorators: [{ type: Optional },] },
 ]; };
 Searchbar.propDecorators = {
@@ -58396,7 +58361,7 @@ Segment.decorators = [
 Segment.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: NgControl, decorators: [{ type: Optional },] },
 ]; };
 Segment.propDecorators = {
@@ -58957,7 +58922,7 @@ Select.ctorParameters = function () { return [
     { type: Form, },
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Item, decorators: [{ type: Optional },] },
     { type: DeepLinker, },
 ]; };
@@ -63843,7 +63808,7 @@ Slides.ctorParameters = function () { return [
     { type: NgZone, },
     { type: ViewController, decorators: [{ type: Optional },] },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 Slides.propDecorators = {
     'autoplay': [{ type: Input },],
@@ -63898,7 +63863,7 @@ var Slide = (function () {
      */
     function Slide(elementRef, renderer, _slides) {
         this._slides = _slides;
-        renderer.addClass(elementRef.nativeElement, 'swiper-slide');
+        renderer.setElementClass(elementRef.nativeElement, 'swiper-slide', true);
         _slides.update(10);
     }
     /**
@@ -63925,7 +63890,7 @@ Slide.decorators = [
  */
 Slide.ctorParameters = function () { return [
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Slides, },
 ]; };
 
@@ -64171,7 +64136,7 @@ Spinner.decorators = [
 Spinner.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 Spinner.propDecorators = {
     'name': [{ type: Input },],
@@ -64952,7 +64917,7 @@ Tabs.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
     { type: Platform, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: DeepLinker, },
     { type: Keyboard, },
 ]; };
@@ -65286,7 +65251,7 @@ var Tab = (function (_super) {
             // add the .tab-subpage css class to tabs pages that should act like subpages
             var /** @type {?} */ pageEleRef = viewCtrl.pageRef();
             if (pageEleRef) {
-                this._renderer.addClass(pageEleRef.nativeElement, 'tab-subpage');
+                this._renderer.setElementClass(pageEleRef.nativeElement, 'tab-subpage', true);
             }
         }
     };
@@ -65376,7 +65341,7 @@ Tab.ctorParameters = function () { return [
     { type: Platform, },
     { type: ElementRef, },
     { type: NgZone, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ComponentFactoryResolver, },
     { type: ChangeDetectorRef, },
     { type: GestureController, },
@@ -65483,7 +65448,7 @@ TabButton.decorators = [
 TabButton.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 TabButton.propDecorators = {
     'tab': [{ type: Input },],
@@ -65507,13 +65472,13 @@ var ToastCmp = (function () {
         this._config = _config;
         this._elementRef = _elementRef;
         this.dismissTimeout = undefined;
-        renderer.addClass(_elementRef.nativeElement, "toast-" + _config.get('mode'));
+        renderer.setElementClass(_elementRef.nativeElement, "toast-" + _config.get('mode'), true);
         this.d = params.data;
         if (this.d.cssClass) {
             this.d.cssClass.split(' ').forEach(function (cssClass) {
                 // Make sure the class isn't whitespace, otherwise it throws exceptions
                 if (cssClass.trim() !== '')
-                    renderer.addClass(_elementRef.nativeElement, cssClass);
+                    renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
             });
         }
         this.id = (++toastIds);
@@ -65595,7 +65560,7 @@ ToastCmp.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
     { type: NavParams, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 var toastIds = -1;
 
@@ -66345,7 +66310,7 @@ Toggle.ctorParameters = function () { return [
     { type: Config, },
     { type: Platform, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Haptic, },
     { type: Item, decorators: [{ type: Optional },] },
     { type: GestureController, },
@@ -66412,7 +66377,7 @@ Footer.decorators = [
 Footer.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ViewController, decorators: [{ type: Optional },] },
 ]; };
 
@@ -66475,7 +66440,7 @@ Header.decorators = [
 Header.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: ViewController, decorators: [{ type: Optional },] },
 ]; };
 
@@ -66614,7 +66579,7 @@ Toolbar.decorators = [
 Toolbar.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 var __extends$91 = (undefined && undefined.__extends) || (function () {
@@ -66672,7 +66637,7 @@ ToolbarItem.decorators = [
 ToolbarItem.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Toolbar, decorators: [{ type: Optional },] },
     { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
 ]; };
@@ -66765,7 +66730,7 @@ ToolbarTitle.decorators = [
 ToolbarTitle.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: Toolbar, decorators: [{ type: Optional },] },
     { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
 ]; };
@@ -66867,7 +66832,7 @@ Typography.decorators = [
 Typography.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 /**
@@ -68273,7 +68238,7 @@ var VirtualScroll = (function () {
     VirtualScroll.prototype._setHeight = function (newVirtualHeight) {
         if (newVirtualHeight !== this._vHeight) {
             // ******** DOM WRITE ****************
-            this._renderer.setStyle(this._elementRef.nativeElement, 'height', newVirtualHeight > 0 ? newVirtualHeight + 'px' : '');
+            this._renderer.setElementStyle(this._elementRef.nativeElement, 'height', newVirtualHeight > 0 ? newVirtualHeight + 'px' : '');
             this._vHeight = newVirtualHeight;
             (void 0) /* console.debug */;
         }
@@ -68296,12 +68261,7 @@ var VirtualScroll = (function () {
      * @return {?}
      */
     VirtualScroll.prototype.setElementClass = function (className, add) {
-        if (add) {
-            this._renderer.addClass(this._elementRef.nativeElement, className);
-        }
-        else {
-            this._renderer.removeClass(this._elementRef.nativeElement, className);
-        }
+        this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     };
     /**
      * @hidden
@@ -68327,7 +68287,7 @@ VirtualScroll.decorators = [
 VirtualScroll.ctorParameters = function () { return [
     { type: IterableDiffers, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: NgZone, },
     { type: ChangeDetectorRef, },
     { type: Content, },
@@ -72232,12 +72192,7 @@ var ClickBlock = (function () {
      * @return {?}
      */
     ClickBlock.prototype._setElementClass = function (className, add) {
-        if (add) {
-            this.renderer.addClass(this.elementRef.nativeElement, className);
-        }
-        else {
-            this.renderer.removeClass(this.elementRef.nativeElement, className);
-        }
+        this.renderer.setElementClass(this.elementRef.nativeElement, className, add);
     };
     return ClickBlock;
 }());
@@ -72254,7 +72209,7 @@ ClickBlock.ctorParameters = function () { return [
     { type: Config, },
     { type: Platform, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
 ]; };
 
 /**

@@ -41,12 +41,12 @@
             this.d = params.data;
             this.mode = this.d.mode || config.get('mode');
             this.keyboardResizes = config.getBoolean('keyboardResizes', false);
-            _renderer.addClass(_elementRef.nativeElement, "alert-" + this.mode);
+            _renderer.setElementClass(_elementRef.nativeElement, "alert-" + this.mode, true);
             if (this.d.cssClass) {
                 this.d.cssClass.split(' ').forEach(function (cssClass) {
                     // Make sure the class isn't whitespace, otherwise it throws exceptions
                     if (cssClass.trim() !== '')
-                        _renderer.addClass(_elementRef.nativeElement, cssClass);
+                        _renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
                 });
             }
             this.id = (++alertIds);
@@ -117,7 +117,7 @@
                 // the alert up high because we need to leave space for the virtual keboard
                 // this also helps prevent the layout getting all messed up from
                 // the browser trying to scroll the input into a safe area
-                this._renderer.addClass(this._elementRef.nativeElement, 'alert-top');
+                this._renderer.setElementClass(this._elementRef.nativeElement, 'alert-top', true);
             }
         };
         /**
@@ -341,7 +341,7 @@
         { type: config_1.Config, },
         { type: gesture_controller_1.GestureController, },
         { type: nav_params_1.NavParams, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
         { type: platform_1.Platform, },
     ]; };
     AlertCmp.propDecorators = {

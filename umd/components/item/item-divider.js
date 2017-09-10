@@ -51,7 +51,7 @@ var __extends = (this && this.__extends) || (function () {
     ItemDivider.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
     ]; };
     exports.ItemDivider = ItemDivider;
     function ItemDivider_tsickle_Closure_declarations() {

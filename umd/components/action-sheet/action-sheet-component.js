@@ -33,12 +33,12 @@
             this.gestureBlocker = gestureCtrl.createBlocker(gesture_controller_1.BLOCK_ALL);
             this.d = params.data;
             this.mode = config.get('mode');
-            renderer.addClass(_elementRef.nativeElement, "action-sheet-" + this.mode);
+            renderer.setElementClass(_elementRef.nativeElement, "action-sheet-" + this.mode, true);
             if (this.d.cssClass) {
                 this.d.cssClass.split(' ').forEach(function (cssClass) {
                     // Make sure the class isn't whitespace, otherwise it throws exceptions
                     if (cssClass.trim() !== '')
-                        renderer.addClass(_elementRef.nativeElement, cssClass);
+                        renderer.setElementClass(_elementRef.nativeElement, cssClass, true);
                 });
             }
             this.id = (++actionSheetIds);
@@ -200,7 +200,7 @@
         { type: core_1.ElementRef, },
         { type: gesture_controller_1.GestureController, },
         { type: nav_params_1.NavParams, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
     ]; };
     ActionSheetCmp.propDecorators = {
         'keyUp': [{ type: core_1.HostListener, args: ['body:keyup', ['$event'],] },],

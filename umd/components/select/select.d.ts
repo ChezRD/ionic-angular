@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, OnDestroy, Renderer2, QueryList } from '@angular/core';
+import { ElementRef, EventEmitter, OnDestroy, QueryList, Renderer } from '@angular/core';
 import { ActionSheet } from '../action-sheet/action-sheet';
 import { Alert } from '../alert/alert';
 import { Popover } from '../popover/popover';
@@ -190,7 +190,7 @@ export declare class Select extends BaseInput<any> implements OnDestroy {
      * @output {any} Emitted when the selection was cancelled.
      */
     ionCancel: EventEmitter<Select>;
-    constructor(_app: App, form: Form, config: Config, elementRef: ElementRef, renderer: Renderer2, item: Item, deepLinker: DeepLinker);
+    constructor(_app: App, form: Form, config: Config, elementRef: ElementRef, renderer: Renderer, item: Item, deepLinker: DeepLinker);
     _click(ev: UIEvent): void;
     _keyup(): void;
     /**

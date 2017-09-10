@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, NgZone, Optional, Output, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, NgZone, Optional, Output, Renderer, ViewChild, ViewEncapsulation } from '@angular/core';
 import { App } from '../app/app';
 import { Config } from '../../config/config';
 import { DomController } from '../../platform/dom-controller';
@@ -900,7 +900,7 @@ Content.ctorParameters = function () { return [
     { type: Platform, },
     { type: DomController, },
     { type: ElementRef, },
-    { type: Renderer2, },
+    { type: Renderer, },
     { type: App, },
     { type: Keyboard, },
     { type: NgZone, },

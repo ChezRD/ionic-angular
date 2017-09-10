@@ -692,12 +692,7 @@
          * @return {?}
          */
         Menu.prototype.setElementClass = function (className, add) {
-            if (add) {
-                this._renderer.addClass(this._elementRef.nativeElement, className);
-            }
-            else {
-                this._renderer.removeClass(this._elementRef.nativeElement, className);
-            }
+            this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
         };
         /**
          * @hidden
@@ -706,7 +701,7 @@
          * @return {?}
          */
         Menu.prototype.setElementAttribute = function (attributeName, value) {
-            this._renderer.setAttribute(this._elementRef.nativeElement, attributeName, value);
+            this._renderer.setElementAttribute(this._elementRef.nativeElement, attributeName, value);
         };
         /**
          * @hidden
@@ -751,7 +746,7 @@
         { type: core_1.ElementRef, },
         { type: config_1.Config, },
         { type: platform_1.Platform, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
         { type: keyboard_1.Keyboard, },
         { type: gesture_controller_1.GestureController, },
         { type: dom_controller_1.DomController, },

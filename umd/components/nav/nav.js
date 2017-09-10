@@ -223,7 +223,7 @@ var __extends = (this && this.__extends) || (function () {
         { type: platform_1.Platform, },
         { type: core_1.ElementRef, },
         { type: core_1.NgZone, },
-        { type: core_1.Renderer2, },
+        { type: core_1.Renderer, },
         { type: core_1.ComponentFactoryResolver, },
         { type: gesture_controller_1.GestureController, },
         { type: transition_controller_1.TransitionController, },
