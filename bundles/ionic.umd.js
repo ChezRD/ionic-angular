@@ -49112,6 +49112,9 @@ var InfiniteScroll = (function () {
         if (this.state === STATE_LOADING || this.state === STATE_DISABLED) {
             return 1;
         }
+        if (!ev) {
+            return 2;
+        }
         if (ev && ev.timeStamp && this._lastCheck + 32 > ev.timeStamp) {
             // no need to check less than every XXms
             return 2;
