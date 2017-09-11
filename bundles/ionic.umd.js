@@ -41537,7 +41537,14 @@ var BaseInput = (function (_super) {
         (void 0) /* console.debug */;
         this._form && this._form.unsetAsFocused(this);
         this._setFocus(false);
+        this._fireTouched();
         this.ionBlur.emit(this);
+    };
+    /**
+     * @hidden
+     * @return {?}
+     */
+    BaseInput.prototype._fireTouched = function () {
         this._onTouched && this._onTouched();
     };
     /**
@@ -41563,7 +41570,6 @@ var BaseInput = (function (_super) {
      */
     BaseInput.prototype.onChange = function () {
         this._onChanged && this._onChanged(this._inputNgModelEvent());
-        this._onTouched && this._onTouched();
     };
     /**
      * @hidden
@@ -45019,6 +45025,7 @@ var Checkbox = (function (_super) {
         ev.preventDefault();
         ev.stopPropagation();
         this.value = !this.value;
+        this._fireTouched();
     };
     /**
      * @hidden
@@ -49105,11 +49112,11 @@ var InfiniteScroll = (function () {
         if (this.state === STATE_LOADING || this.state === STATE_DISABLED) {
             return 1;
         }
-        if (this._lastCheck + 32 > ev.timeStamp) {
+        if (ev.timeStamp && this._lastCheck + 32 > ev.timeStamp) {
             // no need to check less than every XXms
             return 2;
         }
-        this._lastCheck = ev.timeStamp;
+        this._lastCheck = ev.timeStamp || Date.now();
         // ******** DOM READ ****************
         var /** @type {?} */ infiniteHeight = this._elementRef.nativeElement.scrollHeight;
         if (!infiniteHeight) {
@@ -58325,7 +58332,10 @@ var Segment = (function (_super) {
         var _this = this;
         this._initialize();
         this._buttons.forEach(function (button) {
-            button.ionSelect.subscribe(function (selectedButton) { return _this.value = selectedButton.value; });
+            button.ionSelect.subscribe(function (selectedButton) {
+                _this.value = selectedButton.value;
+                _this._fireTouched();
+            });
         });
     };
     /**
