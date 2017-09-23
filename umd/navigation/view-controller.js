@@ -30,7 +30,7 @@
      * }
      * ```
      */
-    var ViewController = (function () {
+    var ViewController = /** @class */ (function () {
         /**
          * @param {?=} component
          * @param {?=} data
@@ -577,11 +577,11 @@
                 instance[methodName]();
             }
         };
+        ViewController.propDecorators = {
+            '_emitter': [{ type: core_1.Output },],
+        };
         return ViewController;
     }());
-    ViewController.propDecorators = {
-        '_emitter': [{ type: core_1.Output },],
-    };
     exports.ViewController = ViewController;
     function ViewController_tsickle_Closure_declarations() {
         /** @type {?} */

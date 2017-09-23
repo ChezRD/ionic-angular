@@ -9,7 +9,7 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var PanRecognizer = (function () {
+    var PanRecognizer = /** @class */ (function () {
         /**
          * @param {?} direction
          * @param {?} threshold

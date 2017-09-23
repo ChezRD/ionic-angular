@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * Gesture attached to the content which the menu is assigned to
      */
-    var MenuContentGesture = (function (_super) {
+    var MenuContentGesture = /** @class */ (function (_super) {
         __extends(MenuContentGesture, _super);
         /**
          * @param {?} plt

@@ -151,7 +151,7 @@ import { Config } from '../../config/config';
  * \@demo /docs/demos/src/action-sheet/
  * @see {\@link /docs/components#action-sheets ActionSheet Component Docs}
  */
-var ActionSheetController = (function () {
+var ActionSheetController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -169,19 +169,19 @@ var ActionSheetController = (function () {
         if (opts === void 0) { opts = {}; }
         return new ActionSheet(this._app, opts, this.config);
     };
+    ActionSheetController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    ActionSheetController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+    ]; };
     return ActionSheetController;
 }());
 export { ActionSheetController };
-ActionSheetController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-ActionSheetController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-]; };
 function ActionSheetController_tsickle_Closure_declarations() {
     /** @type {?} */
     ActionSheetController.decorators;

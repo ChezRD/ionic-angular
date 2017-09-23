@@ -7,7 +7,7 @@ import { ViewController } from '../../navigation/view-controller';
 /**
  * @hidden
  */
-var ActionSheetCmp = (function () {
+var ActionSheetCmp = /** @class */ (function () {
     /**
      * @param {?} _viewCtrl
      * @param {?} config
@@ -148,53 +148,53 @@ var ActionSheetCmp = (function () {
         this.d = this.cancelButton = null;
         this.gestureBlocker.destroy();
     };
+    ActionSheetCmp.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-action-sheet',
+                    template: '<ion-backdrop (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>' +
+                        '<div class="action-sheet-wrapper">' +
+                        '<div class="action-sheet-container">' +
+                        '<div class="action-sheet-group">' +
+                        '<div class="action-sheet-title" id="{{hdrId}}" *ngIf="d.title">{{d.title}}</div>' +
+                        '<div class="action-sheet-sub-title" id="{{descId}}" *ngIf="d.subTitle">{{d.subTitle}}</div>' +
+                        '<button ion-button="action-sheet-button" (click)="click(b)" *ngFor="let b of d.buttons" class="disable-hover" [attr.icon-start]="b.icon ? \'\' : null" [ngClass]="b.cssClass">' +
+                        '<ion-icon [name]="b.icon" *ngIf="b.icon" class="action-sheet-icon"></ion-icon>' +
+                        '{{b.text}}' +
+                        '</button>' +
+                        '</div>' +
+                        '<div class="action-sheet-group" *ngIf="cancelButton">' +
+                        '<button ion-button="action-sheet-button" (click)="click(cancelButton)" class="action-sheet-cancel disable-hover" [attr.icon-start]="cancelButton.icon ? \'\' : null" [ngClass]="cancelButton.cssClass">' +
+                        '<ion-icon [name]="cancelButton.icon" *ngIf="cancelButton.icon" class="action-sheet-icon"></ion-icon>' +
+                        '{{cancelButton.text}}' +
+                        '</button>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>',
+                    host: {
+                        'role': 'dialog',
+                        '[attr.aria-labelledby]': 'hdrId',
+                        '[attr.aria-describedby]': 'descId'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ActionSheetCmp.ctorParameters = function () { return [
+        { type: ViewController, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: GestureController, },
+        { type: NavParams, },
+        { type: Renderer, },
+    ]; };
+    ActionSheetCmp.propDecorators = {
+        'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     return ActionSheetCmp;
 }());
 export { ActionSheetCmp };
-ActionSheetCmp.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-action-sheet',
-                template: '<ion-backdrop (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>' +
-                    '<div class="action-sheet-wrapper">' +
-                    '<div class="action-sheet-container">' +
-                    '<div class="action-sheet-group">' +
-                    '<div class="action-sheet-title" id="{{hdrId}}" *ngIf="d.title">{{d.title}}</div>' +
-                    '<div class="action-sheet-sub-title" id="{{descId}}" *ngIf="d.subTitle">{{d.subTitle}}</div>' +
-                    '<button ion-button="action-sheet-button" (click)="click(b)" *ngFor="let b of d.buttons" class="disable-hover" [attr.icon-start]="b.icon ? \'\' : null" [ngClass]="b.cssClass">' +
-                    '<ion-icon [name]="b.icon" *ngIf="b.icon" class="action-sheet-icon"></ion-icon>' +
-                    '{{b.text}}' +
-                    '</button>' +
-                    '</div>' +
-                    '<div class="action-sheet-group" *ngIf="cancelButton">' +
-                    '<button ion-button="action-sheet-button" (click)="click(cancelButton)" class="action-sheet-cancel disable-hover" [attr.icon-start]="cancelButton.icon ? \'\' : null" [ngClass]="cancelButton.cssClass">' +
-                    '<ion-icon [name]="cancelButton.icon" *ngIf="cancelButton.icon" class="action-sheet-icon"></ion-icon>' +
-                    '{{cancelButton.text}}' +
-                    '</button>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>',
-                host: {
-                    'role': 'dialog',
-                    '[attr.aria-labelledby]': 'hdrId',
-                    '[attr.aria-describedby]': 'descId'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-ActionSheetCmp.ctorParameters = function () { return [
-    { type: ViewController, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: GestureController, },
-    { type: NavParams, },
-    { type: Renderer, },
-]; };
-ActionSheetCmp.propDecorators = {
-    'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
-};
 function ActionSheetCmp_tsickle_Closure_declarations() {
     /** @type {?} */
     ActionSheetCmp.decorators;

@@ -97,7 +97,7 @@ var __extends = (this && this.__extends) || (function () {
      *
      * \@demo /docs/demos/src/input/
      */
-    var TextInput = (function (_super) {
+    var TextInput = /** @class */ (function (_super) {
         __extends(TextInput, _super);
         /**
          * @param {?} config
@@ -445,7 +445,7 @@ var __extends = (this && this.__extends) || (function () {
                 return this._scrollData;
             }
             var /** @type {?} */ ele = this._elementRef.nativeElement;
-            ele = (ele.closest('ion-item,[ion-item]')) || ele;
+            ele = /** @type {?} */ (ele.closest('ion-item,[ion-item]')) || ele;
             return this._scrollData = getScrollData(ele.offsetTop, ele.offsetHeight, this._content.getContentDimensions(), this._keyboardHeight, this._plt.height());
         };
         /**
@@ -615,85 +615,85 @@ var __extends = (this && this.__extends) || (function () {
                 _this.setFocus();
             });
         };
+        TextInput.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: 'ion-input,ion-textarea',
+                        template: '<input #textInput *ngIf="!_isTextarea" class="text-input" ' +
+                            '[ngClass]="\'text-input-\' + _mode"' +
+                            '(input)="onInput($event)" ' +
+                            '(blur)="onBlur($event)" ' +
+                            '(focus)="onFocus($event)" ' +
+                            '(keydown)="onKeydown($event)" ' +
+                            '[type]="_type" ' +
+                            '[attr.aria-labelledby]="_labelId" ' +
+                            '[attr.min]="min" ' +
+                            '[attr.max]="max" ' +
+                            '[attr.step]="step" ' +
+                            '[attr.autocomplete]="autocomplete" ' +
+                            '[attr.autocorrect]="autocorrect" ' +
+                            '[placeholder]="placeholder" ' +
+                            '[disabled]="_disabled" ' +
+                            '[readonly]="_readonly">' +
+                            '<textarea #textInput *ngIf="_isTextarea" class="text-input" ' +
+                            '[ngClass]="\'text-input-\' + _mode"' +
+                            '(input)="onInput($event)" ' +
+                            '(blur)="onBlur($event)" ' +
+                            '(focus)="onFocus($event)" ' +
+                            '(keydown)="onKeydown($event)" ' +
+                            '[attr.aria-labelledby]="_labelId" ' +
+                            '[attr.autocomplete]="autocomplete" ' +
+                            '[attr.autocorrect]="autocorrect" ' +
+                            '[placeholder]="placeholder" ' +
+                            '[disabled]="_disabled" ' +
+                            '[readonly]="_readonly"></textarea>' +
+                            '<button ion-button *ngIf="_clearInput" clear class="text-input-clear-icon" ' +
+                            'type="button" ' +
+                            '(click)="clearTextInput($event)" ' +
+                            '(mousedown)="clearTextInput($event)" ' +
+                            'tabindex="-1"></button>' +
+                            '<div class="input-cover" *ngIf="_useAssist" ' +
+                            '(touchstart)="_pointerStart($event)" ' +
+                            '(touchend)="_pointerEnd($event)" ' +
+                            '(mousedown)="_pointerStart($event)" ' +
+                            '(mouseup)="_pointerEnd($event)"></div>',
+                        encapsulation: core_1.ViewEncapsulation.None,
+                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                        inputs: ['value']
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        TextInput.ctorParameters = function () { return [
+            { type: config_1.Config, },
+            { type: platform_1.Platform, },
+            { type: form_1.Form, },
+            { type: app_1.App, },
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+            { type: content_1.Content, decorators: [{ type: core_1.Optional },] },
+            { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
+            { type: forms_1.NgControl, decorators: [{ type: core_1.Optional },] },
+            { type: dom_controller_1.DomController, },
+        ]; };
+        TextInput.propDecorators = {
+            'clearInput': [{ type: core_1.Input },],
+            'type': [{ type: core_1.Input },],
+            'readonly': [{ type: core_1.Input },],
+            'clearOnEdit': [{ type: core_1.Input },],
+            '_native': [{ type: core_1.ViewChild, args: ['textInput', { read: core_1.ElementRef },] },],
+            'autocomplete': [{ type: core_1.Input },],
+            'autocorrect': [{ type: core_1.Input },],
+            'placeholder': [{ type: core_1.Input },],
+            'min': [{ type: core_1.Input },],
+            'max': [{ type: core_1.Input },],
+            'step': [{ type: core_1.Input },],
+            'input': [{ type: core_1.Output },],
+            'blur': [{ type: core_1.Output },],
+            'focus': [{ type: core_1.Output },],
+        };
         return TextInput;
     }(base_input_1.BaseInput));
-    TextInput.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ion-input,ion-textarea',
-                    template: '<input #textInput *ngIf="!_isTextarea" class="text-input" ' +
-                        '[ngClass]="\'text-input-\' + _mode"' +
-                        '(input)="onInput($event)" ' +
-                        '(blur)="onBlur($event)" ' +
-                        '(focus)="onFocus($event)" ' +
-                        '(keydown)="onKeydown($event)" ' +
-                        '[type]="_type" ' +
-                        '[attr.aria-labelledby]="_labelId" ' +
-                        '[attr.min]="min" ' +
-                        '[attr.max]="max" ' +
-                        '[attr.step]="step" ' +
-                        '[attr.autocomplete]="autocomplete" ' +
-                        '[attr.autocorrect]="autocorrect" ' +
-                        '[placeholder]="placeholder" ' +
-                        '[disabled]="_disabled" ' +
-                        '[readonly]="_readonly">' +
-                        '<textarea #textInput *ngIf="_isTextarea" class="text-input" ' +
-                        '[ngClass]="\'text-input-\' + _mode"' +
-                        '(input)="onInput($event)" ' +
-                        '(blur)="onBlur($event)" ' +
-                        '(focus)="onFocus($event)" ' +
-                        '(keydown)="onKeydown($event)" ' +
-                        '[attr.aria-labelledby]="_labelId" ' +
-                        '[attr.autocomplete]="autocomplete" ' +
-                        '[attr.autocorrect]="autocorrect" ' +
-                        '[placeholder]="placeholder" ' +
-                        '[disabled]="_disabled" ' +
-                        '[readonly]="_readonly"></textarea>' +
-                        '<button ion-button *ngIf="_clearInput" clear class="text-input-clear-icon" ' +
-                        'type="button" ' +
-                        '(click)="clearTextInput($event)" ' +
-                        '(mousedown)="clearTextInput($event)" ' +
-                        'tabindex="-1"></button>' +
-                        '<div class="input-cover" *ngIf="_useAssist" ' +
-                        '(touchstart)="_pointerStart($event)" ' +
-                        '(touchend)="_pointerEnd($event)" ' +
-                        '(mousedown)="_pointerStart($event)" ' +
-                        '(mouseup)="_pointerEnd($event)"></div>',
-                    encapsulation: core_1.ViewEncapsulation.None,
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                    inputs: ['value']
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    TextInput.ctorParameters = function () { return [
-        { type: config_1.Config, },
-        { type: platform_1.Platform, },
-        { type: form_1.Form, },
-        { type: app_1.App, },
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-        { type: content_1.Content, decorators: [{ type: core_1.Optional },] },
-        { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
-        { type: forms_1.NgControl, decorators: [{ type: core_1.Optional },] },
-        { type: dom_controller_1.DomController, },
-    ]; };
-    TextInput.propDecorators = {
-        'clearInput': [{ type: core_1.Input },],
-        'type': [{ type: core_1.Input },],
-        'readonly': [{ type: core_1.Input },],
-        'clearOnEdit': [{ type: core_1.Input },],
-        '_native': [{ type: core_1.ViewChild, args: ['textInput', { read: core_1.ElementRef },] },],
-        'autocomplete': [{ type: core_1.Input },],
-        'autocorrect': [{ type: core_1.Input },],
-        'placeholder': [{ type: core_1.Input },],
-        'min': [{ type: core_1.Input },],
-        'max': [{ type: core_1.Input },],
-        'step': [{ type: core_1.Input },],
-        'input': [{ type: core_1.Output },],
-        'blur': [{ type: core_1.Output },],
-        'focus': [{ type: core_1.Output },],
-    };
     exports.TextInput = TextInput;
     function TextInput_tsickle_Closure_declarations() {
         /** @type {?} */

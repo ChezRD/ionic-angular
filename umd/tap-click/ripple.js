@@ -15,7 +15,7 @@
     /**
      * @hidden
      */
-    var RippleActivator = (function () {
+    var RippleActivator = /** @class */ (function () {
         /**
          * @param {?} app
          * @param {?} config

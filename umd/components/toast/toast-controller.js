@@ -78,7 +78,7 @@
      *
      * \@demo /docs/demos/src/toast/
      */
-    var ToastController = (function () {
+    var ToastController = /** @class */ (function () {
         /**
          * @param {?} _app
          * @param {?} config
@@ -96,18 +96,18 @@
             if (opts === void 0) { opts = {}; }
             return new toast_1.Toast(this._app, opts, this.config);
         };
+        ToastController.decorators = [
+            { type: core_1.Injectable },
+        ];
+        /**
+         * @nocollapse
+         */
+        ToastController.ctorParameters = function () { return [
+            { type: app_1.App, },
+            { type: config_1.Config, },
+        ]; };
         return ToastController;
     }());
-    ToastController.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    ToastController.ctorParameters = function () { return [
-        { type: app_1.App, },
-        { type: config_1.Config, },
-    ]; };
     exports.ToastController = ToastController;
     function ToastController_tsickle_Closure_declarations() {
         /** @type {?} */

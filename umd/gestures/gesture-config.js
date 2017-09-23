@@ -25,7 +25,7 @@ var __extends = (this && this.__extends) || (function () {
      * @hidden
      * This class overrides the default Angular gesture config.
      */
-    var IonicGestureConfig = (function (_super) {
+    var IonicGestureConfig = /** @class */ (function (_super) {
         __extends(IonicGestureConfig, _super);
         function IonicGestureConfig() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -41,15 +41,15 @@ var __extends = (this && this.__extends) || (function () {
             }
             return mc;
         };
+        IonicGestureConfig.decorators = [
+            { type: core_1.Injectable },
+        ];
+        /**
+         * @nocollapse
+         */
+        IonicGestureConfig.ctorParameters = function () { return []; };
         return IonicGestureConfig;
     }(platform_browser_1.HammerGestureConfig));
-    IonicGestureConfig.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    IonicGestureConfig.ctorParameters = function () { return []; };
     exports.IonicGestureConfig = IonicGestureConfig;
     function IonicGestureConfig_tsickle_Closure_declarations() {
         /** @type {?} */

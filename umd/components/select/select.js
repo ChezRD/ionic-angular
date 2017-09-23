@@ -169,7 +169,7 @@ var __extends = (this && this.__extends) || (function () {
      *
      * \@demo /docs/demos/src/select/
      */
-    var Select = (function (_super) {
+    var Select = /** @class */ (function (_super) {
         __extends(Select, _super);
         /**
          * @param {?} _app
@@ -489,57 +489,57 @@ var __extends = (this && this.__extends) || (function () {
             this._updateText();
             _super.prototype._inputUpdated.call(this);
         };
+        Select.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: 'ion-select',
+                        template: '<div *ngIf="!_text" class="select-placeholder select-text">{{placeholder}}</div>' +
+                            '<div *ngIf="_text" class="select-text">{{selectedText || _text}}</div>' +
+                            '<div class="select-icon">' +
+                            '<div class="select-icon-inner"></div>' +
+                            '</div>' +
+                            '<button aria-haspopup="true" ' +
+                            'type="button" ' +
+                            '[id]="id" ' +
+                            'ion-button="item-cover" ' +
+                            '[attr.aria-labelledby]="_labelId" ' +
+                            '[attr.aria-disabled]="_disabled" ' +
+                            'class="item-cover">' +
+                            '</button>',
+                        host: {
+                            '[class.select-disabled]': '_disabled'
+                        },
+                        providers: [{ provide: forms_1.NG_VALUE_ACCESSOR, useExisting: Select, multi: true }],
+                        encapsulation: core_1.ViewEncapsulation.None,
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Select.ctorParameters = function () { return [
+            { type: app_1.App, },
+            { type: form_1.Form, },
+            { type: config_1.Config, },
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+            { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
+            { type: deep_linker_1.DeepLinker, },
+        ]; };
+        Select.propDecorators = {
+            'cancelText': [{ type: core_1.Input },],
+            'okText': [{ type: core_1.Input },],
+            'placeholder': [{ type: core_1.Input },],
+            'selectOptions': [{ type: core_1.Input },],
+            'interface': [{ type: core_1.Input },],
+            'selectedText': [{ type: core_1.Input },],
+            'compareWith': [{ type: core_1.Input },],
+            'ionCancel': [{ type: core_1.Output },],
+            '_click': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
+            '_keyup': [{ type: core_1.HostListener, args: ['keyup.space',] },],
+            'multiple': [{ type: core_1.Input },],
+            'options': [{ type: core_1.ContentChildren, args: [option_1.Option,] },],
+        };
         return Select;
     }(base_input_1.BaseInput));
-    Select.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ion-select',
-                    template: '<div *ngIf="!_text" class="select-placeholder select-text">{{placeholder}}</div>' +
-                        '<div *ngIf="_text" class="select-text">{{selectedText || _text}}</div>' +
-                        '<div class="select-icon">' +
-                        '<div class="select-icon-inner"></div>' +
-                        '</div>' +
-                        '<button aria-haspopup="true" ' +
-                        'type="button" ' +
-                        '[id]="id" ' +
-                        'ion-button="item-cover" ' +
-                        '[attr.aria-labelledby]="_labelId" ' +
-                        '[attr.aria-disabled]="_disabled" ' +
-                        'class="item-cover">' +
-                        '</button>',
-                    host: {
-                        '[class.select-disabled]': '_disabled'
-                    },
-                    providers: [{ provide: forms_1.NG_VALUE_ACCESSOR, useExisting: Select, multi: true }],
-                    encapsulation: core_1.ViewEncapsulation.None,
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Select.ctorParameters = function () { return [
-        { type: app_1.App, },
-        { type: form_1.Form, },
-        { type: config_1.Config, },
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-        { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
-        { type: deep_linker_1.DeepLinker, },
-    ]; };
-    Select.propDecorators = {
-        'cancelText': [{ type: core_1.Input },],
-        'okText': [{ type: core_1.Input },],
-        'placeholder': [{ type: core_1.Input },],
-        'selectOptions': [{ type: core_1.Input },],
-        'interface': [{ type: core_1.Input },],
-        'selectedText': [{ type: core_1.Input },],
-        'compareWith': [{ type: core_1.Input },],
-        'ionCancel': [{ type: core_1.Output },],
-        '_click': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
-        '_keyup': [{ type: core_1.HostListener, args: ['keyup.space',] },],
-        'multiple': [{ type: core_1.Input },],
-        'options': [{ type: core_1.ContentChildren, args: [option_1.Option,] },],
-    };
     exports.Select = Select;
     function Select_tsickle_Closure_declarations() {
         /** @type {?} */

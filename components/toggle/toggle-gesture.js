@@ -14,7 +14,7 @@ import { pointerCoord } from '../../util/dom';
 /**
  * @hidden
  */
-var ToggleGesture = (function (_super) {
+var ToggleGesture = /** @class */ (function (_super) {
     __extends(ToggleGesture, _super);
     /**
      * @param {?} plt

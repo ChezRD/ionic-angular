@@ -22,24 +22,24 @@ import { Directive } from '@angular/core';
  *
  *
  */
-var Col = (function () {
+var Col = /** @class */ (function () {
     function Col() {
     }
+    Col.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-col, [ion-col]',
+                    host: {
+                        'class': 'col'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Col.ctorParameters = function () { return []; };
     return Col;
 }());
 export { Col };
-Col.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-col, [ion-col]',
-                host: {
-                    'class': 'col'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Col.ctorParameters = function () { return []; };
 function Col_tsickle_Closure_declarations() {
     /** @type {?} */
     Col.decorators;

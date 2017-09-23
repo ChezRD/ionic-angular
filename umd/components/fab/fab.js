@@ -67,7 +67,7 @@ var __extends = (this && this.__extends) || (function () {
      * \@demo /docs/demos/src/fab/
      * @see {\@link /docs/components#fabs FAB Component Docs}
      */
-    var FabButton = (function (_super) {
+    var FabButton = /** @class */ (function (_super) {
         __extends(FabButton, _super);
         /**
          * @param {?} config
@@ -85,28 +85,28 @@ var __extends = (this && this.__extends) || (function () {
         FabButton.prototype.setActiveClose = function (closeVisible) {
             this.setElementClass('fab-close-active', closeVisible);
         };
+        FabButton.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: '[ion-fab]',
+                        template: '<ion-icon name="close" class="fab-close-icon"></ion-icon>' +
+                            '<span class="button-inner">' +
+                            '<ng-content></ng-content>' +
+                            '</span>' +
+                            '<div class="button-effect"></div>',
+                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                        encapsulation: core_1.ViewEncapsulation.None,
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        FabButton.ctorParameters = function () { return [
+            { type: config_1.Config, },
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+        ]; };
         return FabButton;
     }(ion_1.Ion));
-    FabButton.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: '[ion-fab]',
-                    template: '<ion-icon name="close" class="fab-close-icon"></ion-icon>' +
-                        '<span class="button-inner">' +
-                        '<ng-content></ng-content>' +
-                        '</span>' +
-                        '<div class="button-effect"></div>',
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core_1.ViewEncapsulation.None,
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    FabButton.ctorParameters = function () { return [
-        { type: config_1.Config, },
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-    ]; };
     exports.FabButton = FabButton;
     function FabButton_tsickle_Closure_declarations() {
         /** @type {?} */

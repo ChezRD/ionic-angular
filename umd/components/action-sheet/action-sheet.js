@@ -26,7 +26,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var ActionSheet = (function (_super) {
+    var ActionSheet = /** @class */ (function (_super) {
         __extends(ActionSheet, _super);
         /**
          * @param {?} app

@@ -31,7 +31,7 @@ var __extends = (this && this.__extends) || (function () {
     var platform_1 = require("../../platform/platform");
     var scroll_view_1 = require("../../util/scroll-view");
     var view_controller_1 = require("../../navigation/view-controller");
-    var EventEmitterProxy = (function (_super) {
+    var EventEmitterProxy = /** @class */ (function (_super) {
         __extends(EventEmitterProxy, _super);
         function EventEmitterProxy() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -184,7 +184,7 @@ var __extends = (this && this.__extends) || (function () {
      * ```
      *
      */
-    var Content = (function (_super) {
+    var Content = /** @class */ (function (_super) {
         __extends(Content, _super);
         /**
          * @param {?} config
@@ -693,7 +693,7 @@ var __extends = (this && this.__extends) || (function () {
             var /** @type {?} */ parentEle = ele.parentElement;
             var /** @type {?} */ children = parentEle.children;
             for (var /** @type {?} */ i = children.length - 1; i >= 0; i--) {
-                ele = (children[i]);
+                ele = /** @type {?} */ (children[i]);
                 tagName = ele.tagName;
                 if (tagName === 'ION-CONTENT') {
                     scrollEvent.contentElement = ele;
@@ -722,7 +722,7 @@ var __extends = (this && this.__extends) || (function () {
             var /** @type {?} */ tabbarEle;
             while (ele && ele.tagName !== 'ION-MODAL' && !ele.classList.contains('tab-subpage')) {
                 if (ele.tagName === 'ION-TABS') {
-                    tabbarEle = (ele.firstElementChild);
+                    tabbarEle = /** @type {?} */ (ele.firstElementChild);
                     // ******** DOM READ ****************
                     this._tabbarHeight = tabbarEle.clientHeight;
                     if (this._tabsPlacement === null) {
@@ -882,50 +882,50 @@ var __extends = (this && this.__extends) || (function () {
             // to start new requests and render images
             return Math.abs(this._scroll.ev.velocityY) < this._imgVelMax;
         };
+        Content.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: 'ion-content',
+                        template: '<div class="fixed-content" #fixedContent>' +
+                            '<ng-content select="[ion-fixed],ion-fab"></ng-content>' +
+                            '</div>' +
+                            '<div class="scroll-content" #scrollContent>' +
+                            '<ng-content></ng-content>' +
+                            '</div>' +
+                            '<ng-content select="ion-refresher"></ng-content>',
+                        host: {
+                            '[class.statusbar-padding]': 'statusbarPadding',
+                            '[class.has-refresher]': '_hasRefresher'
+                        },
+                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                        encapsulation: core_1.ViewEncapsulation.None
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Content.ctorParameters = function () { return [
+            { type: config_1.Config, },
+            { type: platform_1.Platform, },
+            { type: dom_controller_1.DomController, },
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+            { type: app_1.App, },
+            { type: keyboard_1.Keyboard, },
+            { type: core_1.NgZone, },
+            { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
+            { type: nav_controller_1.NavController, decorators: [{ type: core_1.Optional },] },
+        ]; };
+        Content.propDecorators = {
+            '_fixedContent': [{ type: core_1.ViewChild, args: ['fixedContent', { read: core_1.ElementRef },] },],
+            '_scrollContent': [{ type: core_1.ViewChild, args: ['scrollContent', { read: core_1.ElementRef },] },],
+            'ionScrollStart': [{ type: core_1.Output },],
+            'ionScroll': [{ type: core_1.Output },],
+            'ionScrollEnd': [{ type: core_1.Output },],
+            'fullscreen': [{ type: core_1.Input },],
+            'scrollDownOnLoad': [{ type: core_1.Input },],
+        };
         return Content;
     }(ion_1.Ion));
-    Content.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ion-content',
-                    template: '<div class="fixed-content" #fixedContent>' +
-                        '<ng-content select="[ion-fixed],ion-fab"></ng-content>' +
-                        '</div>' +
-                        '<div class="scroll-content" #scrollContent>' +
-                        '<ng-content></ng-content>' +
-                        '</div>' +
-                        '<ng-content select="ion-refresher"></ng-content>',
-                    host: {
-                        '[class.statusbar-padding]': 'statusbarPadding',
-                        '[class.has-refresher]': '_hasRefresher'
-                    },
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core_1.ViewEncapsulation.None
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Content.ctorParameters = function () { return [
-        { type: config_1.Config, },
-        { type: platform_1.Platform, },
-        { type: dom_controller_1.DomController, },
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-        { type: app_1.App, },
-        { type: keyboard_1.Keyboard, },
-        { type: core_1.NgZone, },
-        { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
-        { type: nav_controller_1.NavController, decorators: [{ type: core_1.Optional },] },
-    ]; };
-    Content.propDecorators = {
-        '_fixedContent': [{ type: core_1.ViewChild, args: ['fixedContent', { read: core_1.ElementRef },] },],
-        '_scrollContent': [{ type: core_1.ViewChild, args: ['scrollContent', { read: core_1.ElementRef },] },],
-        'ionScrollStart': [{ type: core_1.Output },],
-        'ionScroll': [{ type: core_1.Output },],
-        'ionScrollEnd': [{ type: core_1.Output },],
-        'fullscreen': [{ type: core_1.Input },],
-        'scrollDownOnLoad': [{ type: core_1.Input },],
-    };
     exports.Content = Content;
     function Content_tsickle_Closure_declarations() {
         /** @type {?} */

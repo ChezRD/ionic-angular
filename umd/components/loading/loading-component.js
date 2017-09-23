@@ -19,7 +19,7 @@
     /**
      * @hidden
      */
-    var LoadingCmp = (function () {
+    var LoadingCmp = /** @class */ (function () {
         /**
          * @param {?} _viewCtrl
          * @param {?} _config
@@ -112,38 +112,38 @@
             (void 0) /* assert */;
             this.gestureBlocker.destroy();
         };
+        LoadingCmp.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: 'ion-loading',
+                        template: '<ion-backdrop [hidden]="!d.showBackdrop" (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>' +
+                            '<div class="loading-wrapper">' +
+                            '<div *ngIf="showSpinner" class="loading-spinner">' +
+                            '<ion-spinner [name]="d.spinner"></ion-spinner>' +
+                            '</div>' +
+                            '<div *ngIf="d.content" [innerHTML]="d.content" class="loading-content"></div>' +
+                            '</div>',
+                        host: {
+                            'role': 'dialog'
+                        },
+                        encapsulation: core_1.ViewEncapsulation.None,
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        LoadingCmp.ctorParameters = function () { return [
+            { type: view_controller_1.ViewController, },
+            { type: config_1.Config, },
+            { type: core_1.ElementRef, },
+            { type: gesture_controller_1.GestureController, },
+            { type: nav_params_1.NavParams, },
+            { type: core_1.Renderer, },
+        ]; };
+        LoadingCmp.propDecorators = {
+            'keyUp': [{ type: core_1.HostListener, args: ['body:keyup', ['$event'],] },],
+        };
         return LoadingCmp;
     }());
-    LoadingCmp.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ion-loading',
-                    template: '<ion-backdrop [hidden]="!d.showBackdrop" (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>' +
-                        '<div class="loading-wrapper">' +
-                        '<div *ngIf="showSpinner" class="loading-spinner">' +
-                        '<ion-spinner [name]="d.spinner"></ion-spinner>' +
-                        '</div>' +
-                        '<div *ngIf="d.content" [innerHTML]="d.content" class="loading-content"></div>' +
-                        '</div>',
-                    host: {
-                        'role': 'dialog'
-                    },
-                    encapsulation: core_1.ViewEncapsulation.None,
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    LoadingCmp.ctorParameters = function () { return [
-        { type: view_controller_1.ViewController, },
-        { type: config_1.Config, },
-        { type: core_1.ElementRef, },
-        { type: gesture_controller_1.GestureController, },
-        { type: nav_params_1.NavParams, },
-        { type: core_1.Renderer, },
-    ]; };
-    LoadingCmp.propDecorators = {
-        'keyUp': [{ type: core_1.HostListener, args: ['body:keyup', ['$event'],] },],
-    };
     exports.LoadingCmp = LoadingCmp;
     function LoadingCmp_tsickle_Closure_declarations() {
         /** @type {?} */

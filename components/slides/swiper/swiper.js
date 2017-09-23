@@ -81,10 +81,10 @@ export function initSwiper(s, plt) {
         s.virtualTranslate = true;
     }
     // Wrapper
-    s._wrapper = (s.container.querySelector('.' + CLS.wrapper));
+    s._wrapper = /** @type {?} */ (s.container.querySelector('.' + CLS.wrapper));
     // Pagination
     if (s.paginationType) {
-        s._paginationContainer = (s.container.querySelector('.swiper-pagination'));
+        s._paginationContainer = /** @type {?} */ (s.container.querySelector('.swiper-pagination'));
         if (s.paginationType === 'bullets') {
             s._paginationContainer.classList.add(CLS.paginationModifier + 'clickable');
         }
@@ -173,7 +173,7 @@ function autoplay(s, plt) {
     var /** @type {?} */ autoplayDelay = s.autoplay;
     var /** @type {?} */ activeSlide = s._slides[s._activeIndex];
     if (activeSlide.hasAttribute('data-swiper-autoplay')) {
-        autoplayDelay = ((activeSlide.getAttribute('data-swiper-autoplay') || s.autoplay));
+        autoplayDelay = /** @type {?} */ ((activeSlide.getAttribute('data-swiper-autoplay') || s.autoplay));
     }
     s._autoplayTimeoutId = plt.timeout(function () {
         s._zone.run(function () {
@@ -431,7 +431,7 @@ export function updateSlidesSize(s, plt) {
                 slideSize = round(slideSize);
         }
         else {
-            slideSize = (s._renderedSize - ((s.slidesPerView) - 1) * spaceBetween) / (s.slidesPerView);
+            slideSize = (s._renderedSize - ((s.slidesPerView) - 1) * spaceBetween) / /** @type {?} */ (s.slidesPerView);
             if (s.roundLengths)
                 slideSize = round(slideSize);
             if (isHorizontal(s)) {
@@ -683,7 +683,7 @@ export function fixLoop(s, plt) {
         newIndex = newIndex + s.loopedSlides;
         slideTo(s, plt, newIndex, 0, false, true);
     }
-    else if ((s.slidesPerView === 'auto' && s._activeIndex >= s.loopedSlides * 2) || (s._activeIndex > s._slides.length - (s.slidesPerView) * 2)) {
+    else if ((s.slidesPerView === 'auto' && s._activeIndex >= s.loopedSlides * 2) || (s._activeIndex > s._slides.length - /** @type {?} */ (s.slidesPerView) * 2)) {
         // Fix For Positive Oversliding
         newIndex = -s._slides.length + s._activeIndex + s.loopedSlides;
         newIndex = newIndex + s.loopedSlides;

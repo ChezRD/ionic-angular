@@ -92,7 +92,7 @@ export function getTranslate(s, plt, el, axis) {
     if (axis === 'x') {
         if (win.WebKitCSSMatrix) {
             // Latest Chrome and webkits Fix
-            curTransform = (transformMatrix.m41);
+            curTransform = /** @type {?} */ (transformMatrix.m41);
         }
         else if (matrix.length === 16) {
             // Crazy IE10 Matrix

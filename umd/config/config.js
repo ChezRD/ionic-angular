@@ -130,7 +130,7 @@
      *
      *
      */
-    var Config = (function () {
+    var Config = /** @class */ (function () {
         function Config() {
             this._c = {};
             this._s = {};

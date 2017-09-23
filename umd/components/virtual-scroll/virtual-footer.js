@@ -13,24 +13,24 @@
     /**
      * @hidden
      */
-    var VirtualFooter = (function () {
+    var VirtualFooter = /** @class */ (function () {
         /**
          * @param {?} templateRef
          */
         function VirtualFooter(templateRef) {
             this.templateRef = templateRef;
         }
+        VirtualFooter.decorators = [
+            { type: core_1.Directive, args: [{ selector: '[virtualFooter]' },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        VirtualFooter.ctorParameters = function () { return [
+            { type: core_1.TemplateRef, },
+        ]; };
         return VirtualFooter;
     }());
-    VirtualFooter.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[virtualFooter]' },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    VirtualFooter.ctorParameters = function () { return [
-        { type: core_1.TemplateRef, },
-    ]; };
     exports.VirtualFooter = VirtualFooter;
     function VirtualFooter_tsickle_Closure_declarations() {
         /** @type {?} */

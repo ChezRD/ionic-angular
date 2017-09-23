@@ -3,7 +3,7 @@ import { isArray, isBlank, isPresent } from '../util/util';
 /**
  * @hidden
  */
-var UrlSerializer = (function () {
+var UrlSerializer = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config

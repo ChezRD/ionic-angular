@@ -3,7 +3,7 @@ import { DomController } from '../../platform/dom-controller';
 /**
  * @hidden
  */
-var TabHighlight = (function () {
+var TabHighlight = /** @class */ (function () {
     /**
      * @param {?} _elementRef
      * @param {?} _dom
@@ -37,21 +37,21 @@ var TabHighlight = (function () {
             });
         }, 32);
     };
+    TabHighlight.decorators = [
+        { type: Directive, args: [{
+                    selector: '.tab-highlight'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    TabHighlight.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: DomController, },
+    ]; };
     return TabHighlight;
 }());
 export { TabHighlight };
-TabHighlight.decorators = [
-    { type: Directive, args: [{
-                selector: '.tab-highlight'
-            },] },
-];
-/**
- * @nocollapse
- */
-TabHighlight.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: DomController, },
-]; };
 function TabHighlight_tsickle_Closure_declarations() {
     /** @type {?} */
     TabHighlight.decorators;

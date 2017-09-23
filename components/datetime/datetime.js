@@ -256,7 +256,7 @@ import { convertDataToISO, convertFormatToKey, dateDataSortValue, dateSortValue,
  *
  * \@demo /docs/demos/src/datetime/
  */
-var DateTime = (function (_super) {
+var DateTime = /** @class */ (function (_super) {
     __extends(DateTime, _super);
     /**
      * @param {?} form
@@ -655,62 +655,62 @@ var DateTime = (function (_super) {
             }
         }
     };
+    DateTime.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-datetime',
+                    template: '<div *ngIf="!_text" class="datetime-text datetime-placeholder">{{placeholder}}</div>' +
+                        '<div *ngIf="_text" class="datetime-text">{{_text}}</div>' +
+                        '<button aria-haspopup="true" ' +
+                        'type="button" ' +
+                        '[id]="id" ' +
+                        'ion-button="item-cover" ' +
+                        '[attr.aria-labelledby]="_labelId" ' +
+                        '[attr.aria-disabled]="_disabled" ' +
+                        'class="item-cover">' +
+                        '</button>',
+                    host: {
+                        '[class.datetime-disabled]': '_disabled'
+                    },
+                    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: DateTime, multi: true }],
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    DateTime.ctorParameters = function () { return [
+        { type: Form, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Item, decorators: [{ type: Optional },] },
+        { type: PickerController, decorators: [{ type: Optional },] },
+    ]; };
+    DateTime.propDecorators = {
+        'min': [{ type: Input },],
+        'max': [{ type: Input },],
+        'displayFormat': [{ type: Input },],
+        'pickerFormat': [{ type: Input },],
+        'cancelText': [{ type: Input },],
+        'doneText': [{ type: Input },],
+        'yearValues': [{ type: Input },],
+        'monthValues': [{ type: Input },],
+        'dayValues': [{ type: Input },],
+        'hourValues': [{ type: Input },],
+        'minuteValues': [{ type: Input },],
+        'monthNames': [{ type: Input },],
+        'monthShortNames': [{ type: Input },],
+        'dayNames': [{ type: Input },],
+        'dayShortNames': [{ type: Input },],
+        'pickerOptions': [{ type: Input },],
+        'placeholder': [{ type: Input },],
+        'ionCancel': [{ type: Output },],
+        '_click': [{ type: HostListener, args: ['click', ['$event'],] },],
+        '_keyup': [{ type: HostListener, args: ['keyup.space',] },],
+    };
     return DateTime;
 }(BaseInput));
 export { DateTime };
-DateTime.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-datetime',
-                template: '<div *ngIf="!_text" class="datetime-text datetime-placeholder">{{placeholder}}</div>' +
-                    '<div *ngIf="_text" class="datetime-text">{{_text}}</div>' +
-                    '<button aria-haspopup="true" ' +
-                    'type="button" ' +
-                    '[id]="id" ' +
-                    'ion-button="item-cover" ' +
-                    '[attr.aria-labelledby]="_labelId" ' +
-                    '[attr.aria-disabled]="_disabled" ' +
-                    'class="item-cover">' +
-                    '</button>',
-                host: {
-                    '[class.datetime-disabled]': '_disabled'
-                },
-                providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: DateTime, multi: true }],
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-DateTime.ctorParameters = function () { return [
-    { type: Form, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Item, decorators: [{ type: Optional },] },
-    { type: PickerController, decorators: [{ type: Optional },] },
-]; };
-DateTime.propDecorators = {
-    'min': [{ type: Input },],
-    'max': [{ type: Input },],
-    'displayFormat': [{ type: Input },],
-    'pickerFormat': [{ type: Input },],
-    'cancelText': [{ type: Input },],
-    'doneText': [{ type: Input },],
-    'yearValues': [{ type: Input },],
-    'monthValues': [{ type: Input },],
-    'dayValues': [{ type: Input },],
-    'hourValues': [{ type: Input },],
-    'minuteValues': [{ type: Input },],
-    'monthNames': [{ type: Input },],
-    'monthShortNames': [{ type: Input },],
-    'dayNames': [{ type: Input },],
-    'dayShortNames': [{ type: Input },],
-    'pickerOptions': [{ type: Input },],
-    'placeholder': [{ type: Input },],
-    'ionCancel': [{ type: Output },],
-    '_click': [{ type: HostListener, args: ['click', ['$event'],] },],
-    '_keyup': [{ type: HostListener, args: ['keyup.space',] },],
-};
 function DateTime_tsickle_Closure_declarations() {
     /** @type {?} */
     DateTime.decorators;

@@ -2,7 +2,7 @@ import { Directive, TemplateRef, ViewContainerRef } from '@angular/core';
 /**
  * @hidden
  */
-var VirtualItem = (function () {
+var VirtualItem = /** @class */ (function () {
     /**
      * @param {?} templateRef
      * @param {?} viewContainer
@@ -11,19 +11,19 @@ var VirtualItem = (function () {
         this.templateRef = templateRef;
         this.viewContainer = viewContainer;
     }
+    VirtualItem.decorators = [
+        { type: Directive, args: [{ selector: '[virtualItem]' },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    VirtualItem.ctorParameters = function () { return [
+        { type: TemplateRef, },
+        { type: ViewContainerRef, },
+    ]; };
     return VirtualItem;
 }());
 export { VirtualItem };
-VirtualItem.decorators = [
-    { type: Directive, args: [{ selector: '[virtualItem]' },] },
-];
-/**
- * @nocollapse
- */
-VirtualItem.ctorParameters = function () { return [
-    { type: TemplateRef, },
-    { type: ViewContainerRef, },
-]; };
 function VirtualItem_tsickle_Closure_declarations() {
     /** @type {?} */
     VirtualItem.decorators;

@@ -14,7 +14,7 @@ import { Ion } from '../ion';
 /**
  * @hidden
  */
-var Card = (function (_super) {
+var Card = /** @class */ (function (_super) {
     __extends(Card, _super);
     /**
      * @param {?} config
@@ -24,22 +24,22 @@ var Card = (function (_super) {
     function Card(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'card') || this;
     }
+    Card.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-card'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Card.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
     return Card;
 }(Ion));
 export { Card };
-Card.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-card'
-            },] },
-];
-/**
- * @nocollapse
- */
-Card.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 function Card_tsickle_Closure_declarations() {
     /** @type {?} */
     Card.decorators;

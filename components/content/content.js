@@ -20,7 +20,7 @@ import { NavController } from '../../navigation/nav-controller';
 import { Platform } from '../../platform/platform';
 import { ScrollView } from '../../util/scroll-view';
 import { ViewController } from '../../navigation/view-controller';
-var EventEmitterProxy = (function (_super) {
+var EventEmitterProxy = /** @class */ (function (_super) {
     __extends(EventEmitterProxy, _super);
     function EventEmitterProxy() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -173,7 +173,7 @@ function EventEmitterProxy_tsickle_Closure_declarations() {
  * ```
  *
  */
-var Content = (function (_super) {
+var Content = /** @class */ (function (_super) {
     __extends(Content, _super);
     /**
      * @param {?} config
@@ -682,7 +682,7 @@ var Content = (function (_super) {
         var /** @type {?} */ parentEle = ele.parentElement;
         var /** @type {?} */ children = parentEle.children;
         for (var /** @type {?} */ i = children.length - 1; i >= 0; i--) {
-            ele = (children[i]);
+            ele = /** @type {?} */ (children[i]);
             tagName = ele.tagName;
             if (tagName === 'ION-CONTENT') {
                 scrollEvent.contentElement = ele;
@@ -711,7 +711,7 @@ var Content = (function (_super) {
         var /** @type {?} */ tabbarEle;
         while (ele && ele.tagName !== 'ION-MODAL' && !ele.classList.contains('tab-subpage')) {
             if (ele.tagName === 'ION-TABS') {
-                tabbarEle = (ele.firstElementChild);
+                tabbarEle = /** @type {?} */ (ele.firstElementChild);
                 // ******** DOM READ ****************
                 this._tabbarHeight = tabbarEle.clientHeight;
                 if (this._tabsPlacement === null) {
@@ -871,51 +871,51 @@ var Content = (function (_super) {
         // to start new requests and render images
         return Math.abs(this._scroll.ev.velocityY) < this._imgVelMax;
     };
+    Content.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-content',
+                    template: '<div class="fixed-content" #fixedContent>' +
+                        '<ng-content select="[ion-fixed],ion-fab"></ng-content>' +
+                        '</div>' +
+                        '<div class="scroll-content" #scrollContent>' +
+                        '<ng-content></ng-content>' +
+                        '</div>' +
+                        '<ng-content select="ion-refresher"></ng-content>',
+                    host: {
+                        '[class.statusbar-padding]': 'statusbarPadding',
+                        '[class.has-refresher]': '_hasRefresher'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Content.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: DomController, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: App, },
+        { type: Keyboard, },
+        { type: NgZone, },
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: NavController, decorators: [{ type: Optional },] },
+    ]; };
+    Content.propDecorators = {
+        '_fixedContent': [{ type: ViewChild, args: ['fixedContent', { read: ElementRef },] },],
+        '_scrollContent': [{ type: ViewChild, args: ['scrollContent', { read: ElementRef },] },],
+        'ionScrollStart': [{ type: Output },],
+        'ionScroll': [{ type: Output },],
+        'ionScrollEnd': [{ type: Output },],
+        'fullscreen': [{ type: Input },],
+        'scrollDownOnLoad': [{ type: Input },],
+    };
     return Content;
 }(Ion));
 export { Content };
-Content.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-content',
-                template: '<div class="fixed-content" #fixedContent>' +
-                    '<ng-content select="[ion-fixed],ion-fab"></ng-content>' +
-                    '</div>' +
-                    '<div class="scroll-content" #scrollContent>' +
-                    '<ng-content></ng-content>' +
-                    '</div>' +
-                    '<ng-content select="ion-refresher"></ng-content>',
-                host: {
-                    '[class.statusbar-padding]': 'statusbarPadding',
-                    '[class.has-refresher]': '_hasRefresher'
-                },
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None
-            },] },
-];
-/**
- * @nocollapse
- */
-Content.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: DomController, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: App, },
-    { type: Keyboard, },
-    { type: NgZone, },
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: NavController, decorators: [{ type: Optional },] },
-]; };
-Content.propDecorators = {
-    '_fixedContent': [{ type: ViewChild, args: ['fixedContent', { read: ElementRef },] },],
-    '_scrollContent': [{ type: ViewChild, args: ['scrollContent', { read: ElementRef },] },],
-    'ionScrollStart': [{ type: Output },],
-    'ionScroll': [{ type: Output },],
-    'ionScrollEnd': [{ type: Output },],
-    'fullscreen': [{ type: Input },],
-    'scrollDownOnLoad': [{ type: Input },],
-};
 function Content_tsickle_Closure_declarations() {
     /** @type {?} */
     Content.decorators;

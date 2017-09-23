@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var PageTransition = (function (_super) {
+    var PageTransition = /** @class */ (function (_super) {
         __extends(PageTransition, _super);
         function PageTransition() {
             return _super !== null && _super.apply(this, arguments) || this;

@@ -25,7 +25,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var ListHeader = (function (_super) {
+    var ListHeader = /** @class */ (function (_super) {
         __extends(ListHeader, _super);
         /**
          * @param {?} config
@@ -56,22 +56,22 @@ var __extends = (this && this.__extends) || (function () {
             enumerable: true,
             configurable: true
         });
+        ListHeader.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-list-header'
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        ListHeader.ctorParameters = function () { return [
+            { type: config_1.Config, },
+            { type: core_1.Renderer, },
+            { type: core_1.ElementRef, },
+            { type: undefined, decorators: [{ type: core_1.Attribute, args: ['id',] },] },
+        ]; };
         return ListHeader;
     }(ion_1.Ion));
-    ListHeader.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-list-header'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    ListHeader.ctorParameters = function () { return [
-        { type: config_1.Config, },
-        { type: core_1.Renderer, },
-        { type: core_1.ElementRef, },
-        { type: undefined, decorators: [{ type: core_1.Attribute, args: ['id',] },] },
-    ]; };
     exports.ListHeader = ListHeader;
     function ListHeader_tsickle_Closure_declarations() {
         /** @type {?} */

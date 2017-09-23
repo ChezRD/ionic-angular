@@ -67,7 +67,7 @@ import { Toast } from './toast';
  *
  * \@demo /docs/demos/src/toast/
  */
-var ToastController = (function () {
+var ToastController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -85,19 +85,19 @@ var ToastController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Toast(this._app, opts, this.config);
     };
+    ToastController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    ToastController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+    ]; };
     return ToastController;
 }());
 export { ToastController };
-ToastController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-ToastController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-]; };
 function ToastController_tsickle_Closure_declarations() {
     /** @type {?} */
     ToastController.decorators;

@@ -28,7 +28,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var ToolbarItem = (function (_super) {
+    var ToolbarItem = /** @class */ (function (_super) {
         __extends(ToolbarItem, _super);
         /**
          * @param {?} config
@@ -57,26 +57,26 @@ var __extends = (this && this.__extends) || (function () {
             enumerable: true,
             configurable: true
         });
+        ToolbarItem.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-buttons,[menuToggle]'
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        ToolbarItem.ctorParameters = function () { return [
+            { type: config_1.Config, },
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+            { type: toolbar_1.Toolbar, decorators: [{ type: core_1.Optional },] },
+            { type: navbar_1.Navbar, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [core_1.forwardRef(function () { return navbar_1.Navbar; }),] },] },
+        ]; };
+        ToolbarItem.propDecorators = {
+            '_buttons': [{ type: core_1.ContentChildren, args: [button_1.Button,] },],
+        };
         return ToolbarItem;
     }(ion_1.Ion));
-    ToolbarItem.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-buttons,[menuToggle]'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    ToolbarItem.ctorParameters = function () { return [
-        { type: config_1.Config, },
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-        { type: toolbar_1.Toolbar, decorators: [{ type: core_1.Optional },] },
-        { type: navbar_1.Navbar, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [core_1.forwardRef(function () { return navbar_1.Navbar; }),] },] },
-    ]; };
-    ToolbarItem.propDecorators = {
-        '_buttons': [{ type: core_1.ContentChildren, args: [button_1.Button,] },],
-    };
     exports.ToolbarItem = ToolbarItem;
     function ToolbarItem_tsickle_Closure_declarations() {
         /** @type {?} */

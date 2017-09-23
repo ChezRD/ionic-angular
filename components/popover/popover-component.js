@@ -8,7 +8,7 @@ import { ModuleLoader } from '../../util/module-loader';
 /**
  * @hidden
  */
-var PopoverCmp = (function () {
+var PopoverCmp = /** @class */ (function () {
     /**
      * @param {?} _cfr
      * @param {?} _elementRef
@@ -110,40 +110,40 @@ var PopoverCmp = (function () {
         (void 0) /* assert */;
         this._gestureBlocker.destroy();
     };
+    PopoverCmp.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-popover',
+                    template: '<ion-backdrop (click)="_bdClick()" [hidden]="!d.showBackdrop"></ion-backdrop>' +
+                        '<div class="popover-wrapper">' +
+                        '<div class="popover-arrow"></div>' +
+                        '<div class="popover-content">' +
+                        '<div class="popover-viewport">' +
+                        '<div #viewport nav-viewport></div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    PopoverCmp.ctorParameters = function () { return [
+        { type: ComponentFactoryResolver, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Config, },
+        { type: NavParams, },
+        { type: ViewController, },
+        { type: GestureController, },
+        { type: ModuleLoader, },
+    ]; };
+    PopoverCmp.propDecorators = {
+        '_viewport': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
+        '_keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     return PopoverCmp;
 }());
 export { PopoverCmp };
-PopoverCmp.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-popover',
-                template: '<ion-backdrop (click)="_bdClick()" [hidden]="!d.showBackdrop"></ion-backdrop>' +
-                    '<div class="popover-wrapper">' +
-                    '<div class="popover-arrow"></div>' +
-                    '<div class="popover-content">' +
-                    '<div class="popover-viewport">' +
-                    '<div #viewport nav-viewport></div>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>'
-            },] },
-];
-/**
- * @nocollapse
- */
-PopoverCmp.ctorParameters = function () { return [
-    { type: ComponentFactoryResolver, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Config, },
-    { type: NavParams, },
-    { type: ViewController, },
-    { type: GestureController, },
-    { type: ModuleLoader, },
-]; };
-PopoverCmp.propDecorators = {
-    '_viewport': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
-    '_keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
-};
 function PopoverCmp_tsickle_Closure_declarations() {
     /** @type {?} */
     PopoverCmp.decorators;

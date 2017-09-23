@@ -42,13 +42,13 @@
             pX = parseInt(pX, 10) * progress * rtlFactor + '%';
         }
         else {
-            pX = (pX) * progress * rtlFactor + 'px';
+            pX = /** @type {?} */ (pX) * progress * rtlFactor + 'px';
         }
         if ((pY).indexOf('%') >= 0) {
             pY = parseInt(pY, 10) * progress + '%';
         }
         else {
-            pY = (pY) * progress + 'px';
+            pY = /** @type {?} */ (pY) * progress + 'px';
         }
         swiper_utils_1.transform(el, 'translate3d(' + pX + ', ' + pY + ',0px)');
     }

@@ -7,7 +7,7 @@ import { ViewController } from '../../navigation/view-controller';
  * \@name MenuToggle
  * \@description
  * The `menuToggle` directive can be placed on any button to toggle a menu open or closed.
- * If it is added to the [NavBar](../../navbar/NavBar) of a page, the button will only appear
+ * If it is added to the [NavBar](../../toolbar/Navbar) of a page, the button will only appear
  * when the page it's in is currently a root page. See the [Menu Navigation Bar Behavior](../Menu#navigation-bar-behavior)
  * docs for more information.
  *
@@ -82,7 +82,7 @@ import { ViewController } from '../../navigation/view-controller';
  * @see {\@link /docs/components#menus Menu Component Docs}
  * @see {\@link ../../menu/Menu Menu API Docs}
  */
-var MenuToggle = (function () {
+var MenuToggle = /** @class */ (function () {
     /**
      * @param {?} _menu
      * @param {?} _viewCtrl
@@ -139,30 +139,30 @@ var MenuToggle = (function () {
         enumerable: true,
         configurable: true
     });
+    MenuToggle.decorators = [
+        { type: Directive, args: [{
+                    selector: '[menuToggle]',
+                    host: {
+                        '[hidden]': 'isHidden'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    MenuToggle.ctorParameters = function () { return [
+        { type: MenuController, },
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: Button, decorators: [{ type: Optional },] },
+        { type: Navbar, decorators: [{ type: Optional },] },
+    ]; };
+    MenuToggle.propDecorators = {
+        'menuToggle': [{ type: Input },],
+        'toggle': [{ type: HostListener, args: ['click',] },],
+    };
     return MenuToggle;
 }());
 export { MenuToggle };
-MenuToggle.decorators = [
-    { type: Directive, args: [{
-                selector: '[menuToggle]',
-                host: {
-                    '[hidden]': 'isHidden'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-MenuToggle.ctorParameters = function () { return [
-    { type: MenuController, },
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: Button, decorators: [{ type: Optional },] },
-    { type: Navbar, decorators: [{ type: Optional },] },
-]; };
-MenuToggle.propDecorators = {
-    'menuToggle': [{ type: Input },],
-    'toggle': [{ type: HostListener, args: ['click',] },],
-};
 function MenuToggle_tsickle_Closure_declarations() {
     /** @type {?} */
     MenuToggle.decorators;

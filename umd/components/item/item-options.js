@@ -33,7 +33,7 @@
      * </ion-item-sliding>
      * ```
      */
-    var ItemOptions = (function () {
+    var ItemOptions = /** @class */ (function () {
         /**
          * @param {?} _elementRef
          * @param {?} _plt
@@ -60,24 +60,24 @@
         ItemOptions.prototype.width = function () {
             return this._elementRef.nativeElement.offsetWidth;
         };
+        ItemOptions.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-item-options',
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        ItemOptions.ctorParameters = function () { return [
+            { type: core_1.ElementRef, },
+            { type: platform_1.Platform, },
+        ]; };
+        ItemOptions.propDecorators = {
+            'side': [{ type: core_1.Input },],
+            'ionSwipe': [{ type: core_1.Output },],
+        };
         return ItemOptions;
     }());
-    ItemOptions.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-item-options',
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    ItemOptions.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
-        { type: platform_1.Platform, },
-    ]; };
-    ItemOptions.propDecorators = {
-        'side': [{ type: core_1.Input },],
-        'ionSwipe': [{ type: core_1.Output },],
-    };
     exports.ItemOptions = ItemOptions;
     function ItemOptions_tsickle_Closure_declarations() {
         /** @type {?} */

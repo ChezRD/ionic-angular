@@ -16,7 +16,7 @@
     /**
      * @hidden
      */
-    var NavPopAnchor = (function () {
+    var NavPopAnchor = /** @class */ (function () {
         /**
          * @param {?} host
          * @param {?} linker
@@ -45,24 +45,24 @@
         NavPopAnchor.prototype.ngAfterContentInit = function () {
             this.updateHref();
         };
+        NavPopAnchor.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'a[navPop]',
+                        host: {
+                            '[attr.href]': '_href'
+                        }
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        NavPopAnchor.ctorParameters = function () { return [
+            { type: nav_pop_1.NavPop, decorators: [{ type: core_1.Optional },] },
+            { type: deep_linker_1.DeepLinker, },
+            { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
+        ]; };
         return NavPopAnchor;
     }());
-    NavPopAnchor.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'a[navPop]',
-                    host: {
-                        '[attr.href]': '_href'
-                    }
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    NavPopAnchor.ctorParameters = function () { return [
-        { type: nav_pop_1.NavPop, decorators: [{ type: core_1.Optional },] },
-        { type: deep_linker_1.DeepLinker, },
-        { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
-    ]; };
     exports.NavPopAnchor = NavPopAnchor;
     function NavPopAnchor_tsickle_Closure_declarations() {
         /** @type {?} */

@@ -16,7 +16,7 @@
     /**
      * @hidden
      */
-    var ModuleLoader = (function () {
+    var ModuleLoader = /** @class */ (function () {
         /**
          * @param {?} _ngModuleLoader
          * @param {?} _injector
@@ -61,18 +61,18 @@
         ModuleLoader.prototype.getComponentFactoryResolver = function (component) {
             return this._cfrMap.get(component);
         };
+        ModuleLoader.decorators = [
+            { type: core_1.Injectable },
+        ];
+        /**
+         * @nocollapse
+         */
+        ModuleLoader.ctorParameters = function () { return [
+            { type: ng_module_loader_1.NgModuleLoader, },
+            { type: core_1.Injector, },
+        ]; };
         return ModuleLoader;
     }());
-    ModuleLoader.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    ModuleLoader.ctorParameters = function () { return [
-        { type: ng_module_loader_1.NgModuleLoader, },
-        { type: core_1.Injector, },
-    ]; };
     exports.ModuleLoader = ModuleLoader;
     function ModuleLoader_tsickle_Closure_declarations() {
         /** @type {?} */

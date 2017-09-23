@@ -216,7 +216,7 @@ import { Config } from '../../config/config';
  *
  * \@demo /docs/demos/src/alert/
  */
-var AlertController = (function () {
+var AlertController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -234,19 +234,19 @@ var AlertController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Alert(this._app, opts, this.config);
     };
+    AlertController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    AlertController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+    ]; };
     return AlertController;
 }());
 export { AlertController };
-AlertController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-AlertController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-]; };
 function AlertController_tsickle_Closure_declarations() {
     /** @type {?} */
     AlertController.decorators;

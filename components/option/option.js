@@ -7,7 +7,7 @@ import { isPresent, isTrueProperty } from '../../util/util';
  *
  * \@demo /docs/demos/src/select/
  */
-var Option = (function () {
+var Option = /** @class */ (function () {
     /**
      * @param {?} _elementRef
      */
@@ -88,26 +88,26 @@ var Option = (function () {
         enumerable: true,
         configurable: true
     });
+    Option.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-option'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Option.ctorParameters = function () { return [
+        { type: ElementRef, },
+    ]; };
+    Option.propDecorators = {
+        'disabled': [{ type: Input },],
+        'selected': [{ type: Input },],
+        'value': [{ type: Input },],
+        'ionSelect': [{ type: Output },],
+    };
     return Option;
 }());
 export { Option };
-Option.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-option'
-            },] },
-];
-/**
- * @nocollapse
- */
-Option.ctorParameters = function () { return [
-    { type: ElementRef, },
-]; };
-Option.propDecorators = {
-    'disabled': [{ type: Input },],
-    'selected': [{ type: Input },],
-    'value': [{ type: Input },],
-    'ionSelect': [{ type: Output },],
-};
 function Option_tsickle_Closure_declarations() {
     /** @type {?} */
     Option.decorators;

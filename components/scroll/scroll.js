@@ -17,7 +17,7 @@ import { isTrueProperty } from '../../util/util';
  * ```
  * \@demo /docs/demos/src/scroll/
  */
-var Scroll = (function () {
+var Scroll = /** @class */ (function () {
     function Scroll() {
         this._scrollX = false;
         this._scrollY = false;
@@ -119,36 +119,36 @@ var Scroll = (function () {
             ele.removeEventListener('scroll', handler);
         };
     };
+    Scroll.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-scroll',
+                    template: '<div class="scroll-content" #scrollContent>' +
+                        '<div class="scroll-zoom-wrapper">' +
+                        '<ng-content></ng-content>' +
+                        '</div>' +
+                        '</div>',
+                    host: {
+                        '[class.scroll-x]': 'scrollX',
+                        '[class.scroll-y]': 'scrollY'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Scroll.ctorParameters = function () { return []; };
+    Scroll.propDecorators = {
+        'scrollX': [{ type: Input },],
+        'scrollY': [{ type: Input },],
+        'zoom': [{ type: Input },],
+        'maxZoom': [{ type: Input },],
+        '_scrollContent': [{ type: ViewChild, args: ['scrollContent', { read: ElementRef },] },],
+    };
     return Scroll;
 }());
 export { Scroll };
-Scroll.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-scroll',
-                template: '<div class="scroll-content" #scrollContent>' +
-                    '<div class="scroll-zoom-wrapper">' +
-                    '<ng-content></ng-content>' +
-                    '</div>' +
-                    '</div>',
-                host: {
-                    '[class.scroll-x]': 'scrollX',
-                    '[class.scroll-y]': 'scrollY'
-                },
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Scroll.ctorParameters = function () { return []; };
-Scroll.propDecorators = {
-    'scrollX': [{ type: Input },],
-    'scrollY': [{ type: Input },],
-    'zoom': [{ type: Input },],
-    'maxZoom': [{ type: Input },],
-    '_scrollContent': [{ type: ViewChild, args: ['scrollContent', { read: ElementRef },] },],
-};
 function Scroll_tsickle_Closure_declarations() {
     /** @type {?} */
     Scroll.decorators;

@@ -92,7 +92,7 @@ var __extends = (this && this.__extends) || (function () {
      * \@demo /docs/demos/src/checkbox/
      * @see {\@link /docs/components#checkbox Checkbox Component Docs}
      */
-    var Checkbox = (function (_super) {
+    var Checkbox = /** @class */ (function (_super) {
         __extends(Checkbox, _super);
         /**
          * @param {?} config
@@ -148,44 +148,44 @@ var __extends = (this && this.__extends) || (function () {
         Checkbox.prototype._inputUpdated = function () {
             this._item && this._item.setElementClass('item-checkbox-checked', this._value);
         };
+        Checkbox.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: 'ion-checkbox',
+                        template: '<div class="checkbox-icon" [class.checkbox-checked]="_value">' +
+                            '<div class="checkbox-inner"></div>' +
+                            '</div>' +
+                            '<button role="checkbox" ' +
+                            'type="button" ' +
+                            'ion-button="item-cover" ' +
+                            '[id]="id" ' +
+                            '[attr.aria-checked]="_value" ' +
+                            '[attr.aria-labelledby]="_labelId" ' +
+                            '[attr.aria-disabled]="_disabled" ' +
+                            'class="item-cover"> ' +
+                            '</button>',
+                        host: {
+                            '[class.checkbox-disabled]': '_disabled'
+                        },
+                        providers: [{ provide: forms_1.NG_VALUE_ACCESSOR, useExisting: Checkbox, multi: true }],
+                        encapsulation: core_1.ViewEncapsulation.None,
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Checkbox.ctorParameters = function () { return [
+            { type: config_1.Config, },
+            { type: form_1.Form, },
+            { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+        ]; };
+        Checkbox.propDecorators = {
+            'checked': [{ type: core_1.Input },],
+            '_click': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
+        };
         return Checkbox;
     }(base_input_1.BaseInput));
-    Checkbox.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ion-checkbox',
-                    template: '<div class="checkbox-icon" [class.checkbox-checked]="_value">' +
-                        '<div class="checkbox-inner"></div>' +
-                        '</div>' +
-                        '<button role="checkbox" ' +
-                        'type="button" ' +
-                        'ion-button="item-cover" ' +
-                        '[id]="id" ' +
-                        '[attr.aria-checked]="_value" ' +
-                        '[attr.aria-labelledby]="_labelId" ' +
-                        '[attr.aria-disabled]="_disabled" ' +
-                        'class="item-cover"> ' +
-                        '</button>',
-                    host: {
-                        '[class.checkbox-disabled]': '_disabled'
-                    },
-                    providers: [{ provide: forms_1.NG_VALUE_ACCESSOR, useExisting: Checkbox, multi: true }],
-                    encapsulation: core_1.ViewEncapsulation.None,
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Checkbox.ctorParameters = function () { return [
-        { type: config_1.Config, },
-        { type: form_1.Form, },
-        { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-    ]; };
-    Checkbox.propDecorators = {
-        'checked': [{ type: core_1.Input },],
-        '_click': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
-    };
     exports.Checkbox = Checkbox;
     function Checkbox_tsickle_Closure_declarations() {
         /** @type {?} */

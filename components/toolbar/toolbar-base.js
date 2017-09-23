@@ -12,7 +12,7 @@ import { Ion } from '../ion';
 /**
  * @hidden
  */
-var ToolbarBase = (function (_super) {
+var ToolbarBase = /** @class */ (function (_super) {
     __extends(ToolbarBase, _super);
     /**
      * @param {?} config

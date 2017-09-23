@@ -1,5 +1,5 @@
 import { isString } from '../util/util';
-var OverlayProxy = (function () {
+var OverlayProxy = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} _component

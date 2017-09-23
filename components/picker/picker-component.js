@@ -9,7 +9,7 @@ import { PickerColumnCmp } from './picker-column';
 /**
  * @hidden
  */
-var PickerCmp = (function () {
+var PickerCmp = /** @class */ (function () {
     /**
      * @param {?} _viewCtrl
      * @param {?} _elementRef
@@ -206,34 +206,34 @@ var PickerCmp = (function () {
         (void 0) /* assert */;
         this._gestureBlocker.destroy();
     };
+    PickerCmp.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-picker-cmp',
+                    template: "\n    <ion-backdrop (click)=\"bdClick()\"></ion-backdrop>\n    <div class=\"picker-wrapper\">\n      <div class=\"picker-toolbar\">\n        <div *ngFor=\"let b of d.buttons\" class=\"picker-toolbar-button\" [ngClass]=\"b.cssRole\">\n          <button ion-button (click)=\"btnClick(b)\" [ngClass]=\"b.cssClass\" class=\"picker-button\" clear>\n            {{b.text}}\n          </button>\n        </div>\n      </div>\n      <div class=\"picker-columns\">\n        <div class=\"picker-above-highlight\"></div>\n        <div *ngFor=\"let c of d.columns\" [col]=\"c\" class=\"picker-col\" (ionChange)=\"_colChange($event)\"></div>\n        <div class=\"picker-below-highlight\"></div>\n      </div>\n    </div>\n  ",
+                    host: {
+                        'role': 'dialog'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    PickerCmp.ctorParameters = function () { return [
+        { type: ViewController, },
+        { type: ElementRef, },
+        { type: Config, },
+        { type: GestureController, },
+        { type: NavParams, },
+        { type: Renderer, },
+    ]; };
+    PickerCmp.propDecorators = {
+        '_cols': [{ type: ViewChildren, args: [PickerColumnCmp,] },],
+        '_keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     return PickerCmp;
 }());
 export { PickerCmp };
-PickerCmp.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-picker-cmp',
-                template: "\n    <ion-backdrop (click)=\"bdClick()\"></ion-backdrop>\n    <div class=\"picker-wrapper\">\n      <div class=\"picker-toolbar\">\n        <div *ngFor=\"let b of d.buttons\" class=\"picker-toolbar-button\" [ngClass]=\"b.cssRole\">\n          <button ion-button (click)=\"btnClick(b)\" [ngClass]=\"b.cssClass\" class=\"picker-button\" clear>\n            {{b.text}}\n          </button>\n        </div>\n      </div>\n      <div class=\"picker-columns\">\n        <div class=\"picker-above-highlight\"></div>\n        <div *ngFor=\"let c of d.columns\" [col]=\"c\" class=\"picker-col\" (ionChange)=\"_colChange($event)\"></div>\n        <div class=\"picker-below-highlight\"></div>\n      </div>\n    </div>\n  ",
-                host: {
-                    'role': 'dialog'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-PickerCmp.ctorParameters = function () { return [
-    { type: ViewController, },
-    { type: ElementRef, },
-    { type: Config, },
-    { type: GestureController, },
-    { type: NavParams, },
-    { type: Renderer, },
-]; };
-PickerCmp.propDecorators = {
-    '_cols': [{ type: ViewChildren, args: [PickerColumnCmp,] },],
-    '_keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
-};
 function PickerCmp_tsickle_Closure_declarations() {
     /** @type {?} */
     PickerCmp.decorators;

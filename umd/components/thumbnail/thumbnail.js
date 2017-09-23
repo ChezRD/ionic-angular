@@ -18,20 +18,20 @@
      * Thumbnails can be place on the left or right side of an item with the `item-start` or `item-end` directive.
      * @see {\@link /docs/components/#thumbnail-list Thumbnail Component Docs}
      */
-    var Thumbnail = (function () {
+    var Thumbnail = /** @class */ (function () {
         function Thumbnail() {
         }
+        Thumbnail.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-thumbnail'
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Thumbnail.ctorParameters = function () { return []; };
         return Thumbnail;
     }());
-    Thumbnail.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-thumbnail'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Thumbnail.ctorParameters = function () { return []; };
     exports.Thumbnail = Thumbnail;
     function Thumbnail_tsickle_Closure_declarations() {
         /** @type {?} */

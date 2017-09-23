@@ -152,7 +152,7 @@
     /**
      * @hidden
      */
-    var DeepLinkMetadata = (function () {
+    var DeepLinkMetadata = /** @class */ (function () {
         function DeepLinkMetadata() {
         }
         return DeepLinkMetadata;

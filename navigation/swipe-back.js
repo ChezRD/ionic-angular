@@ -14,7 +14,7 @@ import { SlideEdgeGesture } from '../gestures/slide-edge-gesture';
 /**
  * @hidden
  */
-var SwipeBackGesture = (function (_super) {
+var SwipeBackGesture = /** @class */ (function (_super) {
     __extends(SwipeBackGesture, _super);
     /**
      * @param {?} plt

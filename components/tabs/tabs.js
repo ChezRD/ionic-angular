@@ -156,7 +156,7 @@ import { ViewController } from '../../navigation/view-controller';
  * @see {\@link ../../config/Config Config API Docs}
  *
  */
-var Tabs = (function (_super) {
+var Tabs = /** @class */ (function (_super) {
     __extends(Tabs, _super);
     /**
      * @param {?} parent
@@ -615,47 +615,47 @@ var Tabs = (function (_super) {
         });
         return isPresent(tab) ? tab.index : fallbackIndex;
     };
+    Tabs.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-tabs',
+                    template: '<div class="tabbar" role="tablist" #tabbar>' +
+                        '<a *ngFor="let t of _tabs" [tab]="t" class="tab-button" role="tab" href="#" (ionSelect)="select(t)"></a>' +
+                        '<div class="tab-highlight"></div>' +
+                        '</div>' +
+                        '<ng-content></ng-content>' +
+                        '<div #portal tab-portal></div>',
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [{ provide: RootNode, useExisting: forwardRef(function () { return Tabs; }) }]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Tabs.ctorParameters = function () { return [
+        { type: NavController, decorators: [{ type: Optional },] },
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: App, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Platform, },
+        { type: Renderer, },
+        { type: DeepLinker, },
+        { type: Keyboard, },
+    ]; };
+    Tabs.propDecorators = {
+        'name': [{ type: Input },],
+        'selectedIndex': [{ type: Input },],
+        'tabsLayout': [{ type: Input },],
+        'tabsPlacement': [{ type: Input },],
+        'tabsHighlight': [{ type: Input },],
+        'ionChange': [{ type: Output },],
+        '_highlight': [{ type: ViewChild, args: [TabHighlight,] },],
+        '_tabbar': [{ type: ViewChild, args: ['tabbar',] },],
+        'portal': [{ type: ViewChild, args: ['portal', { read: ViewContainerRef },] },],
+    };
     return Tabs;
 }(Ion));
 export { Tabs };
-Tabs.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-tabs',
-                template: '<div class="tabbar" role="tablist" #tabbar>' +
-                    '<a *ngFor="let t of _tabs" [tab]="t" class="tab-button" role="tab" href="#" (ionSelect)="select(t)"></a>' +
-                    '<div class="tab-highlight"></div>' +
-                    '</div>' +
-                    '<ng-content></ng-content>' +
-                    '<div #portal tab-portal></div>',
-                encapsulation: ViewEncapsulation.None,
-                providers: [{ provide: RootNode, useExisting: forwardRef(function () { return Tabs; }) }]
-            },] },
-];
-/**
- * @nocollapse
- */
-Tabs.ctorParameters = function () { return [
-    { type: NavController, decorators: [{ type: Optional },] },
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: App, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Platform, },
-    { type: Renderer, },
-    { type: DeepLinker, },
-    { type: Keyboard, },
-]; };
-Tabs.propDecorators = {
-    'name': [{ type: Input },],
-    'selectedIndex': [{ type: Input },],
-    'tabsLayout': [{ type: Input },],
-    'tabsPlacement': [{ type: Input },],
-    'tabsHighlight': [{ type: Input },],
-    'ionChange': [{ type: Output },],
-    '_highlight': [{ type: ViewChild, args: [TabHighlight,] },],
-    '_tabbar': [{ type: ViewChild, args: ['tabbar',] },],
-    'portal': [{ type: ViewChild, args: ['portal', { read: ViewContainerRef },] },],
-};
 function Tabs_tsickle_Closure_declarations() {
     /** @type {?} */
     Tabs.decorators;

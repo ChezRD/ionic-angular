@@ -52,7 +52,7 @@ import { RootNode } from '../split-pane/split-pane';
  * \@demo /docs/demos/src/navigation/
  * @see {\@link /docs/components#navigation Navigation Component Docs}
  */
-var Nav = (function (_super) {
+var Nav = /** @class */ (function (_super) {
     __extends(Nav, _super);
     /**
      * @param {?} viewCtrl
@@ -190,43 +190,43 @@ var Nav = (function (_super) {
     Nav.prototype.getSecondaryIdentifier = function () {
         return null;
     };
+    Nav.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-nav',
+                    template: '<div #viewport nav-viewport></div>' +
+                        '<div class="nav-decor"></div>',
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [{ provide: RootNode, useExisting: forwardRef(function () { return Nav; }) }]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Nav.ctorParameters = function () { return [
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: NavController, decorators: [{ type: Optional },] },
+        { type: App, },
+        { type: Config, },
+        { type: Platform, },
+        { type: ElementRef, },
+        { type: NgZone, },
+        { type: Renderer, },
+        { type: ComponentFactoryResolver, },
+        { type: GestureController, },
+        { type: TransitionController, },
+        { type: DeepLinker, decorators: [{ type: Optional },] },
+        { type: DomController, },
+        { type: ErrorHandler, },
+    ]; };
+    Nav.propDecorators = {
+        '_vp': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
+        'root': [{ type: Input },],
+        'rootParams': [{ type: Input },],
+        'name': [{ type: Input },],
+    };
     return Nav;
 }(NavControllerBase));
 export { Nav };
-Nav.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-nav',
-                template: '<div #viewport nav-viewport></div>' +
-                    '<div class="nav-decor"></div>',
-                encapsulation: ViewEncapsulation.None,
-                providers: [{ provide: RootNode, useExisting: forwardRef(function () { return Nav; }) }]
-            },] },
-];
-/**
- * @nocollapse
- */
-Nav.ctorParameters = function () { return [
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: NavController, decorators: [{ type: Optional },] },
-    { type: App, },
-    { type: Config, },
-    { type: Platform, },
-    { type: ElementRef, },
-    { type: NgZone, },
-    { type: Renderer, },
-    { type: ComponentFactoryResolver, },
-    { type: GestureController, },
-    { type: TransitionController, },
-    { type: DeepLinker, decorators: [{ type: Optional },] },
-    { type: DomController, },
-    { type: ErrorHandler, },
-]; };
-Nav.propDecorators = {
-    '_vp': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
-    'root': [{ type: Input },],
-    'rootParams': [{ type: Input },],
-    'name': [{ type: Input },],
-};
 function Nav_tsickle_Closure_declarations() {
     /** @type {?} */
     Nav.decorators;

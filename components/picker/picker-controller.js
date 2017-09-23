@@ -8,7 +8,7 @@ import { Picker } from './picker';
  * \@description
  *
  */
-var PickerController = (function () {
+var PickerController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -26,19 +26,19 @@ var PickerController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Picker(this._app, opts, this.config);
     };
+    PickerController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    PickerController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+    ]; };
     return PickerController;
 }());
 export { PickerController };
-PickerController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-PickerController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-]; };
 function PickerController_tsickle_Closure_declarations() {
     /** @type {?} */
     PickerController.decorators;

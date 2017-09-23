@@ -13,7 +13,7 @@ import { Transition } from '../../transitions/transition';
 /**
  * Animations for pickers
  */
-var PickerSlideIn = (function (_super) {
+var PickerSlideIn = /** @class */ (function (_super) {
     __extends(PickerSlideIn, _super);
     function PickerSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -32,7 +32,7 @@ var PickerSlideIn = (function (_super) {
     return PickerSlideIn;
 }(Transition));
 export { PickerSlideIn };
-var PickerSlideOut = (function (_super) {
+var PickerSlideOut = /** @class */ (function (_super) {
     __extends(PickerSlideOut, _super);
     function PickerSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;

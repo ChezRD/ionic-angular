@@ -111,7 +111,7 @@ var /** @type {?} */ ITEM_SIDE_FLAG_BOTH = ITEM_SIDE_FLAG_LEFT | ITEM_SIDE_FLAG_
  * @see {\@link ../Item Item API Docs}
  * @see {\@link ../../list/List List API Docs}
  */
-var ItemSliding = (function () {
+var ItemSliding = /** @class */ (function () {
     /**
      * @param {?} list
      * @param {?} _plt
@@ -417,32 +417,32 @@ var ItemSliding = (function () {
     ItemSliding.prototype.setElementClass = function (cssClass, shouldAdd) {
         this._renderer.setElementClass(this._elementRef.nativeElement, cssClass, shouldAdd);
     };
+    ItemSliding.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-item-sliding',
+                    template: "\n    <ng-content select=\"ion-item,[ion-item]\"></ng-content>\n    <ng-content select=\"ion-item-options\"></ng-content>\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ItemSliding.ctorParameters = function () { return [
+        { type: List, decorators: [{ type: Optional },] },
+        { type: Platform, },
+        { type: Renderer, },
+        { type: ElementRef, },
+        { type: NgZone, },
+    ]; };
+    ItemSliding.propDecorators = {
+        'item': [{ type: ContentChild, args: [Item,] },],
+        'ionDrag': [{ type: Output },],
+        '_itemOptions': [{ type: ContentChildren, args: [forwardRef(function () { return ItemOptions; }),] },],
+    };
     return ItemSliding;
 }());
 export { ItemSliding };
-ItemSliding.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-item-sliding',
-                template: "\n    <ng-content select=\"ion-item,[ion-item]\"></ng-content>\n    <ng-content select=\"ion-item-options\"></ng-content>\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None
-            },] },
-];
-/**
- * @nocollapse
- */
-ItemSliding.ctorParameters = function () { return [
-    { type: List, decorators: [{ type: Optional },] },
-    { type: Platform, },
-    { type: Renderer, },
-    { type: ElementRef, },
-    { type: NgZone, },
-]; };
-ItemSliding.propDecorators = {
-    'item': [{ type: ContentChild, args: [Item,] },],
-    'ionDrag': [{ type: Output },],
-    '_itemOptions': [{ type: ContentChildren, args: [forwardRef(function () { return ItemOptions; }),] },],
-};
 function ItemSliding_tsickle_Closure_declarations() {
     /** @type {?} */
     ItemSliding.decorators;

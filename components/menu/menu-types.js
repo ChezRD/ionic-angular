@@ -17,7 +17,7 @@ import { MenuController } from '../app/menu-controller';
  * type will provide their own animations for open and close
  * and registers itself with Menu.
  */
-var MenuType = (function () {
+var MenuType = /** @class */ (function () {
     /**
      * @param {?} plt
      */
@@ -108,7 +108,7 @@ function MenuType_tsickle_Closure_declarations() {
  * The content slides over to reveal the menu underneath.
  * The menu itself, which is under the content, does not move.
  */
-var MenuRevealType = (function (_super) {
+var MenuRevealType = /** @class */ (function (_super) {
     __extends(MenuRevealType, _super);
     /**
      * @param {?} menu
@@ -131,7 +131,7 @@ MenuController.registerType('reveal', MenuRevealType);
  * The content slides over to reveal the menu underneath.
  * The menu itself also slides over to reveal its bad self.
  */
-var MenuPushType = (function (_super) {
+var MenuPushType = /** @class */ (function (_super) {
     __extends(MenuPushType, _super);
     /**
      * @param {?} menu
@@ -169,7 +169,7 @@ MenuController.registerType('push', MenuPushType);
  * The menu slides over the content. The content
  * itself, which is under the menu, does not move.
  */
-var MenuOverlayType = (function (_super) {
+var MenuOverlayType = /** @class */ (function (_super) {
     __extends(MenuOverlayType, _super);
     /**
      * @param {?} menu

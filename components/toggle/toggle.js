@@ -58,7 +58,7 @@ import { ToggleGesture } from './toggle-gesture';
  * \@demo /docs/demos/src/toggle/
  * @see {\@link /docs/components#toggle Toggle Component Docs}
  */
-var Toggle = (function (_super) {
+var Toggle = /** @class */ (function (_super) {
     __extends(Toggle, _super);
     /**
      * @param {?} form
@@ -217,52 +217,52 @@ var Toggle = (function (_super) {
         _super.prototype.ngOnDestroy.call(this);
         this._gesture && this._gesture.destroy();
     };
+    Toggle.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-toggle',
+                    template: '<div class="toggle-icon">' +
+                        '<div class="toggle-inner"></div>' +
+                        '</div>' +
+                        '<button role="checkbox" ' +
+                        'type="button" ' +
+                        'ion-button="item-cover" ' +
+                        '[id]="id" ' +
+                        '[attr.aria-checked]="_value" ' +
+                        '[attr.aria-labelledby]="_labelId" ' +
+                        '[attr.aria-disabled]="_disabled" ' +
+                        'class="item-cover" disable-activated>' +
+                        '</button>',
+                    host: {
+                        '[class.toggle-disabled]': '_disabled',
+                        '[class.toggle-checked]': '_value',
+                        '[class.toggle-activated]': '_activated',
+                    },
+                    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Toggle, multi: true }],
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Toggle.ctorParameters = function () { return [
+        { type: Form, },
+        { type: Config, },
+        { type: Platform, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Haptic, },
+        { type: Item, decorators: [{ type: Optional },] },
+        { type: GestureController, },
+        { type: DomController, },
+        { type: NgZone, },
+    ]; };
+    Toggle.propDecorators = {
+        'checked': [{ type: Input },],
+        '_keyup': [{ type: HostListener, args: ['keyup', ['$event'],] },],
+    };
     return Toggle;
 }(BaseInput));
 export { Toggle };
-Toggle.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-toggle',
-                template: '<div class="toggle-icon">' +
-                    '<div class="toggle-inner"></div>' +
-                    '</div>' +
-                    '<button role="checkbox" ' +
-                    'type="button" ' +
-                    'ion-button="item-cover" ' +
-                    '[id]="id" ' +
-                    '[attr.aria-checked]="_value" ' +
-                    '[attr.aria-labelledby]="_labelId" ' +
-                    '[attr.aria-disabled]="_disabled" ' +
-                    'class="item-cover" disable-activated>' +
-                    '</button>',
-                host: {
-                    '[class.toggle-disabled]': '_disabled',
-                    '[class.toggle-checked]': '_value',
-                    '[class.toggle-activated]': '_activated',
-                },
-                providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Toggle, multi: true }],
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Toggle.ctorParameters = function () { return [
-    { type: Form, },
-    { type: Config, },
-    { type: Platform, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Haptic, },
-    { type: Item, decorators: [{ type: Optional },] },
-    { type: GestureController, },
-    { type: DomController, },
-    { type: NgZone, },
-]; };
-Toggle.propDecorators = {
-    'checked': [{ type: Input },],
-    '_keyup': [{ type: HostListener, args: ['keyup', ['$event'],] },],
-};
 function Toggle_tsickle_Closure_declarations() {
     /** @type {?} */
     Toggle.decorators;

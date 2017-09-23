@@ -24,7 +24,7 @@
      * \@description
      * App is a utility class used in Ionic to get information about various aspects of an app
      */
-    var App = (function () {
+    var App = /** @class */ (function () {
         /**
          * @param {?} _config
          * @param {?} _plt
@@ -191,16 +191,16 @@
         App.prototype.getActiveNavs = function (rootNavId) {
             var /** @type {?} */ portal = this._appRoot._getPortal(Constants.PORTAL_MODAL);
             if (portal.length() > 0) {
-                return (findTopNavs(portal));
+                return /** @type {?} */ (findTopNavs(portal));
             }
             if (!this._rootNavs || !this._rootNavs.size) {
                 return [];
             }
             if (this._rootNavs.size === 1) {
-                return (findTopNavs(this._rootNavs.values().next().value));
+                return /** @type {?} */ (findTopNavs(this._rootNavs.values().next().value));
             }
             if (rootNavId) {
-                return (findTopNavs(this._rootNavs.get(rootNavId)));
+                return /** @type {?} */ (findTopNavs(this._rootNavs.get(rootNavId)));
             }
             // fallback to just using all root names
             var /** @type {?} */ activeNavs = [];
@@ -208,7 +208,7 @@
                 var /** @type {?} */ topNavs = findTopNavs(nav);
                 activeNavs = activeNavs.concat(topNavs);
             });
-            return (activeNavs);
+            return /** @type {?} */ (activeNavs);
         };
         /**
          * @return {?}
@@ -404,19 +404,19 @@
             }
             return null;
         };
+        App.decorators = [
+            { type: core_1.Injectable },
+        ];
+        /**
+         * @nocollapse
+         */
+        App.ctorParameters = function () { return [
+            { type: config_1.Config, },
+            { type: platform_1.Platform, },
+            { type: menu_controller_1.MenuController, decorators: [{ type: core_1.Optional },] },
+        ]; };
         return App;
     }());
-    App.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    App.ctorParameters = function () { return [
-        { type: config_1.Config, },
-        { type: platform_1.Platform, },
-        { type: menu_controller_1.MenuController, decorators: [{ type: core_1.Optional },] },
-    ]; };
     exports.App = App;
     function App_tsickle_Closure_declarations() {
         /** @type {?} */

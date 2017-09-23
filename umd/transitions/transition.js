@@ -35,7 +35,7 @@ var __extends = (this && this.__extends) || (function () {
      * - RAF
      * - set inline TO styles - DOM WRITE
      */
-    var Transition = (function (_super) {
+    var Transition = /** @class */ (function (_super) {
         __extends(Transition, _super);
         /**
          * @param {?} plt

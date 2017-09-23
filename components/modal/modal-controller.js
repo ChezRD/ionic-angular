@@ -131,7 +131,7 @@ import { DeepLinker } from '../../navigation/deep-linker';
  * \@demo /docs/demos/src/modal/
  * @see {\@link /docs/components#modals Modal Component Docs}
  */
-var ModalController = (function () {
+var ModalController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -155,20 +155,20 @@ var ModalController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Modal(this._app, component, data, opts, this.config, this.deepLinker);
     };
+    ModalController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    ModalController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+        { type: DeepLinker, },
+    ]; };
     return ModalController;
 }());
 export { ModalController };
-ModalController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-ModalController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-    { type: DeepLinker, },
-]; };
 function ModalController_tsickle_Closure_declarations() {
     /** @type {?} */
     ModalController.decorators;

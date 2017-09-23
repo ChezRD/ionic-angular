@@ -29,24 +29,24 @@ import { Directive } from '@angular/core';
  *
  *
  */
-var Row = (function () {
+var Row = /** @class */ (function () {
     function Row() {
     }
+    Row.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-row, [ion-row]',
+                    host: {
+                        'class': 'row'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Row.ctorParameters = function () { return []; };
     return Row;
 }());
 export { Row };
-Row.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-row, [ion-row]',
-                host: {
-                    'class': 'row'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Row.ctorParameters = function () { return []; };
 function Row_tsickle_Closure_declarations() {
     /** @type {?} */
     Row.decorators;

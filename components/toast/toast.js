@@ -16,7 +16,7 @@ import { ViewController } from '../../navigation/view-controller';
 /**
  * @hidden
  */
-var Toast = (function (_super) {
+var Toast = /** @class */ (function (_super) {
     __extends(Toast, _super);
     /**
      * @param {?} app

@@ -9,7 +9,7 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var TimeoutDebouncer = (function () {
+    var TimeoutDebouncer = /** @class */ (function () {
         /**
          * @param {?} wait
          */

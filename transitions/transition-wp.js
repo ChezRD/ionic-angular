@@ -13,7 +13,7 @@ import { isPresent } from '../util/util';
 import { PageTransition } from './page-transition';
 var /** @type {?} */ SHOW_BACK_BTN_CSS = 'show-back-button';
 var /** @type {?} */ SCALE_SMALL = .95;
-var WPTransition = (function (_super) {
+var WPTransition = /** @class */ (function (_super) {
     __extends(WPTransition, _super);
     function WPTransition() {
         return _super !== null && _super.apply(this, arguments) || this;

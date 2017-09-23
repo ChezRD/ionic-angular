@@ -406,7 +406,7 @@ export class TextInput extends BaseInput {
             return this._scrollData;
         }
         let /** @type {?} */ ele = this._elementRef.nativeElement;
-        ele = (ele.closest('ion-item,[ion-item]')) || ele;
+        ele = /** @type {?} */ (ele.closest('ion-item,[ion-item]')) || ele;
         return this._scrollData = getScrollData(ele.offsetTop, ele.offsetHeight, this._content.getContentDimensions(), this._keyboardHeight, this._plt.height());
     }
     /**

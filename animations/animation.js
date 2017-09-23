@@ -2,7 +2,7 @@ import { isDefined } from '../util/util';
 /**
  * @hidden
  */
-var Animation = (function () {
+var Animation = /** @class */ (function () {
     /**
      * @param {?} plt
      * @param {?=} ele

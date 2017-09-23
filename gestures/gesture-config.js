@@ -14,7 +14,7 @@ import { HammerGestureConfig } from '@angular/platform-browser';
  * @hidden
  * This class overrides the default Angular gesture config.
  */
-var IonicGestureConfig = (function (_super) {
+var IonicGestureConfig = /** @class */ (function (_super) {
     __extends(IonicGestureConfig, _super);
     function IonicGestureConfig() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -30,16 +30,16 @@ var IonicGestureConfig = (function (_super) {
         }
         return mc;
     };
+    IonicGestureConfig.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    IonicGestureConfig.ctorParameters = function () { return []; };
     return IonicGestureConfig;
 }(HammerGestureConfig));
 export { IonicGestureConfig };
-IonicGestureConfig.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-IonicGestureConfig.ctorParameters = function () { return []; };
 function IonicGestureConfig_tsickle_Closure_declarations() {
     /** @type {?} */
     IonicGestureConfig.decorators;

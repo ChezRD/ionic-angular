@@ -53,7 +53,7 @@ import { isCheckedProperty, isTrueProperty } from '../../util/util';
  * @see {\@link /docs/components#radio Radio Component Docs}
  * @see {\@link ../RadioButton RadioButton API Docs}
  */
-var RadioGroup = (function () {
+var RadioGroup = /** @class */ (function () {
     /**
      * @param {?} _renderer
      * @param {?} _elementRef
@@ -253,31 +253,31 @@ var RadioGroup = (function () {
     RadioGroup.prototype.setDisabledState = function (isDisabled) {
         this.disabled = isDisabled;
     };
+    RadioGroup.decorators = [
+        { type: Directive, args: [{
+                    selector: '[radio-group]',
+                    host: {
+                        'role': 'radiogroup'
+                    },
+                    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: RadioGroup, multi: true }],
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    RadioGroup.ctorParameters = function () { return [
+        { type: Renderer, },
+        { type: ElementRef, },
+        { type: ChangeDetectorRef, },
+    ]; };
+    RadioGroup.propDecorators = {
+        'disabled': [{ type: Input },],
+        'ionChange': [{ type: Output },],
+        '_header': [{ type: ContentChild, args: [ListHeader,] },],
+    };
     return RadioGroup;
 }());
 export { RadioGroup };
-RadioGroup.decorators = [
-    { type: Directive, args: [{
-                selector: '[radio-group]',
-                host: {
-                    'role': 'radiogroup'
-                },
-                providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: RadioGroup, multi: true }],
-            },] },
-];
-/**
- * @nocollapse
- */
-RadioGroup.ctorParameters = function () { return [
-    { type: Renderer, },
-    { type: ElementRef, },
-    { type: ChangeDetectorRef, },
-]; };
-RadioGroup.propDecorators = {
-    'disabled': [{ type: Input },],
-    'ionChange': [{ type: Output },],
-    '_header': [{ type: ContentChild, args: [ListHeader,] },],
-};
 function RadioGroup_tsickle_Closure_declarations() {
     /** @type {?} */
     RadioGroup.decorators;

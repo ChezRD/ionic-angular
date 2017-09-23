@@ -267,7 +267,7 @@ var __extends = (this && this.__extends) || (function () {
      *
      * \@demo /docs/demos/src/datetime/
      */
-    var DateTime = (function (_super) {
+    var DateTime = /** @class */ (function (_super) {
         __extends(DateTime, _super);
         /**
          * @param {?} form
@@ -666,61 +666,61 @@ var __extends = (this && this.__extends) || (function () {
                 }
             }
         };
+        DateTime.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: 'ion-datetime',
+                        template: '<div *ngIf="!_text" class="datetime-text datetime-placeholder">{{placeholder}}</div>' +
+                            '<div *ngIf="_text" class="datetime-text">{{_text}}</div>' +
+                            '<button aria-haspopup="true" ' +
+                            'type="button" ' +
+                            '[id]="id" ' +
+                            'ion-button="item-cover" ' +
+                            '[attr.aria-labelledby]="_labelId" ' +
+                            '[attr.aria-disabled]="_disabled" ' +
+                            'class="item-cover">' +
+                            '</button>',
+                        host: {
+                            '[class.datetime-disabled]': '_disabled'
+                        },
+                        providers: [{ provide: forms_1.NG_VALUE_ACCESSOR, useExisting: DateTime, multi: true }],
+                        encapsulation: core_1.ViewEncapsulation.None,
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        DateTime.ctorParameters = function () { return [
+            { type: form_1.Form, },
+            { type: config_1.Config, },
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+            { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
+            { type: picker_controller_1.PickerController, decorators: [{ type: core_1.Optional },] },
+        ]; };
+        DateTime.propDecorators = {
+            'min': [{ type: core_1.Input },],
+            'max': [{ type: core_1.Input },],
+            'displayFormat': [{ type: core_1.Input },],
+            'pickerFormat': [{ type: core_1.Input },],
+            'cancelText': [{ type: core_1.Input },],
+            'doneText': [{ type: core_1.Input },],
+            'yearValues': [{ type: core_1.Input },],
+            'monthValues': [{ type: core_1.Input },],
+            'dayValues': [{ type: core_1.Input },],
+            'hourValues': [{ type: core_1.Input },],
+            'minuteValues': [{ type: core_1.Input },],
+            'monthNames': [{ type: core_1.Input },],
+            'monthShortNames': [{ type: core_1.Input },],
+            'dayNames': [{ type: core_1.Input },],
+            'dayShortNames': [{ type: core_1.Input },],
+            'pickerOptions': [{ type: core_1.Input },],
+            'placeholder': [{ type: core_1.Input },],
+            'ionCancel': [{ type: core_1.Output },],
+            '_click': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
+            '_keyup': [{ type: core_1.HostListener, args: ['keyup.space',] },],
+        };
         return DateTime;
     }(base_input_1.BaseInput));
-    DateTime.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ion-datetime',
-                    template: '<div *ngIf="!_text" class="datetime-text datetime-placeholder">{{placeholder}}</div>' +
-                        '<div *ngIf="_text" class="datetime-text">{{_text}}</div>' +
-                        '<button aria-haspopup="true" ' +
-                        'type="button" ' +
-                        '[id]="id" ' +
-                        'ion-button="item-cover" ' +
-                        '[attr.aria-labelledby]="_labelId" ' +
-                        '[attr.aria-disabled]="_disabled" ' +
-                        'class="item-cover">' +
-                        '</button>',
-                    host: {
-                        '[class.datetime-disabled]': '_disabled'
-                    },
-                    providers: [{ provide: forms_1.NG_VALUE_ACCESSOR, useExisting: DateTime, multi: true }],
-                    encapsulation: core_1.ViewEncapsulation.None,
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    DateTime.ctorParameters = function () { return [
-        { type: form_1.Form, },
-        { type: config_1.Config, },
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-        { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
-        { type: picker_controller_1.PickerController, decorators: [{ type: core_1.Optional },] },
-    ]; };
-    DateTime.propDecorators = {
-        'min': [{ type: core_1.Input },],
-        'max': [{ type: core_1.Input },],
-        'displayFormat': [{ type: core_1.Input },],
-        'pickerFormat': [{ type: core_1.Input },],
-        'cancelText': [{ type: core_1.Input },],
-        'doneText': [{ type: core_1.Input },],
-        'yearValues': [{ type: core_1.Input },],
-        'monthValues': [{ type: core_1.Input },],
-        'dayValues': [{ type: core_1.Input },],
-        'hourValues': [{ type: core_1.Input },],
-        'minuteValues': [{ type: core_1.Input },],
-        'monthNames': [{ type: core_1.Input },],
-        'monthShortNames': [{ type: core_1.Input },],
-        'dayNames': [{ type: core_1.Input },],
-        'dayShortNames': [{ type: core_1.Input },],
-        'pickerOptions': [{ type: core_1.Input },],
-        'placeholder': [{ type: core_1.Input },],
-        'ionCancel': [{ type: core_1.Output },],
-        '_click': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
-        '_keyup': [{ type: core_1.HostListener, args: ['keyup.space',] },],
-    };
     exports.DateTime = DateTime;
     function DateTime_tsickle_Closure_declarations() {
         /** @type {?} */

@@ -54,7 +54,7 @@
         // TODO test form register/deregister
         // TODO test item classes
         // TODO test disable
-        var /** @type {?} */ zone = new core_1.NgZone(true);
+        var /** @type {?} */ zone = new core_1.NgZone({ enableLongStackTrace: true });
         zone.run(function () {
             if (config.testItem === true && !input._item) {
                 (void 0) /* assert */;

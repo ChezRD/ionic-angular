@@ -104,7 +104,7 @@ import { DeepLinker } from '../../navigation/deep-linker';
  *
  * \@demo /docs/demos/src/popover/
  */
-var PopoverController = (function () {
+var PopoverController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -127,20 +127,20 @@ var PopoverController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Popover(this._app, component, data, opts, this.config, this._deepLinker);
     };
+    PopoverController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    PopoverController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+        { type: DeepLinker, },
+    ]; };
     return PopoverController;
 }());
 export { PopoverController };
-PopoverController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-PopoverController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-    { type: DeepLinker, },
-]; };
 function PopoverController_tsickle_Closure_declarations() {
     /** @type {?} */
     PopoverController.decorators;

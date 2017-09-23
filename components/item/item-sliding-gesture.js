@@ -14,7 +14,7 @@ import { pointerCoord } from '../../util/dom';
 /**
  * @hidden
  */
-var ItemSlidingGesture = (function (_super) {
+var ItemSlidingGesture = /** @class */ (function (_super) {
     __extends(ItemSlidingGesture, _super);
     /**
      * @param {?} plt

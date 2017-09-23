@@ -623,7 +623,7 @@ export class Menu {
      * @return {?}
      */
     getMenuElement() {
-        return (this.getNativeElement().querySelector('.menu-inner'));
+        return /** @type {?} */ (this.getNativeElement().querySelector('.menu-inner'));
     }
     /**
      * @hidden

@@ -51,7 +51,7 @@ import { ViewController } from '../../navigation/view-controller';
  * \@demo /docs/demos/src/navbar/
  * @see {\@link ../../toolbar/Toolbar/ Toolbar API Docs}
  */
-var Navbar = (function (_super) {
+var Navbar = /** @class */ (function (_super) {
     __extends(Navbar, _super);
     /**
      * @param {?} _app
@@ -135,44 +135,44 @@ var Navbar = (function (_super) {
         // used to display none/block the navbar
         this._hidden = isHidden;
     };
+    Navbar.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-navbar',
+                    template: '<div class="toolbar-background" [ngClass]="\'toolbar-background-\' + _mode"></div>' +
+                        '<button (click)="backButtonClick($event)" ion-button="bar-button" class="back-button" [ngClass]="\'back-button-\' + _mode" [hidden]="_hideBb">' +
+                        '<ion-icon class="back-button-icon" [ngClass]="\'back-button-icon-\' + _mode" [name]="_bbIcon"></ion-icon>' +
+                        '<span class="back-button-text" [ngClass]="\'back-button-text-\' + _mode">{{_backText}}</span>' +
+                        '</button>' +
+                        '<ng-content select="[menuToggle],ion-buttons[left]"></ng-content>' +
+                        '<ng-content select="ion-buttons[start]"></ng-content>' +
+                        '<ng-content select="ion-buttons[end],ion-buttons[right]"></ng-content>' +
+                        '<div class="toolbar-content" [ngClass]="\'toolbar-content-\' + _mode">' +
+                        '<ng-content></ng-content>' +
+                        '</div>',
+                    host: {
+                        '[hidden]': '_hidden',
+                        'class': 'toolbar',
+                        '[class.statusbar-padding]': '_sbPadding'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Navbar.ctorParameters = function () { return [
+        { type: App, },
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: NavController, decorators: [{ type: Optional },] },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    Navbar.propDecorators = {
+        'hideBackButton': [{ type: Input },],
+    };
     return Navbar;
 }(ToolbarBase));
 export { Navbar };
-Navbar.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-navbar',
-                template: '<div class="toolbar-background" [ngClass]="\'toolbar-background-\' + _mode"></div>' +
-                    '<button (click)="backButtonClick($event)" ion-button="bar-button" class="back-button" [ngClass]="\'back-button-\' + _mode" [hidden]="_hideBb">' +
-                    '<ion-icon class="back-button-icon" [ngClass]="\'back-button-icon-\' + _mode" [name]="_bbIcon"></ion-icon>' +
-                    '<span class="back-button-text" [ngClass]="\'back-button-text-\' + _mode">{{_backText}}</span>' +
-                    '</button>' +
-                    '<ng-content select="[menuToggle],ion-buttons[left]"></ng-content>' +
-                    '<ng-content select="ion-buttons[start]"></ng-content>' +
-                    '<ng-content select="ion-buttons[end],ion-buttons[right]"></ng-content>' +
-                    '<div class="toolbar-content" [ngClass]="\'toolbar-content-\' + _mode">' +
-                    '<ng-content></ng-content>' +
-                    '</div>',
-                host: {
-                    '[hidden]': '_hidden',
-                    'class': 'toolbar',
-                    '[class.statusbar-padding]': '_sbPadding'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Navbar.ctorParameters = function () { return [
-    { type: App, },
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: NavController, decorators: [{ type: Optional },] },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-Navbar.propDecorators = {
-    'hideBackButton': [{ type: Input },],
-};
 function Navbar_tsickle_Closure_declarations() {
     /** @type {?} */
     Navbar.decorators;

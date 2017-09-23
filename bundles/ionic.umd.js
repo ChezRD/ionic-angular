@@ -4,6 +4,82 @@
   (factory((global.ionicBundle = global.ionicBundle || {})));
 }(this, (function (exports) { 'use strict';
 
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = Object.setPrototypeOf ||
+    ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+    function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+
+function __extends$1(d, b) {
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function __values(o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+}
+
+function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+
+
+function __await(v) {
+    return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 
@@ -645,7 +721,7 @@ exports.$$observable = exports.observable;
 });
 
 /**
- * A representation of any set of values over any amount of time. This the most basic building block
+ * A representation of any set of values over any amount of time. This is the most basic building block
  * of RxJS.
  *
  * @class Observable<T>
@@ -653,7 +729,7 @@ exports.$$observable = exports.observable;
 var Observable = (function () {
     /**
      * @constructor
-     * @param {Function} subscribe the function that is  called when the Observable is
+     * @param {Function} subscribe the function that is called when the Observable is
      * initially subscribed to. This function is given a Subscriber, to which new values
      * can be `next`ed, or an `error` method can be called to raise an error, or
      * `complete` can be called to notify of a successful completion.
@@ -677,6 +753,120 @@ var Observable = (function () {
         observable$$1.operator = operator;
         return observable$$1;
     };
+    /**
+     * Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.
+     *
+     * <span class="informal">Use it when you have all these Observables, but still nothing is happening.</span>
+     *
+     * `subscribe` is not a regular operator, but a method that calls Observable's internal `subscribe` function. It
+     * might be for example a function that you passed to a {@link create} static factory, but most of the time it is
+     * a library implementation, which defines what and when will be emitted by an Observable. This means that calling
+     * `subscribe` is actually the moment when Observable starts its work, not when it is created, as it is often
+     * thought.
+     *
+     * Apart from starting the execution of an Observable, this method allows you to listen for values
+     * that an Observable emits, as well as for when it completes or errors. You can achieve this in two
+     * following ways.
+     *
+     * The first way is creating an object that implements {@link Observer} interface. It should have methods
+     * defined by that interface, but note that it should be just a regular JavaScript object, which you can create
+     * yourself in any way you want (ES6 class, classic function constructor, object literal etc.). In particular do
+     * not attempt to use any RxJS implementation details to create Observers - you don't need them. Remember also
+     * that your object does not have to implement all methods. If you find yourself creating a method that doesn't
+     * do anything, you can simply omit it. Note however, that if `error` method is not provided, all errors will
+     * be left uncaught.
+     *
+     * The second way is to give up on Observer object altogether and simply provide callback functions in place of its methods.
+     * This means you can provide three functions as arguments to `subscribe`, where first function is equivalent
+     * of a `next` method, second of an `error` method and third of a `complete` method. Just as in case of Observer,
+     * if you do not need to listen for something, you can omit a function, preferably by passing `undefined` or `null`,
+     * since `subscribe` recognizes these functions by where they were placed in function call. When it comes
+     * to `error` function, just as before, if not provided, errors emitted by an Observable will be thrown.
+     *
+     * Whatever style of calling `subscribe` you use, in both cases it returns a Subscription object.
+     * This object allows you to call `unsubscribe` on it, which in turn will stop work that an Observable does and will clean
+     * up all resources that an Observable used. Note that cancelling a subscription will not call `complete` callback
+     * provided to `subscribe` function, which is reserved for a regular completion signal that comes from an Observable.
+     *
+     * Remember that callbacks provided to `subscribe` are not guaranteed to be called asynchronously.
+     * It is an Observable itself that decides when these functions will be called. For example {@link of}
+     * by default emits all its values synchronously. Always check documentation for how given Observable
+     * will behave when subscribed and if its default behavior can be modified with a {@link Scheduler}.
+     *
+     * @example <caption>Subscribe with an Observer</caption>
+     * const sumObserver = {
+     *   sum: 0,
+     *   next(value) {
+     *     console.log('Adding: ' + value);
+     *     this.sum = this.sum + value;
+     *   },
+     *   error() { // We actually could just remove this method,
+     *   },        // since we do not really care about errors right now.
+     *   complete() {
+     *     console.log('Sum equals: ' + this.sum);
+     *   }
+     * };
+     *
+     * Rx.Observable.of(1, 2, 3) // Synchronously emits 1, 2, 3 and then completes.
+     * .subscribe(sumObserver);
+     *
+     * // Logs:
+     * // "Adding: 1"
+     * // "Adding: 2"
+     * // "Adding: 3"
+     * // "Sum equals: 6"
+     *
+     *
+     * @example <caption>Subscribe with functions</caption>
+     * let sum = 0;
+     *
+     * Rx.Observable.of(1, 2, 3)
+     * .subscribe(
+     *   function(value) {
+     *     console.log('Adding: ' + value);
+     *     sum = sum + value;
+     *   },
+     *   undefined,
+     *   function() {
+     *     console.log('Sum equals: ' + sum);
+     *   }
+     * );
+     *
+     * // Logs:
+     * // "Adding: 1"
+     * // "Adding: 2"
+     * // "Adding: 3"
+     * // "Sum equals: 6"
+     *
+     *
+     * @example <caption>Cancel a subscription</caption>
+     * const subscription = Rx.Observable.interval(1000).subscribe(
+     *   num => console.log(num),
+     *   undefined,
+     *   () => console.log('completed!') // Will not be called, even
+     * );                                // when cancelling subscription
+     *
+     *
+     * setTimeout(() => {
+     *   subscription.unsubscribe();
+     *   console.log('unsubscribed!');
+     * }, 2500);
+     *
+     * // Logs:
+     * // 0 after 1s
+     * // 1 after 2s
+     * // "unsubscribed!" after 2.5s
+     *
+     *
+     * @param {Observer|Function} observerOrNext (optional) Either an observer with methods to be called,
+     *  or the first of three possible handlers, which is the handler for each value emitted from the subscribed
+     *  Observable.
+     * @param {Function} error (optional) A handler for a terminal event resulting from an error. If no error handler is provided,
+     *  the error will be thrown as unhandled.
+     * @param {Function} complete (optional) A handler for a terminal event resulting from successful completion.
+     * @return {ISubscription} a subscription reference to the registered handlers
+     * @method subscribe
+     */
     Observable.prototype.subscribe = function (observerOrNext, error, complete) {
         var operator = this.operator;
         var sink = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
@@ -684,7 +874,7 @@ var Observable = (function () {
             operator.call(sink, this.source);
         }
         else {
-            sink.add(this._trySubscribe(sink));
+            sink.add(this.source ? this._subscribe(sink) : this._trySubscribe(sink));
         }
         if (sink.syncErrorThrowable) {
             sink.syncErrorThrowable = false;
@@ -2027,13 +2217,8 @@ function share() {
 }
 var share_2 = share;
 
-var __extends$1 = (undefined && undefined.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 /**
- * @license Angular v4.1.3
+ * @license Angular v4.3.6
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2192,7 +2377,7 @@ function stringify(token) {
  * found in the LICENSE file at https://angular.io/license
  */
 var _nextClassId = 0;
-var Reflect = _global['Reflect'];
+var Reflect$1 = _global['Reflect'];
 /**
  * @param {?} annotation
  * @return {?}
@@ -2244,7 +2429,7 @@ function applyParams(fnOrArray, key) {
                 paramAnnotations.push(annotation);
             }
         }
-        Reflect.defineMetadata('parameters', paramsAnnotations, fn);
+        Reflect$1.defineMetadata('parameters', paramsAnnotations, fn);
         return fn;
     }
     throw new Error("Only Function or Array is supported in Class definition for key '" + key + "' is '" + stringify(fnOrArray) + "'");
@@ -2352,7 +2537,7 @@ function Class(clsDef) {
         }
     }
     if (this && this.annotations instanceof Array) {
-        Reflect.defineMetadata('annotations', this.annotations, constructor);
+        Reflect$1.defineMetadata('annotations', this.annotations, constructor);
     }
     var /** @type {?} */ constructorName = constructor['name'];
     if (!constructorName || constructorName === 'constructor') {
@@ -2363,19 +2548,19 @@ function Class(clsDef) {
 /**
  * @suppress {globalThis}
  * @param {?} name
- * @param {?} props
+ * @param {?=} props
  * @param {?=} parentClass
  * @param {?=} chainFn
  * @return {?}
  */
 function makeDecorator(name, props, parentClass, chainFn) {
-    var /** @type {?} */ metaCtor = makeMetadataCtor([props]);
+    var /** @type {?} */ metaCtor = makeMetadataCtor(props);
     /**
      * @param {?} objOrType
      * @return {?}
      */
     function DecoratorFactory(objOrType) {
-        if (!(Reflect && Reflect.getOwnMetadata)) {
+        if (!(Reflect$1 && Reflect$1.getOwnMetadata)) {
             throw 'reflect-metadata shim is required when using class decorators';
         }
         if (this instanceof DecoratorFactory) {
@@ -2386,9 +2571,9 @@ function makeDecorator(name, props, parentClass, chainFn) {
         var /** @type {?} */ chainAnnotation = typeof this === 'function' && Array.isArray(this.annotations) ? this.annotations : [];
         chainAnnotation.push(annotationInstance);
         var /** @type {?} */ TypeDecorator = (function TypeDecorator(cls) {
-            var /** @type {?} */ annotations = Reflect.getOwnMetadata('annotations', cls) || [];
+            var /** @type {?} */ annotations = Reflect$1.getOwnMetadata('annotations', cls) || [];
             annotations.push(annotationInstance);
-            Reflect.defineMetadata('annotations', annotations, cls);
+            Reflect$1.defineMetadata('annotations', annotations, cls);
             return cls;
         });
         TypeDecorator.annotations = chainAnnotation;
@@ -2405,34 +2590,26 @@ function makeDecorator(name, props, parentClass, chainFn) {
     return DecoratorFactory;
 }
 /**
- * @param {?} props
+ * @param {?=} props
  * @return {?}
  */
 function makeMetadataCtor(props) {
     return function ctor() {
-        var _this = this;
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        props.forEach(function (prop, i) {
-            var /** @type {?} */ argVal = args[i];
-            if (Array.isArray(prop)) {
-                // plain parameter
-                _this[prop[0]] = argVal === undefined ? prop[1] : argVal;
+        if (props) {
+            var /** @type {?} */ values = props.apply(void 0, args);
+            for (var /** @type {?} */ propName in values) {
+                this[propName] = values[propName];
             }
-            else {
-                for (var /** @type {?} */ propName in prop) {
-                    _this[propName] =
-                        argVal && argVal.hasOwnProperty(propName) ? argVal[propName] : prop[propName];
-                }
-            }
-        });
+        }
     };
 }
 /**
  * @param {?} name
- * @param {?} props
+ * @param {?=} props
  * @param {?=} parentClass
  * @return {?}
  */
@@ -2461,7 +2638,7 @@ function makeParamDecorator(name, props, parentClass) {
          * @return {?}
          */
         function ParamDecorator(cls, unusedKey, index) {
-            var /** @type {?} */ parameters = Reflect.getOwnMetadata('parameters', cls) || [];
+            var /** @type {?} */ parameters = Reflect$1.getOwnMetadata('parameters', cls) || [];
             // there might be gaps if some in between parameters do not have annotations.
             // we pad with nulls.
             while (parameters.length <= index) {
@@ -2469,7 +2646,7 @@ function makeParamDecorator(name, props, parentClass) {
             }
             parameters[index] = parameters[index] || []; /** @type {?} */
             ((parameters[index])).push(annotationInstance);
-            Reflect.defineMetadata('parameters', parameters, cls);
+            Reflect$1.defineMetadata('parameters', parameters, cls);
             return cls;
         }
     }
@@ -2482,7 +2659,7 @@ function makeParamDecorator(name, props, parentClass) {
 }
 /**
  * @param {?} name
- * @param {?} props
+ * @param {?=} props
  * @param {?=} parentClass
  * @return {?}
  */
@@ -2503,10 +2680,10 @@ function makePropDecorator(name, props, parentClass) {
         }
         var /** @type {?} */ decoratorInstance = new (((PropDecoratorFactory)).bind.apply(((PropDecoratorFactory)), [void 0].concat(args)))();
         return function PropDecorator(target, name) {
-            var /** @type {?} */ meta = Reflect.getOwnMetadata('propMetadata', target.constructor) || {};
+            var /** @type {?} */ meta = Reflect$1.getOwnMetadata('propMetadata', target.constructor) || {};
             meta[name] = meta.hasOwnProperty(name) && meta[name] || [];
             meta[name].unshift(decoratorInstance);
-            Reflect.defineMetadata('propMetadata', meta, target.constructor);
+            Reflect$1.defineMetadata('propMetadata', meta, target.constructor);
         };
     }
     if (parentClass) {
@@ -2564,7 +2741,7 @@ var ANALYZE_FOR_ENTRY_COMPONENTS = new InjectionToken('AnalyzeForEntryComponents
  * \@stable
  * \@Annotation
  */
-var Attribute = makeParamDecorator('Attribute', [['attributeName', undefined]]);
+var Attribute = makeParamDecorator('Attribute', function (attributeName) { return ({ attributeName: attributeName }); });
 /**
  * Base class for query metadata.
  *
@@ -2585,56 +2762,37 @@ var Query = (function () {
  *  \@stable
  *  \@Annotation
  */
-var ContentChildren = makePropDecorator('ContentChildren', [
-    ['selector', undefined], {
-        first: false,
-        isViewQuery: false,
-        descendants: false,
-        read: undefined,
-    }
-], Query);
+var ContentChildren = makePropDecorator('ContentChildren', function (selector, data) {
+    if (data === void 0) { data = {}; }
+    return (Object.assign({ selector: selector, first: false, isViewQuery: false, descendants: false }, data));
+}, Query);
 /**
  * ContentChild decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var ContentChild = makePropDecorator('ContentChild', [
-    ['selector', undefined], {
-        first: true,
-        isViewQuery: false,
-        descendants: true,
-        read: undefined,
-    }
-], Query);
+var ContentChild = makePropDecorator('ContentChild', function (selector, data) {
+    if (data === void 0) { data = {}; }
+    return (Object.assign({ selector: selector, first: true, isViewQuery: false, descendants: true }, data));
+}, Query);
 /**
  * ViewChildren decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var ViewChildren = makePropDecorator('ViewChildren', [
-    ['selector', undefined], {
-        first: false,
-        isViewQuery: true,
-        descendants: true,
-        read: undefined,
-    }
-], Query);
+var ViewChildren = makePropDecorator('ViewChildren', function (selector, data) {
+    if (data === void 0) { data = {}; }
+    return (Object.assign({ selector: selector, first: false, isViewQuery: true, descendants: true }, data));
+}, Query);
 /**
  * ViewChild decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var ViewChild = makePropDecorator('ViewChild', [
-    ['selector', undefined], {
-        first: true,
-        isViewQuery: true,
-        descendants: true,
-        read: undefined,
-    }
-], Query);
+var ViewChild = makePropDecorator('ViewChild', function (selector, data) { return (Object.assign({ selector: selector, first: true, isViewQuery: true, descendants: true }, data)); }, Query);
 var ChangeDetectionStrategy = {};
 ChangeDetectionStrategy.OnPush = 0;
 ChangeDetectionStrategy.Default = 1;
@@ -2653,14 +2811,9 @@ ChangeDetectionStrategy[ChangeDetectionStrategy.Default] = "Default";
  * \@stable
  * \@Annotation
  */
-var Directive = makeDecorator('Directive', {
-    selector: undefined,
-    inputs: undefined,
-    outputs: undefined,
-    host: undefined,
-    providers: undefined,
-    exportAs: undefined,
-    queries: undefined
+var Directive = makeDecorator('Directive', function (dir) {
+    if (dir === void 0) { dir = {}; }
+    return dir;
 });
 /**
  * Component decorator and metadata.
@@ -2668,25 +2821,9 @@ var Directive = makeDecorator('Directive', {
  * \@stable
  * \@Annotation
  */
-var Component = makeDecorator('Component', {
-    selector: undefined,
-    inputs: undefined,
-    outputs: undefined,
-    host: undefined,
-    exportAs: undefined,
-    moduleId: undefined,
-    providers: undefined,
-    viewProviders: undefined,
-    changeDetection: ChangeDetectionStrategy.Default,
-    queries: undefined,
-    templateUrl: undefined,
-    template: undefined,
-    styleUrls: undefined,
-    styles: undefined,
-    animations: undefined,
-    encapsulation: undefined,
-    interpolation: undefined,
-    entryComponents: undefined
+var Component = makeDecorator('Component', function (c) {
+    if (c === void 0) { c = {}; }
+    return (Object.assign({ changeDetection: ChangeDetectionStrategy.Default }, c));
 }, Directive);
 /**
  * Pipe decorator and metadata.
@@ -2694,54 +2831,42 @@ var Component = makeDecorator('Component', {
  * \@stable
  * \@Annotation
  */
-var Pipe = makeDecorator('Pipe', {
-    name: undefined,
-    pure: true,
-});
+var Pipe = makeDecorator('Pipe', function (p) { return (Object.assign({ pure: true }, p)); });
 /**
  * Input decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var Input = makePropDecorator('Input', [['bindingPropertyName', undefined]]);
+var Input = makePropDecorator('Input', function (bindingPropertyName) { return ({ bindingPropertyName: bindingPropertyName }); });
 /**
  * Output decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var Output = makePropDecorator('Output', [['bindingPropertyName', undefined]]);
+var Output = makePropDecorator('Output', function (bindingPropertyName) { return ({ bindingPropertyName: bindingPropertyName }); });
 /**
  * HostBinding decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var HostBinding = makePropDecorator('HostBinding', [['hostPropertyName', undefined]]);
+var HostBinding = makePropDecorator('HostBinding', function (hostPropertyName) { return ({ hostPropertyName: hostPropertyName }); });
 /**
  * HostListener decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var HostListener = makePropDecorator('HostListener', [['eventName', undefined], ['args', []]]);
+var HostListener = makePropDecorator('HostListener', function (eventName, args) { return ({ eventName: eventName, args: args }); });
 /**
  * NgModule decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var NgModule = makeDecorator('NgModule', {
-    providers: undefined,
-    declarations: undefined,
-    imports: undefined,
-    exports: undefined,
-    entryComponents: undefined,
-    bootstrap: undefined,
-    schemas: undefined,
-    id: undefined,
-});
+var NgModule = makeDecorator('NgModule', function (ngModule) { return ngModule; });
 var ViewEncapsulation = {};
 ViewEncapsulation.Emulated = 0;
 ViewEncapsulation.Native = 1;
@@ -2797,7 +2922,7 @@ var Version = (function () {
 /**
  * \@stable
  */
-var VERSION = new Version('4.1.3');
+var VERSION = new Version('4.3.6');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -2811,42 +2936,42 @@ var VERSION = new Version('4.1.3');
  * \@stable
  * \@Annotation
  */
-var Inject = makeParamDecorator('Inject', [['token', undefined]]);
+var Inject = makeParamDecorator('Inject', function (token) { return ({ token: token }); });
 /**
  * Optional decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var Optional = makeParamDecorator('Optional', []);
+var Optional = makeParamDecorator('Optional');
 /**
  * Injectable decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var Injectable = makeDecorator('Injectable', []);
+var Injectable = makeDecorator('Injectable');
 /**
  * Self decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var Self = makeParamDecorator('Self', []);
+var Self = makeParamDecorator('Self');
 /**
  * SkipSelf decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var SkipSelf = makeParamDecorator('SkipSelf', []);
+var SkipSelf = makeParamDecorator('SkipSelf');
 /**
  * Host decorator and metadata.
  *
  * \@stable
  * \@Annotation
  */
-var Host = makeParamDecorator('Host', []);
+var Host = makeParamDecorator('Host');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3157,12 +3282,13 @@ function constructResolvingPath(keys) {
  * @return {?}
  */
 function injectionError(injector, key, constructResolvingMessage, originalError) {
-    var /** @type {?} */ error = ((originalError ? wrappedError('', originalError) : Error()));
+    var /** @type {?} */ keys = [key];
+    var /** @type {?} */ errMsg = constructResolvingMessage(keys);
+    var /** @type {?} */ error = ((originalError ? wrappedError(errMsg, originalError) : Error(errMsg)));
     error.addKey = addKey;
-    error.keys = [key];
+    error.keys = keys;
     error.injectors = [injector];
     error.constructResolvingMessage = constructResolvingMessage;
-    error.message = error.constructResolvingMessage();
     ((error))[ERROR_ORIGINAL_ERROR] = originalError;
     return error;
 }
@@ -3175,7 +3301,8 @@ function injectionError(injector, key, constructResolvingMessage, originalError)
 function addKey(injector, key) {
     this.injectors.push(injector);
     this.keys.push(key);
-    this.message = this.constructResolvingMessage();
+    // Note: This updated message won't be reflected in the `.stack` property
+    this.message = this.constructResolvingMessage(this.keys);
 }
 /**
  * Thrown when trying to retrieve a dependency by key from {\@link Injector}, but the
@@ -3195,9 +3322,9 @@ function addKey(injector, key) {
  * @return {?}
  */
 function noProviderError(injector, key) {
-    return injectionError(injector, key, function () {
-        var /** @type {?} */ first = stringify(this.keys[0].token);
-        return "No provider for " + first + "!" + constructResolvingPath(this.keys);
+    return injectionError(injector, key, function (keys) {
+        var /** @type {?} */ first = stringify(keys[0].token);
+        return "No provider for " + first + "!" + constructResolvingPath(keys);
     });
 }
 /**
@@ -3220,8 +3347,8 @@ function noProviderError(injector, key) {
  * @return {?}
  */
 function cyclicDependencyError(injector, key) {
-    return injectionError(injector, key, function () {
-        return "Cannot instantiate cyclic dependency!" + constructResolvingPath(this.keys);
+    return injectionError(injector, key, function (keys) {
+        return "Cannot instantiate cyclic dependency!" + constructResolvingPath(keys);
     });
 }
 /**
@@ -3255,9 +3382,9 @@ function cyclicDependencyError(injector, key) {
  * @return {?}
  */
 function instantiationError(injector, originalException, originalStack, key) {
-    return injectionError(injector, key, function () {
-        var /** @type {?} */ first = stringify(this.keys[0].token);
-        return getOriginalError(this).message + ": Error during instantiation of " + first + "!" + constructResolvingPath(this.keys) + ".";
+    return injectionError(injector, key, function (keys) {
+        var /** @type {?} */ first = stringify(keys[0].token);
+        return originalException.message + ": Error during instantiation of " + first + "!" + constructResolvingPath(keys) + ".";
     }, originalException);
 }
 /**
@@ -3788,62 +3915,6 @@ function getParentCtor(ctor) {
     return parentCtor || Object;
 }
 /**
- * Provides read-only access to reflection data about symbols. Used internally by Angular
- * to power dependency injection and compilation.
- * @abstract
- */
-var ReflectorReader = (function () {
-    function ReflectorReader() {
-    }
-    /**
-     * @abstract
-     * @param {?} typeOrFunc
-     * @return {?}
-     */
-    ReflectorReader.prototype.parameters = function (typeOrFunc) { };
-    /**
-     * @abstract
-     * @param {?} typeOrFunc
-     * @return {?}
-     */
-    ReflectorReader.prototype.annotations = function (typeOrFunc) { };
-    /**
-     * @abstract
-     * @param {?} typeOrFunc
-     * @return {?}
-     */
-    ReflectorReader.prototype.propMetadata = function (typeOrFunc) { };
-    /**
-     * @abstract
-     * @param {?} typeOrFunc
-     * @return {?}
-     */
-    ReflectorReader.prototype.importUri = function (typeOrFunc) { };
-    /**
-     * @abstract
-     * @param {?} typeOrFunc
-     * @return {?}
-     */
-    ReflectorReader.prototype.resourceUri = function (typeOrFunc) { };
-    /**
-     * @abstract
-     * @param {?} name
-     * @param {?} moduleUrl
-     * @param {?} members
-     * @param {?} runtime
-     * @return {?}
-     */
-    ReflectorReader.prototype.resolveIdentifier = function (name, moduleUrl, members, runtime) { };
-    /**
-     * @abstract
-     * @param {?} identifier
-     * @param {?} name
-     * @return {?}
-     */
-    ReflectorReader.prototype.resolveEnum = function (identifier, name) { };
-    return ReflectorReader;
-}());
-/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -3854,15 +3925,12 @@ var ReflectorReader = (function () {
  * Provides access to reflection data about symbols. Used internally by Angular
  * to power dependency injection and compilation.
  */
-var Reflector = (function (_super) {
-    __extends$1(Reflector, _super);
+var Reflector = (function () {
     /**
      * @param {?} reflectionCapabilities
      */
     function Reflector(reflectionCapabilities) {
-        var _this = _super.call(this) || this;
-        _this.reflectionCapabilities = reflectionCapabilities;
-        return _this;
+        this.reflectionCapabilities = reflectionCapabilities;
     }
     /**
      * @param {?} caps
@@ -3947,7 +4015,7 @@ var Reflector = (function (_super) {
         return this.reflectionCapabilities.resolveEnum(identifier, name);
     };
     return Reflector;
-}(ReflectorReader));
+}());
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -3956,7 +4024,7 @@ var Reflector = (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * The {@link Reflector} used internally in Angular to access metadata
+ * The {\@link Reflector} used internally in Angular to access metadata
  * about symbols.
  */
 var reflector = new Reflector(new ReflectionCapabilities());
@@ -4176,7 +4244,7 @@ function _extractToken(typeOrFunc, metadata, params) {
     var /** @type {?} */ optional = false;
     if (!Array.isArray(metadata)) {
         if (metadata instanceof Inject) {
-            return _createDependency(metadata['token'], optional, null);
+            return _createDependency(metadata.token, optional, null);
         }
         else {
             return _createDependency(metadata, optional, null);
@@ -4189,7 +4257,7 @@ function _extractToken(typeOrFunc, metadata, params) {
             token = paramMetadata;
         }
         else if (paramMetadata instanceof Inject) {
-            token = paramMetadata['token'];
+            token = paramMetadata.token;
         }
         else if (paramMetadata instanceof Optional) {
             optional = true;
@@ -5265,32 +5333,6 @@ var ComponentFactoryResolver = (function () {
     return ComponentFactoryResolver;
 }());
 ComponentFactoryResolver.NULL = new _NullComponentFactoryResolver();
-var CodegenComponentFactoryResolver = (function () {
-    /**
-     * @param {?} factories
-     * @param {?} _parent
-     * @param {?} _ngModule
-     */
-    function CodegenComponentFactoryResolver(factories, _parent, _ngModule) {
-        this._parent = _parent;
-        this._ngModule = _ngModule;
-        this._factories = new Map();
-        for (var i = 0; i < factories.length; i++) {
-            var factory = factories[i];
-            this._factories.set(factory.componentType, factory);
-        }
-    }
-    /**
-     * @template T
-     * @param {?} component
-     * @return {?}
-     */
-    CodegenComponentFactoryResolver.prototype.resolveComponentFactory = function (component) {
-        var /** @type {?} */ factory = this._factories.get(component) || this._parent.resolveComponentFactory(component);
-        return new ComponentFactoryBoundToModule(factory, this._ngModule);
-    };
-    return CodegenComponentFactoryResolver;
-}());
 var ComponentFactoryBoundToModule = (function (_super) {
     __extends$1(ComponentFactoryBoundToModule, _super);
     /**
@@ -5410,124 +5452,23 @@ var NgModuleRef = (function () {
 }());
 /**
  * \@experimental
+ * @abstract
  */
 var NgModuleFactory = (function () {
-    /**
-     * @param {?} _injectorClass
-     * @param {?} _moduleType
-     */
-    function NgModuleFactory(_injectorClass, _moduleType) {
-        this._injectorClass = _injectorClass;
-        this._moduleType = _moduleType;
+    function NgModuleFactory() {
     }
-    Object.defineProperty(NgModuleFactory.prototype, "moduleType", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this._moduleType; },
-        enumerable: true,
-        configurable: true
-    });
     /**
+     * @abstract
+     * @return {?}
+     */
+    NgModuleFactory.prototype.moduleType = function () { };
+    /**
+     * @abstract
      * @param {?} parentInjector
      * @return {?}
      */
-    NgModuleFactory.prototype.create = function (parentInjector) {
-        var /** @type {?} */ instance = new this._injectorClass(parentInjector || Injector.NULL);
-        instance.create();
-        return instance;
-    };
+    NgModuleFactory.prototype.create = function (parentInjector) { };
     return NgModuleFactory;
-}());
-var _UNDEFINED = new Object();
-/**
- * @abstract
- */
-var NgModuleInjector = (function () {
-    /**
-     * @param {?} parent
-     * @param {?} factories
-     * @param {?} bootstrapFactories
-     */
-    function NgModuleInjector(parent, factories, bootstrapFactories) {
-        var _this = this;
-        this.parent = parent;
-        this._destroyListeners = [];
-        this._destroyed = false;
-        this.bootstrapFactories =
-            bootstrapFactories.map(function (f) { return new ComponentFactoryBoundToModule(f, _this); });
-        this._cmpFactoryResolver = new CodegenComponentFactoryResolver(factories, parent.get(ComponentFactoryResolver, ComponentFactoryResolver.NULL), this);
-    }
-    /**
-     * @return {?}
-     */
-    NgModuleInjector.prototype.create = function () { this.instance = this.createInternal(); };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    NgModuleInjector.prototype.createInternal = function () { };
-    /**
-     * @param {?} token
-     * @param {?=} notFoundValue
-     * @return {?}
-     */
-    NgModuleInjector.prototype.get = function (token, notFoundValue) {
-        if (notFoundValue === void 0) { notFoundValue = THROW_IF_NOT_FOUND; }
-        if (token === Injector || token === NgModuleRef) {
-            return this;
-        }
-        if (token === ComponentFactoryResolver) {
-            return this._cmpFactoryResolver;
-        }
-        var /** @type {?} */ result = this.getInternal(token, _UNDEFINED);
-        return result === _UNDEFINED ? this.parent.get(token, notFoundValue) : result;
-    };
-    /**
-     * @abstract
-     * @param {?} token
-     * @param {?} notFoundValue
-     * @return {?}
-     */
-    NgModuleInjector.prototype.getInternal = function (token, notFoundValue) { };
-    Object.defineProperty(NgModuleInjector.prototype, "injector", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(NgModuleInjector.prototype, "componentFactoryResolver", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this._cmpFactoryResolver; },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    NgModuleInjector.prototype.destroy = function () {
-        if (this._destroyed) {
-            throw new Error("The ng module " + stringify(this.instance.constructor) + " has already been destroyed.");
-        }
-        this._destroyed = true;
-        this.destroyInternal();
-        this._destroyListeners.forEach(function (listener) { return listener(); });
-    };
-    /**
-     * @param {?} callback
-     * @return {?}
-     */
-    NgModuleInjector.prototype.onDestroy = function (callback) { this._destroyListeners.push(callback); };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    NgModuleInjector.prototype.destroyInternal = function () { };
-    return NgModuleInjector;
 }());
 /**
  * @license
@@ -5829,26 +5770,46 @@ var NgZone = (function () {
      */
     function NgZone(_a) {
         var _b = _a.enableLongStackTrace, enableLongStackTrace = _b === void 0 ? false : _b;
-        this._hasPendingMicrotasks = false;
-        this._hasPendingMacrotasks = false;
-        this._isStable = true;
-        this._nesting = 0;
-        this._onUnstable = new EventEmitter(false);
-        this._onMicrotaskEmpty = new EventEmitter(false);
-        this._onStable = new EventEmitter(false);
-        this._onErrorEvents = new EventEmitter(false);
+        this.hasPendingMicrotasks = false;
+        this.hasPendingMacrotasks = false;
+        /**
+         * Whether there are no outstanding microtasks or macrotasks.
+         */
+        this.isStable = true;
+        /**
+         * Notifies when code enters Angular Zone. This gets fired first on VM Turn.
+         */
+        this.onUnstable = new EventEmitter(false);
+        /**
+         * Notifies when there is no more microtasks enqueue in the current VM Turn.
+         * This is a hint for Angular to do change detection, which may enqueue more microtasks.
+         * For this reason this event can fire multiple times per VM Turn.
+         */
+        this.onMicrotaskEmpty = new EventEmitter(false);
+        /**
+         * Notifies when the last `onMicrotaskEmpty` has run and there are no more microtasks, which
+         * implies we are about to relinquish VM turn.
+         * This event gets called just once.
+         */
+        this.onStable = new EventEmitter(false);
+        /**
+         * Notifies that an error has been delivered.
+         */
+        this.onError = new EventEmitter(false);
         if (typeof Zone == 'undefined') {
             throw new Error('Angular requires Zone.js prolyfill.');
         }
         Zone.assertZonePatched();
-        this.outer = this.inner = Zone.current;
+        var self = this;
+        self._nesting = 0;
+        self._outer = self._inner = Zone.current;
         if (Zone['wtfZoneSpec']) {
-            this.inner = this.inner.fork(Zone['wtfZoneSpec']);
+            self._inner = self._inner.fork(Zone['wtfZoneSpec']);
         }
         if (enableLongStackTrace && Zone['longStackTraceZoneSpec']) {
-            this.inner = this.inner.fork(Zone['longStackTraceZoneSpec']);
+            self._inner = self._inner.fork(Zone['longStackTraceZoneSpec']);
         }
-        this.forkInnerZoneWithAngularBehavior();
+        forkInnerZoneWithAngularBehavior(self);
     }
     /**
      * @return {?}
@@ -5884,14 +5845,14 @@ var NgZone = (function () {
      * @param {?} fn
      * @return {?}
      */
-    NgZone.prototype.run = function (fn) { return this.inner.run(fn); };
+    NgZone.prototype.run = function (fn) { return (((this)))._inner.run(fn); };
     /**
      * Same as `run`, except that synchronous errors are caught and forwarded via `onError` and not
      * rethrown.
      * @param {?} fn
      * @return {?}
      */
-    NgZone.prototype.runGuarded = function (fn) { return this.inner.runGuarded(fn); };
+    NgZone.prototype.runGuarded = function (fn) { return (((this)))._inner.runGuarded(fn); };
     /**
      * Executes the `fn` function synchronously in Angular's parent zone and returns value returned by
      * the function.
@@ -5907,178 +5868,98 @@ var NgZone = (function () {
      * @param {?} fn
      * @return {?}
      */
-    NgZone.prototype.runOutsideAngular = function (fn) { return this.outer.run(fn); };
-    Object.defineProperty(NgZone.prototype, "onUnstable", {
-        /**
-         * Notifies when code enters Angular Zone. This gets fired first on VM Turn.
-         * @return {?}
-         */
-        get: function () { return this._onUnstable; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(NgZone.prototype, "onMicrotaskEmpty", {
-        /**
-         * Notifies when there is no more microtasks enqueue in the current VM Turn.
-         * This is a hint for Angular to do change detection, which may enqueue more microtasks.
-         * For this reason this event can fire multiple times per VM Turn.
-         * @return {?}
-         */
-        get: function () { return this._onMicrotaskEmpty; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(NgZone.prototype, "onStable", {
-        /**
-         * Notifies when the last `onMicrotaskEmpty` has run and there are no more microtasks, which
-         * implies we are about to relinquish VM turn.
-         * This event gets called just once.
-         * @return {?}
-         */
-        get: function () { return this._onStable; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(NgZone.prototype, "onError", {
-        /**
-         * Notify that an error has been delivered.
-         * @return {?}
-         */
-        get: function () { return this._onErrorEvents; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(NgZone.prototype, "isStable", {
-        /**
-         * Whether there are no outstanding microtasks or macrotasks.
-         * @return {?}
-         */
-        get: function () { return this._isStable; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(NgZone.prototype, "hasPendingMicrotasks", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this._hasPendingMicrotasks; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(NgZone.prototype, "hasPendingMacrotasks", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this._hasPendingMacrotasks; },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    NgZone.prototype.checkStable = function () {
-        var _this = this;
-        if (this._nesting == 0 && !this._hasPendingMicrotasks && !this._isStable) {
-            try {
-                this._nesting++;
-                this._onMicrotaskEmpty.emit(null);
-            }
-            finally {
-                this._nesting--;
-                if (!this._hasPendingMicrotasks) {
-                    try {
-                        this.runOutsideAngular(function () { return _this._onStable.emit(null); });
-                    }
-                    finally {
-                        this._isStable = true;
-                    }
-                }
-            }
-        }
-    };
-    /**
-     * @return {?}
-     */
-    NgZone.prototype.forkInnerZoneWithAngularBehavior = function () {
-        var _this = this;
-        this.inner = this.inner.fork({
-            name: 'angular',
-            properties: /** @type {?} */ ({ 'isAngularZone': true }),
-            onInvokeTask: function (delegate, current, target, task, applyThis, applyArgs) {
-                try {
-                    _this.onEnter();
-                    return delegate.invokeTask(target, task, applyThis, applyArgs);
-                }
-                finally {
-                    _this.onLeave();
-                }
-            },
-            onInvoke: function (delegate, current, target, callback, applyThis, applyArgs, source) {
-                try {
-                    _this.onEnter();
-                    return delegate.invoke(target, callback, applyThis, applyArgs, source);
-                }
-                finally {
-                    _this.onLeave();
-                }
-            },
-            onHasTask: function (delegate, current, target, hasTaskState) {
-                delegate.hasTask(target, hasTaskState);
-                if (current === target) {
-                    // We are only interested in hasTask events which originate from our zone
-                    // (A child hasTask event is not interesting to us)
-                    if (hasTaskState.change == 'microTask') {
-                        _this.setHasMicrotask(hasTaskState.microTask);
-                    }
-                    else if (hasTaskState.change == 'macroTask') {
-                        _this.setHasMacrotask(hasTaskState.macroTask);
-                    }
-                }
-            },
-            onHandleError: function (delegate, current, target, error) {
-                delegate.handleError(target, error);
-                _this.triggerError(error);
-                return false;
-            }
-        });
-    };
-    /**
-     * @return {?}
-     */
-    NgZone.prototype.onEnter = function () {
-        this._nesting++;
-        if (this._isStable) {
-            this._isStable = false;
-            this._onUnstable.emit(null);
-        }
-    };
-    /**
-     * @return {?}
-     */
-    NgZone.prototype.onLeave = function () {
-        this._nesting--;
-        this.checkStable();
-    };
-    /**
-     * @param {?} hasMicrotasks
-     * @return {?}
-     */
-    NgZone.prototype.setHasMicrotask = function (hasMicrotasks) {
-        this._hasPendingMicrotasks = hasMicrotasks;
-        this.checkStable();
-    };
-    /**
-     * @param {?} hasMacrotasks
-     * @return {?}
-     */
-    NgZone.prototype.setHasMacrotask = function (hasMacrotasks) { this._hasPendingMacrotasks = hasMacrotasks; };
-    /**
-     * @param {?} error
-     * @return {?}
-     */
-    NgZone.prototype.triggerError = function (error) { this._onErrorEvents.emit(error); };
+    NgZone.prototype.runOutsideAngular = function (fn) { return (((this)))._outer.run(fn); };
     return NgZone;
 }());
+/**
+ * @param {?} zone
+ * @return {?}
+ */
+function checkStable(zone) {
+    if (zone._nesting == 0 && !zone.hasPendingMicrotasks && !zone.isStable) {
+        try {
+            zone._nesting++;
+            zone.onMicrotaskEmpty.emit(null);
+        }
+        finally {
+            zone._nesting--;
+            if (!zone.hasPendingMicrotasks) {
+                try {
+                    zone.runOutsideAngular(function () { return zone.onStable.emit(null); });
+                }
+                finally {
+                    zone.isStable = true;
+                }
+            }
+        }
+    }
+}
+/**
+ * @param {?} zone
+ * @return {?}
+ */
+function forkInnerZoneWithAngularBehavior(zone) {
+    zone._inner = zone._inner.fork({
+        name: 'angular',
+        properties: /** @type {?} */ ({ 'isAngularZone': true }),
+        onInvokeTask: function (delegate, current, target, task, applyThis, applyArgs) {
+            try {
+                onEnter(zone);
+                return delegate.invokeTask(target, task, applyThis, applyArgs);
+            }
+            finally {
+                onLeave(zone);
+            }
+        },
+        onInvoke: function (delegate, current, target, callback, applyThis, applyArgs, source) {
+            try {
+                onEnter(zone);
+                return delegate.invoke(target, callback, applyThis, applyArgs, source);
+            }
+            finally {
+                onLeave(zone);
+            }
+        },
+        onHasTask: function (delegate, current, target, hasTaskState) {
+            delegate.hasTask(target, hasTaskState);
+            if (current === target) {
+                // We are only interested in hasTask events which originate from our zone
+                // (A child hasTask event is not interesting to us)
+                if (hasTaskState.change == 'microTask') {
+                    zone.hasPendingMicrotasks = hasTaskState.microTask;
+                    checkStable(zone);
+                }
+                else if (hasTaskState.change == 'macroTask') {
+                    zone.hasPendingMacrotasks = hasTaskState.macroTask;
+                }
+            }
+        },
+        onHandleError: function (delegate, current, target, error) {
+            delegate.handleError(target, error);
+            zone.runOutsideAngular(function () { return zone.onError.emit(error); });
+            return false;
+        }
+    });
+}
+/**
+ * @param {?} zone
+ * @return {?}
+ */
+function onEnter(zone) {
+    zone._nesting++;
+    if (zone.isStable) {
+        zone.isStable = false;
+        zone.onUnstable.emit(null);
+    }
+}
+/**
+ * @param {?} zone
+ * @return {?}
+ */
+function onLeave(zone) {
+    zone._nesting--;
+    checkStable(zone);
+}
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -6515,15 +6396,16 @@ var PlatformRef = (function () {
 }());
 /**
  * @param {?} errorHandler
+ * @param {?} ngZone
  * @param {?} callback
  * @return {?}
  */
-function _callAndReportToErrorHandler(errorHandler, callback) {
+function _callAndReportToErrorHandler(errorHandler, ngZone, callback) {
     try {
         var /** @type {?} */ result = callback();
         if (isPromise(result)) {
             return result.catch(function (e) {
-                errorHandler.handleError(e);
+                ngZone.runOutsideAngular(function () { return errorHandler.handleError(e); });
                 // rethrow as the exception handler might not do it
                 throw e;
             });
@@ -6531,7 +6413,7 @@ function _callAndReportToErrorHandler(errorHandler, callback) {
         return result;
     }
     catch (e) {
-        errorHandler.handleError(e);
+        ngZone.runOutsideAngular(function () { return errorHandler.handleError(e); });
         // rethrow as the exception handler might not do it
         throw e;
     }
@@ -6617,8 +6499,8 @@ var PlatformRef_ = (function (_super) {
                 throw new Error('No ErrorHandler. Is platform module (BrowserModule) included?');
             }
             moduleRef.onDestroy(function () { return remove(_this._modules, moduleRef); }); /** @type {?} */
-            ((ngZone)).onError.subscribe({ next: function (error) { exceptionHandler.handleError(error); } });
-            return _callAndReportToErrorHandler(exceptionHandler, function () {
+            ((ngZone)).runOutsideAngular(function () { return ((ngZone)).onError.subscribe({ next: function (error) { exceptionHandler.handleError(error); } }); });
+            return _callAndReportToErrorHandler(exceptionHandler, /** @type {?} */ ((ngZone)), function () {
                 var /** @type {?} */ initStatus = moduleRef.injector.get(ApplicationInitStatus);
                 initStatus.runInitializers();
                 return initStatus.donePromise.then(function () {
@@ -6658,9 +6540,9 @@ var PlatformRef_ = (function (_super) {
      * @return {?}
      */
     PlatformRef_.prototype._moduleDoBootstrap = function (moduleRef) {
-        var /** @type {?} */ appRef = moduleRef.injector.get(ApplicationRef);
-        if (moduleRef.bootstrapFactories.length > 0) {
-            moduleRef.bootstrapFactories.forEach(function (f) { return appRef.bootstrap(f); });
+        var /** @type {?} */ appRef = (moduleRef.injector.get(ApplicationRef));
+        if (moduleRef._bootstrapComponents.length > 0) {
+            moduleRef._bootstrapComponents.forEach(function (f) { return appRef.bootstrap(f); });
         }
         else if (moduleRef.instance.ngDoBootstrap) {
             moduleRef.instance.ngDoBootstrap(appRef);
@@ -6700,14 +6582,18 @@ var ApplicationRef = (function () {
      * specified application component onto DOM elements identified by the [componentType]'s
      * selector and kicks off automatic change detection to finish initializing the component.
      *
+     * Optionally, a component can be mounted onto a DOM element that does not match the
+     * [componentType]'s selector.
+     *
      * ### Example
      * {\@example core/ts/platform/platform.ts region='longform'}
      * @abstract
      * @template C
      * @param {?} componentFactory
+     * @param {?=} rootSelectorOrNode
      * @return {?}
      */
-    ApplicationRef.prototype.bootstrap = function (componentFactory) { };
+    ApplicationRef.prototype.bootstrap = function (componentFactory, rootSelectorOrNode) { };
     /**
      * Invoke this method to explicitly process change detection and its side-effects.
      *
@@ -6804,16 +6690,21 @@ var ApplicationRef_ = (function (_super) {
             });
         });
         var isStable = new Observable_2(function (observer) {
-            var stableSub = _this._zone.onStable.subscribe(function () {
-                NgZone.assertNotInAngularZone();
-                // Check whether there are no pending macro/micro tasks in the next tick
-                // to allow for NgZone to update the state.
-                scheduleMicroTask(function () {
-                    if (!_this._stable && !_this._zone.hasPendingMacrotasks &&
-                        !_this._zone.hasPendingMicrotasks) {
-                        _this._stable = true;
-                        observer.next(true);
-                    }
+            // Create the subscription to onStable outside the Angular Zone so that
+            // the callback is run outside the Angular Zone.
+            var stableSub;
+            _this._zone.runOutsideAngular(function () {
+                stableSub = _this._zone.onStable.subscribe(function () {
+                    NgZone.assertNotInAngularZone();
+                    // Check whether there are no pending macro/micro tasks in the next tick
+                    // to allow for NgZone to update the state.
+                    scheduleMicroTask(function () {
+                        if (!_this._stable && !_this._zone.hasPendingMacrotasks &&
+                            !_this._zone.hasPendingMicrotasks) {
+                            _this._stable = true;
+                            observer.next(true);
+                        }
+                    });
                 });
             });
             var unstableSub = _this._zone.onUnstable.subscribe(function () {
@@ -6852,9 +6743,10 @@ var ApplicationRef_ = (function (_super) {
     /**
      * @template C
      * @param {?} componentOrFactory
+     * @param {?=} rootSelectorOrNode
      * @return {?}
      */
-    ApplicationRef_.prototype.bootstrap = function (componentOrFactory) {
+    ApplicationRef_.prototype.bootstrap = function (componentOrFactory, rootSelectorOrNode) {
         var _this = this;
         if (!this._initStatus.done) {
             throw new Error('Cannot bootstrap as there are still asynchronous initializers running. Bootstrap components in the `ngDoBootstrap` method of the root module.');
@@ -6871,7 +6763,8 @@ var ApplicationRef_ = (function (_super) {
         var /** @type {?} */ ngModule = componentFactory instanceof ComponentFactoryBoundToModule ?
             null :
             this._injector.get(NgModuleRef);
-        var /** @type {?} */ compRef = componentFactory.create(Injector.NULL, [], componentFactory.selector, ngModule);
+        var /** @type {?} */ selectorOrNode = rootSelectorOrNode || componentFactory.selector;
+        var /** @type {?} */ compRef = componentFactory.create(Injector.NULL, [], selectorOrNode, ngModule);
         compRef.onDestroy(function () { _this._unloadComponent(compRef); });
         var /** @type {?} */ testability = compRef.injector.get(Testability, null);
         if (testability) {
@@ -6908,6 +6801,7 @@ var ApplicationRef_ = (function (_super) {
      * @return {?}
      */
     ApplicationRef_.prototype.tick = function () {
+        var _this = this;
         if (this._runningTick) {
             throw new Error('ApplicationRef.tick is called recursively');
         }
@@ -6921,7 +6815,7 @@ var ApplicationRef_ = (function (_super) {
         }
         catch (e) {
             // Attention: Don't rethrow as it could cancel subscriptions to Observables!
-            this._exceptionHandler.handleError(e);
+            this._zone.runOutsideAngular(function () { return _this._exceptionHandler.handleError(e); });
         }
         finally {
             this._runningTick = false;
@@ -7170,6 +7064,21 @@ var RendererFactory2 = (function () {
      * @return {?}
      */
     RendererFactory2.prototype.createRenderer = function (hostElement, type) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    RendererFactory2.prototype.begin = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    RendererFactory2.prototype.end = function () { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    RendererFactory2.prototype.whenRenderingDone = function () { };
     return RendererFactory2;
 }());
 var RendererStyleFlags2 = {};
@@ -7837,9 +7746,9 @@ var ChangeDetectorRef = (function () {
      * class Cmp {
      *   numberOfTicks = 0;
      *
-     *   constructor(ref: ChangeDetectorRef) {
+     *   constructor(private ref: ChangeDetectorRef) {
      *     setInterval(() => {
-     *       this.numberOfTicks ++
+     *       this.numberOfTicks++;
      *       // the following is required, otherwise the view will not be updated
      *       this.ref.markForCheck();
      *     }, 1000);
@@ -7890,11 +7799,11 @@ var ChangeDetectorRef = (function () {
      * \@Component({
      *   selector: 'giant-list',
      *   template: `
-     *     <li *ngFor="let d of dataProvider.data">Data {{d}}</lig>
+     *     <li *ngFor="let d of dataProvider.data">Data {{d}}</li>
      *   `,
      * })
      * class GiantList {
-     *   constructor(private ref: ChangeDetectorRef, private dataProvider:DataProvider) {
+     *   constructor(private ref: ChangeDetectorRef, private dataProvider: DataProvider) {
      *     ref.detach();
      *     setInterval(() => {
      *       this.ref.detectChanges();
@@ -7981,13 +7890,14 @@ var ChangeDetectorRef = (function () {
      *   template: 'Data: {{dataProvider.data}}'
      * })
      * class LiveData {
-     *   constructor(private ref: ChangeDetectorRef, private dataProvider:DataProvider) {}
+     *   constructor(private ref: ChangeDetectorRef, private dataProvider: DataProvider) {}
      *
      *   set live(value) {
-     *     if (value)
+     *     if (value) {
      *       this.ref.reattach();
-     *     else
+     *     } else {
      *       this.ref.detach();
+     *     }
      *   }
      * }
      *
@@ -8841,6 +8751,8 @@ var DefaultIterableDiffer = (function () {
             this._movesHead = this._movesTail = null;
             this._removalsHead = this._removalsTail = null;
             this._identityChangesHead = this._identityChangesTail = null;
+            // todo(vicb) when assert gets supported
+            // assert(!this.isDirty);
         }
     };
     /**
@@ -8862,10 +8774,10 @@ var DefaultIterableDiffer = (function () {
         // The previous record after which we will append the current one.
         var /** @type {?} */ previousRecord;
         if (record === null) {
-            previousRecord = ((this._itTail));
+            previousRecord = this._itTail;
         }
         else {
-            previousRecord = ((record._prev));
+            previousRecord = record._prev;
             // Remove the record from the collection since we know it does not match the item.
             this._remove(record);
         }
@@ -9303,13 +9215,13 @@ var _DuplicateItemRecordList = (function () {
     };
     /**
      * @param {?} trackById
-     * @param {?} afterIndex
+     * @param {?} atOrAfterIndex
      * @return {?}
      */
-    _DuplicateItemRecordList.prototype.get = function (trackById, afterIndex) {
+    _DuplicateItemRecordList.prototype.get = function (trackById, atOrAfterIndex) {
         var /** @type {?} */ record;
         for (record = this._head; record !== null; record = record._nextDup) {
-            if ((afterIndex === null || afterIndex < record.currentIndex) &&
+            if ((atOrAfterIndex === null || atOrAfterIndex <= ((record.currentIndex))) &&
                 looseIdentical(record.trackById, trackById)) {
                 return record;
             }
@@ -9369,18 +9281,18 @@ var _DuplicateMap = (function () {
     };
     /**
      * Retrieve the `value` using key. Because the IterableChangeRecord_ value may be one which we
-     * have already iterated over, we use the afterIndex to pretend it is not there.
+     * have already iterated over, we use the `atOrAfterIndex` to pretend it is not there.
      *
      * Use case: `[a, b, c, a, a]` if we are at index `3` which is the second `a` then asking if we
-     * have any more `a`s needs to return the last `a` not the first or second.
+     * have any more `a`s needs to return the second `a`.
      * @param {?} trackById
-     * @param {?} afterIndex
+     * @param {?} atOrAfterIndex
      * @return {?}
      */
-    _DuplicateMap.prototype.get = function (trackById, afterIndex) {
+    _DuplicateMap.prototype.get = function (trackById, atOrAfterIndex) {
         var /** @type {?} */ key = trackById;
         var /** @type {?} */ recordList = this.map.get(key);
-        return recordList ? recordList.get(trackById, afterIndex) : null;
+        return recordList ? recordList.get(trackById, atOrAfterIndex) : null;
     };
     /**
      * Removes a {\@link IterableChangeRecord_} from the list of duplicates.
@@ -9723,26 +9635,6 @@ var DefaultKeyValueDiffer = (function () {
         }
     };
     /**
-     * @return {?}
-     */
-    DefaultKeyValueDiffer.prototype.toString = function () {
-        var /** @type {?} */ items = [];
-        var /** @type {?} */ previous = [];
-        var /** @type {?} */ changes = [];
-        var /** @type {?} */ additions = [];
-        var /** @type {?} */ removals = [];
-        this.forEachItem(function (r) { return items.push(stringify(r)); });
-        this.forEachPreviousItem(function (r) { return previous.push(stringify(r)); });
-        this.forEachChangedItem(function (r) { return changes.push(stringify(r)); });
-        this.forEachAddedItem(function (r) { return additions.push(stringify(r)); });
-        this.forEachRemovedItem(function (r) { return removals.push(stringify(r)); });
-        return 'map: ' + items.join(', ') + '\n' +
-            'previous: ' + previous.join(', ') + '\n' +
-            'additions: ' + additions.join(', ') + '\n' +
-            'changes: ' + changes.join(', ') + '\n' +
-            'removals: ' + removals.join(', ') + '\n';
-    };
-    /**
      * \@internal
      * @template K, V
      * @param {?} obj
@@ -9795,15 +9687,6 @@ var KeyValueChangeRecord_ = (function () {
          */
         this._nextChanged = null;
     }
-    /**
-     * @return {?}
-     */
-    KeyValueChangeRecord_.prototype.toString = function () {
-        return looseIdentical(this.previousValue, this.currentValue) ?
-            stringify(this.key) :
-            (stringify(this.key) + '[' + stringify(this.previousValue) + '->' +
-                stringify(this.currentValue) + ']');
-    };
     return KeyValueChangeRecord_;
 }());
 /**
@@ -10027,7 +9910,6 @@ var _CORE_PLATFORM_PROVIDERS = [
     PlatformRef_,
     { provide: PlatformRef, useExisting: PlatformRef_ },
     { provide: Reflector, useFactory: _reflector, deps: [] },
-    { provide: ReflectorReader, useExisting: Reflector },
     TestabilityRegistry,
     Console,
 ];
@@ -10056,6 +9938,70 @@ var TRANSLATIONS = new InjectionToken('Translations');
  * \@experimental i18n support is experimental.
  */
 var TRANSLATIONS_FORMAT = new InjectionToken('TranslationsFormat');
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @return {?}
+ */
+function _iterableDiffersFactory() {
+    return defaultIterableDiffers;
+}
+/**
+ * @return {?}
+ */
+function _keyValueDiffersFactory() {
+    return defaultKeyValueDiffers;
+}
+/**
+ * @param {?=} locale
+ * @return {?}
+ */
+function _localeFactory(locale) {
+    return locale || 'en-US';
+}
+/**
+ * This module includes the providers of \@angular/core that are needed
+ * to bootstrap components via `ApplicationRef`.
+ *
+ * \@experimental
+ */
+var ApplicationModule = (function () {
+    /**
+     * @param {?} appRef
+     */
+    function ApplicationModule(appRef) {
+    }
+    return ApplicationModule;
+}());
+ApplicationModule.decorators = [
+    { type: NgModule, args: [{
+                providers: [
+                    ApplicationRef_,
+                    { provide: ApplicationRef, useExisting: ApplicationRef_ },
+                    ApplicationInitStatus,
+                    Compiler,
+                    APP_ID_RANDOM_PROVIDER,
+                    { provide: IterableDiffers, useFactory: _iterableDiffersFactory },
+                    { provide: KeyValueDiffers, useFactory: _keyValueDiffersFactory },
+                    {
+                        provide: LOCALE_ID,
+                        useFactory: _localeFactory,
+                        deps: [[new Inject(LOCALE_ID), new Optional(), new SkipSelf()]]
+                    },
+                ]
+            },] },
+];
+/**
+ * @nocollapse
+ */
+ApplicationModule.ctorParameters = function () { return [
+    { type: ApplicationRef, },
+]; };
 var SecurityContext = {};
 SecurityContext.NONE = 0;
 SecurityContext.HTML = 1;
@@ -10155,18 +10101,22 @@ function asQueryList(view, index) {
  * debug mode can hook it. It is lazily filled when `isDevMode` is known.
  */
 var Services = {
-    setCurrentNode: /** @type {?} */ ((undefined)),
-    createRootView: /** @type {?} */ ((undefined)),
-    createEmbeddedView: /** @type {?} */ ((undefined)),
-    checkAndUpdateView: /** @type {?} */ ((undefined)),
-    checkNoChangesView: /** @type {?} */ ((undefined)),
-    destroyView: /** @type {?} */ ((undefined)),
-    resolveDep: /** @type {?} */ ((undefined)),
-    createDebugContext: /** @type {?} */ ((undefined)),
-    handleEvent: /** @type {?} */ ((undefined)),
-    updateDirectives: /** @type {?} */ ((undefined)),
-    updateRenderer: /** @type {?} */ ((undefined)),
-    dirtyParentQueries: /** @type {?} */ ((undefined)),
+    setCurrentNode: undefined,
+    createRootView: undefined,
+    createEmbeddedView: undefined,
+    createComponentView: undefined,
+    createNgModuleRef: undefined,
+    overrideProvider: undefined,
+    clearProviderOverrides: undefined,
+    checkAndUpdateView: undefined,
+    checkNoChangesView: undefined,
+    destroyView: undefined,
+    resolveDep: undefined,
+    createDebugContext: undefined,
+    handleEvent: undefined,
+    updateDirectives: undefined,
+    updateRenderer: undefined,
+    dirtyParentQueries: undefined,
 };
 /**
  * @license
@@ -10455,6 +10405,24 @@ function splitMatchedQueriesDsl(matchedQueriesDsl) {
     return { matchedQueries: matchedQueries, references: references, matchedQueryIds: matchedQueryIds };
 }
 /**
+ * @param {?} deps
+ * @return {?}
+ */
+function splitDepsDsl(deps) {
+    return deps.map(function (value) {
+        var /** @type {?} */ token;
+        var /** @type {?} */ flags;
+        if (Array.isArray(value)) {
+            flags = value[0], token = value[1];
+        }
+        else {
+            flags = 0 /* None */;
+            token = value;
+        }
+        return { flags: flags, token: token, tokenKey: tokenKey(token) };
+    });
+}
+/**
  * @param {?} view
  * @param {?} renderHost
  * @param {?} def
@@ -10476,17 +10444,18 @@ function getParentRenderElement(view, renderHost, def) {
         return renderHost;
     }
 }
-var VIEW_DEFINITION_CACHE = new WeakMap();
+var DEFINITION_CACHE = new WeakMap();
 /**
+ * @template D
  * @param {?} factory
  * @return {?}
  */
-function resolveViewDefinition(factory) {
-    var /** @type {?} */ value = ((VIEW_DEFINITION_CACHE.get(factory)));
+function resolveDefinition(factory) {
+    var /** @type {?} */ value = (((DEFINITION_CACHE.get(factory))));
     if (!value) {
         value = factory(function () { return NOOP; });
         value.factory = factory;
-        VIEW_DEFINITION_CACHE.set(factory, value);
+        DEFINITION_CACHE.set(factory, value);
     }
     return value;
 }
@@ -10906,19 +10875,165 @@ function setElementProperty(view, binding, renderNode$$1, name, value) {
     view.renderer.setProperty(renderNode$$1, name, renderValue);
 }
 /**
- * @param {?} view
- * @param {?} renderHost
- * @param {?} def
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var NOT_CREATED$1 = new Object();
+var InjectorRefTokenKey$1 = tokenKey(Injector);
+var NgModuleRefTokenKey = tokenKey(NgModuleRef);
+/**
+ * @param {?} data
  * @return {?}
  */
-function appendNgContent(view, renderHost, def) {
-    var /** @type {?} */ parentEl = getParentRenderElement(view, renderHost, def);
-    if (!parentEl) {
-        // Nothing to do if there is no parent element.
-        return;
+function initNgModule(data) {
+    var /** @type {?} */ def = data._def;
+    var /** @type {?} */ providers = data._providers = new Array(def.providers.length);
+    for (var /** @type {?} */ i = 0; i < def.providers.length; i++) {
+        var /** @type {?} */ provDef = def.providers[i];
+        providers[i] = provDef.flags & 4096 /* LazyProvider */ ? NOT_CREATED$1 :
+            _createProviderInstance$1(data, provDef);
     }
-    var /** @type {?} */ ngContentIndex = ((def.ngContent)).index;
-    visitProjectedRenderNodes(view, ngContentIndex, 1 /* AppendChild */, parentEl, null, undefined);
+}
+/**
+ * @param {?} data
+ * @param {?} depDef
+ * @param {?=} notFoundValue
+ * @return {?}
+ */
+function resolveNgModuleDep(data, depDef, notFoundValue) {
+    if (notFoundValue === void 0) { notFoundValue = Injector.THROW_IF_NOT_FOUND; }
+    if (depDef.flags & 8 /* Value */) {
+        return depDef.token;
+    }
+    if (depDef.flags & 2 /* Optional */) {
+        notFoundValue = null;
+    }
+    if (depDef.flags & 1 /* SkipSelf */) {
+        return data._parent.get(depDef.token, notFoundValue);
+    }
+    var /** @type {?} */ tokenKey$$1 = depDef.tokenKey;
+    switch (tokenKey$$1) {
+        case InjectorRefTokenKey$1:
+        case NgModuleRefTokenKey:
+            return data;
+    }
+    var /** @type {?} */ providerDef = data._def.providersByKey[tokenKey$$1];
+    if (providerDef) {
+        var /** @type {?} */ providerInstance = data._providers[providerDef.index];
+        if (providerInstance === NOT_CREATED$1) {
+            providerInstance = data._providers[providerDef.index] =
+                _createProviderInstance$1(data, providerDef);
+        }
+        return providerInstance;
+    }
+    return data._parent.get(depDef.token, notFoundValue);
+}
+/**
+ * @param {?} ngModule
+ * @param {?} providerDef
+ * @return {?}
+ */
+function _createProviderInstance$1(ngModule, providerDef) {
+    var /** @type {?} */ injectable;
+    switch (providerDef.flags & 201347067 /* Types */) {
+        case 512 /* TypeClassProvider */:
+            injectable = _createClass(ngModule, providerDef.value, providerDef.deps);
+            break;
+        case 1024 /* TypeFactoryProvider */:
+            injectable = _callFactory(ngModule, providerDef.value, providerDef.deps);
+            break;
+        case 2048 /* TypeUseExistingProvider */:
+            injectable = resolveNgModuleDep(ngModule, providerDef.deps[0]);
+            break;
+        case 256 /* TypeValueProvider */:
+            injectable = providerDef.value;
+            break;
+    }
+    return injectable;
+}
+/**
+ * @param {?} ngModule
+ * @param {?} ctor
+ * @param {?} deps
+ * @return {?}
+ */
+function _createClass(ngModule, ctor, deps) {
+    var /** @type {?} */ len = deps.length;
+    var /** @type {?} */ injectable;
+    switch (len) {
+        case 0:
+            injectable = new ctor();
+            break;
+        case 1:
+            injectable = new ctor(resolveNgModuleDep(ngModule, deps[0]));
+            break;
+        case 2:
+            injectable =
+                new ctor(resolveNgModuleDep(ngModule, deps[0]), resolveNgModuleDep(ngModule, deps[1]));
+            break;
+        case 3:
+            injectable = new ctor(resolveNgModuleDep(ngModule, deps[0]), resolveNgModuleDep(ngModule, deps[1]), resolveNgModuleDep(ngModule, deps[2]));
+            break;
+        default:
+            var /** @type {?} */ depValues = new Array(len);
+            for (var /** @type {?} */ i = 0; i < len; i++) {
+                depValues[i] = resolveNgModuleDep(ngModule, deps[i]);
+            }
+            injectable = new (ctor.bind.apply(ctor, [void 0].concat(depValues)))();
+    }
+    return injectable;
+}
+/**
+ * @param {?} ngModule
+ * @param {?} factory
+ * @param {?} deps
+ * @return {?}
+ */
+function _callFactory(ngModule, factory, deps) {
+    var /** @type {?} */ len = deps.length;
+    var /** @type {?} */ injectable;
+    switch (len) {
+        case 0:
+            injectable = factory();
+            break;
+        case 1:
+            injectable = factory(resolveNgModuleDep(ngModule, deps[0]));
+            break;
+        case 2:
+            injectable =
+                factory(resolveNgModuleDep(ngModule, deps[0]), resolveNgModuleDep(ngModule, deps[1]));
+            break;
+        case 3:
+            injectable = factory(resolveNgModuleDep(ngModule, deps[0]), resolveNgModuleDep(ngModule, deps[1]), resolveNgModuleDep(ngModule, deps[2]));
+            break;
+        default:
+            var /** @type {?} */ depValues = Array(len);
+            for (var /** @type {?} */ i = 0; i < len; i++) {
+                depValues[i] = resolveNgModuleDep(ngModule, deps[i]);
+            }
+            injectable = factory.apply(void 0, depValues);
+    }
+    return injectable;
+}
+/**
+ * @param {?} ngModule
+ * @param {?} lifecycles
+ * @return {?}
+ */
+function callNgModuleLifecycle(ngModule, lifecycles) {
+    var /** @type {?} */ def = ngModule._def;
+    for (var /** @type {?} */ i = 0; i < def.providers.length; i++) {
+        var /** @type {?} */ provDef = def.providers[i];
+        if (provDef.flags & 131072 /* OnDestroy */) {
+            var /** @type {?} */ instance = ngModule._providers[i];
+            if (instance && instance !== NOT_CREATED$1) {
+                instance.ngOnDestroy();
+            }
+        }
+    }
 }
 /**
  * @license
@@ -11176,7 +11291,7 @@ var ComponentFactory_ = (function (_super) {
         if (!ngModule) {
             throw new Error('ngModule should be provided');
         }
-        var /** @type {?} */ viewDef = resolveViewDefinition(this.viewDefFactory);
+        var /** @type {?} */ viewDef = resolveDefinition(this.viewDefFactory);
         var /** @type {?} */ componentNodeIndex = ((((viewDef.nodes[0].element)).componentProvider)).index;
         var /** @type {?} */ view = Services.createRootView(injector, projectableNodes || [], rootSelectorOrNode, viewDef, ngModule, EMPTY_CONTEXT);
         var /** @type {?} */ component = asProviderData(view, componentNodeIndex).instance;
@@ -11390,6 +11505,9 @@ var ViewContainerRef_ = (function () {
      * @return {?}
      */
     ViewContainerRef_.prototype.insert = function (viewRef, index) {
+        if (viewRef.destroyed) {
+            throw new Error('Cannot insert a destroyed View in a ViewContainer!');
+        }
         var /** @type {?} */ viewRef_ = (viewRef);
         var /** @type {?} */ viewData = viewRef_._view;
         attachEmbeddedView(this._view, this._data, index, viewData);
@@ -11402,6 +11520,9 @@ var ViewContainerRef_ = (function () {
      * @return {?}
      */
     ViewContainerRef_.prototype.move = function (viewRef, currentIndex) {
+        if (viewRef.destroyed) {
+            throw new Error('Cannot move a destroyed View in a ViewContainer!');
+        }
         var /** @type {?} */ previousIndex = this._embeddedViews.indexOf(viewRef._view);
         moveEmbeddedView(this._data, previousIndex, currentIndex);
         return viewRef;
@@ -11484,7 +11605,16 @@ var ViewRef_ = (function () {
     /**
      * @return {?}
      */
-    ViewRef_.prototype.detectChanges = function () { Services.checkAndUpdateView(this._view); };
+    ViewRef_.prototype.detectChanges = function () {
+        var /** @type {?} */ fs = this._view.root.rendererFactory;
+        if (fs.begin) {
+            fs.begin();
+        }
+        Services.checkAndUpdateView(this._view);
+        if (fs.end) {
+            fs.end();
+        }
+    };
     /**
      * @return {?}
      */
@@ -11570,7 +11700,7 @@ var TemplateRef_ = (function (_super) {
      * @return {?}
      */
     TemplateRef_.prototype.createEmbeddedView = function (context) {
-        return new ViewRef_(Services.createEmbeddedView(this._parentView, this._def, context));
+        return new ViewRef_(Services.createEmbeddedView(this._parentView, this._def, /** @type {?} */ ((((this._def.element)).template)), context));
     };
     Object.defineProperty(TemplateRef_.prototype, "elementRef", {
         /**
@@ -11817,6 +11947,83 @@ var RendererAdapter = (function () {
     return RendererAdapter;
 }());
 /**
+ * @param {?} moduleType
+ * @param {?} parent
+ * @param {?} bootstrapComponents
+ * @param {?} def
+ * @return {?}
+ */
+function createNgModuleRef(moduleType, parent, bootstrapComponents, def) {
+    return new NgModuleRef_(moduleType, parent, bootstrapComponents, def);
+}
+var NgModuleRef_ = (function () {
+    /**
+     * @param {?} _moduleType
+     * @param {?} _parent
+     * @param {?} _bootstrapComponents
+     * @param {?} _def
+     */
+    function NgModuleRef_(_moduleType, _parent, _bootstrapComponents, _def) {
+        this._moduleType = _moduleType;
+        this._parent = _parent;
+        this._bootstrapComponents = _bootstrapComponents;
+        this._def = _def;
+        this._destroyListeners = [];
+        this._destroyed = false;
+        initNgModule(this);
+    }
+    /**
+     * @param {?} token
+     * @param {?=} notFoundValue
+     * @return {?}
+     */
+    NgModuleRef_.prototype.get = function (token, notFoundValue) {
+        if (notFoundValue === void 0) { notFoundValue = Injector.THROW_IF_NOT_FOUND; }
+        return resolveNgModuleDep(this, { token: token, tokenKey: tokenKey(token), flags: 0 /* None */ }, notFoundValue);
+    };
+    Object.defineProperty(NgModuleRef_.prototype, "instance", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this.get(this._moduleType); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgModuleRef_.prototype, "componentFactoryResolver", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this.get(ComponentFactoryResolver); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgModuleRef_.prototype, "injector", {
+        /**
+         * @return {?}
+         */
+        get: function () { return this; },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    NgModuleRef_.prototype.destroy = function () {
+        if (this._destroyed) {
+            throw new Error("The ng module " + stringify(this.instance.constructor) + " has already been destroyed.");
+        }
+        this._destroyed = true;
+        callNgModuleLifecycle(this, 131072 /* OnDestroy */);
+        this._destroyListeners.forEach(function (listener) { return listener(); });
+    };
+    /**
+     * @param {?} callback
+     * @return {?}
+     */
+    NgModuleRef_.prototype.onDestroy = function (callback) { this._destroyListeners.push(callback); };
+    return NgModuleRef_;
+}());
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -11850,18 +12057,7 @@ function _def(flags, matchedQueriesDsl, childCount, token, value, deps, bindings
     if (!bindings) {
         bindings = [];
     }
-    var /** @type {?} */ depDefs = deps.map(function (value) {
-        var /** @type {?} */ token;
-        var /** @type {?} */ flags;
-        if (Array.isArray(value)) {
-            flags = value[0], token = value[1];
-        }
-        else {
-            flags = 0 /* None */;
-            token = value;
-        }
-        return { flags: flags, token: token, tokenKey: tokenKey(token) };
-    });
+    var /** @type {?} */ depDefs = splitDepsDsl(deps);
     return {
         // will bet set by the view definition
         index: -1,
@@ -11877,7 +12073,7 @@ function _def(flags, matchedQueriesDsl, childCount, token, value, deps, bindings
         ngContentIndex: -1, childCount: childCount, bindings: bindings,
         bindingFlags: calcBindingFlags(bindings), outputs: outputs,
         element: null,
-        provider: { token: token, tokenKey: tokenKey(token), value: value, deps: depDefs },
+        provider: { token: token, value: value, deps: depDefs },
         text: null,
         query: null,
         ngContent: null
@@ -12364,6 +12560,187 @@ function callProviderLifecycles(view, index, lifecycles) {
     }
 }
 /**
+ * @return {?}
+ */
+function createQuery() {
+    return new QueryList();
+}
+/**
+ * @param {?} view
+ * @return {?}
+ */
+function dirtyParentQueries(view) {
+    var /** @type {?} */ queryIds = view.def.nodeMatchedQueries;
+    while (view.parent && isEmbeddedView(view)) {
+        var /** @type {?} */ tplDef = ((view.parentNodeDef));
+        view = view.parent;
+        // content queries
+        var /** @type {?} */ end = tplDef.index + tplDef.childCount;
+        for (var /** @type {?} */ i = 0; i <= end; i++) {
+            var /** @type {?} */ nodeDef = view.def.nodes[i];
+            if ((nodeDef.flags & 67108864 /* TypeContentQuery */) &&
+                (nodeDef.flags & 536870912 /* DynamicQuery */) &&
+                (((nodeDef.query)).filterId & queryIds) === ((nodeDef.query)).filterId) {
+                asQueryList(view, i).setDirty();
+            }
+            if ((nodeDef.flags & 1 /* TypeElement */ && i + nodeDef.childCount < tplDef.index) ||
+                !(nodeDef.childFlags & 67108864 /* TypeContentQuery */) ||
+                !(nodeDef.childFlags & 536870912 /* DynamicQuery */)) {
+                // skip elements that don't contain the template element or no query.
+                i += nodeDef.childCount;
+            }
+        }
+    }
+    // view queries
+    if (view.def.nodeFlags & 134217728 /* TypeViewQuery */) {
+        for (var /** @type {?} */ i = 0; i < view.def.nodes.length; i++) {
+            var /** @type {?} */ nodeDef = view.def.nodes[i];
+            if ((nodeDef.flags & 134217728 /* TypeViewQuery */) && (nodeDef.flags & 536870912 /* DynamicQuery */)) {
+                asQueryList(view, i).setDirty();
+            }
+            // only visit the root nodes
+            i += nodeDef.childCount;
+        }
+    }
+}
+/**
+ * @param {?} view
+ * @param {?} nodeDef
+ * @return {?}
+ */
+function checkAndUpdateQuery(view, nodeDef) {
+    var /** @type {?} */ queryList = asQueryList(view, nodeDef.index);
+    if (!queryList.dirty) {
+        return;
+    }
+    var /** @type {?} */ directiveInstance;
+    var /** @type {?} */ newValues = ((undefined));
+    if (nodeDef.flags & 67108864 /* TypeContentQuery */) {
+        var /** @type {?} */ elementDef_1 = ((((nodeDef.parent)).parent));
+        newValues = calcQueryValues(view, elementDef_1.index, elementDef_1.index + elementDef_1.childCount, /** @type {?} */ ((nodeDef.query)), []);
+        directiveInstance = asProviderData(view, /** @type {?} */ ((nodeDef.parent)).index).instance;
+    }
+    else if (nodeDef.flags & 134217728 /* TypeViewQuery */) {
+        newValues = calcQueryValues(view, 0, view.def.nodes.length - 1, /** @type {?} */ ((nodeDef.query)), []);
+        directiveInstance = view.component;
+    }
+    queryList.reset(newValues);
+    var /** @type {?} */ bindings = ((nodeDef.query)).bindings;
+    var /** @type {?} */ notify = false;
+    for (var /** @type {?} */ i = 0; i < bindings.length; i++) {
+        var /** @type {?} */ binding = bindings[i];
+        var /** @type {?} */ boundValue = void 0;
+        switch (binding.bindingType) {
+            case 0 /* First */:
+                boundValue = queryList.first;
+                break;
+            case 1 /* All */:
+                boundValue = queryList;
+                notify = true;
+                break;
+        }
+        directiveInstance[binding.propName] = boundValue;
+    }
+    if (notify) {
+        queryList.notifyOnChanges();
+    }
+}
+/**
+ * @param {?} view
+ * @param {?} startIndex
+ * @param {?} endIndex
+ * @param {?} queryDef
+ * @param {?} values
+ * @return {?}
+ */
+function calcQueryValues(view, startIndex, endIndex, queryDef, values) {
+    for (var /** @type {?} */ i = startIndex; i <= endIndex; i++) {
+        var /** @type {?} */ nodeDef = view.def.nodes[i];
+        var /** @type {?} */ valueType = nodeDef.matchedQueries[queryDef.id];
+        if (valueType != null) {
+            values.push(getQueryValue(view, nodeDef, valueType));
+        }
+        if (nodeDef.flags & 1 /* TypeElement */ && ((nodeDef.element)).template &&
+            (((((nodeDef.element)).template)).nodeMatchedQueries & queryDef.filterId) ===
+                queryDef.filterId) {
+            var /** @type {?} */ elementData = asElementData(view, i);
+            // check embedded views that were attached at the place of their template,
+            // but process child nodes first if some match the query (see issue #16568)
+            if ((nodeDef.childMatchedQueries & queryDef.filterId) === queryDef.filterId) {
+                calcQueryValues(view, i + 1, i + nodeDef.childCount, queryDef, values);
+                i += nodeDef.childCount;
+            }
+            if (nodeDef.flags & 16777216 /* EmbeddedViews */) {
+                var /** @type {?} */ embeddedViews = ((elementData.viewContainer))._embeddedViews;
+                for (var /** @type {?} */ k = 0; k < embeddedViews.length; k++) {
+                    var /** @type {?} */ embeddedView = embeddedViews[k];
+                    var /** @type {?} */ dvc = declaredViewContainer(embeddedView);
+                    if (dvc && dvc === elementData) {
+                        calcQueryValues(embeddedView, 0, embeddedView.def.nodes.length - 1, queryDef, values);
+                    }
+                }
+            }
+            var /** @type {?} */ projectedViews = elementData.template._projectedViews;
+            if (projectedViews) {
+                for (var /** @type {?} */ k = 0; k < projectedViews.length; k++) {
+                    var /** @type {?} */ projectedView = projectedViews[k];
+                    calcQueryValues(projectedView, 0, projectedView.def.nodes.length - 1, queryDef, values);
+                }
+            }
+        }
+        if ((nodeDef.childMatchedQueries & queryDef.filterId) !== queryDef.filterId) {
+            // if no child matches the query, skip the children.
+            i += nodeDef.childCount;
+        }
+    }
+    return values;
+}
+/**
+ * @param {?} view
+ * @param {?} nodeDef
+ * @param {?} queryValueType
+ * @return {?}
+ */
+function getQueryValue(view, nodeDef, queryValueType) {
+    if (queryValueType != null) {
+        // a match
+        var /** @type {?} */ value = void 0;
+        switch (queryValueType) {
+            case 1 /* RenderElement */:
+                value = asElementData(view, nodeDef.index).renderElement;
+                break;
+            case 0 /* ElementRef */:
+                value = new ElementRef(asElementData(view, nodeDef.index).renderElement);
+                break;
+            case 2 /* TemplateRef */:
+                value = asElementData(view, nodeDef.index).template;
+                break;
+            case 3 /* ViewContainerRef */:
+                value = asElementData(view, nodeDef.index).viewContainer;
+                break;
+            case 4 /* Provider */:
+                value = asProviderData(view, nodeDef.index).instance;
+                break;
+        }
+        return value;
+    }
+}
+/**
+ * @param {?} view
+ * @param {?} renderHost
+ * @param {?} def
+ * @return {?}
+ */
+function appendNgContent(view, renderHost, def) {
+    var /** @type {?} */ parentEl = getParentRenderElement(view, renderHost, def);
+    if (!parentEl) {
+        // Nothing to do if there is no parent element.
+        return;
+    }
+    var /** @type {?} */ ngContentIndex = ((def.ngContent)).index;
+    visitProjectedRenderNodes(view, ngContentIndex, 1 /* AppendChild */, parentEl, null, undefined);
+}
+/**
  * @param {?} flags
  * @param {?} propertyNames
  * @return {?}
@@ -12584,167 +12961,6 @@ function checkAndUpdatePureExpressionDynamic(view, def, values) {
     return changed;
 }
 /**
- * @return {?}
- */
-function createQuery() {
-    return new QueryList();
-}
-/**
- * @param {?} view
- * @return {?}
- */
-function dirtyParentQueries(view) {
-    var /** @type {?} */ queryIds = view.def.nodeMatchedQueries;
-    while (view.parent && isEmbeddedView(view)) {
-        var /** @type {?} */ tplDef = ((view.parentNodeDef));
-        view = view.parent;
-        // content queries
-        var /** @type {?} */ end = tplDef.index + tplDef.childCount;
-        for (var /** @type {?} */ i = 0; i <= end; i++) {
-            var /** @type {?} */ nodeDef = view.def.nodes[i];
-            if ((nodeDef.flags & 67108864 /* TypeContentQuery */) &&
-                (nodeDef.flags & 536870912 /* DynamicQuery */) &&
-                (((nodeDef.query)).filterId & queryIds) === ((nodeDef.query)).filterId) {
-                asQueryList(view, i).setDirty();
-            }
-            if ((nodeDef.flags & 1 /* TypeElement */ && i + nodeDef.childCount < tplDef.index) ||
-                !(nodeDef.childFlags & 67108864 /* TypeContentQuery */) ||
-                !(nodeDef.childFlags & 536870912 /* DynamicQuery */)) {
-                // skip elements that don't contain the template element or no query.
-                i += nodeDef.childCount;
-            }
-        }
-    }
-    // view queries
-    if (view.def.nodeFlags & 134217728 /* TypeViewQuery */) {
-        for (var /** @type {?} */ i = 0; i < view.def.nodes.length; i++) {
-            var /** @type {?} */ nodeDef = view.def.nodes[i];
-            if ((nodeDef.flags & 134217728 /* TypeViewQuery */) && (nodeDef.flags & 536870912 /* DynamicQuery */)) {
-                asQueryList(view, i).setDirty();
-            }
-            // only visit the root nodes
-            i += nodeDef.childCount;
-        }
-    }
-}
-/**
- * @param {?} view
- * @param {?} nodeDef
- * @return {?}
- */
-function checkAndUpdateQuery(view, nodeDef) {
-    var /** @type {?} */ queryList = asQueryList(view, nodeDef.index);
-    if (!queryList.dirty) {
-        return;
-    }
-    var /** @type {?} */ directiveInstance;
-    var /** @type {?} */ newValues = ((undefined));
-    if (nodeDef.flags & 67108864 /* TypeContentQuery */) {
-        var /** @type {?} */ elementDef_1 = ((((nodeDef.parent)).parent));
-        newValues = calcQueryValues(view, elementDef_1.index, elementDef_1.index + elementDef_1.childCount, /** @type {?} */ ((nodeDef.query)), []);
-        directiveInstance = asProviderData(view, /** @type {?} */ ((nodeDef.parent)).index).instance;
-    }
-    else if (nodeDef.flags & 134217728 /* TypeViewQuery */) {
-        newValues = calcQueryValues(view, 0, view.def.nodes.length - 1, /** @type {?} */ ((nodeDef.query)), []);
-        directiveInstance = view.component;
-    }
-    queryList.reset(newValues);
-    var /** @type {?} */ bindings = ((nodeDef.query)).bindings;
-    var /** @type {?} */ notify = false;
-    for (var /** @type {?} */ i = 0; i < bindings.length; i++) {
-        var /** @type {?} */ binding = bindings[i];
-        var /** @type {?} */ boundValue = void 0;
-        switch (binding.bindingType) {
-            case 0 /* First */:
-                boundValue = queryList.first;
-                break;
-            case 1 /* All */:
-                boundValue = queryList;
-                notify = true;
-                break;
-        }
-        directiveInstance[binding.propName] = boundValue;
-    }
-    if (notify) {
-        queryList.notifyOnChanges();
-    }
-}
-/**
- * @param {?} view
- * @param {?} startIndex
- * @param {?} endIndex
- * @param {?} queryDef
- * @param {?} values
- * @return {?}
- */
-function calcQueryValues(view, startIndex, endIndex, queryDef, values) {
-    for (var /** @type {?} */ i = startIndex; i <= endIndex; i++) {
-        var /** @type {?} */ nodeDef = view.def.nodes[i];
-        var /** @type {?} */ valueType = nodeDef.matchedQueries[queryDef.id];
-        if (valueType != null) {
-            values.push(getQueryValue(view, nodeDef, valueType));
-        }
-        if (nodeDef.flags & 1 /* TypeElement */ && ((nodeDef.element)).template &&
-            (((((nodeDef.element)).template)).nodeMatchedQueries & queryDef.filterId) ===
-                queryDef.filterId) {
-            // check embedded views that were attached at the place of their template.
-            var /** @type {?} */ elementData = asElementData(view, i);
-            if (nodeDef.flags & 16777216 /* EmbeddedViews */) {
-                var /** @type {?} */ embeddedViews = ((elementData.viewContainer))._embeddedViews;
-                for (var /** @type {?} */ k = 0; k < embeddedViews.length; k++) {
-                    var /** @type {?} */ embeddedView = embeddedViews[k];
-                    var /** @type {?} */ dvc = declaredViewContainer(embeddedView);
-                    if (dvc && dvc === elementData) {
-                        calcQueryValues(embeddedView, 0, embeddedView.def.nodes.length - 1, queryDef, values);
-                    }
-                }
-            }
-            var /** @type {?} */ projectedViews = elementData.template._projectedViews;
-            if (projectedViews) {
-                for (var /** @type {?} */ k = 0; k < projectedViews.length; k++) {
-                    var /** @type {?} */ projectedView = projectedViews[k];
-                    calcQueryValues(projectedView, 0, projectedView.def.nodes.length - 1, queryDef, values);
-                }
-            }
-        }
-        if ((nodeDef.childMatchedQueries & queryDef.filterId) !== queryDef.filterId) {
-            // if no child matches the query, skip the children.
-            i += nodeDef.childCount;
-        }
-    }
-    return values;
-}
-/**
- * @param {?} view
- * @param {?} nodeDef
- * @param {?} queryValueType
- * @return {?}
- */
-function getQueryValue(view, nodeDef, queryValueType) {
-    if (queryValueType != null) {
-        // a match
-        var /** @type {?} */ value = void 0;
-        switch (queryValueType) {
-            case 1 /* RenderElement */:
-                value = asElementData(view, nodeDef.index).renderElement;
-                break;
-            case 0 /* ElementRef */:
-                value = new ElementRef(asElementData(view, nodeDef.index).renderElement);
-                break;
-            case 2 /* TemplateRef */:
-                value = asElementData(view, nodeDef.index).template;
-                break;
-            case 3 /* ViewContainerRef */:
-                value = asElementData(view, nodeDef.index).viewContainer;
-                break;
-            case 4 /* Provider */:
-                value = asProviderData(view, nodeDef.index).instance;
-                break;
-        }
-        return value;
-    }
-}
-/**
  * @param {?} view
  * @param {?} renderHost
  * @param {?} def
@@ -12904,13 +13120,14 @@ function validateNode(parent, node, nodeCount) {
 /**
  * @param {?} parent
  * @param {?} anchorDef
+ * @param {?} viewDef
  * @param {?=} context
  * @return {?}
  */
-function createEmbeddedView(parent, anchorDef$$1, context) {
+function createEmbeddedView(parent, anchorDef$$1, viewDef, context) {
     // embedded views are seen as siblings to the anchor, so we need
     // to get the parent of the anchor and use it as parentIndex.
-    var /** @type {?} */ view = createView(parent.root, parent.renderer, parent, anchorDef$$1, /** @type {?} */ ((((anchorDef$$1.element)).template)));
+    var /** @type {?} */ view = createView(parent.root, parent.renderer, parent, anchorDef$$1, viewDef);
     initView(view, parent.component, context);
     createViewNodes(view);
     return view;
@@ -12926,6 +13143,24 @@ function createRootView(root, def, context) {
     initView(view, context, context);
     createViewNodes(view);
     return view;
+}
+/**
+ * @param {?} parentView
+ * @param {?} nodeDef
+ * @param {?} viewDef
+ * @param {?} hostElement
+ * @return {?}
+ */
+function createComponentView(parentView, nodeDef, viewDef, hostElement) {
+    var /** @type {?} */ rendererType = ((nodeDef.element)).componentRendererType;
+    var /** @type {?} */ compRenderer;
+    if (!rendererType) {
+        compRenderer = parentView.root.renderer;
+    }
+    else {
+        compRenderer = parentView.root.rendererFactory.createRenderer(hostElement, rendererType);
+    }
+    return createView(parentView.root, compRenderer, parentView, /** @type {?} */ ((nodeDef.element)).componentProvider, viewDef);
 }
 /**
  * @param {?} root
@@ -12980,16 +13215,8 @@ function createViewNodes(view) {
                 var /** @type {?} */ el = (createElement(view, renderHost, nodeDef));
                 var /** @type {?} */ componentView = ((undefined));
                 if (nodeDef.flags & 33554432 /* ComponentView */) {
-                    var /** @type {?} */ compViewDef = resolveViewDefinition(/** @type {?} */ ((((nodeDef.element)).componentView)));
-                    var /** @type {?} */ rendererType = ((nodeDef.element)).componentRendererType;
-                    var /** @type {?} */ compRenderer = void 0;
-                    if (!rendererType) {
-                        compRenderer = view.root.renderer;
-                    }
-                    else {
-                        compRenderer = view.root.rendererFactory.createRenderer(el, rendererType);
-                    }
-                    componentView = createView(view.root, compRenderer, view, /** @type {?} */ ((nodeDef.element)).componentProvider, compViewDef);
+                    var /** @type {?} */ compViewDef = resolveDefinition(/** @type {?} */ ((((nodeDef.element)).componentView)));
+                    componentView = Services.createComponentView(view, nodeDef, compViewDef, el);
                 }
                 listenToElementOutputs(view, componentView, nodeDef, el);
                 nodeData = ({
@@ -13294,6 +13521,8 @@ function checkNoChangesNodeDynamic(view, nodeDef, values) {
     }
 }
 /**
+ * Workaround https://github.com/angular/tsickle/issues/497
+ * @suppress {misplacedTypeAnnotation}
  * @param {?} view
  * @param {?} nodeDef
  * @return {?}
@@ -13528,6 +13757,10 @@ function initServicesIfNeeded() {
     Services.setCurrentNode = services.setCurrentNode;
     Services.createRootView = services.createRootView;
     Services.createEmbeddedView = services.createEmbeddedView;
+    Services.createComponentView = services.createComponentView;
+    Services.createNgModuleRef = services.createNgModuleRef;
+    Services.overrideProvider = services.overrideProvider;
+    Services.clearProviderOverrides = services.clearProviderOverrides;
     Services.checkAndUpdateView = services.checkAndUpdateView;
     Services.checkNoChangesView = services.checkNoChangesView;
     Services.destroyView = services.destroyView;
@@ -13546,6 +13779,10 @@ function createProdServices() {
         setCurrentNode: function () { },
         createRootView: createProdRootView,
         createEmbeddedView: createEmbeddedView,
+        createComponentView: createComponentView,
+        createNgModuleRef: createNgModuleRef,
+        overrideProvider: NOOP,
+        clearProviderOverrides: NOOP,
         checkAndUpdateView: checkAndUpdateView,
         checkNoChangesView: checkNoChangesView,
         destroyView: destroyView,
@@ -13565,13 +13802,17 @@ function createDebugServices() {
         setCurrentNode: debugSetCurrentNode,
         createRootView: debugCreateRootView,
         createEmbeddedView: debugCreateEmbeddedView,
+        createComponentView: debugCreateComponentView,
+        createNgModuleRef: debugCreateNgModuleRef,
+        overrideProvider: debugOverrideProvider,
+        clearProviderOverrides: debugClearProviderOverrides,
         checkAndUpdateView: debugCheckAndUpdateView,
         checkNoChangesView: debugCheckNoChangesView,
         destroyView: debugDestroyView,
         createDebugContext: function (view, nodeIndex) { return new DebugContext_(view, nodeIndex); },
         handleEvent: debugHandleEvent,
         updateDirectives: debugUpdateDirectives,
-        updateRenderer: debugUpdateRenderer
+        updateRenderer: debugUpdateRenderer,
     };
 }
 /**
@@ -13599,7 +13840,8 @@ function createProdRootView(elInjector, projectableNodes, rootSelectorOrNode, de
 function debugCreateRootView(elInjector, projectableNodes, rootSelectorOrNode, def, ngModule, context) {
     var /** @type {?} */ rendererFactory = ngModule.injector.get(RendererFactory2);
     var /** @type {?} */ root = createRootData(elInjector, ngModule, new DebugRendererFactory2(rendererFactory), projectableNodes, rootSelectorOrNode);
-    return callWithDebugContext(DebugAction.create, createRootView, null, [root, def, context]);
+    var /** @type {?} */ defWithOverride = applyProviderOverridesToView(def);
+    return callWithDebugContext(DebugAction.create, createRootView, null, [root, defWithOverride, context]);
 }
 /**
  * @param {?} elInjector
@@ -13618,6 +13860,158 @@ function createRootData(elInjector, ngModule, rendererFactory, projectableNodes,
         injector: elInjector, projectableNodes: projectableNodes,
         selectorOrNode: rootSelectorOrNode, sanitizer: sanitizer, rendererFactory: rendererFactory, renderer: renderer, errorHandler: errorHandler
     };
+}
+/**
+ * @param {?} parentView
+ * @param {?} anchorDef
+ * @param {?} viewDef
+ * @param {?=} context
+ * @return {?}
+ */
+function debugCreateEmbeddedView(parentView, anchorDef, viewDef$$1, context) {
+    var /** @type {?} */ defWithOverride = applyProviderOverridesToView(viewDef$$1);
+    return callWithDebugContext(DebugAction.create, createEmbeddedView, null, [parentView, anchorDef, defWithOverride, context]);
+}
+/**
+ * @param {?} parentView
+ * @param {?} nodeDef
+ * @param {?} viewDef
+ * @param {?} hostElement
+ * @return {?}
+ */
+function debugCreateComponentView(parentView, nodeDef, viewDef$$1, hostElement) {
+    var /** @type {?} */ defWithOverride = applyProviderOverridesToView(viewDef$$1);
+    return callWithDebugContext(DebugAction.create, createComponentView, null, [parentView, nodeDef, defWithOverride, hostElement]);
+}
+/**
+ * @param {?} moduleType
+ * @param {?} parentInjector
+ * @param {?} bootstrapComponents
+ * @param {?} def
+ * @return {?}
+ */
+function debugCreateNgModuleRef(moduleType, parentInjector, bootstrapComponents, def) {
+    var /** @type {?} */ defWithOverride = applyProviderOverridesToNgModule(def);
+    return createNgModuleRef(moduleType, parentInjector, bootstrapComponents, defWithOverride);
+}
+var providerOverrides = new Map();
+/**
+ * @param {?} override
+ * @return {?}
+ */
+function debugOverrideProvider(override) {
+    providerOverrides.set(override.token, override);
+}
+/**
+ * @return {?}
+ */
+function debugClearProviderOverrides() {
+    providerOverrides.clear();
+}
+/**
+ * @param {?} def
+ * @return {?}
+ */
+function applyProviderOverridesToView(def) {
+    if (providerOverrides.size === 0) {
+        return def;
+    }
+    var /** @type {?} */ elementIndicesWithOverwrittenProviders = findElementIndicesWithOverwrittenProviders(def);
+    if (elementIndicesWithOverwrittenProviders.length === 0) {
+        return def;
+    }
+    // clone the whole view definition,
+    // as it maintains references between the nodes that are hard to update.
+    def = ((def.factory))(function () { return NOOP; });
+    for (var /** @type {?} */ i = 0; i < elementIndicesWithOverwrittenProviders.length; i++) {
+        applyProviderOverridesToElement(def, elementIndicesWithOverwrittenProviders[i]);
+    }
+    return def;
+    /**
+     * @param {?} def
+     * @return {?}
+     */
+    function findElementIndicesWithOverwrittenProviders(def) {
+        var /** @type {?} */ elIndicesWithOverwrittenProviders = [];
+        var /** @type {?} */ lastElementDef = null;
+        for (var /** @type {?} */ i = 0; i < def.nodes.length; i++) {
+            var /** @type {?} */ nodeDef = def.nodes[i];
+            if (nodeDef.flags & 1 /* TypeElement */) {
+                lastElementDef = nodeDef;
+            }
+            if (lastElementDef && nodeDef.flags & 3840 /* CatProviderNoDirective */ &&
+                providerOverrides.has(/** @type {?} */ ((nodeDef.provider)).token)) {
+                elIndicesWithOverwrittenProviders.push(/** @type {?} */ ((lastElementDef)).index);
+                lastElementDef = null;
+            }
+        }
+        return elIndicesWithOverwrittenProviders;
+    }
+    /**
+     * @param {?} viewDef
+     * @param {?} elIndex
+     * @return {?}
+     */
+    function applyProviderOverridesToElement(viewDef$$1, elIndex) {
+        for (var /** @type {?} */ i = elIndex + 1; i < viewDef$$1.nodes.length; i++) {
+            var /** @type {?} */ nodeDef = viewDef$$1.nodes[i];
+            if (nodeDef.flags & 1 /* TypeElement */) {
+                // stop at the next element
+                return;
+            }
+            if (nodeDef.flags & 3840 /* CatProviderNoDirective */) {
+                // Make all providers lazy, so that we don't get into trouble
+                // with ordering problems of providers on the same element
+                nodeDef.flags |= 4096 /* LazyProvider */;
+                var /** @type {?} */ provider = ((nodeDef.provider));
+                var /** @type {?} */ override = providerOverrides.get(provider.token);
+                if (override) {
+                    nodeDef.flags = (nodeDef.flags & ~3840 /* CatProviderNoDirective */) | override.flags;
+                    provider.deps = splitDepsDsl(override.deps);
+                    provider.value = override.value;
+                }
+            }
+        }
+    }
+}
+/**
+ * @param {?} def
+ * @return {?}
+ */
+function applyProviderOverridesToNgModule(def) {
+    if (providerOverrides.size === 0 || !hasOverrrides(def)) {
+        return def;
+    }
+    // clone the whole view definition,
+    // as it maintains references between the nodes that are hard to update.
+    def = ((def.factory))(function () { return NOOP; });
+    applyProviderOverrides(def);
+    return def;
+    /**
+     * @param {?} def
+     * @return {?}
+     */
+    function hasOverrrides(def) {
+        return def.providers.some(function (node) { return !!(node.flags & 3840 /* CatProviderNoDirective */) && providerOverrides.has(node.token); });
+    }
+    /**
+     * @param {?} def
+     * @return {?}
+     */
+    function applyProviderOverrides(def) {
+        for (var /** @type {?} */ i = 0; i < def.providers.length; i++) {
+            var /** @type {?} */ provider = def.providers[i];
+            // Make all providers lazy, so that we don't get into trouble
+            // with ordering problems of providers on the same element
+            provider.flags |= 4096 /* LazyProvider */;
+            var /** @type {?} */ override = providerOverrides.get(provider.token);
+            if (override) {
+                provider.flags = (provider.flags & ~3840 /* CatProviderNoDirective */) | override.flags;
+                provider.deps = splitDepsDsl(override.deps);
+                provider.value = override.value;
+            }
+        }
+    }
 }
 /**
  * @param {?} view
@@ -13664,15 +14058,6 @@ function prodCheckNoChangesNode(view, nodeIndex, argStyle, v0, v1, v2, v3, v4, v
     return (nodeDef.flags & 224 /* CatPureExpression */) ?
         asPureExpressionData(view, nodeIndex).value :
         undefined;
-}
-/**
- * @param {?} parent
- * @param {?} anchorDef
- * @param {?=} context
- * @return {?}
- */
-function debugCreateEmbeddedView(parent, anchorDef, context) {
-    return callWithDebugContext(DebugAction.create, createEmbeddedView, null, [parent, anchorDef, context]);
 }
 /**
  * @param {?} view
@@ -14173,6 +14558,31 @@ var DebugRendererFactory2 = (function () {
     DebugRendererFactory2.prototype.createRenderer = function (element, renderData) {
         return new DebugRenderer2(this.delegate.createRenderer(element, renderData));
     };
+    /**
+     * @return {?}
+     */
+    DebugRendererFactory2.prototype.begin = function () {
+        if (this.delegate.begin) {
+            this.delegate.begin();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    DebugRendererFactory2.prototype.end = function () {
+        if (this.delegate.end) {
+            this.delegate.end();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    DebugRendererFactory2.prototype.whenRenderingDone = function () {
+        if (this.delegate.whenRenderingDone) {
+            return this.delegate.whenRenderingDone();
+        }
+        return Promise.resolve(null);
+    };
     return DebugRendererFactory2;
 }());
 var DebugRenderer2 = (function () {
@@ -14422,84 +14832,34 @@ var DebugRenderer2 = (function () {
     DebugRenderer2.prototype.setValue = function (node, value) { return this.delegate.setValue(node, value); };
     return DebugRenderer2;
 }());
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * @return {?}
- */
-function _iterableDiffersFactory() {
-    return defaultIterableDiffers;
-}
-/**
- * @return {?}
- */
-function _keyValueDiffersFactory() {
-    return defaultKeyValueDiffers;
-}
-/**
- * @param {?=} locale
- * @return {?}
- */
-function _localeFactory(locale) {
-    return locale || 'en-US';
-}
-/**
- * @return {?}
- */
-function _initViewEngine() {
-    initServicesIfNeeded();
-}
-/**
- * This module includes the providers of \@angular/core that are needed
- * to bootstrap components via `ApplicationRef`.
- *
- * \@experimental
- */
-var ApplicationModule = (function () {
+var NgModuleFactory_ = (function (_super) {
+    __extends$1(NgModuleFactory_, _super);
     /**
-     * @param {?} appRef
+     * @param {?} moduleType
+     * @param {?} _bootstrapComponents
+     * @param {?} _ngModuleDefFactory
      */
-    function ApplicationModule(appRef) {
+    function NgModuleFactory_(moduleType, _bootstrapComponents, _ngModuleDefFactory) {
+        var _this = 
+        // Attention: this ctor is called as top level function.
+        // Putting any logic in here will destroy closure tree shaking!
+        _super.call(this) || this;
+        _this.moduleType = moduleType;
+        _this._bootstrapComponents = _bootstrapComponents;
+        _this._ngModuleDefFactory = _ngModuleDefFactory;
+        return _this;
     }
-    return ApplicationModule;
-}());
-ApplicationModule.decorators = [
-    { type: NgModule, args: [{
-                providers: [
-                    ApplicationRef_,
-                    { provide: ApplicationRef, useExisting: ApplicationRef_ },
-                    ApplicationInitStatus,
-                    Compiler,
-                    APP_ID_RANDOM_PROVIDER,
-                    { provide: IterableDiffers, useFactory: _iterableDiffersFactory },
-                    { provide: KeyValueDiffers, useFactory: _keyValueDiffersFactory },
-                    {
-                        provide: LOCALE_ID,
-                        useFactory: _localeFactory,
-                        deps: [[new Inject(LOCALE_ID), new Optional(), new SkipSelf()]]
-                    },
-                    { provide: APP_INITIALIZER, useValue: _initViewEngine, multi: true },
-                ]
-            },] },
-];
-/**
- * @nocollapse
- */
-ApplicationModule.ctorParameters = function () { return [
-    { type: ApplicationRef, },
-]; };
+    /**
+     * @param {?} parentInjector
+     * @return {?}
+     */
+    NgModuleFactory_.prototype.create = function (parentInjector) {
+        initServicesIfNeeded();
+        var /** @type {?} */ def = resolveDefinition(this._ngModuleDefFactory);
+        return Services.createNgModuleRef(this.moduleType, parentInjector || Injector.NULL, this._bootstrapComponents, def);
+    };
+    return NgModuleFactory_;
+}(NgModuleFactory));
 /**
  * `animate` is an animation-specific function that is designed to be used inside of Angular's
  * animation DSL language. If this information is new, please navigate to the {\@link
@@ -14552,14 +14912,203 @@ function animate$1(timings, styles) {
     if (styles === void 0) { styles = null; }
     return { type: 4 /* Animate */, styles: styles, timings: timings };
 }
-
-var __extends$15 = (undefined && undefined.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 /**
- * @license Angular v4.1.3
+ * `group` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the {\@link
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
+ *
+ * `group` specifies a list of animation steps that are all run in parallel. Grouped animations are
+ * useful when a series of styles must be animated/closed off at different starting/ending times.
+ *
+ * The `group` function can either be used within a {\@link sequence sequence} or a {\@link transition
+ * transition} and it will only continue to the next instruction once all of the inner animation
+ * steps have completed.
+ *
+ * ### Usage
+ *
+ * The `steps` data that is passed into the `group` animation function can either consist of {\@link
+ * style style} or {\@link animate animate} function calls. Each call to `style()` or `animate()`
+ * within a group will be executed instantly (use {\@link keyframes keyframes} or a {\@link
+ * animate#usage animate() with a delay value} to offset styles to be applied at a later time).
+ *
+ * ```typescript
+ * group([
+ *   animate("1s", { background: "black" }))
+ *   animate("2s", { color: "white" }))
+ * ])
+ * ```
+ *
+ * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} steps
+ * @param {?=} options
+ * @return {?}
+ */
+function group$1(steps, options) {
+    if (options === void 0) { options = null; }
+    return { type: 3 /* Group */, steps: steps, options: options };
+}
+/**
+ * `sequence` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the {\@link
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
+ *
+ * `sequence` Specifies a list of animation steps that are run one by one. (`sequence` is used by
+ * default when an array is passed as animation data into {\@link transition transition}.)
+ *
+ * The `sequence` function can either be used within a {\@link group group} or a {\@link transition
+ * transition} and it will only continue to the next instruction once each of the inner animation
+ * steps have completed.
+ *
+ * To perform animation styling in parallel with other animation steps then have a look at the
+ * {\@link group group} animation function.
+ *
+ * ### Usage
+ *
+ * The `steps` data that is passed into the `sequence` animation function can either consist of
+ * {\@link style style} or {\@link animate animate} function calls. A call to `style()` will apply the
+ * provided styling data immediately while a call to `animate()` will apply its styling data over a
+ * given time depending on its timing data.
+ *
+ * ```typescript
+ * sequence([
+ *   style({ opacity: 0 })),
+ *   animate("1s", { opacity: 1 }))
+ * ])
+ * ```
+ *
+ * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} steps
+ * @param {?=} options
+ * @return {?}
+ */
+function sequence$1(steps, options) {
+    if (options === void 0) { options = null; }
+    return { type: 2 /* Sequence */, steps: steps, options: options };
+}
+/**
+ * `transition` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the {\@link
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
+ *
+ * `transition` declares the {\@link sequence sequence of animation steps} that will be run when the
+ * provided `stateChangeExpr` value is satisfied. The `stateChangeExpr` consists of a `state1 =>
+ * state2` which consists of two known states (use an asterix (`*`) to refer to a dynamic starting
+ * and/or ending state).
+ *
+ * A function can also be provided as the `stateChangeExpr` argument for a transition and this
+ * function will be executed each time a state change occurs. If the value returned within the
+ * function is true then the associated animation will be run.
+ *
+ * Animation transitions are placed within an {\@link trigger animation trigger}. For an transition
+ * to animate to a state value and persist its styles then one or more {\@link state animation
+ * states} is expected to be defined.
+ *
+ * ### Usage
+ *
+ * An animation transition is kicked off the `stateChangeExpr` predicate evaluates to true based on
+ * what the previous state is and what the current state has become. In other words, if a transition
+ * is defined that matches the old/current state criteria then the associated animation will be
+ * triggered.
+ *
+ * ```typescript
+ * // all transition/state changes are defined within an animation trigger
+ * trigger("myAnimationTrigger", [
+ *   // if a state is defined then its styles will be persisted when the
+ *   // animation has fully completed itself
+ *   state("on", style({ background: "green" })),
+ *   state("off", style({ background: "grey" })),
+ *
+ *   // a transition animation that will be kicked off when the state value
+ *   // bound to "myAnimationTrigger" changes from "on" to "off"
+ *   transition("on => off", animate(500)),
+ *
+ *   // it is also possible to do run the same animation for both directions
+ *   transition("on <=> off", animate(500)),
+ *
+ *   // or to define multiple states pairs separated by commas
+ *   transition("on => off, off => void", animate(500)),
+ *
+ *   // this is a catch-all state change for when an element is inserted into
+ *   // the page and the destination state is unknown
+ *   transition("void => *", [
+ *     style({ opacity: 0 }),
+ *     animate(500)
+ *   ]),
+ *
+ *   // this will capture a state change between any states
+ *   transition("* => *", animate("1s 0s")),
+ *
+ *   // you can also go full out and include a function
+ *   transition((fromState, toState) => {
+ *     // when `true` then it will allow the animation below to be invoked
+ *     return fromState == "off" && toState == "on";
+ *   }, animate("1s 0s"))
+ * ])
+ * ```
+ *
+ * The template associated with this component will make use of the `myAnimationTrigger` animation
+ * trigger by binding to an element within its template code.
+ *
+ * ```html
+ * <!-- somewhere inside of my-component-tpl.html -->
+ * <div [\@myAnimationTrigger]="myStatusExp">...</div>
+ * ```
+ *
+ * #### The final `animate` call
+ *
+ * If the final step within the transition steps is a call to `animate()` that **only** uses a
+ * timing value with **no style data** then it will be automatically used as the final animation arc
+ * for the element to animate itself to the final state. This involves an automatic mix of
+ * adding/removing CSS styles so that the element will be in the exact state it should be for the
+ * applied state to be presented correctly.
+ *
+ * ```
+ * // start off by hiding the element, but make sure that it animates properly to whatever state
+ * // is currently active for "myAnimationTrigger"
+ * transition("void => *", [
+ *   style({ opacity: 0 }),
+ *   animate(500)
+ * ])
+ * ```
+ *
+ * ### Transition Aliases (`:enter` and `:leave`)
+ *
+ * Given that enter (insertion) and leave (removal) animations are so common, the `transition`
+ * function accepts both `:enter` and `:leave` values which are aliases for the `void => *` and `*
+ * => void` state changes.
+ *
+ * ```
+ * transition(":enter", [
+ *   style({ opacity: 0 }),
+ *   animate(500, style({ opacity: 1 }))
+ * ])
+ * transition(":leave", [
+ *   animate(500, style({ opacity: 0 }))
+ * ])
+ * ```
+ *
+ * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} stateChangeExpr
+ * @param {?} steps
+ * @param {?=} options
+ * @return {?}
+ */
+function transition$1(stateChangeExpr, steps, options) {
+    if (options === void 0) { options = null; }
+    return { type: 1 /* Transition */, expr: stateChangeExpr, animation: steps, options: options };
+}
+
+/**
+ * @license Angular v4.3.6
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -14936,11 +15485,18 @@ var Location = (function () {
         return start + '/' + end;
     };
     /**
-     * If url has a trailing slash, remove it, otherwise return url as is.
+     * If url has a trailing slash, remove it, otherwise return url as is. This
+     * method looks for the first occurence of either #, ?, or the end of the
+     * line as `/` characters after any of these should not be replaced.
      * @param {?} url
      * @return {?}
      */
-    Location.stripTrailingSlash = function (url) { return url.replace(/\/$/, ''); };
+    Location.stripTrailingSlash = function (url) {
+        var /** @type {?} */ match = url.match(/#|\?|$/);
+        var /** @type {?} */ pathEndIdx = match && match.index || url.length;
+        var /** @type {?} */ droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
+        return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
+    };
     return Location;
 }());
 Location.decorators = [
@@ -14992,7 +15548,7 @@ function _stripIndexHtml(url) {
  * \@stable
  */
 var HashLocationStrategy = (function (_super) {
-    __extends$15(HashLocationStrategy, _super);
+    __extends$1(HashLocationStrategy, _super);
     /**
      * @param {?} _platformLocation
      * @param {?=} _baseHref
@@ -15121,7 +15677,7 @@ HashLocationStrategy.ctorParameters = function () { return [
  * \@stable
  */
 var PathLocationStrategy = (function (_super) {
-    __extends$15(PathLocationStrategy, _super);
+    __extends$1(PathLocationStrategy, _super);
     /**
      * @param {?} _platformLocation
      * @param {?=} href
@@ -15270,7 +15826,7 @@ function getPluralCategory(value, cases, ngLocalization) {
  * \@experimental
  */
 var NgLocaleLocalization = (function (_super) {
-    __extends$15(NgLocaleLocalization, _super);
+    __extends$1(NgLocaleLocalization, _super);
     /**
      * @param {?} locale
      */
@@ -15414,42 +15970,6 @@ function getPluralCase(locale, nLike) {
             if (n === 1)
                 return Plural.One;
             return Plural.Other;
-        case 'agq':
-        case 'bas':
-        case 'cu':
-        case 'dav':
-        case 'dje':
-        case 'dua':
-        case 'dyo':
-        case 'ebu':
-        case 'ewo':
-        case 'guz':
-        case 'kam':
-        case 'khq':
-        case 'ki':
-        case 'kln':
-        case 'kok':
-        case 'ksf':
-        case 'lrc':
-        case 'lu':
-        case 'luo':
-        case 'luy':
-        case 'mer':
-        case 'mfe':
-        case 'mgh':
-        case 'mua':
-        case 'mzn':
-        case 'nmg':
-        case 'nus':
-        case 'qu':
-        case 'rn':
-        case 'rw':
-        case 'sbp':
-        case 'twq':
-        case 'vai':
-        case 'yav':
-        case 'yue':
-        case 'zgh':
         case 'ak':
         case 'ln':
         case 'mg':
@@ -15728,9 +16248,34 @@ function getPluralCase(locale, nLike) {
             if (n === Math.floor(n) && n >= 0 && n <= 1 || n === Math.floor(n) && n >= 11 && n <= 99)
                 return Plural.One;
             return Plural.Other;
+        // When there is no specification, the default is always "other"
+        // Spec: http://cldr.unicode.org/index/cldr-spec/plural-rules
+        // > other (required—general plural form — also used if the language only has a single form)
         default:
             return Plural.Other;
     }
+}
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ * @param {?} cookieStr
+ * @param {?} name
+ * @return {?}
+ */
+function parseCookieValue(cookieStr, name) {
+    name = encodeURIComponent(name);
+    for (var _i = 0, _a = cookieStr.split(';'); _i < _a.length; _i++) {
+        var cookie = _a[_i];
+        var /** @type {?} */ eqIndex = cookie.indexOf('=');
+        var _b = eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)], cookieName = _b[0], cookieValue = _b[1];
+        if (cookieName.trim() === name) {
+            return decodeURIComponent(cookieValue);
+        }
+    }
+    return null;
 }
 /**
  * @license
@@ -16378,7 +16923,7 @@ function getTypeNameForDebugging$1(type) {
  * A common pattern is that we need to show a set of properties from the same object. If the
  * object is undefined, then we have to use the safe-traversal-operator `?.` to guard against
  * dereferencing a `null` value. This is especially the case when waiting on async data such as
- * when using the `async` pipe as shown in folowing example:
+ * when using the `async` pipe as shown in following example:
  *
  * ```
  * Hello {{ (userStream|async)?.last }}, {{ (userStream|async)?.first }}!
@@ -17466,11 +18011,12 @@ var NumberFormatter = (function () {
      * @param {?} num
      * @param {?} locale
      * @param {?} style
-     * @param {?=} __3
+     * @param {?=} opts
      * @return {?}
      */
-    NumberFormatter.format = function (num, locale, style$$1, _a) {
-        var _b = _a === void 0 ? {} : _a, minimumIntegerDigits = _b.minimumIntegerDigits, minimumFractionDigits = _b.minimumFractionDigits, maximumFractionDigits = _b.maximumFractionDigits, currency = _b.currency, _c = _b.currencyAsSymbol, currencyAsSymbol = _c === void 0 ? false : _c;
+    NumberFormatter.format = function (num, locale, style$$1, opts) {
+        if (opts === void 0) { opts = {}; }
+        var minimumIntegerDigits = opts.minimumIntegerDigits, minimumFractionDigits = opts.minimumFractionDigits, maximumFractionDigits = opts.maximumFractionDigits, currency = opts.currency, _a = opts.currencyAsSymbol, currencyAsSymbol = _a === void 0 ? false : _a;
         var /** @type {?} */ options = {
             minimumIntegerDigits: minimumIntegerDigits,
             minimumFractionDigits: minimumFractionDigits,
@@ -17638,7 +18184,7 @@ function nameCondition(prop, len) {
  * @return {?}
  */
 function combine(options) {
-    return ((Object)).assign.apply(((Object)), [{}].concat(options));
+    return options.reduce(function (merged, opt) { return (Object.assign({}, merged, opt)); }, {});
 }
 /**
  * @param {?} ret
@@ -17783,7 +18329,7 @@ function formatNumber(pipe, locale, value, style$$1, digits, currency, currencyA
  * details see your native internationalization library.
  *
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+ * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
  *
  * ### Example
  *
@@ -17829,7 +18375,7 @@ DecimalPipe.ctorParameters = function () { return [
  * - `digitInfo` See {\@link DecimalPipe} for detailed description.
  *
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+ * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
  *
  * ### Example
  *
@@ -17879,7 +18425,7 @@ PercentPipe.ctorParameters = function () { return [
  * - `digitInfo` See {\@link DecimalPipe} for detailed description.
  *
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
- * and may require a polyfill. See {\@linkDocs guide/browser-support} for details.
+ * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
  *
  * ### Example
  *
@@ -17971,8 +18517,8 @@ var ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\
  *  | month     |   M    | L (S)  | MMM (Sep)    | MMMM (September)  | M (9)     | MM (09)   |
  *  | day       |   d    | -      | -            | -                 | d (3)     | dd (03)   |
  *  | weekday   |   E    | E (S)  | EEE (Sun)    | EEEE (Sunday)     | -         | -         |
- *  | hour      |   j    | -      | -            | -                 | j (13)    | jj (13)   |
- *  | hour12    |   h    | -      | -            | -                 | h (1 PM)  | hh (01 PM)|
+ *  | hour      |   j    | -      | -            | -                 | j (1 PM)  | jj (1 PM) |
+ *  | hour12    |   h    | -      | -            | -                 | h (1)     | hh (01)   |
  *  | hour24    |   H    | -      | -            | -                 | H (13)    | HH (13)   |
  *  | minute    |   m    | -      | -            | -                 | m (5)     | mm (05)   |
  *  | second    |   s    | -      | -            | -                 | s (9)     | ss (09)   |
@@ -18040,14 +18586,14 @@ var DatePipe = (function () {
         }
         else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
             /**
-            * For ISO Strings without time the day, month and year must be extracted from the ISO String
-            * before Date creation to avoid time offset and errors in the new Date.
-            * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
-            * date, some browsers (e.g. IE 9) will throw an invalid Date error
-            * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
-            * is applied
-            * Note: ISO months are 0 for January, 1 for February, ...
-            */
+             * For ISO Strings without time the day, month and year must be extracted from the ISO String
+             * before Date creation to avoid time offset and errors in the new Date.
+             * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
+             * date, some browsers (e.g. IE 9) will throw an invalid Date error
+             * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
+             * is applied
+             * Note: ISO months are 0 for January, 1 for February, ...
+             */
             var _a = value.split('-').map(function (val) { return parseInt(val, 10); }), y = _a[0], m = _a[1], d = _a[2];
             date = new Date(y, m - 1, d);
         }
@@ -18423,6 +18969,46 @@ CommonModule.decorators = [
  */
 CommonModule.ctorParameters = function () { return []; };
 /**
+ * I18N pipes are being changed to move away from using the JS Intl API.
+ *
+ * The former pipes relying on the Intl API will be moved to this module while the `CommonModule`
+ * will contain the new pipes that do not rely on Intl.
+ *
+ * As a first step this module is created empty to ease the migration.
+ *
+ * see https://github.com/angular/angular/pull/18284
+ *
+ * @deprecated from v5
+ */
+var DeprecatedI18NPipesModule = (function () {
+    function DeprecatedI18NPipesModule() {
+    }
+    return DeprecatedI18NPipesModule;
+}());
+DeprecatedI18NPipesModule.decorators = [
+    { type: NgModule, args: [{ declarations: [], exports: [] },] },
+];
+/**
+ * @nocollapse
+ */
+DeprecatedI18NPipesModule.ctorParameters = function () { return []; };
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * A DI Token representing the main rendering context. In a browser this is the DOM Document.
+ *
+ * Note: Document might not be available in the Application Context when Application and Rendering
+ * Contexts are not the same (e.g. when running the application into a Web Worker).
+ *
+ * \@stable
+ */
+var DOCUMENT = new InjectionToken('DocumentToken');
+/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -18445,15 +19031,10 @@ var PLATFORM_BROWSER_ID = 'browser';
 /**
  * \@stable
  */
-var VERSION$2 = new Version('4.1.3');
+var VERSION$2 = new Version('4.3.6');
 
-var __extends$14 = (undefined && undefined.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 /**
- * @license Angular v4.1.3
+ * @license Angular v4.3.6
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -19211,13 +19792,6 @@ var DomAdapter = (function () {
     DomAdapter.prototype.getData = function (element, name) { };
     /**
      * @abstract
-     * @param {?} name
-     * @param {?} value
-     * @return {?}
-     */
-    DomAdapter.prototype.setGlobalVar = function (name, value) { };
-    /**
-     * @abstract
      * @return {?}
      */
     DomAdapter.prototype.supportsWebAnimation = function () { };
@@ -19276,7 +19850,7 @@ var DomAdapter = (function () {
  * @abstract
  */
 var GenericBrowserDomAdapter = (function (_super) {
-    __extends$14(GenericBrowserDomAdapter, _super);
+    __extends$1(GenericBrowserDomAdapter, _super);
     function GenericBrowserDomAdapter() {
         var _this = _super.call(this) || this;
         _this._animationPrefix = null;
@@ -19413,7 +19987,7 @@ if (_global['Node']) {
     };
 }
 var BrowserDomAdapter = (function (_super) {
-    __extends$14(BrowserDomAdapter, _super);
+    __extends$1(BrowserDomAdapter, _super);
     function BrowserDomAdapter() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -20183,12 +20757,6 @@ var BrowserDomAdapter = (function (_super) {
      */
     BrowserDomAdapter.prototype.getComputedStyle = function (element) { return getComputedStyle(element); };
     /**
-     * @param {?} path
-     * @param {?} value
-     * @return {?}
-     */
-    BrowserDomAdapter.prototype.setGlobalVar = function (path, value) { setValueOnPath(_global, path, value); };
-    /**
      * @return {?}
      */
     BrowserDomAdapter.prototype.supportsWebAnimation = function () {
@@ -20252,46 +20820,6 @@ function relativePath(url) {
         '/' + urlParsingNode.pathname;
 }
 /**
- * @param {?} cookieStr
- * @param {?} name
- * @return {?}
- */
-function parseCookieValue(cookieStr, name) {
-    name = encodeURIComponent(name);
-    for (var _i = 0, _a = cookieStr.split(';'); _i < _a.length; _i++) {
-        var cookie = _a[_i];
-        var /** @type {?} */ eqIndex = cookie.indexOf('=');
-        var _b = eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)], cookieName = _b[0], cookieValue = _b[1];
-        if (cookieName.trim() === name) {
-            return decodeURIComponent(cookieValue);
-        }
-    }
-    return null;
-}
-/**
- * @param {?} global
- * @param {?} path
- * @param {?} value
- * @return {?}
- */
-function setValueOnPath(global, path, value) {
-    var /** @type {?} */ parts = path.split('.');
-    var /** @type {?} */ obj = global;
-    while (parts.length > 1) {
-        var /** @type {?} */ name = ((parts.shift()));
-        if (obj.hasOwnProperty(name) && obj[name] != null) {
-            obj = obj[name];
-        }
-        else {
-            obj = obj[name] = {};
-        }
-    }
-    if (obj === undefined || obj === null) {
-        obj = {};
-    }
-    obj[((parts.shift()))] = value;
-}
-/**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
@@ -20304,9 +20832,9 @@ function setValueOnPath(global, path, value) {
  * Note: Document might not be available in the Application Context when Application and Rendering
  * Contexts are not the same (e.g. when running the application into a Web Worker).
  *
- * \@stable
+ * @deprecated import from `\@angular/common` instead.
  */
-var DOCUMENT = new InjectionToken('DocumentToken');
+var DOCUMENT$1 = DOCUMENT;
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -20331,7 +20859,7 @@ function supportsState() {
  * {\@link Location}.
  */
 var BrowserPlatformLocation = (function (_super) {
-    __extends$14(BrowserPlatformLocation, _super);
+    __extends$1(BrowserPlatformLocation, _super);
     /**
      * @param {?} _doc
      */
@@ -20449,7 +20977,7 @@ BrowserPlatformLocation.decorators = [
  * @nocollapse
  */
 BrowserPlatformLocation.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] },] },
 ]; };
 /**
  * @license
@@ -20605,7 +21133,7 @@ Meta.decorators = [
  * @nocollapse
  */
 Meta.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] },] },
 ]; };
 /**
  * @license
@@ -20641,7 +21169,7 @@ var SERVER_TRANSITION_PROVIDERS = [
     {
         provide: APP_INITIALIZER,
         useFactory: appInitializerFactory,
-        deps: [TRANSITION_ID, DOCUMENT, Injector],
+        deps: [TRANSITION_ID, DOCUMENT$1, Injector],
         multi: true
     },
 ];
@@ -20762,7 +21290,7 @@ Title.decorators = [
  * @nocollapse
  */
 Title.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] },] },
 ]; };
 /**
  * @license
@@ -20771,21 +21299,42 @@ Title.ctorParameters = function () { return [
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var __assign = (undefined && undefined.__assign) || Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s)
-            if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
+/**
+ * @param {?} input
+ * @return {?}
+ */
+/**
+ * @param {?} input
+ * @return {?}
+ */
+/**
+ * Exports the value under a given `name` in the global property `ng`. For example `ng.probe` if
+ * `name` is `'probe'`.
+ * @param {?} name Name under which it will be exported. Keep in mind this will be a property of the
+ * global `ng` object.
+ * @param {?} value The value to export.
+ * @return {?}
+ */
+function exportNgVar(name, value) {
+    if (!ng) {
+        _global['ng'] = ng = ((_global['ng'])) || {};
     }
-    return t;
-};
+    ng[name] = value;
+}
+var ng;
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 var CORE_TOKENS = {
     'ApplicationRef': ApplicationRef,
     'NgZone': NgZone,
 };
-var INSPECT_GLOBAL_NAME = 'ng.probe';
-var CORE_TOKENS_GLOBAL_NAME = 'ng.coreTokens';
+var INSPECT_GLOBAL_NAME = 'probe';
+var CORE_TOKENS_GLOBAL_NAME = 'coreTokens';
 /**
  * Returns a {\@link DebugElement} for the given native DOM element, or
  * null if the given native element does not have an Angular view associated
@@ -20818,8 +21367,8 @@ var NgProbeToken$1 = (function () {
  */
 function _createNgProbe(extraTokens, coreTokens) {
     var /** @type {?} */ tokens = (extraTokens || []).concat(coreTokens || []);
-    getDOM().setGlobalVar(INSPECT_GLOBAL_NAME, inspectNativeElement);
-    getDOM().setGlobalVar(CORE_TOKENS_GLOBAL_NAME, __assign({}, CORE_TOKENS, _ngProbeTokensToMap(tokens || [])));
+    exportNgVar(INSPECT_GLOBAL_NAME, inspectNativeElement);
+    exportNgVar(CORE_TOKENS_GLOBAL_NAME, Object.assign({}, CORE_TOKENS, _ngProbeTokensToMap(tokens || [])));
     return function () { return inspectNativeElement; };
 }
 /**
@@ -21013,7 +21562,7 @@ SharedStylesHost.decorators = [
  */
 SharedStylesHost.ctorParameters = function () { return []; };
 var DomSharedStylesHost = (function (_super) {
-    __extends$14(DomSharedStylesHost, _super);
+    __extends$1(DomSharedStylesHost, _super);
     /**
      * @param {?} _doc
      */
@@ -21072,7 +21621,7 @@ DomSharedStylesHost.decorators = [
  * @nocollapse
  */
 DomSharedStylesHost.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] },] },
 ]; };
 /**
  * @license
@@ -21183,6 +21732,14 @@ var DomRendererFactory2 = (function () {
             }
         }
     };
+    /**
+     * @return {?}
+     */
+    DomRendererFactory2.prototype.begin = function () { };
+    /**
+     * @return {?}
+     */
+    DomRendererFactory2.prototype.end = function () { };
     return DomRendererFactory2;
 }());
 DomRendererFactory2.decorators = [
@@ -21406,7 +21963,7 @@ function checkNoSyntheticProp(name, nameKind) {
     }
 }
 var EmulatedEncapsulationDomRenderer2 = (function (_super) {
-    __extends$14(EmulatedEncapsulationDomRenderer2, _super);
+    __extends$1(EmulatedEncapsulationDomRenderer2, _super);
     /**
      * @param {?} eventManager
      * @param {?} sharedStylesHost
@@ -21439,7 +21996,7 @@ var EmulatedEncapsulationDomRenderer2 = (function (_super) {
     return EmulatedEncapsulationDomRenderer2;
 }(DefaultDomRenderer2));
 var ShadowDomRenderer = (function (_super) {
-    __extends$14(ShadowDomRenderer, _super);
+    __extends$1(ShadowDomRenderer, _super);
     /**
      * @param {?} eventManager
      * @param {?} sharedStylesHost
@@ -21512,7 +22069,7 @@ var ShadowDomRenderer = (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 var DomEventsPlugin = (function (_super) {
-    __extends$14(DomEventsPlugin, _super);
+    __extends$1(DomEventsPlugin, _super);
     /**
      * @param {?} doc
      */
@@ -21543,7 +22100,7 @@ DomEventsPlugin.decorators = [
  * @nocollapse
  */
 DomEventsPlugin.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] },] },
 ]; };
 /**
  * @license
@@ -21627,7 +22184,7 @@ HammerGestureConfig.decorators = [
  */
 HammerGestureConfig.ctorParameters = function () { return []; };
 var HammerGesturesPlugin = (function (_super) {
-    __extends$14(HammerGesturesPlugin, _super);
+    __extends$1(HammerGesturesPlugin, _super);
     /**
      * @param {?} doc
      * @param {?} _config
@@ -21684,7 +22241,7 @@ HammerGesturesPlugin.decorators = [
  * @nocollapse
  */
 HammerGesturesPlugin.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] },] },
     { type: HammerGestureConfig, decorators: [{ type: Inject, args: [HAMMER_GESTURE_CONFIG,] },] },
 ]; };
 /**
@@ -21705,7 +22262,7 @@ var MODIFIER_KEY_GETTERS = {
  * \@experimental
  */
 var KeyEventsPlugin = (function (_super) {
-    __extends$14(KeyEventsPlugin, _super);
+    __extends$1(KeyEventsPlugin, _super);
     /**
      * @param {?} doc
      */
@@ -21820,7 +22377,7 @@ KeyEventsPlugin.decorators = [
  * @nocollapse
  */
 KeyEventsPlugin.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] },] },
 ]; };
 /**
  * @license
@@ -21856,7 +22413,9 @@ KeyEventsPlugin.ctorParameters = function () { return [
  * This regular expression was taken from the Closure sanitization library.
  */
 var SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file):|[^&:/?#]*(?:[/?#]|$))/gi;
-/** A pattern that matches safe data URLs. Only matches image, video and audio types. */
+/**
+ * A pattern that matches safe data URLs. Only matches image, video and audio types.
+ */
 var DATA_URL_PATTERN = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[a-z0-9+\/]+=*$/i;
 /**
  * @param {?} url
@@ -21886,10 +22445,14 @@ function sanitizeSrcset(srcset) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/** A <body> element that can be safely used to parse untrusted HTML. Lazily initialized below. */
+/**
+ * A <body> element that can be safely used to parse untrusted HTML. Lazily initialized below.
+ */
 var inertElement = null;
-/** Lazily initialized to make sure the DOM adapter gets set before use. */
-var DOM = ((null));
+/**
+ * Lazily initialized to make sure the DOM adapter gets set before use.
+ */
+var DOM = null;
 /**
  * Returns an HTML element that is guaranteed to not execute code when creating elements in it.
  * @return {?}
@@ -21974,7 +22537,7 @@ var HTML_ATTRS = tagSet('abbr,accesskey,align,alt,autoplay,axis,bgcolor,border,c
     'ismap,itemscope,itemprop,kind,label,lang,language,loop,media,muted,nohref,nowrap,open,preload,rel,rev,role,rows,rowspan,rules,' +
     'scope,scrolling,shape,size,sizes,span,srclang,start,summary,tabindex,target,title,translate,type,usemap,' +
     'valign,value,vspace,width');
-// NB: This currently conciously doesn't support SVG. SVG sanitization has had several security
+// NB: This currently consciously doesn't support SVG. SVG sanitization has had several security
 // issues in the past, so it seems safer to leave it out if possible. If support for binding SVG via
 // innerHTML is required, SVG attributes should be added here.
 // NB: Sanitization does not allow <form> elements or other active elements (<button> etc). Those
@@ -22389,7 +22952,7 @@ var DomSanitizer = (function () {
     return DomSanitizer;
 }());
 var DomSanitizerImpl = (function (_super) {
-    __extends$14(DomSanitizerImpl, _super);
+    __extends$1(DomSanitizerImpl, _super);
     /**
      * @param {?} _doc
      */
@@ -22488,7 +23051,7 @@ DomSanitizerImpl.decorators = [
  * @nocollapse
  */
 DomSanitizerImpl.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT$1,] },] },
 ]; };
 /**
  * @abstract
@@ -22516,7 +23079,7 @@ var SafeValueImpl = (function () {
     return SafeValueImpl;
 }());
 var SafeHtmlImpl = (function (_super) {
-    __extends$14(SafeHtmlImpl, _super);
+    __extends$1(SafeHtmlImpl, _super);
     function SafeHtmlImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -22527,7 +23090,7 @@ var SafeHtmlImpl = (function (_super) {
     return SafeHtmlImpl;
 }(SafeValueImpl));
 var SafeStyleImpl = (function (_super) {
-    __extends$14(SafeStyleImpl, _super);
+    __extends$1(SafeStyleImpl, _super);
     function SafeStyleImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -22538,7 +23101,7 @@ var SafeStyleImpl = (function (_super) {
     return SafeStyleImpl;
 }(SafeValueImpl));
 var SafeScriptImpl = (function (_super) {
-    __extends$14(SafeScriptImpl, _super);
+    __extends$1(SafeScriptImpl, _super);
     function SafeScriptImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -22549,7 +23112,7 @@ var SafeScriptImpl = (function (_super) {
     return SafeScriptImpl;
 }(SafeValueImpl));
 var SafeUrlImpl = (function (_super) {
-    __extends$14(SafeUrlImpl, _super);
+    __extends$1(SafeUrlImpl, _super);
     function SafeUrlImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -22560,7 +23123,7 @@ var SafeUrlImpl = (function (_super) {
     return SafeUrlImpl;
 }(SafeValueImpl));
 var SafeResourceUrlImpl = (function (_super) {
-    __extends$14(SafeResourceUrlImpl, _super);
+    __extends$1(SafeResourceUrlImpl, _super);
     function SafeResourceUrlImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -22581,7 +23144,7 @@ var INTERNAL_BROWSER_PLATFORM_PROVIDERS = [
     { provide: PLATFORM_ID, useValue: PLATFORM_BROWSER_ID },
     { provide: PLATFORM_INITIALIZER, useValue: initDomAdapter, multi: true },
     { provide: PlatformLocation, useClass: BrowserPlatformLocation },
-    { provide: DOCUMENT, useFactory: _document, deps: [] },
+    { provide: DOCUMENT$1, useFactory: _document, deps: [] },
 ];
 /**
  * \@security Replacing built-in sanitization providers exposes the application to XSS risks.
@@ -22770,7 +23333,7 @@ var AngularProfiler = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var PROFILER_GLOBAL_NAME = 'ng.profiler';
+var PROFILER_GLOBAL_NAME = 'profiler';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -22793,7 +23356,7 @@ var PROFILER_GLOBAL_NAME = 'ng.profiler';
 /**
  * \@stable
  */
-var VERSION$1 = new Version('4.1.3');
+var VERSION$1 = new Version('4.3.6');
 
 var PORTAL_DEFAULT = 1;
 var PORTAL_MODAL = 2;
@@ -23181,7 +23744,7 @@ function requestIonicCallback(functionToLazy) {
  *
  *
  */
-var Config = (function () {
+var Config = /** @class */ (function () {
     function Config() {
         this._c = {};
         this._s = {};
@@ -23474,7 +24037,7 @@ var ConfigToken = new OpaqueToken('USERCONFIG');
  * @see {\@link /docs/api/components/nav/Nav/ Nav API Docs}
  * @see {\@link /docs/api/components/nav/NavPush/ NavPush API Docs}
  */
-var NavParams = (function () {
+var NavParams = /** @class */ (function () {
     /**
      * @hidden
      * @param {?=} data
@@ -23524,7 +24087,7 @@ var NavParams = (function () {
  * }
  * ```
  */
-var ViewController = (function () {
+var ViewController = /** @class */ (function () {
     /**
      * @param {?=} component
      * @param {?=} data
@@ -24071,11 +24634,11 @@ var ViewController = (function () {
             instance[methodName]();
         }
     };
+    ViewController.propDecorators = {
+        '_emitter': [{ type: Output },],
+    };
     return ViewController;
 }());
-ViewController.propDecorators = {
-    '_emitter': [{ type: Output },],
-};
 /**
  * @param {?} viewCtrl
  * @return {?}
@@ -24212,7 +24775,7 @@ function isNav(nav) {
 /**
  * @hidden
  */
-var DeepLinkMetadata = (function () {
+var DeepLinkMetadata = /** @class */ (function () {
     function DeepLinkMetadata() {
     }
     return DeepLinkMetadata;
@@ -24342,7 +24905,7 @@ var DIRECTION_SWITCH = 'switch';
  * @see {\@link ../Menu Menu API Docs}
  *
  */
-var MenuController = (function () {
+var MenuController = /** @class */ (function () {
     function MenuController() {
         this._menus = [];
     }
@@ -24669,7 +25232,7 @@ function copyInputAttributes(srcElement, destElement) {
 /**
  * @hidden
  */
-var QueryParams = (function () {
+var QueryParams = /** @class */ (function () {
     function QueryParams() {
         this.data = {};
     }
@@ -24727,7 +25290,7 @@ var QueryParams = (function () {
  * ```
  * \@demo /docs/demos/src/platform/
  */
-var Platform = (function () {
+var Platform = /** @class */ (function () {
     function Platform() {
         var _this = this;
         this._versions = {};
@@ -25189,7 +25752,7 @@ var Platform = (function () {
      * @return {?}
      */
     Platform.prototype.getElementFromPoint = function (x, y) {
-        return (this._doc['elementFromPoint'](x, y));
+        return /** @type {?} */ (this._doc['elementFromPoint'](x, y));
     };
     /**
      * @hidden
@@ -25702,7 +26265,7 @@ function insertSuperset(registry, platformNode) {
 /**
  * @hidden
  */
-var PlatformNode = (function () {
+var PlatformNode = /** @class */ (function () {
     /**
      * @param {?} registry
      * @param {?} platformName
@@ -25835,7 +26398,7 @@ function setupPlatform(doc, platformConfigs, zone) {
 /**
  * @hidden
  */
-var Animation = (function () {
+var Animation = /** @class */ (function () {
     /**
      * @param {?} plt
      * @param {?=} ele
@@ -27036,7 +27599,7 @@ var ANIMATION_CSS_VALUE_REGEX = /(^-?\d*\.?\d*)(.*)/;
 var ANIMATION_DURATION_MIN = 32;
 var ANIMATION_TRANSITION_END_FALLBACK_PADDING_MS = 400;
 
-var __extends$18 = (undefined && undefined.__extends) || (function () {
+var __extends$16 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -27061,8 +27624,8 @@ var __extends$18 = (undefined && undefined.__extends) || (function () {
  * - RAF
  * - set inline TO styles - DOM WRITE
  */
-var Transition = (function (_super) {
-    __extends$18(Transition, _super);
+var Transition = /** @class */ (function (_super) {
+    __extends$16(Transition, _super);
     /**
      * @param {?} plt
      * @param {?} enteringView
@@ -27105,7 +27668,7 @@ var Transition = (function (_super) {
     return Transition;
 }(Animation));
 
-var __extends$17 = (undefined && undefined.__extends) || (function () {
+var __extends$15 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -27118,8 +27681,8 @@ var __extends$17 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var PageTransition = (function (_super) {
-    __extends$17(PageTransition, _super);
+var PageTransition = /** @class */ (function (_super) {
+    __extends$15(PageTransition, _super);
     function PageTransition() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -27151,7 +27714,7 @@ var PageTransition = (function (_super) {
     return PageTransition;
 }(Transition));
 
-var __extends$16 = (undefined && undefined.__extends) || (function () {
+var __extends$14 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -27169,8 +27732,8 @@ var TRANSLATEX = 'translateX';
 var CENTER = '0%';
 var OFF_OPACITY = 0.8;
 var SHOW_BACK_BTN_CSS = 'show-back-button';
-var IOSTransition = (function (_super) {
-    __extends$16(IOSTransition, _super);
+var IOSTransition = /** @class */ (function (_super) {
+    __extends$14(IOSTransition, _super);
     function IOSTransition() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -27322,7 +27885,7 @@ var IOSTransition = (function (_super) {
     return IOSTransition;
 }(PageTransition));
 
-var __extends$19 = (undefined && undefined.__extends) || (function () {
+var __extends$17 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -27336,8 +27899,8 @@ var TRANSLATEY = 'translateY';
 var OFF_BOTTOM = '40px';
 var CENTER$1 = '0px';
 var SHOW_BACK_BTN_CSS$1 = 'show-back-button';
-var MDTransition = (function (_super) {
-    __extends$19(MDTransition, _super);
+var MDTransition = /** @class */ (function (_super) {
+    __extends$17(MDTransition, _super);
     function MDTransition() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -27388,7 +27951,7 @@ var MDTransition = (function (_super) {
     return MDTransition;
 }(PageTransition));
 
-var __extends$20 = (undefined && undefined.__extends) || (function () {
+var __extends$18 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -27400,8 +27963,8 @@ var __extends$20 = (undefined && undefined.__extends) || (function () {
 })();
 var SHOW_BACK_BTN_CSS$2 = 'show-back-button';
 var SCALE_SMALL = .95;
-var WPTransition = (function (_super) {
-    __extends$20(WPTransition, _super);
+var WPTransition = /** @class */ (function (_super) {
+    __extends$18(WPTransition, _super);
     function WPTransition() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -27458,7 +28021,7 @@ var WPTransition = (function (_super) {
  * \@description
  * App is a utility class used in Ionic to get information about various aspects of an app
  */
-var App = (function () {
+var App = /** @class */ (function () {
     /**
      * @param {?} _config
      * @param {?} _plt
@@ -27471,7 +28034,7 @@ var App = (function () {
         this._disTime = 0;
         this._scrollTime = 0;
         this._title = '';
-        this._titleSrv = new Title(DOCUMENT);
+        this._titleSrv = new Title(DOCUMENT$1);
         this._rootNavs = new Map();
         this._didScroll = false;
         /**
@@ -27625,16 +28188,16 @@ var App = (function () {
     App.prototype.getActiveNavs = function (rootNavId) {
         var /** @type {?} */ portal = this._appRoot._getPortal(PORTAL_MODAL);
         if (portal.length() > 0) {
-            return (findTopNavs(portal));
+            return /** @type {?} */ (findTopNavs(portal));
         }
         if (!this._rootNavs || !this._rootNavs.size) {
             return [];
         }
         if (this._rootNavs.size === 1) {
-            return (findTopNavs(this._rootNavs.values().next().value));
+            return /** @type {?} */ (findTopNavs(this._rootNavs.values().next().value));
         }
         if (rootNavId) {
-            return (findTopNavs(this._rootNavs.get(rootNavId)));
+            return /** @type {?} */ (findTopNavs(this._rootNavs.get(rootNavId)));
         }
         // fallback to just using all root names
         var /** @type {?} */ activeNavs = [];
@@ -27642,7 +28205,7 @@ var App = (function () {
             var /** @type {?} */ topNavs = findTopNavs(nav);
             activeNavs = activeNavs.concat(topNavs);
         });
-        return (activeNavs);
+        return /** @type {?} */ (activeNavs);
     };
     /**
      * @return {?}
@@ -27838,19 +28401,19 @@ var App = (function () {
         }
         return null;
     };
+    App.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    App.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: MenuController, decorators: [{ type: Optional },] },
+    ]; };
     return App;
 }());
-App.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-App.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: MenuController, decorators: [{ type: Optional },] },
-]; };
 /**
  * @param {?} nav
  * @param {?} id
@@ -27915,7 +28478,7 @@ var CLICK_BLOCK_BUFFER_IN_MILLIS = 64;
 /**
  * @hidden
  */
-var Ion = (function () {
+var Ion = /** @class */ (function () {
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -28057,17 +28620,17 @@ var Ion = (function () {
     Ion.prototype.getNativeElement = function () {
         return this._elementRef.nativeElement;
     };
+    Ion.propDecorators = {
+        'color': [{ type: Input },],
+        'mode': [{ type: Input },],
+    };
     return Ion;
 }());
-Ion.propDecorators = {
-    'color': [{ type: Input },],
-    'mode': [{ type: Input },],
-};
 
 /**
  * @hidden
  */
-var UrlSerializer = (function () {
+var UrlSerializer = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -28612,7 +29175,7 @@ function hydrateSegment(segment, nav) {
 /**
  * @hidden
  */
-var DeepLinker = (function () {
+var DeepLinker = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} _serializer
@@ -29120,7 +29683,7 @@ function getNavFromTree(nav, id) {
 /**
  * @hidden
  */
-var DomDebouncer = (function () {
+var DomDebouncer = /** @class */ (function () {
     /**
      * @param {?} dom
      */
@@ -29172,7 +29735,7 @@ var DomDebouncer = (function () {
 /**
  * @hidden
  */
-var DomController = (function () {
+var DomController = /** @class */ (function () {
     /**
      * @param {?} plt
      */
@@ -29269,17 +29832,17 @@ var DomController = (function () {
             throw err;
         }
     };
+    DomController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    DomController.ctorParameters = function () { return [
+        { type: Platform, },
+    ]; };
     return DomController;
 }());
-DomController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-DomController.ctorParameters = function () { return [
-    { type: Platform, },
-]; };
 /**
  * @param {?} timeStamp
  * @param {?} r
@@ -29348,7 +29911,7 @@ var BLOCK_ALL = {
 /**
  * @hidden
  */
-var GestureController = (function () {
+var GestureController = /** @class */ (function () {
     /**
      * @param {?} _app
      */
@@ -29519,21 +30082,21 @@ var GestureController = (function () {
         var /** @type {?} */ disabled = this.disabledGestures[gestureName];
         return !!(disabled && disabled.size > 0);
     };
+    GestureController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    GestureController.ctorParameters = function () { return [
+        { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
+    ]; };
     return GestureController;
 }());
-GestureController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-GestureController.ctorParameters = function () { return [
-    { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
-]; };
 /**
  * @hidden
  */
-var GestureDelegate = (function () {
+var GestureDelegate = /** @class */ (function () {
     /**
      * @param {?} name
      * @param {?} id
@@ -29607,7 +30170,7 @@ var GestureDelegate = (function () {
 /**
  * @hidden
  */
-var BlockerDelegate = (function () {
+var BlockerDelegate = /** @class */ (function () {
     /**
      * @param {?} id
      * @param {?} controller
@@ -30010,7 +30573,7 @@ var BlockerDelegate = (function () {
  * @see {\@link /docs/components#navigation Navigation Component Docs}
  * @abstract
  */
-var NavController = (function () {
+var NavController = /** @class */ (function () {
     function NavController() {
     }
     /**
@@ -30271,7 +30834,7 @@ var NavController = (function () {
     return NavController;
 }());
 
-var PanRecognizer = (function () {
+var PanRecognizer = /** @class */ (function () {
     /**
      * @param {?} direction
      * @param {?} threshold
@@ -30345,7 +30908,7 @@ var PanRecognizer = (function () {
 /**
  * @hidden
  */
-var PointerEvents = (function () {
+var PointerEvents = /** @class */ (function () {
     /**
      * @param {?} plt
      * @param {?} ele
@@ -30478,7 +31041,7 @@ var POINTER_EVENT_TYPE_TOUCH = 2;
 /**
  * @hidden
  */
-var UIEventManager = (function () {
+var UIEventManager = /** @class */ (function () {
     /**
      * @param {?} plt
      */
@@ -30541,7 +31104,7 @@ var UIEventManager = (function () {
 /**
  * @hidden
  */
-var PanGesture = (function () {
+var PanGesture = /** @class */ (function () {
     /**
      * @param {?} plt
      * @param {?} element
@@ -30741,7 +31304,7 @@ var PanGesture = (function () {
     return PanGesture;
 }());
 
-var __extends$25 = (undefined && undefined.__extends) || (function () {
+var __extends$23 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -30754,8 +31317,8 @@ var __extends$25 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var SlideGesture = (function (_super) {
-    __extends$25(SlideGesture, _super);
+var SlideGesture = /** @class */ (function (_super) {
+    __extends$23(SlideGesture, _super);
     /**
      * @param {?} plt
      * @param {?} element
@@ -30865,7 +31428,7 @@ var SlideGesture = (function (_super) {
     return SlideGesture;
 }(PanGesture));
 
-var __extends$24 = (undefined && undefined.__extends) || (function () {
+var __extends$22 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -30878,8 +31441,8 @@ var __extends$24 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var SlideEdgeGesture = (function (_super) {
-    __extends$24(SlideEdgeGesture, _super);
+var SlideEdgeGesture = /** @class */ (function (_super) {
+    __extends$22(SlideEdgeGesture, _super);
     /**
      * @param {?} plt
      * @param {?} element
@@ -30953,7 +31516,7 @@ var SlideEdgeGesture = (function (_super) {
     return SlideEdgeGesture;
 }(SlideGesture));
 
-var __extends$23 = (undefined && undefined.__extends) || (function () {
+var __extends$21 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -30966,8 +31529,8 @@ var __extends$23 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var SwipeBackGesture = (function (_super) {
-    __extends$23(SwipeBackGesture, _super);
+var SwipeBackGesture = /** @class */ (function (_super) {
+    __extends$21(SwipeBackGesture, _super);
     /**
      * @param {?} plt
      * @param {?} _nav
@@ -31037,7 +31600,7 @@ var SwipeBackGesture = (function (_super) {
     return SwipeBackGesture;
 }(SlideEdgeGesture));
 
-var __extends$22 = (undefined && undefined.__extends) || (function () {
+var __extends$20 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -31051,8 +31614,8 @@ var __extends$22 = (undefined && undefined.__extends) || (function () {
  * @hidden
  * This class is for internal use only. It is not exported publicly.
  */
-var NavControllerBase = (function (_super) {
-    __extends$22(NavControllerBase, _super);
+var NavControllerBase = /** @class */ (function (_super) {
+    __extends$20(NavControllerBase, _super);
     /**
      * @param {?} parent
      * @param {?} _app
@@ -32351,11 +32914,11 @@ var NavControllerBase = (function (_super) {
         console.warn('(getActiveChildNav) is deprecated and will be removed in the next major release. Use getActiveChildNavs instead.');
         return this._children[this._children.length - 1];
     };
+    NavControllerBase.propDecorators = {
+        'swipeBackEnabled': [{ type: Input },],
+    };
     return NavControllerBase;
 }(Ion));
-NavControllerBase.propDecorators = {
-    'swipeBackEnabled': [{ type: Input },],
-};
 var ctrlIds = -1;
 var DISABLE_APP_MINIMUM_DURATION = 64;
 var ACTIVE_TRANSITION_DEFAULT = 5000;
@@ -32364,7 +32927,7 @@ var ACTIVE_TRANSITION_OFFSET = 2000;
 /**
  * @hidden
  */
-var TransitionController = (function () {
+var TransitionController = /** @class */ (function () {
     /**
      * @param {?} plt
      * @param {?} _config
@@ -32380,7 +32943,7 @@ var TransitionController = (function () {
      * @return {?}
      */
     TransitionController.prototype.getRootTrnsId = function (nav) {
-        nav = (nav.parent);
+        nav = /** @type {?} */ (nav.parent);
         while (nav) {
             if (isPresent(nav._trnsId)) {
                 return nav._trnsId;
@@ -32432,20 +32995,20 @@ var TransitionController = (function () {
             delete this._trns[trnsId];
         }
     };
+    TransitionController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    TransitionController.ctorParameters = function () { return [
+        { type: Platform, },
+        { type: Config, },
+    ]; };
     return TransitionController;
 }());
-TransitionController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-TransitionController.ctorParameters = function () { return [
-    { type: Platform, },
-    { type: Config, },
-]; };
 
-var __extends$21 = (undefined && undefined.__extends) || (function () {
+var __extends$19 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -32458,8 +33021,8 @@ var __extends$21 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var OverlayPortal = (function (_super) {
-    __extends$21(OverlayPortal, _super);
+var OverlayPortal = /** @class */ (function (_super) {
+    __extends$19(OverlayPortal, _super);
     /**
      * @param {?} app
      * @param {?} config
@@ -32518,34 +33081,34 @@ var OverlayPortal = (function (_super) {
     OverlayPortal.prototype.getSecondaryIdentifier = function () {
         return null;
     };
+    OverlayPortal.decorators = [
+        { type: Directive, args: [{
+                    selector: '[overlay-portal]',
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    OverlayPortal.ctorParameters = function () { return [
+        { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
+        { type: Config, },
+        { type: Platform, },
+        { type: ElementRef, },
+        { type: NgZone, },
+        { type: Renderer, },
+        { type: ComponentFactoryResolver, },
+        { type: GestureController, },
+        { type: TransitionController, },
+        { type: DeepLinker, decorators: [{ type: Optional },] },
+        { type: ViewContainerRef, },
+        { type: DomController, },
+        { type: ErrorHandler, },
+    ]; };
+    OverlayPortal.propDecorators = {
+        '_overlayPortal': [{ type: Input, args: ['overlay-portal',] },],
+    };
     return OverlayPortal;
 }(NavControllerBase));
-OverlayPortal.decorators = [
-    { type: Directive, args: [{
-                selector: '[overlay-portal]',
-            },] },
-];
-/**
- * @nocollapse
- */
-OverlayPortal.ctorParameters = function () { return [
-    { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
-    { type: Config, },
-    { type: Platform, },
-    { type: ElementRef, },
-    { type: NgZone, },
-    { type: Renderer, },
-    { type: ComponentFactoryResolver, },
-    { type: GestureController, },
-    { type: TransitionController, },
-    { type: DeepLinker, decorators: [{ type: Optional },] },
-    { type: ViewContainerRef, },
-    { type: DomController, },
-    { type: ErrorHandler, },
-]; };
-OverlayPortal.propDecorators = {
-    '_overlayPortal': [{ type: Input, args: ['overlay-portal',] },],
-};
 
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -32561,7 +33124,7 @@ var AppRootToken = new OpaqueToken('USERROOT');
 /**
  * @hidden
  */
-var IonicApp = (function (_super) {
+var IonicApp = /** @class */ (function (_super) {
     __extends(IonicApp, _super);
     /**
      * @param {?} _userCmp
@@ -32707,38 +33270,38 @@ var IonicApp = (function (_super) {
             return Promise.resolve(false);
         }
     };
+    IonicApp.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-app',
+                    template: '<div #viewport app-viewport></div>' +
+                        '<div #modalPortal overlay-portal></div>' +
+                        '<div #overlayPortal overlay-portal></div>' +
+                        '<div #loadingPortal class="loading-portal" overlay-portal></div>' +
+                        '<div #toastPortal class="toast-portal" [overlay-portal]="10000"></div>' +
+                        '<div class="click-block"></div>'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    IonicApp.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [AppRootToken,] },] },
+        { type: ComponentFactoryResolver, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Config, },
+        { type: Platform, },
+        { type: App, },
+    ]; };
+    IonicApp.propDecorators = {
+        '_viewport': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
+        '_modalPortal': [{ type: ViewChild, args: ['modalPortal', { read: OverlayPortal },] },],
+        '_overlayPortal': [{ type: ViewChild, args: ['overlayPortal', { read: OverlayPortal },] },],
+        '_loadingPortal': [{ type: ViewChild, args: ['loadingPortal', { read: OverlayPortal },] },],
+        '_toastPortal': [{ type: ViewChild, args: ['toastPortal', { read: OverlayPortal },] },],
+    };
     return IonicApp;
 }(Ion));
-IonicApp.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-app',
-                template: '<div #viewport app-viewport></div>' +
-                    '<div #modalPortal overlay-portal></div>' +
-                    '<div #overlayPortal overlay-portal></div>' +
-                    '<div #loadingPortal class="loading-portal" overlay-portal></div>' +
-                    '<div #toastPortal class="toast-portal" [overlay-portal]="10000"></div>' +
-                    '<div class="click-block"></div>'
-            },] },
-];
-/**
- * @nocollapse
- */
-IonicApp.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [AppRootToken,] },] },
-    { type: ComponentFactoryResolver, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Config, },
-    { type: Platform, },
-    { type: App, },
-]; };
-IonicApp.propDecorators = {
-    '_viewport': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
-    '_modalPortal': [{ type: ViewChild, args: ['modalPortal', { read: OverlayPortal },] },],
-    '_overlayPortal': [{ type: ViewChild, args: ['overlayPortal', { read: OverlayPortal },] },],
-    '_loadingPortal': [{ type: ViewChild, args: ['loadingPortal', { read: OverlayPortal },] },],
-    '_toastPortal': [{ type: ViewChild, args: ['toastPortal', { read: OverlayPortal },] },],
-};
 
 var KEY_LEFT = 37;
 var KEY_UP = 38;
@@ -32752,7 +33315,7 @@ var KEY_TAB = 9;
 /**
  * @hidden
  */
-var ActionSheetCmp = (function () {
+var ActionSheetCmp = /** @class */ (function () {
     /**
      * @param {?} _viewCtrl
      * @param {?} config
@@ -32893,55 +33456,55 @@ var ActionSheetCmp = (function () {
         this.d = this.cancelButton = null;
         this.gestureBlocker.destroy();
     };
+    ActionSheetCmp.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-action-sheet',
+                    template: '<ion-backdrop (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>' +
+                        '<div class="action-sheet-wrapper">' +
+                        '<div class="action-sheet-container">' +
+                        '<div class="action-sheet-group">' +
+                        '<div class="action-sheet-title" id="{{hdrId}}" *ngIf="d.title">{{d.title}}</div>' +
+                        '<div class="action-sheet-sub-title" id="{{descId}}" *ngIf="d.subTitle">{{d.subTitle}}</div>' +
+                        '<button ion-button="action-sheet-button" (click)="click(b)" *ngFor="let b of d.buttons" class="disable-hover" [attr.icon-start]="b.icon ? \'\' : null" [ngClass]="b.cssClass">' +
+                        '<ion-icon [name]="b.icon" *ngIf="b.icon" class="action-sheet-icon"></ion-icon>' +
+                        '{{b.text}}' +
+                        '</button>' +
+                        '</div>' +
+                        '<div class="action-sheet-group" *ngIf="cancelButton">' +
+                        '<button ion-button="action-sheet-button" (click)="click(cancelButton)" class="action-sheet-cancel disable-hover" [attr.icon-start]="cancelButton.icon ? \'\' : null" [ngClass]="cancelButton.cssClass">' +
+                        '<ion-icon [name]="cancelButton.icon" *ngIf="cancelButton.icon" class="action-sheet-icon"></ion-icon>' +
+                        '{{cancelButton.text}}' +
+                        '</button>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>',
+                    host: {
+                        'role': 'dialog',
+                        '[attr.aria-labelledby]': 'hdrId',
+                        '[attr.aria-describedby]': 'descId'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ActionSheetCmp.ctorParameters = function () { return [
+        { type: ViewController, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: GestureController, },
+        { type: NavParams, },
+        { type: Renderer, },
+    ]; };
+    ActionSheetCmp.propDecorators = {
+        'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     return ActionSheetCmp;
 }());
-ActionSheetCmp.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-action-sheet',
-                template: '<ion-backdrop (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>' +
-                    '<div class="action-sheet-wrapper">' +
-                    '<div class="action-sheet-container">' +
-                    '<div class="action-sheet-group">' +
-                    '<div class="action-sheet-title" id="{{hdrId}}" *ngIf="d.title">{{d.title}}</div>' +
-                    '<div class="action-sheet-sub-title" id="{{descId}}" *ngIf="d.subTitle">{{d.subTitle}}</div>' +
-                    '<button ion-button="action-sheet-button" (click)="click(b)" *ngFor="let b of d.buttons" class="disable-hover" [attr.icon-start]="b.icon ? \'\' : null" [ngClass]="b.cssClass">' +
-                    '<ion-icon [name]="b.icon" *ngIf="b.icon" class="action-sheet-icon"></ion-icon>' +
-                    '{{b.text}}' +
-                    '</button>' +
-                    '</div>' +
-                    '<div class="action-sheet-group" *ngIf="cancelButton">' +
-                    '<button ion-button="action-sheet-button" (click)="click(cancelButton)" class="action-sheet-cancel disable-hover" [attr.icon-start]="cancelButton.icon ? \'\' : null" [ngClass]="cancelButton.cssClass">' +
-                    '<ion-icon [name]="cancelButton.icon" *ngIf="cancelButton.icon" class="action-sheet-icon"></ion-icon>' +
-                    '{{cancelButton.text}}' +
-                    '</button>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>',
-                host: {
-                    'role': 'dialog',
-                    '[attr.aria-labelledby]': 'hdrId',
-                    '[attr.aria-describedby]': 'descId'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-ActionSheetCmp.ctorParameters = function () { return [
-    { type: ViewController, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: GestureController, },
-    { type: NavParams, },
-    { type: Renderer, },
-]; };
-ActionSheetCmp.propDecorators = {
-    'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
-};
 var actionSheetIds = -1;
 
-var __extends$27 = (undefined && undefined.__extends) || (function () {
+var __extends$25 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -32951,8 +33514,8 @@ var __extends$27 = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var ActionSheetSlideIn = (function (_super) {
-    __extends$27(ActionSheetSlideIn, _super);
+var ActionSheetSlideIn = /** @class */ (function (_super) {
+    __extends$25(ActionSheetSlideIn, _super);
     function ActionSheetSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -32969,8 +33532,8 @@ var ActionSheetSlideIn = (function (_super) {
     };
     return ActionSheetSlideIn;
 }(Transition));
-var ActionSheetSlideOut = (function (_super) {
-    __extends$27(ActionSheetSlideOut, _super);
+var ActionSheetSlideOut = /** @class */ (function (_super) {
+    __extends$25(ActionSheetSlideOut, _super);
     function ActionSheetSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -32987,8 +33550,8 @@ var ActionSheetSlideOut = (function (_super) {
     };
     return ActionSheetSlideOut;
 }(Transition));
-var ActionSheetMdSlideIn = (function (_super) {
-    __extends$27(ActionSheetMdSlideIn, _super);
+var ActionSheetMdSlideIn = /** @class */ (function (_super) {
+    __extends$25(ActionSheetMdSlideIn, _super);
     function ActionSheetMdSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -33005,8 +33568,8 @@ var ActionSheetMdSlideIn = (function (_super) {
     };
     return ActionSheetMdSlideIn;
 }(Transition));
-var ActionSheetMdSlideOut = (function (_super) {
-    __extends$27(ActionSheetMdSlideOut, _super);
+var ActionSheetMdSlideOut = /** @class */ (function (_super) {
+    __extends$25(ActionSheetMdSlideOut, _super);
     function ActionSheetMdSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -33023,8 +33586,8 @@ var ActionSheetMdSlideOut = (function (_super) {
     };
     return ActionSheetMdSlideOut;
 }(Transition));
-var ActionSheetWpSlideIn = (function (_super) {
-    __extends$27(ActionSheetWpSlideIn, _super);
+var ActionSheetWpSlideIn = /** @class */ (function (_super) {
+    __extends$25(ActionSheetWpSlideIn, _super);
     function ActionSheetWpSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -33041,8 +33604,8 @@ var ActionSheetWpSlideIn = (function (_super) {
     };
     return ActionSheetWpSlideIn;
 }(Transition));
-var ActionSheetWpSlideOut = (function (_super) {
-    __extends$27(ActionSheetWpSlideOut, _super);
+var ActionSheetWpSlideOut = /** @class */ (function (_super) {
+    __extends$25(ActionSheetWpSlideOut, _super);
     function ActionSheetWpSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -33060,7 +33623,7 @@ var ActionSheetWpSlideOut = (function (_super) {
     return ActionSheetWpSlideOut;
 }(Transition));
 
-var __extends$26 = (undefined && undefined.__extends) || (function () {
+var __extends$24 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -33073,8 +33636,8 @@ var __extends$26 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var ActionSheet = (function (_super) {
-    __extends$26(ActionSheet, _super);
+var ActionSheet = /** @class */ (function (_super) {
+    __extends$24(ActionSheet, _super);
     /**
      * @param {?} app
      * @param {?} opts
@@ -33291,7 +33854,7 @@ var ActionSheet = (function (_super) {
  * \@demo /docs/demos/src/action-sheet/
  * @see {\@link /docs/components#action-sheets ActionSheet Component Docs}
  */
-var ActionSheetController = (function () {
+var ActionSheetController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -33309,23 +33872,23 @@ var ActionSheetController = (function () {
         if (opts === void 0) { opts = {}; }
         return new ActionSheet(this._app, opts, this.config);
     };
+    ActionSheetController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    ActionSheetController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+    ]; };
     return ActionSheetController;
 }());
-ActionSheetController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-ActionSheetController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-]; };
 
 /**
  * @hidden
  */
-var AlertCmp = (function () {
+var AlertCmp = /** @class */ (function () {
     /**
      * @param {?} _viewCtrl
      * @param {?} _elementRef
@@ -33581,79 +34144,79 @@ var AlertCmp = (function () {
         (void 0) /* assert */;
         this.gestureBlocker.destroy();
     };
+    AlertCmp.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-alert',
+                    template: '<ion-backdrop (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>' +
+                        '<div class="alert-wrapper">' +
+                        '<div class="alert-head">' +
+                        '<h2 id="{{hdrId}}" class="alert-title" *ngIf="d.title" [innerHTML]="d.title"></h2>' +
+                        '<h3 id="{{subHdrId}}" class="alert-sub-title" *ngIf="d.subTitle" [innerHTML]="d.subTitle"></h3>' +
+                        '</div>' +
+                        '<div id="{{msgId}}" class="alert-message" [innerHTML]="d.message"></div>' +
+                        '<div *ngIf="d.inputs.length" [ngSwitch]="inputType">' +
+                        '<ng-template ngSwitchCase="radio">' +
+                        '<div class="alert-radio-group" role="radiogroup" [attr.aria-labelledby]="hdrId" [attr.aria-activedescendant]="activeId">' +
+                        '<button ion-button="alert-radio-button" *ngFor="let i of d.inputs" (click)="rbClick(i)" [attr.aria-checked]="i.checked" [disabled]="i.disabled" [attr.id]="i.id" class="alert-tappable alert-radio" role="radio">' +
+                        '<div class="alert-radio-icon"><div class="alert-radio-inner"></div></div>' +
+                        '<div class="alert-radio-label">' +
+                        '{{i.label}}' +
+                        '</div>' +
+                        '</button>' +
+                        '</div>' +
+                        '</ng-template>' +
+                        '<ng-template ngSwitchCase="checkbox">' +
+                        '<div class="alert-checkbox-group">' +
+                        '<button ion-button="alert-checkbox-button" *ngFor="let i of d.inputs" (click)="cbClick(i)" [attr.aria-checked]="i.checked" [attr.id]="i.id" [disabled]="i.disabled" class="alert-tappable alert-checkbox" role="checkbox">' +
+                        '<div class="alert-checkbox-icon"><div class="alert-checkbox-inner"></div></div>' +
+                        '<div class="alert-checkbox-label">' +
+                        '{{i.label}}' +
+                        '</div>' +
+                        '</button>' +
+                        '</div>' +
+                        '</ng-template>' +
+                        '<ng-template ngSwitchDefault>' +
+                        '<div class="alert-input-group">' +
+                        '<div *ngFor="let i of d.inputs" class="alert-input-wrapper">' +
+                        '<input [placeholder]="i.placeholder" [(ngModel)]="i.value" [type]="i.type" [min]="i.min" [max]="i.max" [attr.id]="i.id" class="alert-input">' +
+                        '</div>' +
+                        '</div>' +
+                        '</ng-template>' +
+                        '</div>' +
+                        '<div class="alert-button-group" [ngClass]="{\'alert-button-group-vertical\':d.buttons.length>2}">' +
+                        '<button ion-button="alert-button" *ngFor="let b of d.buttons" (click)="btnClick(b)" [ngClass]="b.cssClass">' +
+                        '{{b.text}}' +
+                        '</button>' +
+                        '</div>' +
+                        '</div>',
+                    host: {
+                        'role': 'dialog',
+                        '[attr.aria-labelledby]': 'hdrId',
+                        '[attr.aria-describedby]': 'descId'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    AlertCmp.ctorParameters = function () { return [
+        { type: ViewController, },
+        { type: ElementRef, },
+        { type: Config, },
+        { type: GestureController, },
+        { type: NavParams, },
+        { type: Renderer, },
+        { type: Platform, },
+    ]; };
+    AlertCmp.propDecorators = {
+        'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     return AlertCmp;
 }());
-AlertCmp.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-alert',
-                template: '<ion-backdrop (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>' +
-                    '<div class="alert-wrapper">' +
-                    '<div class="alert-head">' +
-                    '<h2 id="{{hdrId}}" class="alert-title" *ngIf="d.title" [innerHTML]="d.title"></h2>' +
-                    '<h3 id="{{subHdrId}}" class="alert-sub-title" *ngIf="d.subTitle" [innerHTML]="d.subTitle"></h3>' +
-                    '</div>' +
-                    '<div id="{{msgId}}" class="alert-message" [innerHTML]="d.message"></div>' +
-                    '<div *ngIf="d.inputs.length" [ngSwitch]="inputType">' +
-                    '<ng-template ngSwitchCase="radio">' +
-                    '<div class="alert-radio-group" role="radiogroup" [attr.aria-labelledby]="hdrId" [attr.aria-activedescendant]="activeId">' +
-                    '<button ion-button="alert-radio-button" *ngFor="let i of d.inputs" (click)="rbClick(i)" [attr.aria-checked]="i.checked" [disabled]="i.disabled" [attr.id]="i.id" class="alert-tappable alert-radio" role="radio">' +
-                    '<div class="alert-radio-icon"><div class="alert-radio-inner"></div></div>' +
-                    '<div class="alert-radio-label">' +
-                    '{{i.label}}' +
-                    '</div>' +
-                    '</button>' +
-                    '</div>' +
-                    '</ng-template>' +
-                    '<ng-template ngSwitchCase="checkbox">' +
-                    '<div class="alert-checkbox-group">' +
-                    '<button ion-button="alert-checkbox-button" *ngFor="let i of d.inputs" (click)="cbClick(i)" [attr.aria-checked]="i.checked" [attr.id]="i.id" [disabled]="i.disabled" class="alert-tappable alert-checkbox" role="checkbox">' +
-                    '<div class="alert-checkbox-icon"><div class="alert-checkbox-inner"></div></div>' +
-                    '<div class="alert-checkbox-label">' +
-                    '{{i.label}}' +
-                    '</div>' +
-                    '</button>' +
-                    '</div>' +
-                    '</ng-template>' +
-                    '<ng-template ngSwitchDefault>' +
-                    '<div class="alert-input-group">' +
-                    '<div *ngFor="let i of d.inputs" class="alert-input-wrapper">' +
-                    '<input [placeholder]="i.placeholder" [(ngModel)]="i.value" [type]="i.type" [min]="i.min" [max]="i.max" [attr.id]="i.id" class="alert-input">' +
-                    '</div>' +
-                    '</div>' +
-                    '</ng-template>' +
-                    '</div>' +
-                    '<div class="alert-button-group" [ngClass]="{\'alert-button-group-vertical\':d.buttons.length>2}">' +
-                    '<button ion-button="alert-button" *ngFor="let b of d.buttons" (click)="btnClick(b)" [ngClass]="b.cssClass">' +
-                    '{{b.text}}' +
-                    '</button>' +
-                    '</div>' +
-                    '</div>',
-                host: {
-                    'role': 'dialog',
-                    '[attr.aria-labelledby]': 'hdrId',
-                    '[attr.aria-describedby]': 'descId'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-AlertCmp.ctorParameters = function () { return [
-    { type: ViewController, },
-    { type: ElementRef, },
-    { type: Config, },
-    { type: GestureController, },
-    { type: NavParams, },
-    { type: Renderer, },
-    { type: Platform, },
-]; };
-AlertCmp.propDecorators = {
-    'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
-};
 var alertIds = -1;
 
-var __extends$29 = (undefined && undefined.__extends) || (function () {
+var __extends$27 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -33666,8 +34229,8 @@ var __extends$29 = (undefined && undefined.__extends) || (function () {
 /**
  * Animations for alerts
  */
-var AlertPopIn = (function (_super) {
-    __extends$29(AlertPopIn, _super);
+var AlertPopIn = /** @class */ (function (_super) {
+    __extends$27(AlertPopIn, _super);
     function AlertPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -33688,8 +34251,8 @@ var AlertPopIn = (function (_super) {
     };
     return AlertPopIn;
 }(Transition));
-var AlertPopOut = (function (_super) {
-    __extends$29(AlertPopOut, _super);
+var AlertPopOut = /** @class */ (function (_super) {
+    __extends$27(AlertPopOut, _super);
     function AlertPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -33710,8 +34273,8 @@ var AlertPopOut = (function (_super) {
     };
     return AlertPopOut;
 }(Transition));
-var AlertMdPopIn = (function (_super) {
-    __extends$29(AlertMdPopIn, _super);
+var AlertMdPopIn = /** @class */ (function (_super) {
+    __extends$27(AlertMdPopIn, _super);
     function AlertMdPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -33732,8 +34295,8 @@ var AlertMdPopIn = (function (_super) {
     };
     return AlertMdPopIn;
 }(Transition));
-var AlertMdPopOut = (function (_super) {
-    __extends$29(AlertMdPopOut, _super);
+var AlertMdPopOut = /** @class */ (function (_super) {
+    __extends$27(AlertMdPopOut, _super);
     function AlertMdPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -33754,8 +34317,8 @@ var AlertMdPopOut = (function (_super) {
     };
     return AlertMdPopOut;
 }(Transition));
-var AlertWpPopIn = (function (_super) {
-    __extends$29(AlertWpPopIn, _super);
+var AlertWpPopIn = /** @class */ (function (_super) {
+    __extends$27(AlertWpPopIn, _super);
     function AlertWpPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -33776,8 +34339,8 @@ var AlertWpPopIn = (function (_super) {
     };
     return AlertWpPopIn;
 }(Transition));
-var AlertWpPopOut = (function (_super) {
-    __extends$29(AlertWpPopOut, _super);
+var AlertWpPopOut = /** @class */ (function (_super) {
+    __extends$27(AlertWpPopOut, _super);
     function AlertWpPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -33799,7 +34362,7 @@ var AlertWpPopOut = (function (_super) {
     return AlertWpPopOut;
 }(Transition));
 
-var __extends$28 = (undefined && undefined.__extends) || (function () {
+var __extends$26 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -33812,8 +34375,8 @@ var __extends$28 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var Alert = (function (_super) {
-    __extends$28(Alert, _super);
+var Alert = /** @class */ (function (_super) {
+    __extends$26(Alert, _super);
     /**
      * @param {?} app
      * @param {?=} opts
@@ -34128,7 +34691,7 @@ var Alert = (function (_super) {
  *
  * \@demo /docs/demos/src/alert/
  */
-var AlertController = (function () {
+var AlertController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -34146,18 +34709,18 @@ var AlertController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Alert(this._app, opts, this.config);
     };
+    AlertController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    AlertController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+    ]; };
     return AlertController;
 }());
-AlertController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-AlertController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-]; };
 
 /**
  * \@name Avatar
@@ -34167,25 +34730,25 @@ AlertController.ctorParameters = function () { return [
  * Avatars can be placed on the left or right side of an item with the `item-start` or `item-end` directive.
  * @see {\@link /docs/components/#avatar-list Avatar Component Docs}
  */
-var Avatar = (function () {
+var Avatar = /** @class */ (function () {
     function Avatar() {
     }
+    Avatar.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-avatar'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Avatar.ctorParameters = function () { return []; };
     return Avatar;
 }());
-Avatar.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-avatar'
-            },] },
-];
-/**
- * @nocollapse
- */
-Avatar.ctorParameters = function () { return []; };
 
 /**
  * @hidden
  */
-var Backdrop = (function () {
+var Backdrop = /** @class */ (function () {
     /**
      * @param {?} _elementRef
      * @param {?} _renderer
@@ -34208,27 +34771,27 @@ var Backdrop = (function () {
     Backdrop.prototype.setElementClass = function (className, add) {
         this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     };
+    Backdrop.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-backdrop',
+                    host: {
+                        'role': 'presentation',
+                        'tappable': '',
+                        'disable-activated': ''
+                    },
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Backdrop.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
     return Backdrop;
 }());
-Backdrop.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-backdrop',
-                host: {
-                    'role': 'presentation',
-                    'tappable': '',
-                    'disable-activated': ''
-                },
-            },] },
-];
-/**
- * @nocollapse
- */
-Backdrop.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 
-var __extends$30 = (undefined && undefined.__extends) || (function () {
+var __extends$28 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -34245,8 +34808,8 @@ var __extends$30 = (undefined && undefined.__extends) || (function () {
  * Badges are simple components in Ionic containing numbers or text. You can display a badge to indicate that there is new information associated with the item it is on.
  * @see {\@link /docs/components/#badges Badges Component Docs}
  */
-var Badge = (function (_super) {
-    __extends$30(Badge, _super);
+var Badge = /** @class */ (function (_super) {
+    __extends$28(Badge, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -34255,23 +34818,23 @@ var Badge = (function (_super) {
     function Badge(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'badge') || this;
     }
+    Badge.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-badge'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Badge.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
     return Badge;
 }(Ion));
-Badge.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-badge'
-            },] },
-];
-/**
- * @nocollapse
- */
-Badge.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 
-var __extends$31 = (undefined && undefined.__extends) || (function () {
+var __extends$29 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -34396,8 +34959,8 @@ var __extends$31 = (undefined && undefined.__extends) || (function () {
  * @see {\@link ../../fab/FabButton FabButton API Docs}
  * @see {\@link ../../fab/FabContainer FabContainer API Docs}
  */
-var Button = (function (_super) {
-    __extends$31(Button, _super);
+var Button = /** @class */ (function (_super) {
+    __extends$29(Button, _super);
     /**
      * @param {?} ionButton
      * @param {?} config
@@ -34670,42 +35233,120 @@ var Button = (function (_super) {
             }
         }
     };
+    Button.decorators = [
+        { type: Component, args: [{
+                    selector: '[ion-button]',
+                    template: '<span class="button-inner">' +
+                        '<ng-content></ng-content>' +
+                        '</span>' +
+                        '<div class="button-effect"></div>',
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Button.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Attribute, args: ['ion-button',] },] },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    Button.propDecorators = {
+        'large': [{ type: Input },],
+        'small': [{ type: Input },],
+        'default': [{ type: Input },],
+        'outline': [{ type: Input },],
+        'clear': [{ type: Input },],
+        'solid': [{ type: Input },],
+        'round': [{ type: Input },],
+        'block': [{ type: Input },],
+        'full': [{ type: Input },],
+        'strong': [{ type: Input },],
+        'mode': [{ type: Input },],
+        'color': [{ type: Input },],
+    };
     return Button;
 }(Ion));
-Button.decorators = [
-    { type: Component, args: [{
-                selector: '[ion-button]',
-                template: '<span class="button-inner">' +
-                    '<ng-content></ng-content>' +
-                    '</span>' +
-                    '<div class="button-effect"></div>',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
+
+var __extends$30 = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 /**
- * @nocollapse
+ * @hidden
  */
-Button.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Attribute, args: ['ion-button',] },] },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-Button.propDecorators = {
-    'large': [{ type: Input },],
-    'small': [{ type: Input },],
-    'default': [{ type: Input },],
-    'outline': [{ type: Input },],
-    'clear': [{ type: Input },],
-    'solid': [{ type: Input },],
-    'round': [{ type: Input },],
-    'block': [{ type: Input },],
-    'full': [{ type: Input },],
-    'strong': [{ type: Input },],
-    'mode': [{ type: Input },],
-    'color': [{ type: Input },],
-};
+var Card = /** @class */ (function (_super) {
+    __extends$30(Card, _super);
+    /**
+     * @param {?} config
+     * @param {?} elementRef
+     * @param {?} renderer
+     */
+    function Card(config, elementRef, renderer) {
+        return _super.call(this, config, elementRef, renderer, 'card') || this;
+    }
+    Card.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-card'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Card.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    return Card;
+}(Ion));
+
+var __extends$31 = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * @hidden
+ */
+var CardContent = /** @class */ (function (_super) {
+    __extends$31(CardContent, _super);
+    /**
+     * @param {?} config
+     * @param {?} elementRef
+     * @param {?} renderer
+     */
+    function CardContent(config, elementRef, renderer) {
+        return _super.call(this, config, elementRef, renderer, 'card-content') || this;
+    }
+    CardContent.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-card-content'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    CardContent.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    return CardContent;
+}(Ion));
 
 var __extends$32 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -34720,31 +35361,31 @@ var __extends$32 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var Card = (function (_super) {
-    __extends$32(Card, _super);
+var CardHeader = /** @class */ (function (_super) {
+    __extends$32(CardHeader, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
      * @param {?} renderer
      */
-    function Card(config, elementRef, renderer) {
-        return _super.call(this, config, elementRef, renderer, 'card') || this;
+    function CardHeader(config, elementRef, renderer) {
+        return _super.call(this, config, elementRef, renderer, 'card-header') || this;
     }
-    return Card;
+    CardHeader.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-card-header'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    CardHeader.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    return CardHeader;
 }(Ion));
-Card.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-card'
-            },] },
-];
-/**
- * @nocollapse
- */
-Card.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 
 var __extends$33 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -34759,86 +35400,8 @@ var __extends$33 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var CardContent = (function (_super) {
-    __extends$33(CardContent, _super);
-    /**
-     * @param {?} config
-     * @param {?} elementRef
-     * @param {?} renderer
-     */
-    function CardContent(config, elementRef, renderer) {
-        return _super.call(this, config, elementRef, renderer, 'card-content') || this;
-    }
-    return CardContent;
-}(Ion));
-CardContent.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-card-content'
-            },] },
-];
-/**
- * @nocollapse
- */
-CardContent.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-
-var __extends$34 = (undefined && undefined.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-/**
- * @hidden
- */
-var CardHeader = (function (_super) {
-    __extends$34(CardHeader, _super);
-    /**
-     * @param {?} config
-     * @param {?} elementRef
-     * @param {?} renderer
-     */
-    function CardHeader(config, elementRef, renderer) {
-        return _super.call(this, config, elementRef, renderer, 'card-header') || this;
-    }
-    return CardHeader;
-}(Ion));
-CardHeader.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-card-header'
-            },] },
-];
-/**
- * @nocollapse
- */
-CardHeader.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-
-var __extends$35 = (undefined && undefined.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-/**
- * @hidden
- */
-var CardTitle = (function (_super) {
-    __extends$35(CardTitle, _super);
+var CardTitle = /** @class */ (function (_super) {
+    __extends$33(CardTitle, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -34847,23 +35410,23 @@ var CardTitle = (function (_super) {
     function CardTitle(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'card-title') || this;
     }
+    CardTitle.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-card-title'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    CardTitle.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
     return CardTitle;
 }(Ion));
-CardTitle.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-card-title'
-            },] },
-];
-/**
- * @nocollapse
- */
-CardTitle.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 
-var __extends$38 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+var __extends$35 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -34879,7 +35442,7 @@ var __extends$38 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @hide true
  */
 var ForkJoinObservable = (function (_super) {
-    __extends$38(ForkJoinObservable, _super);
+    __extends$35(ForkJoinObservable, _super);
     function ForkJoinObservable(sources, resultSelector) {
         _super.call(this);
         this.sources = sources;
@@ -34927,7 +35490,7 @@ var ForkJoinObservable_2 = ForkJoinObservable;
  * @extends {Ignored}
  */
 var ForkJoinSubscriber = (function (_super) {
-    __extends$38(ForkJoinSubscriber, _super);
+    __extends$35(ForkJoinSubscriber, _super);
     function ForkJoinSubscriber(destination, sources, resultSelector) {
         _super.call(this, destination);
         this.sources = sources;
@@ -34980,7 +35543,7 @@ var ForkJoinObservable_1 = {
 
 var forkJoin_1 = ForkJoinObservable_1.ForkJoinObservable.create;
 
-var __extends$39 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+var __extends$36 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -34993,7 +35556,7 @@ var __extends$39 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @hide true
  */
 var PromiseObservable = (function (_super) {
-    __extends$39(PromiseObservable, _super);
+    __extends$36(PromiseObservable, _super);
     function PromiseObservable(promise, scheduler) {
         _super.call(this);
         this.promise = promise;
@@ -35106,7 +35669,7 @@ var PromiseObservable_1 = {
 
 var fromPromise_1 = PromiseObservable_1.PromiseObservable.create;
 
-var __extends$40 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+var __extends$37 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -35168,7 +35731,7 @@ var MapOperator = (function () {
  * @extends {Ignored}
  */
 var MapSubscriber = (function (_super) {
-    __extends$40(MapSubscriber, _super);
+    __extends$37(MapSubscriber, _super);
     function MapSubscriber(destination, project, thisArg) {
         _super.call(this, destination);
         this.project = project;
@@ -35191,13 +35754,8 @@ var MapSubscriber = (function (_super) {
     return MapSubscriber;
 }(Subscriber_1.Subscriber));
 
-var __extends$37 = (undefined && undefined.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 /**
- * @license Angular v4.1.3
+ * @license Angular v4.3.6
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -35220,12 +35778,16 @@ var AbstractControlDirective = (function () {
     function AbstractControlDirective() {
     }
     /**
+     * The {\@link FormControl}, {\@link FormGroup}, or {\@link FormArray}
+     * that backs this directive. Most properties fall through to that
+     * instance.
      * @abstract
      * @return {?}
      */
     AbstractControlDirective.prototype.control = function () { };
     Object.defineProperty(AbstractControlDirective.prototype, "value", {
         /**
+         * The value of the control.
          * @return {?}
          */
         get: function () { return this.control ? this.control.value : null; },
@@ -35234,6 +35796,10 @@ var AbstractControlDirective = (function () {
     });
     Object.defineProperty(AbstractControlDirective.prototype, "valid", {
         /**
+         * A control is `valid` when its `status === VALID`.
+         *
+         * In order to have this status, the control must have passed all its
+         * validation checks.
          * @return {?}
          */
         get: function () { return this.control ? this.control.valid : null; },
@@ -35242,6 +35808,10 @@ var AbstractControlDirective = (function () {
     });
     Object.defineProperty(AbstractControlDirective.prototype, "invalid", {
         /**
+         * A control is `invalid` when its `status === INVALID`.
+         *
+         * In order to have this status, the control must have failed
+         * at least one of its validation checks.
          * @return {?}
          */
         get: function () { return this.control ? this.control.invalid : null; },
@@ -35250,54 +35820,23 @@ var AbstractControlDirective = (function () {
     });
     Object.defineProperty(AbstractControlDirective.prototype, "pending", {
         /**
+         * A control is `pending` when its `status === PENDING`.
+         *
+         * In order to have this status, the control must be in the
+         * middle of conducting a validation check.
          * @return {?}
          */
         get: function () { return this.control ? this.control.pending : null; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(AbstractControlDirective.prototype, "errors", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this.control ? this.control.errors : null; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "pristine", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this.control ? this.control.pristine : null; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "dirty", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this.control ? this.control.dirty : null; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "touched", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this.control ? this.control.touched : null; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AbstractControlDirective.prototype, "untouched", {
-        /**
-         * @return {?}
-         */
-        get: function () { return this.control ? this.control.untouched : null; },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(AbstractControlDirective.prototype, "disabled", {
         /**
+         * A control is `disabled` when its `status === DISABLED`.
+         *
+         * Disabled controls are exempt from validation checks and
+         * are not included in the aggregate value of their ancestor
+         * controls.
          * @return {?}
          */
         get: function () { return this.control ? this.control.disabled : null; },
@@ -35306,14 +35845,76 @@ var AbstractControlDirective = (function () {
     });
     Object.defineProperty(AbstractControlDirective.prototype, "enabled", {
         /**
+         * A control is `enabled` as long as its `status !== DISABLED`.
+         *
+         * In other words, it has a status of `VALID`, `INVALID`, or
+         * `PENDING`.
          * @return {?}
          */
         get: function () { return this.control ? this.control.enabled : null; },
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(AbstractControlDirective.prototype, "errors", {
+        /**
+         * Returns any errors generated by failing validation. If there
+         * are no errors, it will return null.
+         * @return {?}
+         */
+        get: function () { return this.control ? this.control.errors : null; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "pristine", {
+        /**
+         * A control is `pristine` if the user has not yet changed
+         * the value in the UI.
+         *
+         * Note that programmatic changes to a control's value will
+         * *not* mark it dirty.
+         * @return {?}
+         */
+        get: function () { return this.control ? this.control.pristine : null; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "dirty", {
+        /**
+         * A control is `dirty` if the user has changed the value
+         * in the UI.
+         *
+         * Note that programmatic changes to a control's value will
+         * *not* mark it dirty.
+         * @return {?}
+         */
+        get: function () { return this.control ? this.control.dirty : null; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "touched", {
+        /**
+         * A control is marked `touched` once the user has triggered
+         * a `blur` event on it.
+         * @return {?}
+         */
+        get: function () { return this.control ? this.control.touched : null; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AbstractControlDirective.prototype, "untouched", {
+        /**
+         * A control is `untouched` if the user has not yet triggered
+         * a `blur` event on it.
+         * @return {?}
+         */
+        get: function () { return this.control ? this.control.untouched : null; },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(AbstractControlDirective.prototype, "statusChanges", {
         /**
+         * Emits an event every time the validation status of the control
+         * is re-calculated.
          * @return {?}
          */
         get: function () {
@@ -35324,6 +35925,8 @@ var AbstractControlDirective = (function () {
     });
     Object.defineProperty(AbstractControlDirective.prototype, "valueChanges", {
         /**
+         * Emits an event every time the value of the control changes, in
+         * the UI or programmatically.
          * @return {?}
          */
         get: function () {
@@ -35334,6 +35937,9 @@ var AbstractControlDirective = (function () {
     });
     Object.defineProperty(AbstractControlDirective.prototype, "path", {
         /**
+         * Returns an array that represents the path from the top-level form
+         * to this control. Each index is the string name of the control on
+         * that level.
          * @return {?}
          */
         get: function () { return null; },
@@ -35341,6 +35947,13 @@ var AbstractControlDirective = (function () {
         configurable: true
     });
     /**
+     * Resets the form control. This means by default:
+     *
+     * * it is marked as `pristine`
+     * * it is marked as `untouched`
+     * * value is set to null
+     *
+     * For more information, see {\@link AbstractControl}.
      * @param {?=} value
      * @return {?}
      */
@@ -35350,6 +35963,10 @@ var AbstractControlDirective = (function () {
             this.control.reset(value);
     };
     /**
+     * Returns true if the control with the given path has the error specified. Otherwise
+     * returns false.
+     *
+     * If no path is given, it checks for the error on the present control.
      * @param {?} errorCode
      * @param {?=} path
      * @return {?}
@@ -35358,6 +35975,10 @@ var AbstractControlDirective = (function () {
         return this.control ? this.control.hasError(errorCode, path) : false;
     };
     /**
+     * Returns error data if the control with the given path has the error specified. Otherwise
+     * returns null or undefined.
+     *
+     * If no path is given, it checks for the error on the present control.
      * @param {?} errorCode
      * @param {?=} path
      * @return {?}
@@ -35383,7 +36004,7 @@ var AbstractControlDirective = (function () {
  * @abstract
  */
 var ControlContainer = (function (_super) {
-    __extends$37(ControlContainer, _super);
+    __extends$1(ControlContainer, _super);
     function ControlContainer() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -35414,15 +36035,6 @@ var ControlContainer = (function (_super) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var __assign$1 = (undefined && undefined.__assign) || Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s)
-            if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-    }
-    return t;
-};
 /**
  * @param {?} value
  * @return {?}
@@ -35468,6 +36080,38 @@ var EMAIL_REGEXP = /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.
 var Validators = (function () {
     function Validators() {
     }
+    /**
+     * Validator that requires controls to have a value greater than a number.
+     * @param {?} min
+     * @return {?}
+     */
+    Validators.min = function (min) {
+        return function (control) {
+            if (isEmptyInputValue(control.value) || isEmptyInputValue(min)) {
+                return null; // don't validate empty values to allow optional controls
+            }
+            var /** @type {?} */ value = parseFloat(control.value);
+            // Controls with NaN values after parsing should be treated as not having a
+            // minimum, per the HTML forms spec: https://www.w3.org/TR/html5/forms.html#attr-input-min
+            return !isNaN(value) && value < min ? { 'min': { 'min': min, 'actual': control.value } } : null;
+        };
+    };
+    /**
+     * Validator that requires controls to have a value less than a number.
+     * @param {?} max
+     * @return {?}
+     */
+    Validators.max = function (max) {
+        return function (control) {
+            if (isEmptyInputValue(control.value) || isEmptyInputValue(max)) {
+                return null; // don't validate empty values to allow optional controls
+            }
+            var /** @type {?} */ value = parseFloat(control.value);
+            // Controls with NaN values after parsing should be treated as not having a
+            // maximum, per the HTML forms spec: https://www.w3.org/TR/html5/forms.html#attr-input-max
+            return !isNaN(value) && value > max ? { 'max': { 'max': max, 'actual': control.value } } : null;
+        };
+    };
     /**
      * Validator that requires controls to have a non-empty value.
      * @param {?} control
@@ -35625,7 +36269,7 @@ function _executeAsyncValidators(control, validators) {
  */
 function _mergeErrors(arrayOfErrors) {
     var /** @type {?} */ res = arrayOfErrors.reduce(function (res, errors) {
-        return errors != null ? __assign$1({}, /** @type {?} */ ((res)), errors) : ((res));
+        return errors != null ? Object.assign({}, /** @type {?} */ ((res)), errors) : ((res));
     }, {});
     return Object.keys(res).length === 0 ? null : res;
 }
@@ -35681,7 +36325,7 @@ var CheckboxControlValueAccessor = (function () {
      * @return {?}
      */
     CheckboxControlValueAccessor.prototype.writeValue = function (value) {
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'checked', value);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'checked', value);
     };
     /**
      * @param {?} fn
@@ -35698,7 +36342,7 @@ var CheckboxControlValueAccessor = (function () {
      * @return {?}
      */
     CheckboxControlValueAccessor.prototype.setDisabledState = function (isDisabled) {
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
     return CheckboxControlValueAccessor;
 }());
@@ -35713,7 +36357,7 @@ CheckboxControlValueAccessor.decorators = [
  * @nocollapse
  */
 CheckboxControlValueAccessor.ctorParameters = function () { return [
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: ElementRef, },
 ]; };
 /**
@@ -35765,6 +36409,9 @@ var DefaultValueAccessor = (function () {
         this._compositionMode = _compositionMode;
         this.onChange = function (_) { };
         this.onTouched = function () { };
+        /**
+         * Whether the user is creating a composition string (IME events).
+         */
         this._composing = false;
         if (this._compositionMode == null) {
             this._compositionMode = !_isAndroid();
@@ -35776,7 +36423,7 @@ var DefaultValueAccessor = (function () {
      */
     DefaultValueAccessor.prototype.writeValue = function (value) {
         var /** @type {?} */ normalizedValue = value == null ? '' : value;
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', normalizedValue);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'value', normalizedValue);
     };
     /**
      * @param {?} fn
@@ -35793,9 +36440,10 @@ var DefaultValueAccessor = (function () {
      * @return {?}
      */
     DefaultValueAccessor.prototype.setDisabledState = function (isDisabled) {
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
     /**
+     * \@internal
      * @param {?} value
      * @return {?}
      */
@@ -35805,10 +36453,12 @@ var DefaultValueAccessor = (function () {
         }
     };
     /**
+     * \@internal
      * @return {?}
      */
     DefaultValueAccessor.prototype._compositionStart = function () { this._composing = true; };
     /**
+     * \@internal
      * @param {?} value
      * @return {?}
      */
@@ -35837,7 +36487,7 @@ DefaultValueAccessor.decorators = [
  * @nocollapse
  */
 DefaultValueAccessor.ctorParameters = function () { return [
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: ElementRef, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [COMPOSITION_BUFFER_MODE,] },] },
 ]; };
@@ -35911,7 +36561,7 @@ var NumberValueAccessor = (function () {
     NumberValueAccessor.prototype.writeValue = function (value) {
         // The value needs to be normalized for IE9, otherwise it is set to 'null' when null
         var /** @type {?} */ normalizedValue = value == null ? '' : value;
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', normalizedValue);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'value', normalizedValue);
     };
     /**
      * @param {?} fn
@@ -35930,7 +36580,7 @@ var NumberValueAccessor = (function () {
      * @return {?}
      */
     NumberValueAccessor.prototype.setDisabledState = function (isDisabled) {
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
     return NumberValueAccessor;
 }());
@@ -35949,7 +36599,7 @@ NumberValueAccessor.decorators = [
  * @nocollapse
  */
 NumberValueAccessor.ctorParameters = function () { return [
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: ElementRef, },
 ]; };
 /**
@@ -35975,7 +36625,7 @@ function unimplemented() {
  * @abstract
  */
 var NgControl = (function (_super) {
-    __extends$37(NgControl, _super);
+    __extends$1(NgControl, _super);
     function NgControl() {
         var _this = _super.apply(this, arguments) || this;
         /**
@@ -36151,7 +36801,7 @@ var RadioControlValueAccessor = (function () {
      */
     RadioControlValueAccessor.prototype.writeValue = function (value) {
         this._state = value === this.value;
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'checked', this._state);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'checked', this._state);
     };
     /**
      * @param {?} fn
@@ -36180,7 +36830,7 @@ var RadioControlValueAccessor = (function () {
      * @return {?}
      */
     RadioControlValueAccessor.prototype.setDisabledState = function (isDisabled) {
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
     /**
      * @return {?}
@@ -36211,7 +36861,7 @@ RadioControlValueAccessor.decorators = [
  * @nocollapse
  */
 RadioControlValueAccessor.ctorParameters = function () { return [
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: ElementRef, },
     { type: RadioControlRegistry, },
     { type: Injector, },
@@ -36258,7 +36908,7 @@ var RangeValueAccessor = (function () {
      * @return {?}
      */
     RangeValueAccessor.prototype.writeValue = function (value) {
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', parseFloat(value));
+        this._renderer.setProperty(this._elementRef.nativeElement, 'value', parseFloat(value));
     };
     /**
      * @param {?} fn
@@ -36277,7 +36927,7 @@ var RangeValueAccessor = (function () {
      * @return {?}
      */
     RangeValueAccessor.prototype.setDisabledState = function (isDisabled) {
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
     return RangeValueAccessor;
 }());
@@ -36296,7 +36946,7 @@ RangeValueAccessor.decorators = [
  * @nocollapse
  */
 RangeValueAccessor.ctorParameters = function () { return [
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: ElementRef, },
 ]; };
 /**
@@ -36435,10 +37085,10 @@ var SelectControlValueAccessor = (function () {
         this.value = value;
         var /** @type {?} */ id = this._getOptionId(value);
         if (id == null) {
-            this._renderer.setElementProperty(this._elementRef.nativeElement, 'selectedIndex', -1);
+            this._renderer.setProperty(this._elementRef.nativeElement, 'selectedIndex', -1);
         }
         var /** @type {?} */ valueString = _buildValueString(id, value);
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', valueString);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'value', valueString);
     };
     /**
      * @param {?} fn
@@ -36447,8 +37097,8 @@ var SelectControlValueAccessor = (function () {
     SelectControlValueAccessor.prototype.registerOnChange = function (fn) {
         var _this = this;
         this.onChange = function (valueString) {
-            _this.value = valueString;
-            fn(_this._getOptionValue(valueString));
+            _this.value = _this._getOptionValue(valueString);
+            fn(_this.value);
         };
     };
     /**
@@ -36461,7 +37111,7 @@ var SelectControlValueAccessor = (function () {
      * @return {?}
      */
     SelectControlValueAccessor.prototype.setDisabledState = function (isDisabled) {
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
     /**
      * \@internal
@@ -36503,7 +37153,7 @@ SelectControlValueAccessor.decorators = [
  * @nocollapse
  */
 SelectControlValueAccessor.ctorParameters = function () { return [
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: ElementRef, },
 ]; };
 SelectControlValueAccessor.propDecorators = {
@@ -36565,7 +37215,7 @@ var NgSelectOption = (function () {
      * @return {?}
      */
     NgSelectOption.prototype._setElementValue = function (value) {
-        this._renderer.setElementProperty(this._element.nativeElement, 'value', value);
+        this._renderer.setProperty(this._element.nativeElement, 'value', value);
     };
     /**
      * @return {?}
@@ -36586,7 +37236,7 @@ NgSelectOption.decorators = [
  */
 NgSelectOption.ctorParameters = function () { return [
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: SelectControlValueAccessor, decorators: [{ type: Optional }, { type: Host },] },
 ]; };
 NgSelectOption.propDecorators = {
@@ -36748,7 +37398,7 @@ var SelectMultipleControlValueAccessor = (function () {
      * @return {?}
      */
     SelectMultipleControlValueAccessor.prototype.setDisabledState = function (isDisabled) {
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
     /**
      * \@internal
@@ -36795,7 +37445,7 @@ SelectMultipleControlValueAccessor.decorators = [
  * @nocollapse
  */
 SelectMultipleControlValueAccessor.ctorParameters = function () { return [
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: ElementRef, },
 ]; };
 SelectMultipleControlValueAccessor.propDecorators = {
@@ -36865,7 +37515,7 @@ var NgSelectMultipleOption = (function () {
      * @return {?}
      */
     NgSelectMultipleOption.prototype._setElementValue = function (value) {
-        this._renderer.setElementProperty(this._element.nativeElement, 'value', value);
+        this._renderer.setProperty(this._element.nativeElement, 'value', value);
     };
     /**
      * \@internal
@@ -36873,7 +37523,7 @@ var NgSelectMultipleOption = (function () {
      * @return {?}
      */
     NgSelectMultipleOption.prototype._setSelected = function (selected) {
-        this._renderer.setElementProperty(this._element.nativeElement, 'selected', selected);
+        this._renderer.setProperty(this._element.nativeElement, 'selected', selected);
     };
     /**
      * @return {?}
@@ -36894,7 +37544,7 @@ NgSelectMultipleOption.decorators = [
  */
 NgSelectMultipleOption.ctorParameters = function () { return [
     { type: ElementRef, },
-    { type: Renderer, },
+    { type: Renderer2, },
     { type: SelectMultipleControlValueAccessor, decorators: [{ type: Optional }, { type: Host },] },
 ]; };
 NgSelectMultipleOption.propDecorators = {
@@ -37108,7 +37758,7 @@ function selectValueAccessor(dir, valueAccessors) {
  * \@stable
  */
 var AbstractFormGroupDirective = (function (_super) {
-    __extends$37(AbstractFormGroupDirective, _super);
+    __extends$1(AbstractFormGroupDirective, _super);
     function AbstractFormGroupDirective() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -37262,12 +37912,21 @@ var ngControlStatusHost = {
 };
 /**
  * Directive automatically applied to Angular form controls that sets CSS classes
- * based on control status (valid/invalid/dirty/etc).
+ * based on control status. The following classes are applied as the properties
+ * become true:
+ *
+ * * ng-valid
+ * * ng-invalid
+ * * ng-pending
+ * * ng-pristine
+ * * ng-dirty
+ * * ng-untouched
+ * * ng-touched
  *
  * \@stable
  */
 var NgControlStatus = (function (_super) {
-    __extends$37(NgControlStatus, _super);
+    __extends$1(NgControlStatus, _super);
     /**
      * @param {?} cd
      */
@@ -37292,7 +37951,7 @@ NgControlStatus.ctorParameters = function () { return [
  * \@stable
  */
 var NgControlStatusGroup = (function (_super) {
-    __extends$37(NgControlStatusGroup, _super);
+    __extends$1(NgControlStatusGroup, _super);
     /**
      * @param {?} cd
      */
@@ -37614,14 +38273,14 @@ var AbstractControl = (function () {
      *
      * This will also mark all direct ancestors as `touched` to maintain
      * the model.
-     * @param {?=} __0
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype.markAsTouched = function (_a) {
-        var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
+    AbstractControl.prototype.markAsTouched = function (opts) {
+        if (opts === void 0) { opts = {}; }
         this._touched = true;
-        if (this._parent && !onlySelf) {
-            this._parent.markAsTouched({ onlySelf: onlySelf });
+        if (this._parent && !opts.onlySelf) {
+            this._parent.markAsTouched(opts);
         }
     };
     /**
@@ -37630,15 +38289,15 @@ var AbstractControl = (function () {
      * If the control has any children, it will also mark all children as `untouched`
      * to maintain the model, and re-calculate the `touched` status of all parent
      * controls.
-     * @param {?=} __0
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype.markAsUntouched = function (_a) {
-        var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
+    AbstractControl.prototype.markAsUntouched = function (opts) {
+        if (opts === void 0) { opts = {}; }
         this._touched = false;
         this._forEachChild(function (control) { control.markAsUntouched({ onlySelf: true }); });
-        if (this._parent && !onlySelf) {
-            this._parent._updateTouched({ onlySelf: onlySelf });
+        if (this._parent && !opts.onlySelf) {
+            this._parent._updateTouched(opts);
         }
     };
     /**
@@ -37646,14 +38305,14 @@ var AbstractControl = (function () {
      *
      * This will also mark all direct ancestors as `dirty` to maintain
      * the model.
-     * @param {?=} __0
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype.markAsDirty = function (_a) {
-        var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
+    AbstractControl.prototype.markAsDirty = function (opts) {
+        if (opts === void 0) { opts = {}; }
         this._pristine = false;
-        if (this._parent && !onlySelf) {
-            this._parent.markAsDirty({ onlySelf: onlySelf });
+        if (this._parent && !opts.onlySelf) {
+            this._parent.markAsDirty(opts);
         }
     };
     /**
@@ -37662,27 +38321,27 @@ var AbstractControl = (function () {
      * If the control has any children, it will also mark all children as `pristine`
      * to maintain the model, and re-calculate the `pristine` status of all parent
      * controls.
-     * @param {?=} __0
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype.markAsPristine = function (_a) {
-        var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
+    AbstractControl.prototype.markAsPristine = function (opts) {
+        if (opts === void 0) { opts = {}; }
         this._pristine = true;
         this._forEachChild(function (control) { control.markAsPristine({ onlySelf: true }); });
-        if (this._parent && !onlySelf) {
-            this._parent._updatePristine({ onlySelf: onlySelf });
+        if (this._parent && !opts.onlySelf) {
+            this._parent._updatePristine(opts);
         }
     };
     /**
      * Marks the control as `pending`.
-     * @param {?=} __0
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype.markAsPending = function (_a) {
-        var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
+    AbstractControl.prototype.markAsPending = function (opts) {
+        if (opts === void 0) { opts = {}; }
         this._status = PENDING;
-        if (this._parent && !onlySelf) {
-            this._parent.markAsPending({ onlySelf: onlySelf });
+        if (this._parent && !opts.onlySelf) {
+            this._parent.markAsPending(opts);
         }
     };
     /**
@@ -37690,20 +38349,20 @@ var AbstractControl = (function () {
      * excluded from the aggregate value of any parent. Its status is `DISABLED`.
      *
      * If the control has children, all children will be disabled to maintain the model.
-     * @param {?=} __0
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype.disable = function (_a) {
-        var _b = _a === void 0 ? {} : _a, onlySelf = _b.onlySelf, emitEvent = _b.emitEvent;
+    AbstractControl.prototype.disable = function (opts) {
+        if (opts === void 0) { opts = {}; }
         this._status = DISABLED;
         this._errors = null;
         this._forEachChild(function (control) { control.disable({ onlySelf: true }); });
         this._updateValue();
-        if (emitEvent !== false) {
+        if (opts.emitEvent !== false) {
             this._valueChanges.emit(this._value);
             this._statusChanges.emit(this._status);
         }
-        this._updateAncestors(!!onlySelf);
+        this._updateAncestors(!!opts.onlySelf);
         this._onDisabledChange.forEach(function (changeFn) { return changeFn(true); });
     };
     /**
@@ -37712,15 +38371,15 @@ var AbstractControl = (function () {
      * its validators.
      *
      * If the control has children, all children will be enabled.
-     * @param {?=} __0
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype.enable = function (_a) {
-        var _b = _a === void 0 ? {} : _a, onlySelf = _b.onlySelf, emitEvent = _b.emitEvent;
+    AbstractControl.prototype.enable = function (opts) {
+        if (opts === void 0) { opts = {}; }
         this._status = VALID;
         this._forEachChild(function (control) { control.enable({ onlySelf: true }); });
-        this.updateValueAndValidity({ onlySelf: true, emitEvent: emitEvent });
-        this._updateAncestors(!!onlySelf);
+        this.updateValueAndValidity({ onlySelf: true, emitEvent: opts.emitEvent });
+        this._updateAncestors(!!opts.onlySelf);
         this._onDisabledChange.forEach(function (changeFn) { return changeFn(false); });
     };
     /**
@@ -37767,11 +38426,11 @@ var AbstractControl = (function () {
      * Re-calculates the value and validation status of the control.
      *
      * By default, it will also update the value and validity of its ancestors.
-     * @param {?=} __0
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype.updateValueAndValidity = function (_a) {
-        var _b = _a === void 0 ? {} : _a, onlySelf = _b.onlySelf, emitEvent = _b.emitEvent;
+    AbstractControl.prototype.updateValueAndValidity = function (opts) {
+        if (opts === void 0) { opts = {}; }
         this._setInitialStatus();
         this._updateValue();
         if (this.enabled) {
@@ -37779,26 +38438,26 @@ var AbstractControl = (function () {
             this._errors = this._runValidator();
             this._status = this._calculateStatus();
             if (this._status === VALID || this._status === PENDING) {
-                this._runAsyncValidator(emitEvent);
+                this._runAsyncValidator(opts.emitEvent);
             }
         }
-        if (emitEvent !== false) {
+        if (opts.emitEvent !== false) {
             this._valueChanges.emit(this._value);
             this._statusChanges.emit(this._status);
         }
-        if (this._parent && !onlySelf) {
-            this._parent.updateValueAndValidity({ onlySelf: onlySelf, emitEvent: emitEvent });
+        if (this._parent && !opts.onlySelf) {
+            this._parent.updateValueAndValidity(opts);
         }
     };
     /**
      * \@internal
-     * @param {?=} __0
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype._updateTreeValidity = function (_a) {
-        var emitEvent = (_a === void 0 ? { emitEvent: true } : _a).emitEvent;
-        this._forEachChild(function (ctrl) { return ctrl._updateTreeValidity({ emitEvent: emitEvent }); });
-        this.updateValueAndValidity({ onlySelf: true, emitEvent: emitEvent });
+    AbstractControl.prototype._updateTreeValidity = function (opts) {
+        if (opts === void 0) { opts = { emitEvent: true }; }
+        this._forEachChild(function (ctrl) { return ctrl._updateTreeValidity(opts); });
+        this.updateValueAndValidity({ onlySelf: true, emitEvent: opts.emitEvent });
     };
     /**
      * @return {?}
@@ -37854,13 +38513,13 @@ var AbstractControl = (function () {
      * expect(login.valid).toEqual(true);
      * ```
      * @param {?} errors
-     * @param {?=} __1
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype.setErrors = function (errors, _a) {
-        var emitEvent = (_a === void 0 ? {} : _a).emitEvent;
+    AbstractControl.prototype.setErrors = function (errors, opts) {
+        if (opts === void 0) { opts = {}; }
         this._errors = errors;
-        this._updateControlsErrors(emitEvent !== false);
+        this._updateControlsErrors(opts.emitEvent !== false);
     };
     /**
      * Retrieves a child control given the control's name or path.
@@ -37879,7 +38538,7 @@ var AbstractControl = (function () {
      */
     AbstractControl.prototype.get = function (path) { return _find(this, path, '.'); };
     /**
-     * Returns true if the control with the given path has the error specified. Otherwise
+     * Returns error data if the control with the given path has the error specified. Otherwise
      * returns null or undefined.
      *
      * If no path is given, it checks for the error on the present control.
@@ -38002,26 +38661,26 @@ var AbstractControl = (function () {
     };
     /**
      * \@internal
-     * @param {?=} __0
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype._updatePristine = function (_a) {
-        var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
+    AbstractControl.prototype._updatePristine = function (opts) {
+        if (opts === void 0) { opts = {}; }
         this._pristine = !this._anyControlsDirty();
-        if (this._parent && !onlySelf) {
-            this._parent._updatePristine({ onlySelf: onlySelf });
+        if (this._parent && !opts.onlySelf) {
+            this._parent._updatePristine(opts);
         }
     };
     /**
      * \@internal
-     * @param {?=} __0
+     * @param {?=} opts
      * @return {?}
      */
-    AbstractControl.prototype._updateTouched = function (_a) {
-        var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
+    AbstractControl.prototype._updateTouched = function (opts) {
+        if (opts === void 0) { opts = {}; }
         this._touched = this._anyControlsTouched();
-        if (this._parent && !onlySelf) {
-            this._parent._updateTouched({ onlySelf: onlySelf });
+        if (this._parent && !opts.onlySelf) {
+            this._parent._updateTouched(opts);
         }
     };
     /**
@@ -38085,7 +38744,7 @@ var AbstractControl = (function () {
  * \@stable
  */
 var FormControl = (function (_super) {
-    __extends$37(FormControl, _super);
+    __extends$1(FormControl, _super);
     /**
      * @param {?=} formState
      * @param {?=} validator
@@ -38299,7 +38958,7 @@ var FormControl = (function (_super) {
  * \@stable
  */
 var FormGroup = (function (_super) {
-    __extends$37(FormGroup, _super);
+    __extends$1(FormGroup, _super);
     /**
      * @param {?} controls
      * @param {?=} validator
@@ -38653,7 +39312,7 @@ var FormGroup = (function (_super) {
  * \@stable
  */
 var FormArray = (function (_super) {
-    __extends$37(FormArray, _super);
+    __extends$1(FormArray, _super);
     /**
      * @param {?} controls
      * @param {?=} validator
@@ -38981,7 +39640,7 @@ var resolvedPromise = Promise.resolve(null);
  *  \@stable
  */
 var NgForm = (function (_super) {
-    __extends$37(NgForm, _super);
+    __extends$1(NgForm, _super);
     /**
      * @param {?} validators
      * @param {?} asyncValidators
@@ -39250,7 +39909,7 @@ var modelGroupProvider = {
  * \@stable
  */
 var NgModelGroup = (function (_super) {
-    __extends$37(NgModelGroup, _super);
+    __extends$1(NgModelGroup, _super);
     /**
      * @param {?} parent
      * @param {?} validators
@@ -39376,7 +40035,7 @@ var resolvedPromise$1 = Promise.resolve(null);
  *  \@stable
  */
 var NgModel = (function (_super) {
-    __extends$37(NgModel, _super);
+    __extends$1(NgModel, _super);
     /**
      * @param {?} parent
      * @param {?} validators
@@ -39676,7 +40335,7 @@ var formControlBinding$1 = {
  *  \@stable
  */
 var FormControlDirective = (function (_super) {
-    __extends$37(FormControlDirective, _super);
+    __extends$1(FormControlDirective, _super);
     /**
      * @param {?} validators
      * @param {?} asyncValidators
@@ -39831,7 +40490,7 @@ var formDirectiveProvider$1 = {
  *  \@stable
  */
 var FormGroupDirective = (function (_super) {
-    __extends$37(FormGroupDirective, _super);
+    __extends$1(FormGroupDirective, _super);
     /**
      * @param {?} _validators
      * @param {?} _asyncValidators
@@ -40113,7 +40772,7 @@ var formGroupNameProvider = {
  * \@stable
  */
 var FormGroupName = (function (_super) {
-    __extends$37(FormGroupName, _super);
+    __extends$1(FormGroupName, _super);
     /**
      * @param {?} parent
      * @param {?} validators
@@ -40203,7 +40862,7 @@ var formArrayNameProvider = {
  * \@stable
  */
 var FormArrayName = (function (_super) {
-    __extends$37(FormArrayName, _super);
+    __extends$1(FormArrayName, _super);
     /**
      * @param {?} parent
      * @param {?} validators
@@ -40370,7 +41029,7 @@ var controlNameBinding = {
  *  \@stable
  */
 var FormControlName = (function (_super) {
-    __extends$37(FormControlName, _super);
+    __extends$1(FormControlName, _super);
     /**
      * @param {?} parent
      * @param {?} validators
@@ -40600,7 +41259,7 @@ RequiredValidator.propDecorators = {
  * \@experimental
  */
 var CheckboxRequiredValidator = (function (_super) {
-    __extends$37(CheckboxRequiredValidator, _super);
+    __extends$1(CheckboxRequiredValidator, _super);
     function CheckboxRequiredValidator() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -40625,7 +41284,7 @@ CheckboxRequiredValidator.decorators = [
  */
 CheckboxRequiredValidator.ctorParameters = function () { return []; };
 /**
- * Provider which adds {@link EmailValidator} to {@link NG_VALIDATORS}.
+ * Provider which adds {\@link EmailValidator} to {\@link NG_VALIDATORS}.
  */
 var EMAIL_VALIDATOR = {
     provide: NG_VALIDATORS,
@@ -40690,11 +41349,11 @@ EmailValidator.propDecorators = {
     'email': [{ type: Input },],
 };
 /**
- * Provider which adds {@link MinLengthValidator} to {@link NG_VALIDATORS}.
+ * Provider which adds {\@link MinLengthValidator} to {\@link NG_VALIDATORS}.
  *
  * ## Example:
  *
- * {@example common/forms/ts/validators/validators.ts region='min'}
+ * {\@example common/forms/ts/validators/validators.ts region='min'}
  */
 var MIN_LENGTH_VALIDATOR = {
     provide: NG_VALIDATORS,
@@ -40756,11 +41415,11 @@ MinLengthValidator.propDecorators = {
     'minlength': [{ type: Input },],
 };
 /**
- * Provider which adds {@link MaxLengthValidator} to {@link NG_VALIDATORS}.
+ * Provider which adds {\@link MaxLengthValidator} to {\@link NG_VALIDATORS}.
  *
  * ## Example:
  *
- * {@example common/forms/ts/validators/validators.ts region='max'}
+ * {\@example common/forms/ts/validators/validators.ts region='max'}
  */
 var MAX_LENGTH_VALIDATOR = {
     provide: NG_VALIDATORS,
@@ -41015,7 +41674,7 @@ FormBuilder.ctorParameters = function () { return []; };
 /**
  * \@stable
  */
-var VERSION$3 = new Version('4.1.3');
+var VERSION$3 = new Version('4.3.6');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -41149,7 +41808,7 @@ ReactiveFormsModule.ctorParameters = function () { return []; };
 /**
  * @hidden
  */
-var Form = (function () {
+var Form = /** @class */ (function () {
     function Form() {
         this._focused = null;
         this._ids = -1;
@@ -41216,20 +41875,20 @@ var Form = (function () {
     Form.prototype.nextId = function () {
         return ++this._ids;
     };
+    Form.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    Form.ctorParameters = function () { return []; };
     return Form;
 }());
-Form.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-Form.ctorParameters = function () { return []; };
 /**
  * @hidden
  * @abstract
  */
-var IonicTapInput = (function () {
+var IonicTapInput = /** @class */ (function () {
     function IonicTapInput() {
     }
     /**
@@ -41265,7 +41924,7 @@ var IonicTapInput = (function () {
  * @hidden
  * @abstract
  */
-var IonicFormInput = (function () {
+var IonicFormInput = /** @class */ (function () {
     function IonicFormInput() {
     }
     /**
@@ -41276,7 +41935,7 @@ var IonicFormInput = (function () {
     return IonicFormInput;
 }());
 
-var TimeoutDebouncer = (function () {
+var TimeoutDebouncer = /** @class */ (function () {
     /**
      * @param {?} wait
      */
@@ -41316,7 +41975,7 @@ var TimeoutDebouncer = (function () {
     return TimeoutDebouncer;
 }());
 
-var __extends$41 = (undefined && undefined.__extends) || (function () {
+var __extends$38 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -41326,8 +41985,8 @@ var __extends$41 = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var BaseInput = (function (_super) {
-    __extends$41(BaseInput, _super);
+var BaseInput = /** @class */ (function (_super) {
+    __extends$38(BaseInput, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -41539,6 +42198,7 @@ var BaseInput = (function (_super) {
         this._setFocus(false);
         this._fireTouched();
         this.ionBlur.emit(this);
+        this._onTouched && this._onTouched();
     };
     /**
      * @hidden
@@ -41669,14 +42329,14 @@ var BaseInput = (function (_super) {
             item.setElementClass('item-input-has-value', hasValue);
         }
     };
+    BaseInput.propDecorators = {
+        'ionFocus': [{ type: Output },],
+        'ionChange': [{ type: Output },],
+        'ionBlur': [{ type: Output },],
+        'disabled': [{ type: Input },],
+    };
     return BaseInput;
 }(Ion));
-BaseInput.propDecorators = {
-    'ionFocus': [{ type: Output },],
-    'ionChange': [{ type: Output },],
-    'ionBlur': [{ type: Output },],
-    'disabled': [{ type: Input },],
-};
 /**
  * @param {?} element
  * @param {?} control
@@ -41694,7 +42354,7 @@ function setControlCss(element, control) {
     element.setElementClass('ng-invalid', !control.valid);
 }
 
-var __extends$43 = (undefined && undefined.__extends) || (function () {
+var __extends$40 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -41735,8 +42395,8 @@ var __extends$43 = (undefined && undefined.__extends) || (function () {
  * @see {\@link /docs/components#icons Icon Component Docs}
  *
  */
-var Icon = (function (_super) {
-    __extends$43(Icon, _super);
+var Icon = /** @class */ (function (_super) {
+    __extends$40(Icon, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -41907,33 +42567,33 @@ var Icon = (function (_super) {
             .replace('-', ' ');
         this.setElementAttribute('aria-label', label);
     };
+    Icon.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-icon',
+                    host: {
+                        'role': 'img'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Icon.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    Icon.propDecorators = {
+        'name': [{ type: Input },],
+        'ios': [{ type: Input },],
+        'md': [{ type: Input },],
+        'isActive': [{ type: Input },],
+        '_hidden': [{ type: HostBinding, args: ['class.hide',] },],
+    };
     return Icon;
 }(Ion));
-Icon.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-icon',
-                host: {
-                    'role': 'img'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Icon.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-Icon.propDecorators = {
-    'name': [{ type: Input },],
-    'ios': [{ type: Input },],
-    'md': [{ type: Input },],
-    'isActive': [{ type: Input },],
-    '_hidden': [{ type: HostBinding, args: ['class.hide',] },],
-};
 
-var __extends$44 = (undefined && undefined.__extends) || (function () {
+var __extends$41 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -41991,8 +42651,8 @@ var __extends$44 = (undefined && undefined.__extends) || (function () {
  * @see {\@link ../../input/Input Input API Docs}
  *
  */
-var Label = (function (_super) {
-    __extends$44(Label, _super);
+var Label = /** @class */ (function (_super) {
+    __extends$41(Label, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -42039,28 +42699,28 @@ var Label = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Label.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-label'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Label.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: undefined, decorators: [{ type: Attribute, args: ['floating',] },] },
+        { type: undefined, decorators: [{ type: Attribute, args: ['stacked',] },] },
+        { type: undefined, decorators: [{ type: Attribute, args: ['fixed',] },] },
+        { type: undefined, decorators: [{ type: Attribute, args: ['inset',] },] },
+    ]; };
+    Label.propDecorators = {
+        'id': [{ type: Input },],
+    };
     return Label;
 }(Ion));
-Label.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-label'
-            },] },
-];
-/**
- * @nocollapse
- */
-Label.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: undefined, decorators: [{ type: Attribute, args: ['floating',] },] },
-    { type: undefined, decorators: [{ type: Attribute, args: ['stacked',] },] },
-    { type: undefined, decorators: [{ type: Attribute, args: ['fixed',] },] },
-    { type: undefined, decorators: [{ type: Attribute, args: ['inset',] },] },
-]; };
-Label.propDecorators = {
-    'id': [{ type: Input },],
-};
 
 /**
  * \@name Keyboard
@@ -42077,7 +42737,7 @@ Label.propDecorators = {
  * }
  * ```
  */
-var Keyboard = (function () {
+var Keyboard = /** @class */ (function () {
     /**
      * @param {?} config
      * @param {?} _plt
@@ -42334,24 +42994,24 @@ var Keyboard = (function () {
         }
         return false;
     };
+    Keyboard.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    Keyboard.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: NgZone, },
+        { type: DomController, },
+    ]; };
     return Keyboard;
 }());
-Keyboard.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-Keyboard.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: NgZone, },
-    { type: DomController, },
-]; };
 var KEYBOARD_CLOSE_POLLING = 150;
 var KEYBOARD_POLLING_CHECKS_MAX = 100;
 
-var ScrollView = (function () {
+var ScrollView = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} _plt
@@ -42875,7 +43535,7 @@ var EVENT_OPTS = {
     zone: false
 };
 
-var __extends$45 = (undefined && undefined.__extends) || (function () {
+var __extends$42 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -42885,8 +43545,8 @@ var __extends$45 = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var EventEmitterProxy = (function (_super) {
-    __extends$45(EventEmitterProxy, _super);
+var EventEmitterProxy = /** @class */ (function (_super) {
+    __extends$42(EventEmitterProxy, _super);
     function EventEmitterProxy() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -43033,8 +43693,8 @@ var EventEmitterProxy = (function (_super) {
  * ```
  *
  */
-var Content = (function (_super) {
-    __extends$45(Content, _super);
+var Content = /** @class */ (function (_super) {
+    __extends$42(Content, _super);
     /**
      * @param {?} config
      * @param {?} _plt
@@ -43542,7 +44202,7 @@ var Content = (function (_super) {
         var /** @type {?} */ parentEle = ele.parentElement;
         var /** @type {?} */ children = parentEle.children;
         for (var /** @type {?} */ i = children.length - 1; i >= 0; i--) {
-            ele = (children[i]);
+            ele = /** @type {?} */ (children[i]);
             tagName = ele.tagName;
             if (tagName === 'ION-CONTENT') {
                 scrollEvent.contentElement = ele;
@@ -43571,7 +44231,7 @@ var Content = (function (_super) {
         var /** @type {?} */ tabbarEle;
         while (ele && ele.tagName !== 'ION-MODAL' && !ele.classList.contains('tab-subpage')) {
             if (ele.tagName === 'ION-TABS') {
-                tabbarEle = (ele.firstElementChild);
+                tabbarEle = /** @type {?} */ (ele.firstElementChild);
                 // ******** DOM READ ****************
                 this._tabbarHeight = tabbarEle.clientHeight;
                 if (this._tabsPlacement === null) {
@@ -43731,50 +44391,50 @@ var Content = (function (_super) {
         // to start new requests and render images
         return Math.abs(this._scroll.ev.velocityY) < this._imgVelMax;
     };
+    Content.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-content',
+                    template: '<div class="fixed-content" #fixedContent>' +
+                        '<ng-content select="[ion-fixed],ion-fab"></ng-content>' +
+                        '</div>' +
+                        '<div class="scroll-content" #scrollContent>' +
+                        '<ng-content></ng-content>' +
+                        '</div>' +
+                        '<ng-content select="ion-refresher"></ng-content>',
+                    host: {
+                        '[class.statusbar-padding]': 'statusbarPadding',
+                        '[class.has-refresher]': '_hasRefresher'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Content.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: DomController, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: App, },
+        { type: Keyboard, },
+        { type: NgZone, },
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: NavController, decorators: [{ type: Optional },] },
+    ]; };
+    Content.propDecorators = {
+        '_fixedContent': [{ type: ViewChild, args: ['fixedContent', { read: ElementRef },] },],
+        '_scrollContent': [{ type: ViewChild, args: ['scrollContent', { read: ElementRef },] },],
+        'ionScrollStart': [{ type: Output },],
+        'ionScroll': [{ type: Output },],
+        'ionScrollEnd': [{ type: Output },],
+        'fullscreen': [{ type: Input },],
+        'scrollDownOnLoad': [{ type: Input },],
+    };
     return Content;
 }(Ion));
-Content.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-content',
-                template: '<div class="fixed-content" #fixedContent>' +
-                    '<ng-content select="[ion-fixed],ion-fab"></ng-content>' +
-                    '</div>' +
-                    '<div class="scroll-content" #scrollContent>' +
-                    '<ng-content></ng-content>' +
-                    '</div>' +
-                    '<ng-content select="ion-refresher"></ng-content>',
-                host: {
-                    '[class.statusbar-padding]': 'statusbarPadding',
-                    '[class.has-refresher]': '_hasRefresher'
-                },
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None
-            },] },
-];
-/**
- * @nocollapse
- */
-Content.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: DomController, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: App, },
-    { type: Keyboard, },
-    { type: NgZone, },
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: NavController, decorators: [{ type: Optional },] },
-]; };
-Content.propDecorators = {
-    '_fixedContent': [{ type: ViewChild, args: ['fixedContent', { read: ElementRef },] },],
-    '_scrollContent': [{ type: ViewChild, args: ['scrollContent', { read: ElementRef },] },],
-    'ionScrollStart': [{ type: Output },],
-    'ionScroll': [{ type: Output },],
-    'ionScrollEnd': [{ type: Output },],
-    'fullscreen': [{ type: Input },],
-    'scrollDownOnLoad': [{ type: Input },],
-};
 /**
  * @param {?} imgs
  * @param {?} viewableTop
@@ -43927,7 +44587,7 @@ function findReorderItem(node, listNode) {
 /**
  * @hidden
  */
-var ItemReorderGesture = (function () {
+var ItemReorderGesture = /** @class */ (function () {
     /**
      * @param {?} plt
      * @param {?} reorderList
@@ -44088,7 +44748,7 @@ var AUTO_SCROLL_MARGIN = 60;
 var SCROLL_JUMP = 10;
 var ITEM_REORDER_ACTIVE = 'reorder-active';
 
-var ReorderIndexes = (function () {
+var ReorderIndexes = /** @class */ (function () {
     /**
      * @param {?} from
      * @param {?} to
@@ -44228,7 +44888,7 @@ var ReorderIndexes = (function () {
  * @see {\@link ../../list/List List API Docs}
  * @see {\@link ../Item Item API Docs}
  */
-var ItemReorder = (function () {
+var ItemReorder = /** @class */ (function () {
     /**
      * @param {?} _plt
      * @param {?} _dom
@@ -44419,36 +45079,36 @@ var ItemReorder = (function () {
     ItemReorder.prototype.getNativeElement = function () {
         return this._element;
     };
+    ItemReorder.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-list[reorder],ion-item-group[reorder]',
+                    host: {
+                        '[class.reorder-enabled]': '_enableReorder',
+                        '[class.reorder-visible]': '_visibleReorder',
+                        '[class.reorder-side-start]': '_isStart'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ItemReorder.ctorParameters = function () { return [
+        { type: Platform, },
+        { type: DomController, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: NgZone, },
+        { type: Content, decorators: [{ type: Optional },] },
+    ]; };
+    ItemReorder.propDecorators = {
+        'ionItemReorder': [{ type: Output },],
+        'side': [{ type: Input, args: ['side',] },],
+        'reorder': [{ type: Input },],
+    };
     return ItemReorder;
 }());
-ItemReorder.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-list[reorder],ion-item-group[reorder]',
-                host: {
-                    '[class.reorder-enabled]': '_enableReorder',
-                    '[class.reorder-visible]': '_visibleReorder',
-                    '[class.reorder-side-start]': '_isStart'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-ItemReorder.ctorParameters = function () { return [
-    { type: Platform, },
-    { type: DomController, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: NgZone, },
-    { type: Content, decorators: [{ type: Optional },] },
-]; };
-ItemReorder.propDecorators = {
-    'ionItemReorder': [{ type: Output },],
-    'side': [{ type: Input, args: ['side',] },],
-    'reorder': [{ type: Input },],
-};
 
-var __extends$42 = (undefined && undefined.__extends) || (function () {
+var __extends$39 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -44720,8 +45380,8 @@ var __extends$42 = (undefined && undefined.__extends) || (function () {
  * @see {\@link ../../list/List List API Docs}
  * @see {\@link ../ItemSliding ItemSliding API Docs}
  */
-var Item = (function (_super) {
-    __extends$42(Item, _super);
+var Item = /** @class */ (function (_super) {
+    __extends$39(Item, _super);
     /**
      * @param {?} form
      * @param {?} config
@@ -44868,49 +45528,49 @@ var Item = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Item.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-list-header,ion-item,[ion-item],ion-item-divider',
+                    template: '<ng-content select="[item-start],[item-left],ion-checkbox:not([item-end]):not([item-right])"></ng-content>' +
+                        '<div class="item-inner">' +
+                        '<div class="input-wrapper">' +
+                        '<ng-content select="ion-label"></ng-content>' +
+                        '<ion-label *ngIf="_viewLabel">' +
+                        '<ng-content></ng-content>' +
+                        '</ion-label>' +
+                        '<ng-content select="ion-select,ion-input,ion-textarea,ion-datetime,ion-range,[item-content]"></ng-content>' +
+                        '</div>' +
+                        '<ng-content select="[item-end],[item-right],ion-radio,ion-toggle"></ng-content>' +
+                        '<ion-reorder *ngIf="_hasReorder"></ion-reorder>' +
+                        '</div>' +
+                        '<div class="button-effect"></div>',
+                    host: {
+                        'class': 'item'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Item.ctorParameters = function () { return [
+        { type: Form, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: ItemReorder, decorators: [{ type: Optional },] },
+    ]; };
+    Item.propDecorators = {
+        'contentLabel': [{ type: ContentChild, args: [Label,] },],
+        'viewLabel': [{ type: ViewChild, args: [Label,] },],
+        '_buttons': [{ type: ContentChildren, args: [Button,] },],
+        '_icons': [{ type: ContentChildren, args: [Icon,] },],
+    };
     return Item;
 }(Ion));
-Item.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-list-header,ion-item,[ion-item],ion-item-divider',
-                template: '<ng-content select="[item-start],[item-left],ion-checkbox:not([item-end]):not([item-right])"></ng-content>' +
-                    '<div class="item-inner">' +
-                    '<div class="input-wrapper">' +
-                    '<ng-content select="ion-label"></ng-content>' +
-                    '<ion-label *ngIf="_viewLabel">' +
-                    '<ng-content></ng-content>' +
-                    '</ion-label>' +
-                    '<ng-content select="ion-select,ion-input,ion-textarea,ion-datetime,ion-range,[item-content]"></ng-content>' +
-                    '</div>' +
-                    '<ng-content select="[item-end],[item-right],ion-radio,ion-toggle"></ng-content>' +
-                    '<ion-reorder *ngIf="_hasReorder"></ion-reorder>' +
-                    '</div>' +
-                    '<div class="button-effect"></div>',
-                host: {
-                    'class': 'item'
-                },
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Item.ctorParameters = function () { return [
-    { type: Form, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: ItemReorder, decorators: [{ type: Optional },] },
-]; };
-Item.propDecorators = {
-    'contentLabel': [{ type: ContentChild, args: [Label,] },],
-    'viewLabel': [{ type: ViewChild, args: [Label,] },],
-    '_buttons': [{ type: ContentChildren, args: [Button,] },],
-    '_icons': [{ type: ContentChildren, args: [Icon,] },],
-};
 
-var __extends$36 = (undefined && undefined.__extends) || (function () {
+var __extends$34 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -44986,8 +45646,8 @@ var __extends$36 = (undefined && undefined.__extends) || (function () {
  * \@demo /docs/demos/src/checkbox/
  * @see {\@link /docs/components#checkbox Checkbox Component Docs}
  */
-var Checkbox = (function (_super) {
-    __extends$36(Checkbox, _super);
+var Checkbox = /** @class */ (function (_super) {
+    __extends$34(Checkbox, _super);
     /**
      * @param {?} config
      * @param {?} form
@@ -45042,46 +45702,46 @@ var Checkbox = (function (_super) {
     Checkbox.prototype._inputUpdated = function () {
         this._item && this._item.setElementClass('item-checkbox-checked', this._value);
     };
+    Checkbox.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-checkbox',
+                    template: '<div class="checkbox-icon" [class.checkbox-checked]="_value">' +
+                        '<div class="checkbox-inner"></div>' +
+                        '</div>' +
+                        '<button role="checkbox" ' +
+                        'type="button" ' +
+                        'ion-button="item-cover" ' +
+                        '[id]="id" ' +
+                        '[attr.aria-checked]="_value" ' +
+                        '[attr.aria-labelledby]="_labelId" ' +
+                        '[attr.aria-disabled]="_disabled" ' +
+                        'class="item-cover"> ' +
+                        '</button>',
+                    host: {
+                        '[class.checkbox-disabled]': '_disabled'
+                    },
+                    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Checkbox, multi: true }],
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Checkbox.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Form, },
+        { type: Item, decorators: [{ type: Optional },] },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    Checkbox.propDecorators = {
+        'checked': [{ type: Input },],
+        '_click': [{ type: HostListener, args: ['click', ['$event'],] },],
+    };
     return Checkbox;
 }(BaseInput));
-Checkbox.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-checkbox',
-                template: '<div class="checkbox-icon" [class.checkbox-checked]="_value">' +
-                    '<div class="checkbox-inner"></div>' +
-                    '</div>' +
-                    '<button role="checkbox" ' +
-                    'type="button" ' +
-                    'ion-button="item-cover" ' +
-                    '[id]="id" ' +
-                    '[attr.aria-checked]="_value" ' +
-                    '[attr.aria-labelledby]="_labelId" ' +
-                    '[attr.aria-disabled]="_disabled" ' +
-                    'class="item-cover"> ' +
-                    '</button>',
-                host: {
-                    '[class.checkbox-disabled]': '_disabled'
-                },
-                providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Checkbox, multi: true }],
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Checkbox.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Form, },
-    { type: Item, decorators: [{ type: Optional },] },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-Checkbox.propDecorators = {
-    'checked': [{ type: Input },],
-    '_click': [{ type: HostListener, args: ['click', ['$event'],] },],
-};
 
-var __extends$46 = (undefined && undefined.__extends) || (function () {
+var __extends$43 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -45179,8 +45839,8 @@ var __extends$46 = (undefined && undefined.__extends) || (function () {
  * \@demo /docs/demos/src/chip/
  *
  */
-var Chip = (function (_super) {
-    __extends$46(Chip, _super);
+var Chip = /** @class */ (function (_super) {
+    __extends$43(Chip, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -45189,21 +45849,21 @@ var Chip = (function (_super) {
     function Chip(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'chip') || this;
     }
+    Chip.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-chip'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Chip.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
     return Chip;
 }(Ion));
-Chip.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-chip'
-            },] },
-];
-/**
- * @nocollapse
- */
-Chip.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 
 /**
  * \@name Haptic
@@ -45224,7 +45884,7 @@ Chip.ctorParameters = function () { return [
  *
  * ```
  */
-var Haptic = (function () {
+var Haptic = /** @class */ (function () {
     /**
      * @param {?} plt
      */
@@ -45292,17 +45952,17 @@ var Haptic = (function () {
     Haptic.prototype.impact = function (options) {
         this._p && this._p.impact(options);
     };
+    Haptic.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    Haptic.ctorParameters = function () { return [
+        { type: Platform, },
+    ]; };
     return Haptic;
 }());
-Haptic.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-Haptic.ctorParameters = function () { return [
-    { type: Platform, },
-]; };
 
 var PICKER_OPT_SELECTED = 'picker-opt-selected';
 var DECELERATION_FRICTION$1 = 0.97;
@@ -45312,7 +45972,7 @@ var MAX_PICKER_SPEED = 60;
 /**
  * @hidden
  */
-var PickerColumnCmp = (function () {
+var PickerColumnCmp = /** @class */ (function () {
     /**
      * @param {?} config
      * @param {?} _plt
@@ -45584,7 +46244,7 @@ var PickerColumnCmp = (function () {
         var /** @type {?} */ scaleStr = "scale(" + this.scaleFactor + ")";
         for (i = 0; i < length; i++) {
             button = children[i];
-            opt = (this.col.options[i]);
+            opt = /** @type {?} */ (this.col.options[i]);
             optOffset = (i * this.optHeight) + y;
             visible = true;
             transform = '';
@@ -45680,49 +46340,49 @@ var PickerColumnCmp = (function () {
             this.update(y, 150, true, false);
         }
     };
+    PickerColumnCmp.decorators = [
+        { type: Component, args: [{
+                    selector: '.picker-col',
+                    template: '<div *ngIf="col.prefix" class="picker-prefix" [style.width]="col.prefixWidth">{{col.prefix}}</div>' +
+                        '<div class="picker-opts" #colEle [style.max-width]="col.optionsWidth">' +
+                        '<button *ngFor="let o of col.options; let i=index"' +
+                        '[class.picker-opt-disabled]="o.disabled" ' +
+                        'class="picker-opt" disable-activated (click)="optClick($event, i)">' +
+                        '{{o.text}}' +
+                        '</button>' +
+                        '</div>' +
+                        '<div *ngIf="col.suffix" class="picker-suffix" [style.width]="col.suffixWidth">{{col.suffix}}</div>',
+                    host: {
+                        '[style.max-width]': 'col.columnWidth',
+                        '[class.picker-opts-left]': 'col.align=="left"',
+                        '[class.picker-opts-right]': 'col.align=="right"',
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    PickerColumnCmp.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: ElementRef, },
+        { type: NgZone, },
+        { type: Haptic, },
+        { type: Platform, },
+        { type: DomController, },
+    ]; };
+    PickerColumnCmp.propDecorators = {
+        'colEle': [{ type: ViewChild, args: ['colEle',] },],
+        'col': [{ type: Input },],
+        'ionChange': [{ type: Output },],
+    };
     return PickerColumnCmp;
 }());
-PickerColumnCmp.decorators = [
-    { type: Component, args: [{
-                selector: '.picker-col',
-                template: '<div *ngIf="col.prefix" class="picker-prefix" [style.width]="col.prefixWidth">{{col.prefix}}</div>' +
-                    '<div class="picker-opts" #colEle [style.max-width]="col.optionsWidth">' +
-                    '<button *ngFor="let o of col.options; let i=index"' +
-                    '[class.picker-opt-disabled]="o.disabled" ' +
-                    'class="picker-opt" disable-activated (click)="optClick($event, i)">' +
-                    '{{o.text}}' +
-                    '</button>' +
-                    '</div>' +
-                    '<div *ngIf="col.suffix" class="picker-suffix" [style.width]="col.suffixWidth">{{col.suffix}}</div>',
-                host: {
-                    '[style.max-width]': 'col.columnWidth',
-                    '[class.picker-opts-left]': 'col.align=="left"',
-                    '[class.picker-opts-right]': 'col.align=="right"',
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-PickerColumnCmp.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: ElementRef, },
-    { type: NgZone, },
-    { type: Haptic, },
-    { type: Platform, },
-    { type: DomController, },
-]; };
-PickerColumnCmp.propDecorators = {
-    'colEle': [{ type: ViewChild, args: ['colEle',] },],
-    'col': [{ type: Input },],
-    'ionChange': [{ type: Output },],
-};
 
 /**
  * @hidden
  */
-var PickerCmp = (function () {
+var PickerCmp = /** @class */ (function () {
     /**
      * @param {?} _viewCtrl
      * @param {?} _elementRef
@@ -45919,36 +46579,36 @@ var PickerCmp = (function () {
         (void 0) /* assert */;
         this._gestureBlocker.destroy();
     };
+    PickerCmp.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-picker-cmp',
+                    template: "\n    <ion-backdrop (click)=\"bdClick()\"></ion-backdrop>\n    <div class=\"picker-wrapper\">\n      <div class=\"picker-toolbar\">\n        <div *ngFor=\"let b of d.buttons\" class=\"picker-toolbar-button\" [ngClass]=\"b.cssRole\">\n          <button ion-button (click)=\"btnClick(b)\" [ngClass]=\"b.cssClass\" class=\"picker-button\" clear>\n            {{b.text}}\n          </button>\n        </div>\n      </div>\n      <div class=\"picker-columns\">\n        <div class=\"picker-above-highlight\"></div>\n        <div *ngFor=\"let c of d.columns\" [col]=\"c\" class=\"picker-col\" (ionChange)=\"_colChange($event)\"></div>\n        <div class=\"picker-below-highlight\"></div>\n      </div>\n    </div>\n  ",
+                    host: {
+                        'role': 'dialog'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    PickerCmp.ctorParameters = function () { return [
+        { type: ViewController, },
+        { type: ElementRef, },
+        { type: Config, },
+        { type: GestureController, },
+        { type: NavParams, },
+        { type: Renderer, },
+    ]; };
+    PickerCmp.propDecorators = {
+        '_cols': [{ type: ViewChildren, args: [PickerColumnCmp,] },],
+        '_keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     return PickerCmp;
 }());
-PickerCmp.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-picker-cmp',
-                template: "\n    <ion-backdrop (click)=\"bdClick()\"></ion-backdrop>\n    <div class=\"picker-wrapper\">\n      <div class=\"picker-toolbar\">\n        <div *ngFor=\"let b of d.buttons\" class=\"picker-toolbar-button\" [ngClass]=\"b.cssRole\">\n          <button ion-button (click)=\"btnClick(b)\" [ngClass]=\"b.cssClass\" class=\"picker-button\" clear>\n            {{b.text}}\n          </button>\n        </div>\n      </div>\n      <div class=\"picker-columns\">\n        <div class=\"picker-above-highlight\"></div>\n        <div *ngFor=\"let c of d.columns\" [col]=\"c\" class=\"picker-col\" (ionChange)=\"_colChange($event)\"></div>\n        <div class=\"picker-below-highlight\"></div>\n      </div>\n    </div>\n  ",
-                host: {
-                    'role': 'dialog'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-PickerCmp.ctorParameters = function () { return [
-    { type: ViewController, },
-    { type: ElementRef, },
-    { type: Config, },
-    { type: GestureController, },
-    { type: NavParams, },
-    { type: Renderer, },
-]; };
-PickerCmp.propDecorators = {
-    '_cols': [{ type: ViewChildren, args: [PickerColumnCmp,] },],
-    '_keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
-};
 var pickerIds = -1;
 
-var __extends$49 = (undefined && undefined.__extends) || (function () {
+var __extends$46 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -45961,8 +46621,8 @@ var __extends$49 = (undefined && undefined.__extends) || (function () {
 /**
  * Animations for pickers
  */
-var PickerSlideIn = (function (_super) {
-    __extends$49(PickerSlideIn, _super);
+var PickerSlideIn = /** @class */ (function (_super) {
+    __extends$46(PickerSlideIn, _super);
     function PickerSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -45979,8 +46639,8 @@ var PickerSlideIn = (function (_super) {
     };
     return PickerSlideIn;
 }(Transition));
-var PickerSlideOut = (function (_super) {
-    __extends$49(PickerSlideOut, _super);
+var PickerSlideOut = /** @class */ (function (_super) {
+    __extends$46(PickerSlideOut, _super);
     function PickerSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -45998,7 +46658,7 @@ var PickerSlideOut = (function (_super) {
     return PickerSlideOut;
 }(Transition));
 
-var __extends$48 = (undefined && undefined.__extends) || (function () {
+var __extends$45 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -46011,8 +46671,8 @@ var __extends$48 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var Picker = (function (_super) {
-    __extends$48(Picker, _super);
+var Picker = /** @class */ (function (_super) {
+    __extends$45(Picker, _super);
     /**
      * @param {?} app
      * @param {?=} opts
@@ -46096,11 +46756,11 @@ var Picker = (function (_super) {
         if (navOptions === void 0) { navOptions = {}; }
         return this._app.present(this, navOptions);
     };
+    Picker.propDecorators = {
+        'ionChange': [{ type: Output },],
+    };
     return Picker;
 }(ViewController));
-Picker.propDecorators = {
-    'ionChange': [{ type: Output },],
-};
 
 /**
  * @hidden
@@ -46108,7 +46768,7 @@ Picker.propDecorators = {
  * \@description
  *
  */
-var PickerController = (function () {
+var PickerController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -46126,18 +46786,18 @@ var PickerController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Picker(this._app, opts, this.config);
     };
+    PickerController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    PickerController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+    ]; };
     return PickerController;
 }());
-PickerController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-PickerController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-]; };
 
 /**
  * @param {?} template
@@ -46642,7 +47302,7 @@ var VALID_AMPM_PREFIX = [
     FORMAT_hh, FORMAT_h, FORMAT_mm, FORMAT_m, FORMAT_ss, FORMAT_s
 ];
 
-var __extends$47 = (undefined && undefined.__extends) || (function () {
+var __extends$44 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -46891,8 +47551,8 @@ var __extends$47 = (undefined && undefined.__extends) || (function () {
  *
  * \@demo /docs/demos/src/datetime/
  */
-var DateTime = (function (_super) {
-    __extends$47(DateTime, _super);
+var DateTime = /** @class */ (function (_super) {
+    __extends$44(DateTime, _super);
     /**
      * @param {?} form
      * @param {?} config
@@ -47290,61 +47950,61 @@ var DateTime = (function (_super) {
             }
         }
     };
+    DateTime.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-datetime',
+                    template: '<div *ngIf="!_text" class="datetime-text datetime-placeholder">{{placeholder}}</div>' +
+                        '<div *ngIf="_text" class="datetime-text">{{_text}}</div>' +
+                        '<button aria-haspopup="true" ' +
+                        'type="button" ' +
+                        '[id]="id" ' +
+                        'ion-button="item-cover" ' +
+                        '[attr.aria-labelledby]="_labelId" ' +
+                        '[attr.aria-disabled]="_disabled" ' +
+                        'class="item-cover">' +
+                        '</button>',
+                    host: {
+                        '[class.datetime-disabled]': '_disabled'
+                    },
+                    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: DateTime, multi: true }],
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    DateTime.ctorParameters = function () { return [
+        { type: Form, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Item, decorators: [{ type: Optional },] },
+        { type: PickerController, decorators: [{ type: Optional },] },
+    ]; };
+    DateTime.propDecorators = {
+        'min': [{ type: Input },],
+        'max': [{ type: Input },],
+        'displayFormat': [{ type: Input },],
+        'pickerFormat': [{ type: Input },],
+        'cancelText': [{ type: Input },],
+        'doneText': [{ type: Input },],
+        'yearValues': [{ type: Input },],
+        'monthValues': [{ type: Input },],
+        'dayValues': [{ type: Input },],
+        'hourValues': [{ type: Input },],
+        'minuteValues': [{ type: Input },],
+        'monthNames': [{ type: Input },],
+        'monthShortNames': [{ type: Input },],
+        'dayNames': [{ type: Input },],
+        'dayShortNames': [{ type: Input },],
+        'pickerOptions': [{ type: Input },],
+        'placeholder': [{ type: Input },],
+        'ionCancel': [{ type: Output },],
+        '_click': [{ type: HostListener, args: ['click', ['$event'],] },],
+        '_keyup': [{ type: HostListener, args: ['keyup.space',] },],
+    };
     return DateTime;
 }(BaseInput));
-DateTime.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-datetime',
-                template: '<div *ngIf="!_text" class="datetime-text datetime-placeholder">{{placeholder}}</div>' +
-                    '<div *ngIf="_text" class="datetime-text">{{_text}}</div>' +
-                    '<button aria-haspopup="true" ' +
-                    'type="button" ' +
-                    '[id]="id" ' +
-                    'ion-button="item-cover" ' +
-                    '[attr.aria-labelledby]="_labelId" ' +
-                    '[attr.aria-disabled]="_disabled" ' +
-                    'class="item-cover">' +
-                    '</button>',
-                host: {
-                    '[class.datetime-disabled]': '_disabled'
-                },
-                providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: DateTime, multi: true }],
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-DateTime.ctorParameters = function () { return [
-    { type: Form, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Item, decorators: [{ type: Optional },] },
-    { type: PickerController, decorators: [{ type: Optional },] },
-]; };
-DateTime.propDecorators = {
-    'min': [{ type: Input },],
-    'max': [{ type: Input },],
-    'displayFormat': [{ type: Input },],
-    'pickerFormat': [{ type: Input },],
-    'cancelText': [{ type: Input },],
-    'doneText': [{ type: Input },],
-    'yearValues': [{ type: Input },],
-    'monthValues': [{ type: Input },],
-    'dayValues': [{ type: Input },],
-    'hourValues': [{ type: Input },],
-    'minuteValues': [{ type: Input },],
-    'monthNames': [{ type: Input },],
-    'monthShortNames': [{ type: Input },],
-    'dayNames': [{ type: Input },],
-    'dayShortNames': [{ type: Input },],
-    'pickerOptions': [{ type: Input },],
-    'placeholder': [{ type: Input },],
-    'ionCancel': [{ type: Output },],
-    '_click': [{ type: HostListener, args: ['click', ['$event'],] },],
-    '_keyup': [{ type: HostListener, args: ['keyup.space',] },],
-};
 /**
  * @hidden
  * Use to convert a string of comma separated numbers or
@@ -47399,7 +48059,7 @@ function convertToArrayOfStrings(input, type) {
 }
 var DEFAULT_FORMAT = 'MMM D, YYYY';
 
-var __extends$50 = (undefined && undefined.__extends) || (function () {
+var __extends$47 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -47454,8 +48114,8 @@ var __extends$50 = (undefined && undefined.__extends) || (function () {
  * \@demo /docs/demos/src/fab/
  * @see {\@link /docs/components#fabs FAB Component Docs}
  */
-var FabButton = (function (_super) {
-    __extends$50(FabButton, _super);
+var FabButton = /** @class */ (function (_super) {
+    __extends$47(FabButton, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -47472,28 +48132,28 @@ var FabButton = (function (_super) {
     FabButton.prototype.setActiveClose = function (closeVisible) {
         this.setElementClass('fab-close-active', closeVisible);
     };
+    FabButton.decorators = [
+        { type: Component, args: [{
+                    selector: '[ion-fab]',
+                    template: '<ion-icon name="close" class="fab-close-icon"></ion-icon>' +
+                        '<span class="button-inner">' +
+                        '<ng-content></ng-content>' +
+                        '</span>' +
+                        '<div class="button-effect"></div>',
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    FabButton.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
     return FabButton;
 }(Ion));
-FabButton.decorators = [
-    { type: Component, args: [{
-                selector: '[ion-fab]',
-                template: '<ion-icon name="close" class="fab-close-icon"></ion-icon>' +
-                    '<span class="button-inner">' +
-                    '<ng-content></ng-content>' +
-                    '</span>' +
-                    '<div class="button-effect"></div>',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-FabButton.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 
 /**
  * \@name FabList
@@ -47519,7 +48179,7 @@ FabButton.ctorParameters = function () { return [
  * \@demo /docs/demos/src/fab/
  * @see {\@link /docs/components#fab Fab Component Docs}
  */
-var FabList = (function () {
+var FabList = /** @class */ (function () {
     /**
      * @param {?} _elementRef
      * @param {?} _renderer
@@ -47585,25 +48245,25 @@ var FabList = (function () {
     FabList.prototype.setElementClass = function (className, add) {
         this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     };
+    FabList.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-fab-list',
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    FabList.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Config, },
+        { type: Platform, },
+    ]; };
+    FabList.propDecorators = {
+        '_setbuttons': [{ type: ContentChildren, args: [FabButton,] },],
+    };
     return FabList;
 }());
-FabList.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-fab-list',
-            },] },
-];
-/**
- * @nocollapse
- */
-FabList.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Config, },
-    { type: Platform, },
-]; };
-FabList.propDecorators = {
-    '_setbuttons': [{ type: ContentChildren, args: [FabButton,] },],
-};
 
 /**
  * \@name FabContainer
@@ -47686,7 +48346,7 @@ FabList.propDecorators = {
  * \@demo /docs/demos/src/fab/
  * @see {\@link /docs/components#fabs FAB Component Docs}
  */
-var FabContainer = (function () {
+var FabContainer = /** @class */ (function () {
     /**
      * @param {?} plt
      */
@@ -47769,24 +48429,24 @@ var FabContainer = (function () {
     FabContainer.prototype.ngOnDestroy = function () {
         this._events.destroy();
     };
+    FabContainer.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-fab',
+                    template: '<ng-content></ng-content>'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    FabContainer.ctorParameters = function () { return [
+        { type: Platform, },
+    ]; };
+    FabContainer.propDecorators = {
+        '_mainButton': [{ type: ContentChild, args: [FabButton,] },],
+        '_fabLists': [{ type: ContentChildren, args: [FabList,] },],
+    };
     return FabContainer;
 }());
-FabContainer.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-fab',
-                template: '<ng-content></ng-content>'
-            },] },
-];
-/**
- * @nocollapse
- */
-FabContainer.ctorParameters = function () { return [
-    { type: Platform, },
-]; };
-FabContainer.propDecorators = {
-    '_mainButton': [{ type: ContentChild, args: [FabButton,] },],
-    '_fabLists': [{ type: ContentChildren, args: [FabList,] },],
-};
 
 /**
  * \@name Col
@@ -47811,23 +48471,23 @@ FabContainer.propDecorators = {
  *
  *
  */
-var Col = (function () {
+var Col = /** @class */ (function () {
     function Col() {
     }
+    Col.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-col, [ion-col]',
+                    host: {
+                        'class': 'col'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Col.ctorParameters = function () { return []; };
     return Col;
 }());
-Col.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-col, [ion-col]',
-                host: {
-                    'class': 'col'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Col.ctorParameters = function () { return []; };
 
 /**
  * \@name Grid
@@ -48363,23 +49023,23 @@ Col.ctorParameters = function () { return []; };
  * ```
  *
  */
-var Grid = (function () {
+var Grid = /** @class */ (function () {
     function Grid() {
     }
+    Grid.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-grid, [ion-grid]',
+                    host: {
+                        'class': 'grid'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Grid.ctorParameters = function () { return []; };
     return Grid;
 }());
-Grid.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-grid, [ion-grid]',
-                host: {
-                    'class': 'grid'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Grid.ctorParameters = function () { return []; };
 
 /**
  * \@name Row
@@ -48411,23 +49071,23 @@ Grid.ctorParameters = function () { return []; };
  *
  *
  */
-var Row = (function () {
+var Row = /** @class */ (function () {
     function Row() {
     }
+    Row.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-row, [ion-row]',
+                    host: {
+                        'class': 'row'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Row.ctorParameters = function () { return []; };
     return Row;
 }());
-Row.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-row, [ion-row]',
-                host: {
-                    'class': 'row'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Row.ctorParameters = function () { return []; };
 
 /**
  * \@name Img
@@ -48512,7 +49172,7 @@ Row.ctorParameters = function () { return []; };
  * currently working on.
  *
  */
-var Img = (function () {
+var Img = /** @class */ (function () {
     /**
      * @param {?} _elementRef
      * @param {?} _renderer
@@ -48816,34 +49476,34 @@ var Img = (function () {
         this._unreg && this._unreg();
         this._content && this._content.removeImg(this);
     };
+    Img.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-img',
+                    template: '<img>',
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Img.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Platform, },
+        { type: Content, decorators: [{ type: Optional },] },
+        { type: DomController, },
+    ]; };
+    Img.propDecorators = {
+        'src': [{ type: Input },],
+        'bounds': [{ type: Input },],
+        'cache': [{ type: Input },],
+        'width': [{ type: Input },],
+        'height': [{ type: Input },],
+        'alt': [{ type: Input },],
+    };
     return Img;
 }());
-Img.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-img',
-                template: '<img>',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Img.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Platform, },
-    { type: Content, decorators: [{ type: Optional },] },
-    { type: DomController, },
-]; };
-Img.propDecorators = {
-    'src': [{ type: Input },],
-    'bounds': [{ type: Input },],
-    'cache': [{ type: Input },],
-    'width': [{ type: Input },],
-    'height': [{ type: Input },],
-    'alt': [{ type: Input },],
-};
 /**
  * @param {?} val
  * @return {?}
@@ -48999,7 +49659,7 @@ function getUnitValue(val) {
  * \@demo /docs/demos/src/infinite-scroll/
  *
  */
-var InfiniteScroll = (function () {
+var InfiniteScroll = /** @class */ (function () {
     /**
      * @param {?} _content
      * @param {?} _zone
@@ -49270,28 +49930,28 @@ var InfiniteScroll = (function () {
     InfiniteScroll.prototype.ngOnDestroy = function () {
         this._setListeners(false);
     };
+    InfiniteScroll.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-infinite-scroll'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    InfiniteScroll.ctorParameters = function () { return [
+        { type: Content, },
+        { type: NgZone, },
+        { type: ElementRef, },
+        { type: DomController, },
+    ]; };
+    InfiniteScroll.propDecorators = {
+        'threshold': [{ type: Input },],
+        'enabled': [{ type: Input },],
+        'position': [{ type: Input },],
+        'ionInfinite': [{ type: Output },],
+    };
     return InfiniteScroll;
 }());
-InfiniteScroll.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-infinite-scroll'
-            },] },
-];
-/**
- * @nocollapse
- */
-InfiniteScroll.ctorParameters = function () { return [
-    { type: Content, },
-    { type: NgZone, },
-    { type: ElementRef, },
-    { type: DomController, },
-]; };
-InfiniteScroll.propDecorators = {
-    'threshold': [{ type: Input },],
-    'enabled': [{ type: Input },],
-    'position': [{ type: Input },],
-    'ionInfinite': [{ type: Output },],
-};
 var STATE_ENABLED = 'enabled';
 var STATE_DISABLED = 'disabled';
 var STATE_LOADING = 'loading';
@@ -49301,7 +49961,7 @@ var POSITION_BOTTOM = 'bottom';
 /**
  * @hidden
  */
-var InfiniteScrollContent = (function () {
+var InfiniteScrollContent = /** @class */ (function () {
     /**
      * @param {?} inf
      * @param {?} _config
@@ -49319,36 +49979,36 @@ var InfiniteScrollContent = (function () {
             this.loadingSpinner = this._config.get('infiniteLoadingSpinner', this._config.get('spinner', 'ios'));
         }
     };
+    InfiniteScrollContent.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-infinite-scroll-content',
+                    template: '<div class="infinite-loading">' +
+                        '<div class="infinite-loading-spinner" *ngIf="loadingSpinner">' +
+                        '<ion-spinner [name]="loadingSpinner"></ion-spinner>' +
+                        '</div>' +
+                        '<div class="infinite-loading-text" [innerHTML]="loadingText" *ngIf="loadingText"></div>' +
+                        '</div>',
+                    host: {
+                        '[attr.state]': 'inf.state'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    InfiniteScrollContent.ctorParameters = function () { return [
+        { type: InfiniteScroll, },
+        { type: Config, },
+    ]; };
+    InfiniteScrollContent.propDecorators = {
+        'loadingSpinner': [{ type: Input },],
+        'loadingText': [{ type: Input },],
+    };
     return InfiniteScrollContent;
 }());
-InfiniteScrollContent.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-infinite-scroll-content',
-                template: '<div class="infinite-loading">' +
-                    '<div class="infinite-loading-spinner" *ngIf="loadingSpinner">' +
-                    '<ion-spinner [name]="loadingSpinner"></ion-spinner>' +
-                    '</div>' +
-                    '<div class="infinite-loading-text" [innerHTML]="loadingText" *ngIf="loadingText"></div>' +
-                    '</div>',
-                host: {
-                    '[attr.state]': 'inf.state'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-InfiniteScrollContent.ctorParameters = function () { return [
-    { type: InfiniteScroll, },
-    { type: Config, },
-]; };
-InfiniteScrollContent.propDecorators = {
-    'loadingSpinner': [{ type: Input },],
-    'loadingText': [{ type: Input },],
-};
 
-var __extends$52 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+var __extends$49 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -49407,7 +50067,7 @@ var TakeUntilOperator = (function () {
  * @extends {Ignored}
  */
 var TakeUntilSubscriber = (function (_super) {
-    __extends$52(TakeUntilSubscriber, _super);
+    __extends$49(TakeUntilSubscriber, _super);
     function TakeUntilSubscriber(destination, notifier) {
         _super.call(this, destination);
         this.notifier = notifier;
@@ -49428,7 +50088,7 @@ var takeUntil_1 = {
 
 Observable_1.Observable.prototype.takeUntil = takeUntil_1.takeUntil;
 
-var __extends$51 = (undefined && undefined.__extends) || (function () {
+var __extends$48 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -49502,8 +50162,8 @@ var __extends$51 = (undefined && undefined.__extends) || (function () {
  *
  * \@demo /docs/demos/src/input/
  */
-var TextInput = (function (_super) {
-    __extends$51(TextInput, _super);
+var TextInput = /** @class */ (function (_super) {
+    __extends$48(TextInput, _super);
     /**
      * @param {?} config
      * @param {?} _plt
@@ -49850,7 +50510,7 @@ var TextInput = (function (_super) {
             return this._scrollData;
         }
         var /** @type {?} */ ele = this._elementRef.nativeElement;
-        ele = (ele.closest('ion-item,[ion-item]')) || ele;
+        ele = /** @type {?} */ (ele.closest('ion-item,[ion-item]')) || ele;
         return this._scrollData = getScrollData(ele.offsetTop, ele.offsetHeight, this._content.getContentDimensions(), this._keyboardHeight, this._plt.height());
     };
     /**
@@ -50020,85 +50680,85 @@ var TextInput = (function (_super) {
             _this.setFocus();
         });
     };
+    TextInput.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-input,ion-textarea',
+                    template: '<input #textInput *ngIf="!_isTextarea" class="text-input" ' +
+                        '[ngClass]="\'text-input-\' + _mode"' +
+                        '(input)="onInput($event)" ' +
+                        '(blur)="onBlur($event)" ' +
+                        '(focus)="onFocus($event)" ' +
+                        '(keydown)="onKeydown($event)" ' +
+                        '[type]="_type" ' +
+                        '[attr.aria-labelledby]="_labelId" ' +
+                        '[attr.min]="min" ' +
+                        '[attr.max]="max" ' +
+                        '[attr.step]="step" ' +
+                        '[attr.autocomplete]="autocomplete" ' +
+                        '[attr.autocorrect]="autocorrect" ' +
+                        '[placeholder]="placeholder" ' +
+                        '[disabled]="_disabled" ' +
+                        '[readonly]="_readonly">' +
+                        '<textarea #textInput *ngIf="_isTextarea" class="text-input" ' +
+                        '[ngClass]="\'text-input-\' + _mode"' +
+                        '(input)="onInput($event)" ' +
+                        '(blur)="onBlur($event)" ' +
+                        '(focus)="onFocus($event)" ' +
+                        '(keydown)="onKeydown($event)" ' +
+                        '[attr.aria-labelledby]="_labelId" ' +
+                        '[attr.autocomplete]="autocomplete" ' +
+                        '[attr.autocorrect]="autocorrect" ' +
+                        '[placeholder]="placeholder" ' +
+                        '[disabled]="_disabled" ' +
+                        '[readonly]="_readonly"></textarea>' +
+                        '<button ion-button *ngIf="_clearInput" clear class="text-input-clear-icon" ' +
+                        'type="button" ' +
+                        '(click)="clearTextInput($event)" ' +
+                        '(mousedown)="clearTextInput($event)" ' +
+                        'tabindex="-1"></button>' +
+                        '<div class="input-cover" *ngIf="_useAssist" ' +
+                        '(touchstart)="_pointerStart($event)" ' +
+                        '(touchend)="_pointerEnd($event)" ' +
+                        '(mousedown)="_pointerStart($event)" ' +
+                        '(mouseup)="_pointerEnd($event)"></div>',
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    inputs: ['value']
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    TextInput.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: Form, },
+        { type: App, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Content, decorators: [{ type: Optional },] },
+        { type: Item, decorators: [{ type: Optional },] },
+        { type: NgControl, decorators: [{ type: Optional },] },
+        { type: DomController, },
+    ]; };
+    TextInput.propDecorators = {
+        'clearInput': [{ type: Input },],
+        'type': [{ type: Input },],
+        'readonly': [{ type: Input },],
+        'clearOnEdit': [{ type: Input },],
+        '_native': [{ type: ViewChild, args: ['textInput', { read: ElementRef },] },],
+        'autocomplete': [{ type: Input },],
+        'autocorrect': [{ type: Input },],
+        'placeholder': [{ type: Input },],
+        'min': [{ type: Input },],
+        'max': [{ type: Input },],
+        'step': [{ type: Input },],
+        'input': [{ type: Output },],
+        'blur': [{ type: Output },],
+        'focus': [{ type: Output },],
+    };
     return TextInput;
 }(BaseInput));
-TextInput.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-input,ion-textarea',
-                template: '<input #textInput *ngIf="!_isTextarea" class="text-input" ' +
-                    '[ngClass]="\'text-input-\' + _mode"' +
-                    '(input)="onInput($event)" ' +
-                    '(blur)="onBlur($event)" ' +
-                    '(focus)="onFocus($event)" ' +
-                    '(keydown)="onKeydown($event)" ' +
-                    '[type]="_type" ' +
-                    '[attr.aria-labelledby]="_labelId" ' +
-                    '[attr.min]="min" ' +
-                    '[attr.max]="max" ' +
-                    '[attr.step]="step" ' +
-                    '[attr.autocomplete]="autocomplete" ' +
-                    '[attr.autocorrect]="autocorrect" ' +
-                    '[placeholder]="placeholder" ' +
-                    '[disabled]="_disabled" ' +
-                    '[readonly]="_readonly">' +
-                    '<textarea #textInput *ngIf="_isTextarea" class="text-input" ' +
-                    '[ngClass]="\'text-input-\' + _mode"' +
-                    '(input)="onInput($event)" ' +
-                    '(blur)="onBlur($event)" ' +
-                    '(focus)="onFocus($event)" ' +
-                    '(keydown)="onKeydown($event)" ' +
-                    '[attr.aria-labelledby]="_labelId" ' +
-                    '[attr.autocomplete]="autocomplete" ' +
-                    '[attr.autocorrect]="autocorrect" ' +
-                    '[placeholder]="placeholder" ' +
-                    '[disabled]="_disabled" ' +
-                    '[readonly]="_readonly"></textarea>' +
-                    '<button ion-button *ngIf="_clearInput" clear class="text-input-clear-icon" ' +
-                    'type="button" ' +
-                    '(click)="clearTextInput($event)" ' +
-                    '(mousedown)="clearTextInput($event)" ' +
-                    'tabindex="-1"></button>' +
-                    '<div class="input-cover" *ngIf="_useAssist" ' +
-                    '(touchstart)="_pointerStart($event)" ' +
-                    '(touchend)="_pointerEnd($event)" ' +
-                    '(mousedown)="_pointerStart($event)" ' +
-                    '(mouseup)="_pointerEnd($event)"></div>',
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                inputs: ['value']
-            },] },
-];
-/**
- * @nocollapse
- */
-TextInput.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: Form, },
-    { type: App, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Content, decorators: [{ type: Optional },] },
-    { type: Item, decorators: [{ type: Optional },] },
-    { type: NgControl, decorators: [{ type: Optional },] },
-    { type: DomController, },
-]; };
-TextInput.propDecorators = {
-    'clearInput': [{ type: Input },],
-    'type': [{ type: Input },],
-    'readonly': [{ type: Input },],
-    'clearOnEdit': [{ type: Input },],
-    '_native': [{ type: ViewChild, args: ['textInput', { read: ElementRef },] },],
-    'autocomplete': [{ type: Input },],
-    'autocorrect': [{ type: Input },],
-    'placeholder': [{ type: Input },],
-    'min': [{ type: Input },],
-    'max': [{ type: Input },],
-    'step': [{ type: Input },],
-    'input': [{ type: Output },],
-    'blur': [{ type: Output },],
-    'focus': [{ type: Output },],
-};
 /**
  * \@name TextArea
  * \@description
@@ -50294,25 +50954,25 @@ function removeClone(plt, srcComponentEle, srcNativeInputEle) {
 /**
  * @hidden
  */
-var ItemContent = (function () {
+var ItemContent = /** @class */ (function () {
     function ItemContent() {
     }
+    ItemContent.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-item,[ion-item]',
+                    host: {
+                        'class': 'item-block'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ItemContent.ctorParameters = function () { return []; };
     return ItemContent;
 }());
-ItemContent.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-item,[ion-item]',
-                host: {
-                    'class': 'item-block'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-ItemContent.ctorParameters = function () { return []; };
 
-var __extends$53 = (undefined && undefined.__extends) || (function () {
+var __extends$50 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -50325,8 +50985,8 @@ var __extends$53 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var ItemDivider = (function (_super) {
-    __extends$53(ItemDivider, _super);
+var ItemDivider = /** @class */ (function (_super) {
+    __extends$50(ItemDivider, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -50335,42 +50995,42 @@ var ItemDivider = (function (_super) {
     function ItemDivider(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'item-divider') || this;
     }
+    ItemDivider.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-item-divider',
+                    host: {
+                        'class': 'item-divider'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ItemDivider.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
     return ItemDivider;
 }(Ion));
-ItemDivider.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-item-divider',
-                host: {
-                    'class': 'item-divider'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-ItemDivider.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 
 /**
  * @hidden
  */
-var ItemGroup = (function () {
+var ItemGroup = /** @class */ (function () {
     function ItemGroup() {
     }
+    ItemGroup.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-item-group'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ItemGroup.ctorParameters = function () { return []; };
     return ItemGroup;
 }());
-ItemGroup.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-item-group'
-            },] },
-];
-/**
- * @nocollapse
- */
-ItemGroup.ctorParameters = function () { return []; };
 
 /**
  * \@name ItemOptions
@@ -50393,7 +51053,7 @@ ItemGroup.ctorParameters = function () { return []; };
  * </ion-item-sliding>
  * ```
  */
-var ItemOptions = (function () {
+var ItemOptions = /** @class */ (function () {
     /**
      * @param {?} _elementRef
      * @param {?} _plt
@@ -50420,26 +51080,26 @@ var ItemOptions = (function () {
     ItemOptions.prototype.width = function () {
         return this._elementRef.nativeElement.offsetWidth;
     };
+    ItemOptions.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-item-options',
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ItemOptions.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: Platform, },
+    ]; };
+    ItemOptions.propDecorators = {
+        'side': [{ type: Input },],
+        'ionSwipe': [{ type: Output },],
+    };
     return ItemOptions;
 }());
-ItemOptions.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-item-options',
-            },] },
-];
-/**
- * @nocollapse
- */
-ItemOptions.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: Platform, },
-]; };
-ItemOptions.propDecorators = {
-    'side': [{ type: Input },],
-    'ionSwipe': [{ type: Output },],
-};
 
-var __extends$55 = (undefined && undefined.__extends) || (function () {
+var __extends$52 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -50452,8 +51112,8 @@ var __extends$55 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var ItemSlidingGesture = (function (_super) {
-    __extends$55(ItemSlidingGesture, _super);
+var ItemSlidingGesture = /** @class */ (function (_super) {
+    __extends$52(ItemSlidingGesture, _super);
     /**
      * @param {?} plt
      * @param {?} list
@@ -50587,7 +51247,7 @@ function clickedOptionButton(ev) {
     return !!ele;
 }
 
-var __extends$54 = (undefined && undefined.__extends) || (function () {
+var __extends$51 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -50632,8 +51292,8 @@ var __extends$54 = (undefined && undefined.__extends) || (function () {
  * ```
  *
  */
-var List = (function (_super) {
-    __extends$54(List, _super);
+var List = /** @class */ (function (_super) {
+    __extends$51(List, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -50708,27 +51368,27 @@ var List = (function (_super) {
     List.prototype.destroy = function () {
         this._slidingGesture && this._slidingGesture.destroy();
     };
+    List.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-list',
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    List.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Platform, },
+        { type: GestureController, },
+        { type: DomController, },
+    ]; };
+    List.propDecorators = {
+        'sliding': [{ type: Input },],
+    };
     return List;
 }(Ion));
-List.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-list',
-            },] },
-];
-/**
- * @nocollapse
- */
-List.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Platform, },
-    { type: GestureController, },
-    { type: DomController, },
-]; };
-List.propDecorators = {
-    'sliding': [{ type: Input },],
-};
 
 var SWIPE_MARGIN = 30;
 var ELASTIC_FACTOR = 0.55;
@@ -50837,7 +51497,7 @@ var ITEM_SIDE_FLAG_BOTH = ITEM_SIDE_FLAG_LEFT | ITEM_SIDE_FLAG_RIGHT;
  * @see {\@link ../Item Item API Docs}
  * @see {\@link ../../list/List List API Docs}
  */
-var ItemSliding = (function () {
+var ItemSliding = /** @class */ (function () {
     /**
      * @param {?} list
      * @param {?} _plt
@@ -51143,36 +51803,36 @@ var ItemSliding = (function () {
     ItemSliding.prototype.setElementClass = function (cssClass, shouldAdd) {
         this._renderer.setElementClass(this._elementRef.nativeElement, cssClass, shouldAdd);
     };
+    ItemSliding.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-item-sliding',
+                    template: "\n    <ng-content select=\"ion-item,[ion-item]\"></ng-content>\n    <ng-content select=\"ion-item-options\"></ng-content>\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ItemSliding.ctorParameters = function () { return [
+        { type: List, decorators: [{ type: Optional },] },
+        { type: Platform, },
+        { type: Renderer, },
+        { type: ElementRef, },
+        { type: NgZone, },
+    ]; };
+    ItemSliding.propDecorators = {
+        'item': [{ type: ContentChild, args: [Item,] },],
+        'ionDrag': [{ type: Output },],
+        '_itemOptions': [{ type: ContentChildren, args: [forwardRef(function () { return ItemOptions; }),] },],
+    };
     return ItemSliding;
 }());
-ItemSliding.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-item-sliding',
-                template: "\n    <ng-content select=\"ion-item,[ion-item]\"></ng-content>\n    <ng-content select=\"ion-item-options\"></ng-content>\n  ",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None
-            },] },
-];
-/**
- * @nocollapse
- */
-ItemSliding.ctorParameters = function () { return [
-    { type: List, decorators: [{ type: Optional },] },
-    { type: Platform, },
-    { type: Renderer, },
-    { type: ElementRef, },
-    { type: NgZone, },
-]; };
-ItemSliding.propDecorators = {
-    'item': [{ type: ContentChild, args: [Item,] },],
-    'ionDrag': [{ type: Output },],
-    '_itemOptions': [{ type: ContentChildren, args: [forwardRef(function () { return ItemOptions; }),] },],
-};
 
 /**
  * @hidden
  */
-var Reorder = (function () {
+var Reorder = /** @class */ (function () {
     /**
      * @param {?} elementRef
      */
@@ -51195,25 +51855,25 @@ var Reorder = (function () {
         ev.preventDefault();
         ev.stopPropagation();
     };
+    Reorder.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-reorder',
+                    template: "<ion-icon name=\"reorder\"></ion-icon>"
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Reorder.ctorParameters = function () { return [
+        { type: ElementRef, },
+    ]; };
+    Reorder.propDecorators = {
+        'onClick': [{ type: HostListener, args: ['click', ['$event'],] },],
+    };
     return Reorder;
 }());
-Reorder.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-reorder',
-                template: "<ion-icon name=\"reorder\"></ion-icon>"
-            },] },
-];
-/**
- * @nocollapse
- */
-Reorder.ctorParameters = function () { return [
-    { type: ElementRef, },
-]; };
-Reorder.propDecorators = {
-    'onClick': [{ type: HostListener, args: ['click', ['$event'],] },],
-};
 
-var __extends$56 = (undefined && undefined.__extends) || (function () {
+var __extends$53 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -51226,8 +51886,8 @@ var __extends$56 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var ListHeader = (function (_super) {
-    __extends$56(ListHeader, _super);
+var ListHeader = /** @class */ (function (_super) {
+    __extends$53(ListHeader, _super);
     /**
      * @param {?} config
      * @param {?} renderer
@@ -51257,27 +51917,27 @@ var ListHeader = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    ListHeader.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-list-header'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ListHeader.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Renderer, },
+        { type: ElementRef, },
+        { type: undefined, decorators: [{ type: Attribute, args: ['id',] },] },
+    ]; };
     return ListHeader;
 }(Ion));
-ListHeader.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-list-header'
-            },] },
-];
-/**
- * @nocollapse
- */
-ListHeader.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Renderer, },
-    { type: ElementRef, },
-    { type: undefined, decorators: [{ type: Attribute, args: ['id',] },] },
-]; };
 
 /**
  * @hidden
  */
-var LoadingCmp = (function () {
+var LoadingCmp = /** @class */ (function () {
     /**
      * @param {?} _viewCtrl
      * @param {?} _config
@@ -51370,41 +52030,41 @@ var LoadingCmp = (function () {
         (void 0) /* assert */;
         this.gestureBlocker.destroy();
     };
+    LoadingCmp.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-loading',
+                    template: '<ion-backdrop [hidden]="!d.showBackdrop" (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>' +
+                        '<div class="loading-wrapper">' +
+                        '<div *ngIf="showSpinner" class="loading-spinner">' +
+                        '<ion-spinner [name]="d.spinner"></ion-spinner>' +
+                        '</div>' +
+                        '<div *ngIf="d.content" [innerHTML]="d.content" class="loading-content"></div>' +
+                        '</div>',
+                    host: {
+                        'role': 'dialog'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    LoadingCmp.ctorParameters = function () { return [
+        { type: ViewController, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: GestureController, },
+        { type: NavParams, },
+        { type: Renderer, },
+    ]; };
+    LoadingCmp.propDecorators = {
+        'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     return LoadingCmp;
 }());
-LoadingCmp.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-loading',
-                template: '<ion-backdrop [hidden]="!d.showBackdrop" (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>' +
-                    '<div class="loading-wrapper">' +
-                    '<div *ngIf="showSpinner" class="loading-spinner">' +
-                    '<ion-spinner [name]="d.spinner"></ion-spinner>' +
-                    '</div>' +
-                    '<div *ngIf="d.content" [innerHTML]="d.content" class="loading-content"></div>' +
-                    '</div>',
-                host: {
-                    'role': 'dialog'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-LoadingCmp.ctorParameters = function () { return [
-    { type: ViewController, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: GestureController, },
-    { type: NavParams, },
-    { type: Renderer, },
-]; };
-LoadingCmp.propDecorators = {
-    'keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
-};
 var loadingIds = -1;
 
-var __extends$58 = (undefined && undefined.__extends) || (function () {
+var __extends$55 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -51417,8 +52077,8 @@ var __extends$58 = (undefined && undefined.__extends) || (function () {
 /**
  * Animations for loading
  */
-var LoadingPopIn = (function (_super) {
-    __extends$58(LoadingPopIn, _super);
+var LoadingPopIn = /** @class */ (function (_super) {
+    __extends$55(LoadingPopIn, _super);
     function LoadingPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -51439,8 +52099,8 @@ var LoadingPopIn = (function (_super) {
     };
     return LoadingPopIn;
 }(Transition));
-var LoadingPopOut = (function (_super) {
-    __extends$58(LoadingPopOut, _super);
+var LoadingPopOut = /** @class */ (function (_super) {
+    __extends$55(LoadingPopOut, _super);
     function LoadingPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -51461,8 +52121,8 @@ var LoadingPopOut = (function (_super) {
     };
     return LoadingPopOut;
 }(Transition));
-var LoadingMdPopIn = (function (_super) {
-    __extends$58(LoadingMdPopIn, _super);
+var LoadingMdPopIn = /** @class */ (function (_super) {
+    __extends$55(LoadingMdPopIn, _super);
     function LoadingMdPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -51483,8 +52143,8 @@ var LoadingMdPopIn = (function (_super) {
     };
     return LoadingMdPopIn;
 }(Transition));
-var LoadingMdPopOut = (function (_super) {
-    __extends$58(LoadingMdPopOut, _super);
+var LoadingMdPopOut = /** @class */ (function (_super) {
+    __extends$55(LoadingMdPopOut, _super);
     function LoadingMdPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -51505,8 +52165,8 @@ var LoadingMdPopOut = (function (_super) {
     };
     return LoadingMdPopOut;
 }(Transition));
-var LoadingWpPopIn = (function (_super) {
-    __extends$58(LoadingWpPopIn, _super);
+var LoadingWpPopIn = /** @class */ (function (_super) {
+    __extends$55(LoadingWpPopIn, _super);
     function LoadingWpPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -51527,8 +52187,8 @@ var LoadingWpPopIn = (function (_super) {
     };
     return LoadingWpPopIn;
 }(Transition));
-var LoadingWpPopOut = (function (_super) {
-    __extends$58(LoadingWpPopOut, _super);
+var LoadingWpPopOut = /** @class */ (function (_super) {
+    __extends$55(LoadingWpPopOut, _super);
     function LoadingWpPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -51550,7 +52210,7 @@ var LoadingWpPopOut = (function (_super) {
     return LoadingWpPopOut;
 }(Transition));
 
-var __extends$57 = (undefined && undefined.__extends) || (function () {
+var __extends$54 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -51563,8 +52223,8 @@ var __extends$57 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var Loading = (function (_super) {
-    __extends$57(Loading, _super);
+var Loading = /** @class */ (function (_super) {
+    __extends$54(Loading, _super);
     /**
      * @param {?} app
      * @param {?=} opts
@@ -51698,6 +52358,8 @@ var Loading = (function (_super) {
  *
  * \@usage
  * ```ts
+ * import { LoadingController } from 'ionic-angular';
+ *
  * constructor(public loadingCtrl: LoadingController) {
  *
  * }
@@ -51765,7 +52427,7 @@ var Loading = (function (_super) {
  * \@demo /docs/demos/src/loading/
  * @see {\@link /docs/api/components/spinner/Spinner Spinner API Docs}
  */
-var LoadingController = (function () {
+var LoadingController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -51783,20 +52445,20 @@ var LoadingController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Loading(this._app, opts, this.config);
     };
+    LoadingController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    LoadingController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+    ]; };
     return LoadingController;
 }());
-LoadingController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-LoadingController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-]; };
 
-var __extends$59 = (undefined && undefined.__extends) || (function () {
+var __extends$56 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -51809,8 +52471,8 @@ var __extends$59 = (undefined && undefined.__extends) || (function () {
 /**
  * Gesture attached to the content which the menu is assigned to
  */
-var MenuContentGesture = (function (_super) {
-    __extends$59(MenuContentGesture, _super);
+var MenuContentGesture = /** @class */ (function (_super) {
+    __extends$56(MenuContentGesture, _super);
     /**
      * @param {?} plt
      * @param {?} menu
@@ -51923,7 +52585,7 @@ var MenuContentGesture = (function (_super) {
     return MenuContentGesture;
 }(SlideEdgeGesture));
 
-var __extends$61 = (undefined && undefined.__extends) || (function () {
+var __extends$58 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -51945,7 +52607,7 @@ var QUERY = {
  * @hidden
  * @abstract
  */
-var RootNode = (function () {
+var RootNode = /** @class */ (function () {
     function RootNode() {
     }
     /**
@@ -52080,8 +52742,8 @@ var RootNode = (function () {
  *  ```
  *
  */
-var SplitPane = (function (_super) {
-    __extends$61(SplitPane, _super);
+var SplitPane = /** @class */ (function (_super) {
+    __extends$58(SplitPane, _super);
     /**
      * @param {?} _zone
      * @param {?} _plt
@@ -52314,32 +52976,32 @@ var SplitPane = (function (_super) {
     SplitPane.prototype.initPane = function () {
         return true;
     };
+    SplitPane.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-split-pane',
+                    providers: [{ provide: RootNode, useExisting: forwardRef(function () { return SplitPane; }) }]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    SplitPane.ctorParameters = function () { return [
+        { type: NgZone, },
+        { type: Platform, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    SplitPane.propDecorators = {
+        '_setchildren': [{ type: ContentChildren, args: [RootNode, { descendants: false },] },],
+        'when': [{ type: Input },],
+        'enabled': [{ type: Input },],
+        'ionChange': [{ type: Output },],
+    };
     return SplitPane;
 }(Ion));
-SplitPane.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-split-pane',
-                providers: [{ provide: RootNode, useExisting: forwardRef(function () { return SplitPane; }) }]
-            },] },
-];
-/**
- * @nocollapse
- */
-SplitPane.ctorParameters = function () { return [
-    { type: NgZone, },
-    { type: Platform, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-SplitPane.propDecorators = {
-    '_setchildren': [{ type: ContentChildren, args: [RootNode, { descendants: false },] },],
-    'when': [{ type: Input },],
-    'enabled': [{ type: Input },],
-    'ionChange': [{ type: Output },],
-};
 
-var __extends$60 = (undefined && undefined.__extends) || (function () {
+var __extends$57 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -52381,8 +53043,8 @@ var __extends$60 = (undefined && undefined.__extends) || (function () {
  * \@demo /docs/demos/src/navigation/
  * @see {\@link /docs/components#navigation Navigation Component Docs}
  */
-var Nav = (function (_super) {
-    __extends$60(Nav, _super);
+var Nav = /** @class */ (function (_super) {
+    __extends$57(Nav, _super);
     /**
      * @param {?} viewCtrl
      * @param {?} parent
@@ -52519,42 +53181,42 @@ var Nav = (function (_super) {
     Nav.prototype.getSecondaryIdentifier = function () {
         return null;
     };
+    Nav.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-nav',
+                    template: '<div #viewport nav-viewport></div>' +
+                        '<div class="nav-decor"></div>',
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [{ provide: RootNode, useExisting: forwardRef(function () { return Nav; }) }]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Nav.ctorParameters = function () { return [
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: NavController, decorators: [{ type: Optional },] },
+        { type: App, },
+        { type: Config, },
+        { type: Platform, },
+        { type: ElementRef, },
+        { type: NgZone, },
+        { type: Renderer, },
+        { type: ComponentFactoryResolver, },
+        { type: GestureController, },
+        { type: TransitionController, },
+        { type: DeepLinker, decorators: [{ type: Optional },] },
+        { type: DomController, },
+        { type: ErrorHandler, },
+    ]; };
+    Nav.propDecorators = {
+        '_vp': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
+        'root': [{ type: Input },],
+        'rootParams': [{ type: Input },],
+        'name': [{ type: Input },],
+    };
     return Nav;
 }(NavControllerBase));
-Nav.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-nav',
-                template: '<div #viewport nav-viewport></div>' +
-                    '<div class="nav-decor"></div>',
-                encapsulation: ViewEncapsulation.None,
-                providers: [{ provide: RootNode, useExisting: forwardRef(function () { return Nav; }) }]
-            },] },
-];
-/**
- * @nocollapse
- */
-Nav.ctorParameters = function () { return [
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: NavController, decorators: [{ type: Optional },] },
-    { type: App, },
-    { type: Config, },
-    { type: Platform, },
-    { type: ElementRef, },
-    { type: NgZone, },
-    { type: Renderer, },
-    { type: ComponentFactoryResolver, },
-    { type: GestureController, },
-    { type: TransitionController, },
-    { type: DeepLinker, decorators: [{ type: Optional },] },
-    { type: DomController, },
-    { type: ErrorHandler, },
-]; };
-Nav.propDecorators = {
-    '_vp': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
-    'root': [{ type: Input },],
-    'rootParams': [{ type: Input },],
-    'name': [{ type: Input },],
-};
 
 /**
  * \@name Menu
@@ -52720,7 +53382,7 @@ Nav.propDecorators = {
  * @see {\@link ../../nav/Nav Nav API Docs}
  * @see {\@link ../../nav/NavController NavController API Docs}
  */
-var Menu = (function () {
+var Menu = /** @class */ (function () {
     /**
      * @param {?} _menuCtrl
      * @param {?} _elementRef
@@ -53187,7 +53849,7 @@ var Menu = (function () {
      * @return {?}
      */
     Menu.prototype.getMenuElement = function () {
-        return (this.getNativeElement().querySelector('.menu-inner'));
+        return /** @type {?} */ (this.getNativeElement().querySelector('.menu-inner'));
     };
     /**
      * @hidden
@@ -53255,51 +53917,51 @@ var Menu = (function () {
         this._type = null;
         this._cntEle = null;
     };
+    Menu.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-menu',
+                    template: '<div class="menu-inner"><ng-content></ng-content></div>' +
+                        '<ion-backdrop></ion-backdrop>',
+                    host: {
+                        'role': 'navigation'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [{ provide: RootNode, useExisting: forwardRef(function () { return Menu; }) }]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Menu.ctorParameters = function () { return [
+        { type: MenuController, },
+        { type: ElementRef, },
+        { type: Config, },
+        { type: Platform, },
+        { type: Renderer, },
+        { type: Keyboard, },
+        { type: GestureController, },
+        { type: DomController, },
+        { type: App, },
+    ]; };
+    Menu.propDecorators = {
+        'backdrop': [{ type: ViewChild, args: [Backdrop,] },],
+        'menuContent': [{ type: ContentChild, args: [Content,] },],
+        'menuNav': [{ type: ContentChild, args: [Nav,] },],
+        'content': [{ type: Input },],
+        'id': [{ type: Input },],
+        'type': [{ type: Input },],
+        'enabled': [{ type: Input },],
+        'side': [{ type: Input },],
+        'swipeEnabled': [{ type: Input },],
+        'persistent': [{ type: Input },],
+        'maxEdgeStart': [{ type: Input },],
+        'ionDrag': [{ type: Output },],
+        'ionOpen': [{ type: Output },],
+        'ionClose': [{ type: Output },],
+    };
     return Menu;
 }());
-Menu.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-menu',
-                template: '<div class="menu-inner"><ng-content></ng-content></div>' +
-                    '<ion-backdrop></ion-backdrop>',
-                host: {
-                    'role': 'navigation'
-                },
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-                providers: [{ provide: RootNode, useExisting: forwardRef(function () { return Menu; }) }]
-            },] },
-];
-/**
- * @nocollapse
- */
-Menu.ctorParameters = function () { return [
-    { type: MenuController, },
-    { type: ElementRef, },
-    { type: Config, },
-    { type: Platform, },
-    { type: Renderer, },
-    { type: Keyboard, },
-    { type: GestureController, },
-    { type: DomController, },
-    { type: App, },
-]; };
-Menu.propDecorators = {
-    'backdrop': [{ type: ViewChild, args: [Backdrop,] },],
-    'menuContent': [{ type: ContentChild, args: [Content,] },],
-    'menuNav': [{ type: ContentChild, args: [Nav,] },],
-    'content': [{ type: Input },],
-    'id': [{ type: Input },],
-    'type': [{ type: Input },],
-    'enabled': [{ type: Input },],
-    'side': [{ type: Input },],
-    'swipeEnabled': [{ type: Input },],
-    'persistent': [{ type: Input },],
-    'maxEdgeStart': [{ type: Input },],
-    'ionDrag': [{ type: Output },],
-    'ionOpen': [{ type: Output },],
-    'ionClose': [{ type: Output },],
-};
 
 /**
  * \@name MenuClose
@@ -53325,7 +53987,7 @@ Menu.propDecorators = {
  * @see {\@link /docs/components#menus Menu Component Docs}
  * @see {\@link ../../menu/Menu Menu API Docs}
  */
-var MenuClose = (function () {
+var MenuClose = /** @class */ (function () {
     /**
      * @param {?} _menu
      */
@@ -53340,25 +54002,25 @@ var MenuClose = (function () {
         var /** @type {?} */ menu = this._menu.get(this.menuClose);
         menu && menu.close();
     };
+    MenuClose.decorators = [
+        { type: Directive, args: [{
+                    selector: '[menuClose]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    MenuClose.ctorParameters = function () { return [
+        { type: MenuController, },
+    ]; };
+    MenuClose.propDecorators = {
+        'menuClose': [{ type: Input },],
+        'close': [{ type: HostListener, args: ['click',] },],
+    };
     return MenuClose;
 }());
-MenuClose.decorators = [
-    { type: Directive, args: [{
-                selector: '[menuClose]'
-            },] },
-];
-/**
- * @nocollapse
- */
-MenuClose.ctorParameters = function () { return [
-    { type: MenuController, },
-]; };
-MenuClose.propDecorators = {
-    'menuClose': [{ type: Input },],
-    'close': [{ type: HostListener, args: ['click',] },],
-};
 
-var __extends$63 = (undefined && undefined.__extends) || (function () {
+var __extends$60 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -53371,8 +54033,8 @@ var __extends$63 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var ToolbarBase = (function (_super) {
-    __extends$63(ToolbarBase, _super);
+var ToolbarBase = /** @class */ (function (_super) {
+    __extends$60(ToolbarBase, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -53400,7 +54062,7 @@ var ToolbarBase = (function (_super) {
     return ToolbarBase;
 }(Ion));
 
-var __extends$62 = (undefined && undefined.__extends) || (function () {
+var __extends$59 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -53446,8 +54108,8 @@ var __extends$62 = (undefined && undefined.__extends) || (function () {
  * \@demo /docs/demos/src/navbar/
  * @see {\@link ../../toolbar/Toolbar/ Toolbar API Docs}
  */
-var Navbar = (function (_super) {
-    __extends$62(Navbar, _super);
+var Navbar = /** @class */ (function (_super) {
+    __extends$59(Navbar, _super);
     /**
      * @param {?} _app
      * @param {?} viewCtrl
@@ -53530,49 +54192,49 @@ var Navbar = (function (_super) {
         // used to display none/block the navbar
         this._hidden = isHidden;
     };
+    Navbar.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-navbar',
+                    template: '<div class="toolbar-background" [ngClass]="\'toolbar-background-\' + _mode"></div>' +
+                        '<button (click)="backButtonClick($event)" ion-button="bar-button" class="back-button" [ngClass]="\'back-button-\' + _mode" [hidden]="_hideBb">' +
+                        '<ion-icon class="back-button-icon" [ngClass]="\'back-button-icon-\' + _mode" [name]="_bbIcon"></ion-icon>' +
+                        '<span class="back-button-text" [ngClass]="\'back-button-text-\' + _mode">{{_backText}}</span>' +
+                        '</button>' +
+                        '<ng-content select="[menuToggle],ion-buttons[left]"></ng-content>' +
+                        '<ng-content select="ion-buttons[start]"></ng-content>' +
+                        '<ng-content select="ion-buttons[end],ion-buttons[right]"></ng-content>' +
+                        '<div class="toolbar-content" [ngClass]="\'toolbar-content-\' + _mode">' +
+                        '<ng-content></ng-content>' +
+                        '</div>',
+                    host: {
+                        '[hidden]': '_hidden',
+                        'class': 'toolbar',
+                        '[class.statusbar-padding]': '_sbPadding'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Navbar.ctorParameters = function () { return [
+        { type: App, },
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: NavController, decorators: [{ type: Optional },] },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    Navbar.propDecorators = {
+        'hideBackButton': [{ type: Input },],
+    };
     return Navbar;
 }(ToolbarBase));
-Navbar.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-navbar',
-                template: '<div class="toolbar-background" [ngClass]="\'toolbar-background-\' + _mode"></div>' +
-                    '<button (click)="backButtonClick($event)" ion-button="bar-button" class="back-button" [ngClass]="\'back-button-\' + _mode" [hidden]="_hideBb">' +
-                    '<ion-icon class="back-button-icon" [ngClass]="\'back-button-icon-\' + _mode" [name]="_bbIcon"></ion-icon>' +
-                    '<span class="back-button-text" [ngClass]="\'back-button-text-\' + _mode">{{_backText}}</span>' +
-                    '</button>' +
-                    '<ng-content select="[menuToggle],ion-buttons[left]"></ng-content>' +
-                    '<ng-content select="ion-buttons[start]"></ng-content>' +
-                    '<ng-content select="ion-buttons[end],ion-buttons[right]"></ng-content>' +
-                    '<div class="toolbar-content" [ngClass]="\'toolbar-content-\' + _mode">' +
-                    '<ng-content></ng-content>' +
-                    '</div>',
-                host: {
-                    '[hidden]': '_hidden',
-                    'class': 'toolbar',
-                    '[class.statusbar-padding]': '_sbPadding'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Navbar.ctorParameters = function () { return [
-    { type: App, },
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: NavController, decorators: [{ type: Optional },] },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-Navbar.propDecorators = {
-    'hideBackButton': [{ type: Input },],
-};
 
 /**
  * \@name MenuToggle
  * \@description
  * The `menuToggle` directive can be placed on any button to toggle a menu open or closed.
- * If it is added to the [NavBar](../../navbar/NavBar) of a page, the button will only appear
+ * If it is added to the [NavBar](../../toolbar/Navbar) of a page, the button will only appear
  * when the page it's in is currently a root page. See the [Menu Navigation Bar Behavior](../Menu#navigation-bar-behavior)
  * docs for more information.
  *
@@ -53647,7 +54309,7 @@ Navbar.propDecorators = {
  * @see {\@link /docs/components#menus Menu Component Docs}
  * @see {\@link ../../menu/Menu Menu API Docs}
  */
-var MenuToggle = (function () {
+var MenuToggle = /** @class */ (function () {
     /**
      * @param {?} _menu
      * @param {?} _viewCtrl
@@ -53704,31 +54366,31 @@ var MenuToggle = (function () {
         enumerable: true,
         configurable: true
     });
+    MenuToggle.decorators = [
+        { type: Directive, args: [{
+                    selector: '[menuToggle]',
+                    host: {
+                        '[hidden]': 'isHidden'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    MenuToggle.ctorParameters = function () { return [
+        { type: MenuController, },
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: Button, decorators: [{ type: Optional },] },
+        { type: Navbar, decorators: [{ type: Optional },] },
+    ]; };
+    MenuToggle.propDecorators = {
+        'menuToggle': [{ type: Input },],
+        'toggle': [{ type: HostListener, args: ['click',] },],
+    };
     return MenuToggle;
 }());
-MenuToggle.decorators = [
-    { type: Directive, args: [{
-                selector: '[menuToggle]',
-                host: {
-                    '[hidden]': 'isHidden'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-MenuToggle.ctorParameters = function () { return [
-    { type: MenuController, },
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: Button, decorators: [{ type: Optional },] },
-    { type: Navbar, decorators: [{ type: Optional },] },
-]; };
-MenuToggle.propDecorators = {
-    'menuToggle': [{ type: Input },],
-    'toggle': [{ type: HostListener, args: ['click',] },],
-};
 
-var __extends$64 = (undefined && undefined.__extends) || (function () {
+var __extends$61 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -53745,7 +54407,7 @@ var __extends$64 = (undefined && undefined.__extends) || (function () {
  * type will provide their own animations for open and close
  * and registers itself with Menu.
  */
-var MenuType = (function () {
+var MenuType = /** @class */ (function () {
     /**
      * @param {?} plt
      */
@@ -53829,8 +54491,8 @@ var MenuType = (function () {
  * The content slides over to reveal the menu underneath.
  * The menu itself, which is under the content, does not move.
  */
-var MenuRevealType = (function (_super) {
-    __extends$64(MenuRevealType, _super);
+var MenuRevealType = /** @class */ (function (_super) {
+    __extends$61(MenuRevealType, _super);
     /**
      * @param {?} menu
      * @param {?} plt
@@ -53852,8 +54514,8 @@ MenuController.registerType('reveal', MenuRevealType);
  * The content slides over to reveal the menu underneath.
  * The menu itself also slides over to reveal its bad self.
  */
-var MenuPushType = (function (_super) {
-    __extends$64(MenuPushType, _super);
+var MenuPushType = /** @class */ (function (_super) {
+    __extends$61(MenuPushType, _super);
     /**
      * @param {?} menu
      * @param {?} plt
@@ -53890,8 +54552,8 @@ MenuController.registerType('push', MenuPushType);
  * The menu slides over the content. The content
  * itself, which is under the menu, does not move.
  */
-var MenuOverlayType = (function (_super) {
-    __extends$64(MenuOverlayType, _super);
+var MenuOverlayType = /** @class */ (function (_super) {
+    __extends$61(MenuOverlayType, _super);
     /**
      * @param {?} menu
      * @param {?} plt
@@ -53922,7 +54584,7 @@ var MenuOverlayType = (function (_super) {
 }(MenuType));
 MenuController.registerType('overlay', MenuOverlayType);
 
-var OverlayProxy = (function () {
+var OverlayProxy = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} _component
@@ -54011,7 +54673,7 @@ var OverlayProxy = (function () {
 /**
  * NgModuleFactoryLoader that uses SystemJS to load NgModuleFactory
  */
-var NgModuleLoader = (function () {
+var NgModuleLoader = /** @class */ (function () {
     /**
      * @param {?} _compiler
      */
@@ -54027,17 +54689,17 @@ var NgModuleLoader = (function () {
         var /** @type {?} */ offlineMode = this._compiler instanceof Compiler;
         return offlineMode ? loadPrecompiledFactory(modulePath, ngModuleExport) : loadAndCompile(this._compiler, modulePath, ngModuleExport);
     };
+    NgModuleLoader.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgModuleLoader.ctorParameters = function () { return [
+        { type: Compiler, },
+    ]; };
     return NgModuleLoader;
 }());
-NgModuleLoader.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-NgModuleLoader.ctorParameters = function () { return [
-    { type: Compiler, },
-]; };
 /**
  * @param {?} compiler
  * @param {?} modulePath
@@ -54077,7 +54739,7 @@ var LAZY_LOADED_TOKEN = new OpaqueToken('LZYCMP');
 /**
  * @hidden
  */
-var ModuleLoader = (function () {
+var ModuleLoader = /** @class */ (function () {
     /**
      * @param {?} _ngModuleLoader
      * @param {?} _injector
@@ -54122,18 +54784,18 @@ var ModuleLoader = (function () {
     ModuleLoader.prototype.getComponentFactoryResolver = function (component) {
         return this._cfrMap.get(component);
     };
+    ModuleLoader.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    ModuleLoader.ctorParameters = function () { return [
+        { type: NgModuleLoader, },
+        { type: Injector, },
+    ]; };
     return ModuleLoader;
 }());
-ModuleLoader.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-ModuleLoader.ctorParameters = function () { return [
-    { type: NgModuleLoader, },
-    { type: Injector, },
-]; };
 var SPLITTER = '#';
 /**
  * @hidden
@@ -54191,7 +54853,7 @@ function setupPreloading(config, deepLinkConfig, moduleLoader, ngZone) {
 /**
  * @hidden
  */
-var ModalCmp = (function () {
+var ModalCmp = /** @class */ (function () {
     /**
      * @param {?} _cfr
      * @param {?} _renderer
@@ -54295,35 +54957,35 @@ var ModalCmp = (function () {
         (void 0) /* assert */;
         this._gestureBlocker.destroy();
     };
+    ModalCmp.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-modal',
+                    template: '<ion-backdrop (click)="_bdClick()" [class.backdrop-no-tappable]="!_bdDismiss"></ion-backdrop>' +
+                        '<div class="modal-wrapper">' +
+                        '<div #viewport nav-viewport></div>' +
+                        '</div>'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ModalCmp.ctorParameters = function () { return [
+        { type: ComponentFactoryResolver, },
+        { type: Renderer, },
+        { type: ElementRef, },
+        { type: NavParams, },
+        { type: ViewController, },
+        { type: GestureController, },
+        { type: ModuleLoader, },
+    ]; };
+    ModalCmp.propDecorators = {
+        '_viewport': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
+        '_keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     return ModalCmp;
 }());
-ModalCmp.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-modal',
-                template: '<ion-backdrop (click)="_bdClick()" [class.backdrop-no-tappable]="!_bdDismiss"></ion-backdrop>' +
-                    '<div class="modal-wrapper">' +
-                    '<div #viewport nav-viewport></div>' +
-                    '</div>'
-            },] },
-];
-/**
- * @nocollapse
- */
-ModalCmp.ctorParameters = function () { return [
-    { type: ComponentFactoryResolver, },
-    { type: Renderer, },
-    { type: ElementRef, },
-    { type: NavParams, },
-    { type: ViewController, },
-    { type: GestureController, },
-    { type: ModuleLoader, },
-]; };
-ModalCmp.propDecorators = {
-    '_viewport': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
-    '_keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
-};
 
-var __extends$67 = (undefined && undefined.__extends) || (function () {
+var __extends$64 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -54336,8 +54998,8 @@ var __extends$67 = (undefined && undefined.__extends) || (function () {
 /**
  * Animations for modals
  */
-var ModalSlideIn = (function (_super) {
-    __extends$67(ModalSlideIn, _super);
+var ModalSlideIn = /** @class */ (function (_super) {
+    __extends$64(ModalSlideIn, _super);
     function ModalSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -54362,8 +55024,8 @@ var ModalSlideIn = (function (_super) {
     };
     return ModalSlideIn;
 }(PageTransition));
-var ModalSlideOut = (function (_super) {
-    __extends$67(ModalSlideOut, _super);
+var ModalSlideOut = /** @class */ (function (_super) {
+    __extends$64(ModalSlideOut, _super);
     function ModalSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -54390,8 +55052,8 @@ var ModalSlideOut = (function (_super) {
     };
     return ModalSlideOut;
 }(PageTransition));
-var ModalMDSlideIn = (function (_super) {
-    __extends$67(ModalMDSlideIn, _super);
+var ModalMDSlideIn = /** @class */ (function (_super) {
+    __extends$64(ModalMDSlideIn, _super);
     function ModalMDSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -54414,8 +55076,8 @@ var ModalMDSlideIn = (function (_super) {
     };
     return ModalMDSlideIn;
 }(PageTransition));
-var ModalMDSlideOut = (function (_super) {
-    __extends$67(ModalMDSlideOut, _super);
+var ModalMDSlideOut = /** @class */ (function (_super) {
+    __extends$64(ModalMDSlideOut, _super);
     function ModalMDSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -54440,7 +55102,7 @@ var ModalMDSlideOut = (function (_super) {
     return ModalMDSlideOut;
 }(PageTransition));
 
-var __extends$66 = (undefined && undefined.__extends) || (function () {
+var __extends$63 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -54453,8 +55115,8 @@ var __extends$66 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var ModalImpl = (function (_super) {
-    __extends$66(ModalImpl, _super);
+var ModalImpl = /** @class */ (function (_super) {
+    __extends$63(ModalImpl, _super);
     /**
      * @param {?} app
      * @param {?} component
@@ -54516,7 +55178,7 @@ var ModalImpl = (function (_super) {
     return ModalImpl;
 }(ViewController));
 
-var __extends$65 = (undefined && undefined.__extends) || (function () {
+var __extends$62 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -54529,8 +55191,8 @@ var __extends$65 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var Modal = (function (_super) {
-    __extends$65(Modal, _super);
+var Modal = /** @class */ (function (_super) {
+    __extends$62(Modal, _super);
     /**
      * @param {?} app
      * @param {?} component
@@ -54684,7 +55346,7 @@ var Modal = (function (_super) {
  * \@demo /docs/demos/src/modal/
  * @see {\@link /docs/components#modals Modal Component Docs}
  */
-var ModalController = (function () {
+var ModalController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -54708,19 +55370,19 @@ var ModalController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Modal(this._app, component, data, opts, this.config, this.deepLinker);
     };
+    ModalController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    ModalController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+        { type: DeepLinker, },
+    ]; };
     return ModalController;
 }());
-ModalController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-ModalController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-    { type: DeepLinker, },
-]; };
 
 /**
  * \@name NavPop
@@ -54742,7 +55404,7 @@ ModalController.ctorParameters = function () { return [
  * @see {\@link /docs/components#navigation Navigation Component Docs}
  * @see {\@link ../NavPush NavPush API Docs}
  */
-var NavPop = (function () {
+var NavPop = /** @class */ (function () {
     /**
      * @param {?} _nav
      */
@@ -54766,27 +55428,27 @@ var NavPop = (function () {
         }
         return true;
     };
+    NavPop.decorators = [
+        { type: Directive, args: [{
+                    selector: '[navPop]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NavPop.ctorParameters = function () { return [
+        { type: NavController, decorators: [{ type: Optional },] },
+    ]; };
+    NavPop.propDecorators = {
+        'onClick': [{ type: HostListener, args: ['click',] },],
+    };
     return NavPop;
 }());
-NavPop.decorators = [
-    { type: Directive, args: [{
-                selector: '[navPop]'
-            },] },
-];
-/**
- * @nocollapse
- */
-NavPop.ctorParameters = function () { return [
-    { type: NavController, decorators: [{ type: Optional },] },
-]; };
-NavPop.propDecorators = {
-    'onClick': [{ type: HostListener, args: ['click',] },],
-};
 
 /**
  * @hidden
  */
-var NavPopAnchor = (function () {
+var NavPopAnchor = /** @class */ (function () {
     /**
      * @param {?} host
      * @param {?} linker
@@ -54815,24 +55477,24 @@ var NavPopAnchor = (function () {
     NavPopAnchor.prototype.ngAfterContentInit = function () {
         this.updateHref();
     };
+    NavPopAnchor.decorators = [
+        { type: Directive, args: [{
+                    selector: 'a[navPop]',
+                    host: {
+                        '[attr.href]': '_href'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NavPopAnchor.ctorParameters = function () { return [
+        { type: NavPop, decorators: [{ type: Optional },] },
+        { type: DeepLinker, },
+        { type: ViewController, decorators: [{ type: Optional },] },
+    ]; };
     return NavPopAnchor;
 }());
-NavPopAnchor.decorators = [
-    { type: Directive, args: [{
-                selector: 'a[navPop]',
-                host: {
-                    '[attr.href]': '_href'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-NavPopAnchor.ctorParameters = function () { return [
-    { type: NavPop, decorators: [{ type: Optional },] },
-    { type: DeepLinker, },
-    { type: ViewController, decorators: [{ type: Optional },] },
-]; };
 
 /**
  * \@name NavPush
@@ -54877,7 +55539,7 @@ NavPopAnchor.ctorParameters = function () { return [
  * @see {\@link ../NavPop NavPop API Docs}
  *
  */
-var NavPush = (function () {
+var NavPush = /** @class */ (function () {
     /**
      * @param {?} _nav
      */
@@ -54898,29 +55560,29 @@ var NavPush = (function () {
         }
         return true;
     };
+    NavPush.decorators = [
+        { type: Directive, args: [{
+                    selector: '[navPush]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NavPush.ctorParameters = function () { return [
+        { type: NavController, decorators: [{ type: Optional },] },
+    ]; };
+    NavPush.propDecorators = {
+        'navPush': [{ type: Input },],
+        'navParams': [{ type: Input },],
+        'onClick': [{ type: HostListener, args: ['click',] },],
+    };
     return NavPush;
 }());
-NavPush.decorators = [
-    { type: Directive, args: [{
-                selector: '[navPush]'
-            },] },
-];
-/**
- * @nocollapse
- */
-NavPush.ctorParameters = function () { return [
-    { type: NavController, decorators: [{ type: Optional },] },
-]; };
-NavPush.propDecorators = {
-    'navPush': [{ type: Input },],
-    'navParams': [{ type: Input },],
-    'onClick': [{ type: HostListener, args: ['click',] },],
-};
 
 /**
  * @hidden
  */
-var NavPushAnchor = (function () {
+var NavPushAnchor = /** @class */ (function () {
     /**
      * @param {?} host
      * @param {?} linker
@@ -54946,25 +55608,25 @@ var NavPushAnchor = (function () {
     NavPushAnchor.prototype.ngAfterContentInit = function () {
         this.updateHref();
     };
+    NavPushAnchor.decorators = [
+        { type: Directive, args: [{
+                    selector: 'a[navPush]',
+                    host: {
+                        '[attr.href]': '_href'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NavPushAnchor.ctorParameters = function () { return [
+        { type: NavPush, decorators: [{ type: Host },] },
+        { type: DeepLinker, decorators: [{ type: Optional },] },
+    ]; };
     return NavPushAnchor;
 }());
-NavPushAnchor.decorators = [
-    { type: Directive, args: [{
-                selector: 'a[navPush]',
-                host: {
-                    '[attr.href]': '_href'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-NavPushAnchor.ctorParameters = function () { return [
-    { type: NavPush, decorators: [{ type: Host },] },
-    { type: DeepLinker, decorators: [{ type: Optional },] },
-]; };
 
-var __extends$68 = (undefined && undefined.__extends) || (function () {
+var __extends$65 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -54998,8 +55660,8 @@ var __extends$68 = (undefined && undefined.__extends) || (function () {
  * ```
  * {\@link /docs/api/components/api/components/item/item ion-item}
  */
-var Note = (function (_super) {
-    __extends$68(Note, _super);
+var Note = /** @class */ (function (_super) {
+    __extends$65(Note, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -55008,21 +55670,21 @@ var Note = (function (_super) {
     function Note(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'note') || this;
     }
+    Note.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-note'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Note.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
     return Note;
 }(Ion));
-Note.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-note'
-            },] },
-];
-/**
- * @nocollapse
- */
-Note.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 
 /**
  * \@name Option
@@ -55031,7 +55693,7 @@ Note.ctorParameters = function () { return [
  *
  * \@demo /docs/demos/src/select/
  */
-var Option = (function () {
+var Option = /** @class */ (function () {
     /**
      * @param {?} _elementRef
      */
@@ -55112,30 +55774,30 @@ var Option = (function () {
         enumerable: true,
         configurable: true
     });
+    Option.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-option'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Option.ctorParameters = function () { return [
+        { type: ElementRef, },
+    ]; };
+    Option.propDecorators = {
+        'disabled': [{ type: Input },],
+        'selected': [{ type: Input },],
+        'value': [{ type: Input },],
+        'ionSelect': [{ type: Output },],
+    };
     return Option;
 }());
-Option.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-option'
-            },] },
-];
-/**
- * @nocollapse
- */
-Option.ctorParameters = function () { return [
-    { type: ElementRef, },
-]; };
-Option.propDecorators = {
-    'disabled': [{ type: Input },],
-    'selected': [{ type: Input },],
-    'value': [{ type: Input },],
-    'ionSelect': [{ type: Output },],
-};
 
 /**
  * @hidden
  */
-var PopoverCmp = (function () {
+var PopoverCmp = /** @class */ (function () {
     /**
      * @param {?} _cfr
      * @param {?} _elementRef
@@ -55237,42 +55899,42 @@ var PopoverCmp = (function () {
         (void 0) /* assert */;
         this._gestureBlocker.destroy();
     };
+    PopoverCmp.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-popover',
+                    template: '<ion-backdrop (click)="_bdClick()" [hidden]="!d.showBackdrop"></ion-backdrop>' +
+                        '<div class="popover-wrapper">' +
+                        '<div class="popover-arrow"></div>' +
+                        '<div class="popover-content">' +
+                        '<div class="popover-viewport">' +
+                        '<div #viewport nav-viewport></div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    PopoverCmp.ctorParameters = function () { return [
+        { type: ComponentFactoryResolver, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Config, },
+        { type: NavParams, },
+        { type: ViewController, },
+        { type: GestureController, },
+        { type: ModuleLoader, },
+    ]; };
+    PopoverCmp.propDecorators = {
+        '_viewport': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
+        '_keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     return PopoverCmp;
 }());
-PopoverCmp.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-popover',
-                template: '<ion-backdrop (click)="_bdClick()" [hidden]="!d.showBackdrop"></ion-backdrop>' +
-                    '<div class="popover-wrapper">' +
-                    '<div class="popover-arrow"></div>' +
-                    '<div class="popover-content">' +
-                    '<div class="popover-viewport">' +
-                    '<div #viewport nav-viewport></div>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>'
-            },] },
-];
-/**
- * @nocollapse
- */
-PopoverCmp.ctorParameters = function () { return [
-    { type: ComponentFactoryResolver, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Config, },
-    { type: NavParams, },
-    { type: ViewController, },
-    { type: GestureController, },
-    { type: ModuleLoader, },
-]; };
-PopoverCmp.propDecorators = {
-    '_viewport': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
-    '_keyUp': [{ type: HostListener, args: ['body:keyup', ['$event'],] },],
-};
 var popoverIds = -1;
 
-var __extends$71 = (undefined && undefined.__extends) || (function () {
+var __extends$68 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -55285,8 +55947,8 @@ var __extends$71 = (undefined && undefined.__extends) || (function () {
 /**
  * Animations for popover
  */
-var PopoverTransition = (function (_super) {
-    __extends$71(PopoverTransition, _super);
+var PopoverTransition = /** @class */ (function (_super) {
+    __extends$68(PopoverTransition, _super);
     function PopoverTransition() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -55417,8 +56079,8 @@ var PopoverTransition = (function (_super) {
     };
     return PopoverTransition;
 }(PageTransition));
-var PopoverPopIn = (function (_super) {
-    __extends$71(PopoverPopIn, _super);
+var PopoverPopIn = /** @class */ (function (_super) {
+    __extends$68(PopoverPopIn, _super);
     function PopoverPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -55449,8 +56111,8 @@ var PopoverPopIn = (function (_super) {
     };
     return PopoverPopIn;
 }(PopoverTransition));
-var PopoverPopOut = (function (_super) {
-    __extends$71(PopoverPopOut, _super);
+var PopoverPopOut = /** @class */ (function (_super) {
+    __extends$68(PopoverPopOut, _super);
     function PopoverPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -55471,8 +56133,8 @@ var PopoverPopOut = (function (_super) {
     };
     return PopoverPopOut;
 }(PopoverTransition));
-var PopoverMdPopIn = (function (_super) {
-    __extends$71(PopoverMdPopIn, _super);
+var PopoverMdPopIn = /** @class */ (function (_super) {
+    __extends$68(PopoverMdPopIn, _super);
     function PopoverMdPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -55503,8 +56165,8 @@ var PopoverMdPopIn = (function (_super) {
     };
     return PopoverMdPopIn;
 }(PopoverTransition));
-var PopoverMdPopOut = (function (_super) {
-    __extends$71(PopoverMdPopOut, _super);
+var PopoverMdPopOut = /** @class */ (function (_super) {
+    __extends$68(PopoverMdPopOut, _super);
     function PopoverMdPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -55526,7 +56188,7 @@ var PopoverMdPopOut = (function (_super) {
 var POPOVER_IOS_BODY_PADDING = 2;
 var POPOVER_MD_BODY_PADDING = 12;
 
-var __extends$70 = (undefined && undefined.__extends) || (function () {
+var __extends$67 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -55539,8 +56201,8 @@ var __extends$70 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var PopoverImpl = (function (_super) {
-    __extends$70(PopoverImpl, _super);
+var PopoverImpl = /** @class */ (function (_super) {
+    __extends$67(PopoverImpl, _super);
     /**
      * @param {?} app
      * @param {?} component
@@ -55587,7 +56249,7 @@ var PopoverImpl = (function (_super) {
     return PopoverImpl;
 }(ViewController));
 
-var __extends$69 = (undefined && undefined.__extends) || (function () {
+var __extends$66 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -55600,8 +56262,8 @@ var __extends$69 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var Popover = (function (_super) {
-    __extends$69(Popover, _super);
+var Popover = /** @class */ (function (_super) {
+    __extends$66(Popover, _super);
     /**
      * @param {?} app
      * @param {?} component
@@ -55728,7 +56390,7 @@ var Popover = (function (_super) {
  *
  * \@demo /docs/demos/src/popover/
  */
-var PopoverController = (function () {
+var PopoverController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -55751,19 +56413,19 @@ var PopoverController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Popover(this._app, component, data, opts, this.config, this._deepLinker);
     };
+    PopoverController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    PopoverController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+        { type: DeepLinker, },
+    ]; };
     return PopoverController;
 }());
-PopoverController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-PopoverController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-    { type: DeepLinker, },
-]; };
 
 /**
  * \@name RadioGroup
@@ -55816,7 +56478,7 @@ PopoverController.ctorParameters = function () { return [
  * @see {\@link /docs/components#radio Radio Component Docs}
  * @see {\@link ../RadioButton RadioButton API Docs}
  */
-var RadioGroup = (function () {
+var RadioGroup = /** @class */ (function () {
     /**
      * @param {?} _renderer
      * @param {?} _elementRef
@@ -56016,33 +56678,33 @@ var RadioGroup = (function () {
     RadioGroup.prototype.setDisabledState = function (isDisabled) {
         this.disabled = isDisabled;
     };
+    RadioGroup.decorators = [
+        { type: Directive, args: [{
+                    selector: '[radio-group]',
+                    host: {
+                        'role': 'radiogroup'
+                    },
+                    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: RadioGroup, multi: true }],
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    RadioGroup.ctorParameters = function () { return [
+        { type: Renderer, },
+        { type: ElementRef, },
+        { type: ChangeDetectorRef, },
+    ]; };
+    RadioGroup.propDecorators = {
+        'disabled': [{ type: Input },],
+        'ionChange': [{ type: Output },],
+        '_header': [{ type: ContentChild, args: [ListHeader,] },],
+    };
     return RadioGroup;
 }());
-RadioGroup.decorators = [
-    { type: Directive, args: [{
-                selector: '[radio-group]',
-                host: {
-                    'role': 'radiogroup'
-                },
-                providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: RadioGroup, multi: true }],
-            },] },
-];
-/**
- * @nocollapse
- */
-RadioGroup.ctorParameters = function () { return [
-    { type: Renderer, },
-    { type: ElementRef, },
-    { type: ChangeDetectorRef, },
-]; };
-RadioGroup.propDecorators = {
-    'disabled': [{ type: Input },],
-    'ionChange': [{ type: Output },],
-    '_header': [{ type: ContentChild, args: [ListHeader,] },],
-};
 var radioGroupIds = -1;
 
-var __extends$72 = (undefined && undefined.__extends) || (function () {
+var __extends$69 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -56087,8 +56749,8 @@ var __extends$72 = (undefined && undefined.__extends) || (function () {
  * @see {\@link /docs/components#radio Radio Component Docs}
  * @see {\@link ../RadioGroup RadioGroup API Docs}
  */
-var RadioButton = (function (_super) {
-    __extends$72(RadioButton, _super);
+var RadioButton = /** @class */ (function (_super) {
+    __extends$69(RadioButton, _super);
     /**
      * @param {?} _form
      * @param {?} config
@@ -56247,50 +56909,50 @@ var RadioButton = (function (_super) {
         this._form.deregister(this);
         this._group && this._group.remove(this);
     };
+    RadioButton.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-radio',
+                    template: '<div class="radio-icon" [class.radio-checked]="_checked"> ' +
+                        '<div class="radio-inner"></div> ' +
+                        '</div> ' +
+                        '<button role="radio" ' +
+                        'type="button" ' +
+                        'ion-button="item-cover" ' +
+                        '[id]="id" ' +
+                        '[attr.aria-checked]="_checked" ' +
+                        '[attr.aria-labelledby]="_labelId" ' +
+                        '[attr.aria-disabled]="_disabled" ' +
+                        'class="item-cover"> ' +
+                        '</button>',
+                    host: {
+                        '[class.radio-disabled]': '_disabled'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    RadioButton.ctorParameters = function () { return [
+        { type: Form, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Item, decorators: [{ type: Optional },] },
+        { type: RadioGroup, decorators: [{ type: Optional },] },
+    ]; };
+    RadioButton.propDecorators = {
+        'color': [{ type: Input },],
+        'ionSelect': [{ type: Output },],
+        'value': [{ type: Input },],
+        'checked': [{ type: Input },],
+        'disabled': [{ type: Input },],
+        '_click': [{ type: HostListener, args: ['click', ['$event'],] },],
+    };
     return RadioButton;
 }(Ion));
-RadioButton.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-radio',
-                template: '<div class="radio-icon" [class.radio-checked]="_checked"> ' +
-                    '<div class="radio-inner"></div> ' +
-                    '</div> ' +
-                    '<button role="radio" ' +
-                    'type="button" ' +
-                    'ion-button="item-cover" ' +
-                    '[id]="id" ' +
-                    '[attr.aria-checked]="_checked" ' +
-                    '[attr.aria-labelledby]="_labelId" ' +
-                    '[attr.aria-disabled]="_disabled" ' +
-                    'class="item-cover"> ' +
-                    '</button>',
-                host: {
-                    '[class.radio-disabled]': '_disabled'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-RadioButton.ctorParameters = function () { return [
-    { type: Form, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Item, decorators: [{ type: Optional },] },
-    { type: RadioGroup, decorators: [{ type: Optional },] },
-]; };
-RadioButton.propDecorators = {
-    'color': [{ type: Input },],
-    'ionSelect': [{ type: Output },],
-    'value': [{ type: Input },],
-    'checked': [{ type: Input },],
-    'disabled': [{ type: Input },],
-    '_click': [{ type: HostListener, args: ['click', ['$event'],] },],
-};
 
-var __extends$73 = (undefined && undefined.__extends) || (function () {
+var __extends$70 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -56371,8 +57033,8 @@ var __extends$73 = (undefined && undefined.__extends) || (function () {
  *
  * \@demo /docs/demos/src/range/
  */
-var Range = (function (_super) {
-    __extends$73(Range, _super);
+var Range = /** @class */ (function (_super) {
+    __extends$70(Range, _super);
     /**
      * @param {?} form
      * @param {?} _haptic
@@ -56868,58 +57530,58 @@ var Range = (function (_super) {
         _super.prototype.ngOnDestroy.call(this);
         this._events.destroy();
     };
+    Range.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-range',
+                    template: '<ng-content select="[range-left]"></ng-content>' +
+                        '<div class="range-slider" #slider>' +
+                        '<div class="range-tick" *ngFor="let t of _ticks" [style.left]="t.left" [class.range-tick-active]="t.active" role="presentation"></div>' +
+                        '<div class="range-bar" role="presentation"></div>' +
+                        '<div class="range-bar range-bar-active" [style.left]="_barL" [style.right]="_barR" #bar role="presentation"></div>' +
+                        '<div class="range-knob-handle" (ionIncrease)="_keyChg(true, false)" (ionDecrease)="_keyChg(false, false)" [ratio]="_ratioA" [val]="_valA" [pin]="_pin" [pressed]="_pressedA" [min]="_min" [max]="_max" [disabled]="_disabled" [labelId]="_labelId"></div>' +
+                        '<div class="range-knob-handle" (ionIncrease)="_keyChg(true, true)" (ionDecrease)="_keyChg(false, true)" [ratio]="_ratioB" [val]="_valB" [pin]="_pin" [pressed]="_pressedB" [min]="_min" [max]="_max" [disabled]="_disabled" [labelId]="_labelId" *ngIf="_dual"></div>' +
+                        '</div>' +
+                        '<ng-content select="[range-right]"></ng-content>',
+                    host: {
+                        '[class.range-disabled]': '_disabled',
+                        '[class.range-pressed]': '_pressed',
+                        '[class.range-has-pin]': '_pin'
+                    },
+                    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Range, multi: true }],
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Range.ctorParameters = function () { return [
+        { type: Form, },
+        { type: Haptic, },
+        { type: Item, decorators: [{ type: Optional },] },
+        { type: Config, },
+        { type: Platform, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: DomController, },
+        { type: ChangeDetectorRef, },
+    ]; };
+    Range.propDecorators = {
+        '_slider': [{ type: ViewChild, args: ['slider',] },],
+        'min': [{ type: Input },],
+        'max': [{ type: Input },],
+        'step': [{ type: Input },],
+        'snaps': [{ type: Input },],
+        'pin': [{ type: Input },],
+        'debounce': [{ type: Input },],
+        'dualKnobs': [{ type: Input },],
+    };
     return Range;
 }(BaseInput));
-Range.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-range',
-                template: '<ng-content select="[range-left]"></ng-content>' +
-                    '<div class="range-slider" #slider>' +
-                    '<div class="range-tick" *ngFor="let t of _ticks" [style.left]="t.left" [class.range-tick-active]="t.active" role="presentation"></div>' +
-                    '<div class="range-bar" role="presentation"></div>' +
-                    '<div class="range-bar range-bar-active" [style.left]="_barL" [style.right]="_barR" #bar role="presentation"></div>' +
-                    '<div class="range-knob-handle" (ionIncrease)="_keyChg(true, false)" (ionDecrease)="_keyChg(false, false)" [ratio]="_ratioA" [val]="_valA" [pin]="_pin" [pressed]="_pressedA" [min]="_min" [max]="_max" [disabled]="_disabled" [labelId]="_labelId"></div>' +
-                    '<div class="range-knob-handle" (ionIncrease)="_keyChg(true, true)" (ionDecrease)="_keyChg(false, true)" [ratio]="_ratioB" [val]="_valB" [pin]="_pin" [pressed]="_pressedB" [min]="_min" [max]="_max" [disabled]="_disabled" [labelId]="_labelId" *ngIf="_dual"></div>' +
-                    '</div>' +
-                    '<ng-content select="[range-right]"></ng-content>',
-                host: {
-                    '[class.range-disabled]': '_disabled',
-                    '[class.range-pressed]': '_pressed',
-                    '[class.range-has-pin]': '_pin'
-                },
-                providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Range, multi: true }],
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Range.ctorParameters = function () { return [
-    { type: Form, },
-    { type: Haptic, },
-    { type: Item, decorators: [{ type: Optional },] },
-    { type: Config, },
-    { type: Platform, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: DomController, },
-    { type: ChangeDetectorRef, },
-]; };
-Range.propDecorators = {
-    '_slider': [{ type: ViewChild, args: ['slider',] },],
-    'min': [{ type: Input },],
-    'max': [{ type: Input },],
-    'step': [{ type: Input },],
-    'snaps': [{ type: Input },],
-    'pin': [{ type: Input },],
-    'debounce': [{ type: Input },],
-    'dualKnobs': [{ type: Input },],
-};
 
 /**
  * @hidden
  */
-var RangeKnob = (function () {
+var RangeKnob = /** @class */ (function () {
     function RangeKnob() {
         this.ionIncrease = new EventEmitter();
         this.ionDecrease = new EventEmitter();
@@ -56954,45 +57616,45 @@ var RangeKnob = (function () {
             ev.stopPropagation();
         }
     };
+    RangeKnob.decorators = [
+        { type: Component, args: [{
+                    selector: '.range-knob-handle',
+                    template: '<div class="range-pin" *ngIf="pin" role="presentation">{{val}}</div>' +
+                        '<div class="range-knob" role="presentation"></div>',
+                    host: {
+                        '[class.range-knob-pressed]': 'pressed',
+                        '[class.range-knob-min]': 'val===min||val===undefined',
+                        '[class.range-knob-max]': 'val===max',
+                        '[style.left]': '_x',
+                        '[attr.aria-valuenow]': 'val',
+                        '[attr.aria-valuemin]': 'min',
+                        '[attr.aria-valuemax]': 'max',
+                        '[attr.aria-disabled]': 'disabled',
+                        '[attr.aria-labelledby]': 'labelId',
+                        '[tabindex]': 'disabled?-1:0',
+                        'role': 'slider'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    RangeKnob.ctorParameters = function () { return []; };
+    RangeKnob.propDecorators = {
+        'ratio': [{ type: Input },],
+        'pressed': [{ type: Input },],
+        'pin': [{ type: Input },],
+        'min': [{ type: Input },],
+        'max': [{ type: Input },],
+        'val': [{ type: Input },],
+        'disabled': [{ type: Input },],
+        'labelId': [{ type: Input },],
+        'ionIncrease': [{ type: Output },],
+        'ionDecrease': [{ type: Output },],
+        '_keyup': [{ type: HostListener, args: ['keydown', ['$event'],] },],
+    };
     return RangeKnob;
 }());
-RangeKnob.decorators = [
-    { type: Component, args: [{
-                selector: '.range-knob-handle',
-                template: '<div class="range-pin" *ngIf="pin" role="presentation">{{val}}</div>' +
-                    '<div class="range-knob" role="presentation"></div>',
-                host: {
-                    '[class.range-knob-pressed]': 'pressed',
-                    '[class.range-knob-min]': 'val===min||val===undefined',
-                    '[class.range-knob-max]': 'val===max',
-                    '[style.left]': '_x',
-                    '[attr.aria-valuenow]': 'val',
-                    '[attr.aria-valuemin]': 'min',
-                    '[attr.aria-valuemax]': 'max',
-                    '[attr.aria-disabled]': 'disabled',
-                    '[attr.aria-labelledby]': 'labelId',
-                    '[tabindex]': 'disabled?-1:0',
-                    'role': 'slider'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-RangeKnob.ctorParameters = function () { return []; };
-RangeKnob.propDecorators = {
-    'ratio': [{ type: Input },],
-    'pressed': [{ type: Input },],
-    'pin': [{ type: Input },],
-    'min': [{ type: Input },],
-    'max': [{ type: Input },],
-    'val': [{ type: Input },],
-    'disabled': [{ type: Input },],
-    'labelId': [{ type: Input },],
-    'ionIncrease': [{ type: Output },],
-    'ionDecrease': [{ type: Output },],
-    '_keyup': [{ type: HostListener, args: ['keydown', ['$event'],] },],
-};
 
 /**
  * \@name Refresher
@@ -57074,7 +57736,7 @@ RangeKnob.propDecorators = {
  * \@demo /docs/demos/src/refresher/
  *
  */
-var Refresher = (function () {
+var Refresher = /** @class */ (function () {
     /**
      * @param {?} _plt
      * @param {?} _content
@@ -57471,36 +58133,36 @@ var Refresher = (function () {
         this._events.destroy();
         this._gesture.destroy();
     };
+    Refresher.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-refresher',
+                    host: {
+                        '[class.refresher-active]': 'state !== "inactive"',
+                        '[style.top]': '_top'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Refresher.ctorParameters = function () { return [
+        { type: Platform, },
+        { type: Content, decorators: [{ type: Host },] },
+        { type: NgZone, },
+        { type: GestureController, },
+    ]; };
+    Refresher.propDecorators = {
+        'pullMin': [{ type: Input },],
+        'pullMax': [{ type: Input },],
+        'closeDuration': [{ type: Input },],
+        'snapbackDuration': [{ type: Input },],
+        'enabled': [{ type: Input },],
+        'ionRefresh': [{ type: Output },],
+        'ionPull': [{ type: Output },],
+        'ionStart': [{ type: Output },],
+    };
     return Refresher;
 }());
-Refresher.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-refresher',
-                host: {
-                    '[class.refresher-active]': 'state !== "inactive"',
-                    '[style.top]': '_top'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Refresher.ctorParameters = function () { return [
-    { type: Platform, },
-    { type: Content, decorators: [{ type: Host },] },
-    { type: NgZone, },
-    { type: GestureController, },
-]; };
-Refresher.propDecorators = {
-    'pullMin': [{ type: Input },],
-    'pullMax': [{ type: Input },],
-    'closeDuration': [{ type: Input },],
-    'snapbackDuration': [{ type: Input },],
-    'enabled': [{ type: Input },],
-    'ionRefresh': [{ type: Output },],
-    'ionPull': [{ type: Output },],
-    'ionStart': [{ type: Output },],
-};
 var STATE_INACTIVE = 'inactive';
 var STATE_PULLING = 'pulling';
 var STATE_READY = 'ready';
@@ -57511,7 +58173,7 @@ var STATE_COMPLETING = 'completing';
 /**
  * @hidden
  */
-var RefresherContent = (function () {
+var RefresherContent = /** @class */ (function () {
     /**
      * @param {?} r
      * @param {?} _config
@@ -57532,42 +58194,42 @@ var RefresherContent = (function () {
             this.refreshingSpinner = this._config.get('ionRefreshingSpinner', this._config.get('spinner', 'ios'));
         }
     };
+    RefresherContent.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-refresher-content',
+                    template: '<div class="refresher-pulling">' +
+                        '<div class="refresher-pulling-icon" *ngIf="pullingIcon">' +
+                        '<ion-icon [name]="pullingIcon"></ion-icon>' +
+                        '</div>' +
+                        '<div class="refresher-pulling-text" [innerHTML]="pullingText" *ngIf="pullingText"></div>' +
+                        '</div>' +
+                        '<div class="refresher-refreshing">' +
+                        '<div class="refresher-refreshing-icon">' +
+                        '<ion-spinner [name]="refreshingSpinner"></ion-spinner>' +
+                        '</div>' +
+                        '<div class="refresher-refreshing-text" [innerHTML]="refreshingText" *ngIf="refreshingText"></div>' +
+                        '</div>',
+                    host: {
+                        '[attr.state]': 'r.state'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    RefresherContent.ctorParameters = function () { return [
+        { type: Refresher, },
+        { type: Config, },
+    ]; };
+    RefresherContent.propDecorators = {
+        'pullingIcon': [{ type: Input },],
+        'pullingText': [{ type: Input },],
+        'refreshingSpinner': [{ type: Input },],
+        'refreshingText': [{ type: Input },],
+    };
     return RefresherContent;
 }());
-RefresherContent.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-refresher-content',
-                template: '<div class="refresher-pulling">' +
-                    '<div class="refresher-pulling-icon" *ngIf="pullingIcon">' +
-                    '<ion-icon [name]="pullingIcon"></ion-icon>' +
-                    '</div>' +
-                    '<div class="refresher-pulling-text" [innerHTML]="pullingText" *ngIf="pullingText"></div>' +
-                    '</div>' +
-                    '<div class="refresher-refreshing">' +
-                    '<div class="refresher-refreshing-icon">' +
-                    '<ion-spinner [name]="refreshingSpinner"></ion-spinner>' +
-                    '</div>' +
-                    '<div class="refresher-refreshing-text" [innerHTML]="refreshingText" *ngIf="refreshingText"></div>' +
-                    '</div>',
-                host: {
-                    '[attr.state]': 'r.state'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-RefresherContent.ctorParameters = function () { return [
-    { type: Refresher, },
-    { type: Config, },
-]; };
-RefresherContent.propDecorators = {
-    'pullingIcon': [{ type: Input },],
-    'pullingText': [{ type: Input },],
-    'refreshingSpinner': [{ type: Input },],
-    'refreshingText': [{ type: Input },],
-};
 
 /**
  * \@name Scroll
@@ -57586,7 +58248,7 @@ RefresherContent.propDecorators = {
  * ```
  * \@demo /docs/demos/src/scroll/
  */
-var Scroll = (function () {
+var Scroll = /** @class */ (function () {
     function Scroll() {
         this._scrollX = false;
         this._scrollY = false;
@@ -57688,37 +58350,37 @@ var Scroll = (function () {
             ele.removeEventListener('scroll', handler);
         };
     };
+    Scroll.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-scroll',
+                    template: '<div class="scroll-content" #scrollContent>' +
+                        '<div class="scroll-zoom-wrapper">' +
+                        '<ng-content></ng-content>' +
+                        '</div>' +
+                        '</div>',
+                    host: {
+                        '[class.scroll-x]': 'scrollX',
+                        '[class.scroll-y]': 'scrollY'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Scroll.ctorParameters = function () { return []; };
+    Scroll.propDecorators = {
+        'scrollX': [{ type: Input },],
+        'scrollY': [{ type: Input },],
+        'zoom': [{ type: Input },],
+        'maxZoom': [{ type: Input },],
+        '_scrollContent': [{ type: ViewChild, args: ['scrollContent', { read: ElementRef },] },],
+    };
     return Scroll;
 }());
-Scroll.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-scroll',
-                template: '<div class="scroll-content" #scrollContent>' +
-                    '<div class="scroll-zoom-wrapper">' +
-                    '<ng-content></ng-content>' +
-                    '</div>' +
-                    '</div>',
-                host: {
-                    '[class.scroll-x]': 'scrollX',
-                    '[class.scroll-y]': 'scrollY'
-                },
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Scroll.ctorParameters = function () { return []; };
-Scroll.propDecorators = {
-    'scrollX': [{ type: Input },],
-    'scrollY': [{ type: Input },],
-    'zoom': [{ type: Input },],
-    'maxZoom': [{ type: Input },],
-    '_scrollContent': [{ type: ViewChild, args: ['scrollContent', { read: ElementRef },] },],
-};
 
-var __extends$74 = (undefined && undefined.__extends) || (function () {
+var __extends$71 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -57747,8 +58409,8 @@ var __extends$74 = (undefined && undefined.__extends) || (function () {
  * \@demo /docs/demos/src/searchbar/
  * @see {\@link /docs/components#searchbar Searchbar Component Docs}
  */
-var Searchbar = (function (_super) {
-    __extends$74(Searchbar, _super);
+var Searchbar = /** @class */ (function (_super) {
+    __extends$71(Searchbar, _super);
     /**
      * @param {?} config
      * @param {?} _plt
@@ -58082,63 +58744,63 @@ var Searchbar = (function (_super) {
     Searchbar.prototype.setFocus = function () {
         this._renderer.invokeElementMethod(this._searchbarInput.nativeElement, 'focus');
     };
+    Searchbar.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-searchbar',
+                    template: '<div class="searchbar-input-container">' +
+                        '<button ion-button mode="md" (click)="cancelSearchbar($event)" (mousedown)="cancelSearchbar($event)" clear color="dark" class="searchbar-md-cancel" type="button">' +
+                        '<ion-icon name="md-arrow-back"></ion-icon>' +
+                        '</button>' +
+                        '<div #searchbarIcon class="searchbar-search-icon"></div>' +
+                        '<input #searchbarInput class="searchbar-input" (input)="inputChanged($event)" (blur)="inputBlurred()" (focus)="inputFocused()" ' +
+                        '[attr.placeholder]="placeholder" ' +
+                        '[attr.type]="type" ' +
+                        '[attr.autocomplete]="_autocomplete" ' +
+                        '[attr.autocorrect]="_autocorrect" ' +
+                        '[attr.spellcheck]="_spellcheck">' +
+                        '<button ion-button clear class="searchbar-clear-icon" [mode]="_mode" (click)="clearInput($event)" (mousedown)="clearInput($event)" type="button"></button>' +
+                        '</div>' +
+                        '<button ion-button #cancelButton mode="ios" [tabindex]="_isActive ? 1 : -1" clear (click)="cancelSearchbar($event)" (mousedown)="cancelSearchbar($event)" class="searchbar-ios-cancel" type="button">{{cancelButtonText}}</button>',
+                    host: {
+                        '[class.searchbar-animated]': '_animated',
+                        '[class.searchbar-has-value]': '_value',
+                        '[class.searchbar-active]': '_isActive',
+                        '[class.searchbar-show-cancel]': '_showCancelButton',
+                        '[class.searchbar-left-aligned]': '_shouldAlignLeft',
+                        '[class.searchbar-has-focus]': '_isFocus'
+                    },
+                    encapsulation: ViewEncapsulation.None
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Searchbar.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: NgControl, decorators: [{ type: Optional },] },
+    ]; };
+    Searchbar.propDecorators = {
+        'cancelButtonText': [{ type: Input },],
+        'showCancelButton': [{ type: Input },],
+        'debounce': [{ type: Input },],
+        'placeholder': [{ type: Input },],
+        'autocomplete': [{ type: Input },],
+        'autocorrect': [{ type: Input },],
+        'spellcheck': [{ type: Input },],
+        'type': [{ type: Input },],
+        'animated': [{ type: Input },],
+        'ionInput': [{ type: Output },],
+        'ionCancel': [{ type: Output },],
+        'ionClear': [{ type: Output },],
+        '_searchbarInput': [{ type: ViewChild, args: ['searchbarInput',] },],
+        '_searchbarIcon': [{ type: ViewChild, args: ['searchbarIcon',] },],
+        '_cancelButton': [{ type: ViewChild, args: ['cancelButton', { read: ElementRef },] },],
+    };
     return Searchbar;
 }(BaseInput));
-Searchbar.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-searchbar',
-                template: '<div class="searchbar-input-container">' +
-                    '<button ion-button mode="md" (click)="cancelSearchbar($event)" (mousedown)="cancelSearchbar($event)" clear color="dark" class="searchbar-md-cancel" type="button">' +
-                    '<ion-icon name="md-arrow-back"></ion-icon>' +
-                    '</button>' +
-                    '<div #searchbarIcon class="searchbar-search-icon"></div>' +
-                    '<input #searchbarInput class="searchbar-input" (input)="inputChanged($event)" (blur)="inputBlurred()" (focus)="inputFocused()" ' +
-                    '[attr.placeholder]="placeholder" ' +
-                    '[attr.type]="type" ' +
-                    '[attr.autocomplete]="_autocomplete" ' +
-                    '[attr.autocorrect]="_autocorrect" ' +
-                    '[attr.spellcheck]="_spellcheck">' +
-                    '<button ion-button clear class="searchbar-clear-icon" [mode]="_mode" (click)="clearInput($event)" (mousedown)="clearInput($event)" type="button"></button>' +
-                    '</div>' +
-                    '<button ion-button #cancelButton mode="ios" [tabindex]="_isActive ? 1 : -1" clear (click)="cancelSearchbar($event)" (mousedown)="cancelSearchbar($event)" class="searchbar-ios-cancel" type="button">{{cancelButtonText}}</button>',
-                host: {
-                    '[class.searchbar-animated]': '_animated',
-                    '[class.searchbar-has-value]': '_value',
-                    '[class.searchbar-active]': '_isActive',
-                    '[class.searchbar-show-cancel]': '_showCancelButton',
-                    '[class.searchbar-left-aligned]': '_shouldAlignLeft',
-                    '[class.searchbar-has-focus]': '_isFocus'
-                },
-                encapsulation: ViewEncapsulation.None
-            },] },
-];
-/**
- * @nocollapse
- */
-Searchbar.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: NgControl, decorators: [{ type: Optional },] },
-]; };
-Searchbar.propDecorators = {
-    'cancelButtonText': [{ type: Input },],
-    'showCancelButton': [{ type: Input },],
-    'debounce': [{ type: Input },],
-    'placeholder': [{ type: Input },],
-    'autocomplete': [{ type: Input },],
-    'autocorrect': [{ type: Input },],
-    'spellcheck': [{ type: Input },],
-    'type': [{ type: Input },],
-    'animated': [{ type: Input },],
-    'ionInput': [{ type: Output },],
-    'ionCancel': [{ type: Output },],
-    'ionClear': [{ type: Output },],
-    '_searchbarInput': [{ type: ViewChild, args: ['searchbarInput',] },],
-    '_searchbarIcon': [{ type: ViewChild, args: ['searchbarIcon',] },],
-    '_cancelButton': [{ type: ViewChild, args: ['cancelButton', { read: ElementRef },] },],
-};
 
 /**
  * \@name SegmentButton
@@ -58176,7 +58838,7 @@ Searchbar.propDecorators = {
  * @see {\@link /docs/components#segment Segment Component Docs}
  * @see {\@link /docs/api/components/segment/Segment/ Segment API Docs}
  */
-var SegmentButton = (function () {
+var SegmentButton = /** @class */ (function () {
     function SegmentButton() {
         this.isActive = false;
         this._disabled = false;
@@ -58221,36 +58883,36 @@ var SegmentButton = (function () {
             console.warn('<ion-segment-button> requires a "value" attribute');
         }
     };
+    SegmentButton.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-segment-button',
+                    template: '<ng-content></ng-content>' +
+                        '<div class="button-effect"></div>',
+                    host: {
+                        'tappable': '',
+                        'class': 'segment-button',
+                        'role': 'button',
+                        '[class.segment-button-disabled]': '_disabled',
+                        '[class.segment-activated]': 'isActive',
+                        '[attr.aria-pressed]': 'isActive'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    SegmentButton.ctorParameters = function () { return []; };
+    SegmentButton.propDecorators = {
+        'value': [{ type: Input },],
+        'ionSelect': [{ type: Output },],
+        'disabled': [{ type: Input },],
+        'onClick': [{ type: HostListener, args: ['click',] },],
+    };
     return SegmentButton;
 }());
-SegmentButton.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-segment-button',
-                template: '<ng-content></ng-content>' +
-                    '<div class="button-effect"></div>',
-                host: {
-                    'tappable': '',
-                    'class': 'segment-button',
-                    'role': 'button',
-                    '[class.segment-button-disabled]': '_disabled',
-                    '[class.segment-activated]': 'isActive',
-                    '[attr.aria-pressed]': 'isActive'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-SegmentButton.ctorParameters = function () { return []; };
-SegmentButton.propDecorators = {
-    'value': [{ type: Input },],
-    'ionSelect': [{ type: Output },],
-    'disabled': [{ type: Input },],
-    'onClick': [{ type: HostListener, args: ['click',] },],
-};
 
-var __extends$75 = (undefined && undefined.__extends) || (function () {
+var __extends$72 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -58316,8 +58978,8 @@ var __extends$75 = (undefined && undefined.__extends) || (function () {
  * @see {\@link /docs/components#segment Segment Component Docs}
  * @see [Angular Forms](http://learnangular2.com/forms/)
  */
-var Segment = (function (_super) {
-    __extends$75(Segment, _super);
+var Segment = /** @class */ (function (_super) {
+    __extends$72(Segment, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -58358,33 +59020,33 @@ var Segment = (function (_super) {
             button.isActive = (button.value === value);
         }
     };
+    Segment.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-segment',
+                    host: {
+                        '[class.segment-disabled]': '_disabled'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Segment.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: NgControl, decorators: [{ type: Optional },] },
+    ]; };
+    Segment.propDecorators = {
+        '_buttons': [{ type: ContentChildren, args: [SegmentButton,] },],
+    };
     return Segment;
 }(BaseInput));
-Segment.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-segment',
-                host: {
-                    '[class.segment-disabled]': '_disabled'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Segment.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: NgControl, decorators: [{ type: Optional },] },
-]; };
-Segment.propDecorators = {
-    '_buttons': [{ type: ContentChildren, args: [SegmentButton,] },],
-};
 
 /**
  * @hidden
  */
-var SelectPopover = (function () {
+var SelectPopover = /** @class */ (function () {
     /**
      * @param {?} navParams
      * @param {?} viewController
@@ -58421,22 +59083,22 @@ var SelectPopover = (function () {
     SelectPopover.prototype.ngOnInit = function () {
         this.options = this.navParams.data.options;
     };
+    SelectPopover.decorators = [
+        { type: Component, args: [{
+                    template: "\n    <ion-list radio-group [(ngModel)]=\"value\">\n      <ion-item *ngFor=\"let option of options\">\n        <ion-label>{{option.text}}</ion-label>\n        <ion-radio [checked]=\"option.checked\" [value]=\"option.value\" [disabled]=\"option.disabled\"></ion-radio>\n      </ion-item>\n    </ion-list>\n  "
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    SelectPopover.ctorParameters = function () { return [
+        { type: NavParams, },
+        { type: ViewController, },
+    ]; };
     return SelectPopover;
 }());
-SelectPopover.decorators = [
-    { type: Component, args: [{
-                template: "\n    <ion-list radio-group [(ngModel)]=\"value\">\n      <ion-item *ngFor=\"let option of options\">\n        <ion-label>{{option.text}}</ion-label>\n        <ion-radio [checked]=\"option.checked\" [value]=\"option.value\" [disabled]=\"option.disabled\"></ion-radio>\n      </ion-item>\n    </ion-list>\n  "
-            },] },
-];
-/**
- * @nocollapse
- */
-SelectPopover.ctorParameters = function () { return [
-    { type: NavParams, },
-    { type: ViewController, },
-]; };
 
-var __extends$76 = (undefined && undefined.__extends) || (function () {
+var __extends$73 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -58582,8 +59244,8 @@ var __extends$76 = (undefined && undefined.__extends) || (function () {
  *
  * \@demo /docs/demos/src/select/
  */
-var Select = (function (_super) {
-    __extends$76(Select, _super);
+var Select = /** @class */ (function (_super) {
+    __extends$73(Select, _super);
     /**
      * @param {?} _app
      * @param {?} form
@@ -58902,62 +59564,62 @@ var Select = (function (_super) {
         this._updateText();
         _super.prototype._inputUpdated.call(this);
     };
+    Select.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-select',
+                    template: '<div *ngIf="!_text" class="select-placeholder select-text">{{placeholder}}</div>' +
+                        '<div *ngIf="_text" class="select-text">{{selectedText || _text}}</div>' +
+                        '<div class="select-icon">' +
+                        '<div class="select-icon-inner"></div>' +
+                        '</div>' +
+                        '<button aria-haspopup="true" ' +
+                        'type="button" ' +
+                        '[id]="id" ' +
+                        'ion-button="item-cover" ' +
+                        '[attr.aria-labelledby]="_labelId" ' +
+                        '[attr.aria-disabled]="_disabled" ' +
+                        'class="item-cover">' +
+                        '</button>',
+                    host: {
+                        '[class.select-disabled]': '_disabled'
+                    },
+                    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Select, multi: true }],
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Select.ctorParameters = function () { return [
+        { type: App, },
+        { type: Form, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Item, decorators: [{ type: Optional },] },
+        { type: DeepLinker, },
+    ]; };
+    Select.propDecorators = {
+        'cancelText': [{ type: Input },],
+        'okText': [{ type: Input },],
+        'placeholder': [{ type: Input },],
+        'selectOptions': [{ type: Input },],
+        'interface': [{ type: Input },],
+        'selectedText': [{ type: Input },],
+        'compareWith': [{ type: Input },],
+        'ionCancel': [{ type: Output },],
+        '_click': [{ type: HostListener, args: ['click', ['$event'],] },],
+        '_keyup': [{ type: HostListener, args: ['keyup.space',] },],
+        'multiple': [{ type: Input },],
+        'options': [{ type: ContentChildren, args: [Option,] },],
+    };
     return Select;
 }(BaseInput));
-Select.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-select',
-                template: '<div *ngIf="!_text" class="select-placeholder select-text">{{placeholder}}</div>' +
-                    '<div *ngIf="_text" class="select-text">{{selectedText || _text}}</div>' +
-                    '<div class="select-icon">' +
-                    '<div class="select-icon-inner"></div>' +
-                    '</div>' +
-                    '<button aria-haspopup="true" ' +
-                    'type="button" ' +
-                    '[id]="id" ' +
-                    'ion-button="item-cover" ' +
-                    '[attr.aria-labelledby]="_labelId" ' +
-                    '[attr.aria-disabled]="_disabled" ' +
-                    'class="item-cover">' +
-                    '</button>',
-                host: {
-                    '[class.select-disabled]': '_disabled'
-                },
-                providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Select, multi: true }],
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Select.ctorParameters = function () { return [
-    { type: App, },
-    { type: Form, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Item, decorators: [{ type: Optional },] },
-    { type: DeepLinker, },
-]; };
-Select.propDecorators = {
-    'cancelText': [{ type: Input },],
-    'okText': [{ type: Input },],
-    'placeholder': [{ type: Input },],
-    'selectOptions': [{ type: Input },],
-    'interface': [{ type: Input },],
-    'selectedText': [{ type: Input },],
-    'compareWith': [{ type: Input },],
-    'ionCancel': [{ type: Output },],
-    '_click': [{ type: HostListener, args: ['click', ['$event'],] },],
-    '_keyup': [{ type: HostListener, args: ['keyup.space',] },],
-    'multiple': [{ type: Input },],
-    'options': [{ type: ContentChildren, args: [Option,] },],
-};
 
 /**
  * @hidden
  */
-var DisplayWhen = (function () {
+var DisplayWhen = /** @class */ (function () {
     /**
      * @param {?} conditions
      * @param {?} _plt
@@ -59009,7 +59671,7 @@ var DisplayWhen = (function () {
     return DisplayWhen;
 }());
 
-var __extends$77 = (undefined && undefined.__extends) || (function () {
+var __extends$74 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -59060,8 +59722,8 @@ var __extends$77 = (undefined && undefined.__extends) || (function () {
  * @see {\@link ../HideWhen HideWhen API Docs}
  * @see {\@link ../../../platform/Platform Platform API Docs}
  */
-var ShowWhen = (function (_super) {
-    __extends$77(ShowWhen, _super);
+var ShowWhen = /** @class */ (function (_super) {
+    __extends$74(ShowWhen, _super);
     /**
      * @param {?} showWhen
      * @param {?} plt
@@ -59070,27 +59732,27 @@ var ShowWhen = (function (_super) {
     function ShowWhen(showWhen, plt, zone) {
         return _super.call(this, showWhen, plt, zone) || this;
     }
+    // ngOnDestroy is implemented in DisplayWhen
+    ShowWhen.decorators = [
+        { type: Directive, args: [{
+                    selector: '[showWhen]',
+                    host: {
+                        '[class.hidden-show-when]': '!isMatch'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ShowWhen.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Attribute, args: ['showWhen',] },] },
+        { type: Platform, },
+        { type: NgZone, },
+    ]; };
     return ShowWhen;
 }(DisplayWhen));
-// ngOnDestroy is implemented in DisplayWhen
-ShowWhen.decorators = [
-    { type: Directive, args: [{
-                selector: '[showWhen]',
-                host: {
-                    '[class.hidden-show-when]': '!isMatch'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-ShowWhen.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Attribute, args: ['showWhen',] },] },
-    { type: Platform, },
-    { type: NgZone, },
-]; };
 
-var __extends$78 = (undefined && undefined.__extends) || (function () {
+var __extends$75 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -59141,8 +59803,8 @@ var __extends$78 = (undefined && undefined.__extends) || (function () {
  * @see {\@link ../ShowWhen ShowWhen API Docs}
  * @see {\@link ../../../platform/Platform Platform API Docs}
  */
-var HideWhen = (function (_super) {
-    __extends$78(HideWhen, _super);
+var HideWhen = /** @class */ (function (_super) {
+    __extends$75(HideWhen, _super);
     /**
      * @param {?} hideWhen
      * @param {?} plt
@@ -59151,24 +59813,24 @@ var HideWhen = (function (_super) {
     function HideWhen(hideWhen, plt, zone) {
         return _super.call(this, hideWhen, plt, zone) || this;
     }
+    HideWhen.decorators = [
+        { type: Directive, args: [{
+                    selector: '[hideWhen]',
+                    host: {
+                        '[class.hidden-hide-when]': 'isMatch'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    HideWhen.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Attribute, args: ['hideWhen',] },] },
+        { type: Platform, },
+        { type: NgZone, },
+    ]; };
     return HideWhen;
 }(DisplayWhen));
-HideWhen.decorators = [
-    { type: Directive, args: [{
-                selector: '[hideWhen]',
-                host: {
-                    '[class.hidden-hide-when]': 'isMatch'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-HideWhen.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Attribute, args: ['hideWhen',] },] },
-    { type: Platform, },
-    { type: NgZone, },
-]; };
 
 /**
  * @param {?} a
@@ -59266,7 +59928,7 @@ function getElementIndex(ele) {
  */
 function queryChildren(parentEle, query) {
     if (parentEle) {
-        return (parentEle.querySelectorAll(query));
+        return /** @type {?} */ (parentEle.querySelectorAll(query));
     }
     return [];
 }
@@ -59445,13 +60107,13 @@ function setParallaxTransform(s, el, progress) {
         pX = parseInt(pX, 10) * progress * rtlFactor + '%';
     }
     else {
-        pX = (pX) * progress * rtlFactor + 'px';
+        pX = /** @type {?} */ (pX) * progress * rtlFactor + 'px';
     }
     if ((pY).indexOf('%') >= 0) {
         pY = parseInt(pY, 10) * progress + '%';
     }
     else {
-        pY = (pY) * progress + 'px';
+        pY = /** @type {?} */ (pY) * progress + 'px';
     }
     transform(el, 'translate3d(' + pX + ', ' + pY + ',0px)');
 }
@@ -59670,7 +60332,7 @@ function updatePagination(s) {
         paginationHTML = '<span class="' + CLS.paginationProgressbar + '"></span>';
     }
     s._paginationContainer.innerHTML = paginationHTML;
-    s._bullets = (s._paginationContainer.querySelectorAll('.' + CLS.bullet));
+    s._bullets = /** @type {?} */ (s._paginationContainer.querySelectorAll('.' + CLS.bullet));
 }
 /**
  * @param {?} s
@@ -59714,7 +60376,7 @@ function updatePaginationClasses(s) {
     }
     if (s.paginationType === 'fraction') {
         eachChild(s._paginationContainer, '.' + CLS.paginationCurrent, function (ele) {
-            ele.textContent = ((current + 1));
+            ele.textContent = /** @type {?} */ ((current + 1));
         });
         eachChild(s._paginationContainer, '.' + CLS.paginationTotal, function (ele) {
             ele.textContent = total;
@@ -60054,7 +60716,7 @@ var SWIPER_EFFECTS = {
                 var /** @type {?} */ slideOpacity = s.fade.crossFade ?
                     Math.max(1 - Math.abs(slide.progress), 0) :
                     1 + Math.min(Math.max(slide.progress, -1), 0);
-                slide.style.opacity = (slideOpacity);
+                slide.style.opacity = /** @type {?} */ (slideOpacity);
                 transform(slide, 'translate3d(' + tx + 'px, ' + ty + 'px, 0px)');
             }
         },
@@ -60096,7 +60758,7 @@ var SWIPER_EFFECTS = {
                 else if (s._rtl) {
                     rotateY = -rotateY;
                 }
-                slide.style.zIndex = (-Math.abs(Math.round(progress))) + s._slides.length;
+                slide.style.zIndex = /** @type {?} */ (-Math.abs(Math.round(progress))) + s._slides.length;
                 if (s.flip.slideShadows) {
                     // Set shadows
                     var /** @type {?} */ shadowBefore = ((isHorizontal(s) ? slide.querySelector('.swiper-slide-shadow-left') : slide.querySelector('.swiper-slide-shadow-top')));
@@ -60112,10 +60774,10 @@ var SWIPER_EFFECTS = {
                         slide.appendChild(shadowAfter);
                     }
                     if (shadowBefore) {
-                        shadowBefore.style.opacity = (Math.max(-progress, 0));
+                        shadowBefore.style.opacity = /** @type {?} */ (Math.max(-progress, 0));
                     }
                     if (shadowAfter) {
-                        shadowAfter.style.opacity = (Math.max(progress, 0));
+                        shadowAfter.style.opacity = /** @type {?} */ (Math.max(progress, 0));
                     }
                 }
                 transform(slide, 'translate3d(' + tx + 'px, ' + ty + 'px, 0px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)');
@@ -60150,7 +60812,7 @@ var SWIPER_EFFECTS = {
             var /** @type {?} */ cubeShadow;
             if (s.cube.shadow) {
                 if (isHorizontal(s)) {
-                    cubeShadow = (s._wrapper.querySelector('.swiper-cube-shadow'));
+                    cubeShadow = /** @type {?} */ (s._wrapper.querySelector('.swiper-cube-shadow'));
                     if (!cubeShadow) {
                         cubeShadow = plt.doc().createElement('div');
                         cubeShadow.className = 'swiper-cube-shadow';
@@ -60159,7 +60821,7 @@ var SWIPER_EFFECTS = {
                     cubeShadow.style.height = s.renderedWidth + 'px';
                 }
                 else {
-                    cubeShadow = (s.container.querySelector('.swiper-cube-shadow'));
+                    cubeShadow = /** @type {?} */ (s.container.querySelector('.swiper-cube-shadow'));
                     if (!cubeShadow) {
                         cubeShadow = plt.doc().createElement('div');
                         cubeShadow.className = 'swiper-cube-shadow';
@@ -60222,9 +60884,9 @@ var SWIPER_EFFECTS = {
                         slide.appendChild(shadowAfter);
                     }
                     if (shadowBefore)
-                        shadowBefore.style.opacity = (Math.max(-progress, 0));
+                        shadowBefore.style.opacity = /** @type {?} */ (Math.max(-progress, 0));
                     if (shadowAfter)
-                        shadowAfter.style.opacity = (Math.max(progress, 0));
+                        shadowAfter.style.opacity = /** @type {?} */ (Math.max(progress, 0));
                 }
             }
             s._wrapper.style.transformOrigin = s._wrapper.style.webkitTransformOrigin = '50% 50% -' + (s._renderedSize / 2) + 'px';
@@ -60290,7 +60952,7 @@ var SWIPER_EFFECTS = {
                     rotateX = 0;
                 var /** @type {?} */ slideTransform = 'translate3d(' + translateX + 'px,' + translateY + 'px,' + translateZ + 'px)  rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
                 transform(slide, slideTransform);
-                slide.style.zIndex = (-Math.abs(Math.round(offsetMultiplier))) + 1;
+                slide.style.zIndex = /** @type {?} */ (-Math.abs(Math.round(offsetMultiplier))) + 1;
                 if (s.coverflow.slideShadows) {
                     // Set shadows
                     var /** @type {?} */ shadowBefore = ((isHorizontal(s) ? slide.querySelector('.swiper-slide-shadow-left') : slide.querySelector('.swiper-slide-shadow-top')));
@@ -60306,10 +60968,10 @@ var SWIPER_EFFECTS = {
                         slide.appendChild(shadowAfter);
                     }
                     if (shadowBefore) {
-                        shadowBefore.style.opacity = ((offsetMultiplier > 0 ? offsetMultiplier : 0));
+                        shadowBefore.style.opacity = /** @type {?} */ ((offsetMultiplier > 0 ? offsetMultiplier : 0));
                     }
                     if (shadowAfter) {
-                        shadowAfter.style.opacity = (((-offsetMultiplier) > 0 ? -offsetMultiplier : 0));
+                        shadowAfter.style.opacity = /** @type {?} */ (((-offsetMultiplier) > 0 ? -offsetMultiplier : 0));
                     }
                 }
             }
@@ -60414,7 +61076,7 @@ function getTranslate(s, plt, el, axis) {
     if (axis === 'x') {
         if (win.WebKitCSSMatrix) {
             // Latest Chrome and webkits Fix
-            curTransform = (transformMatrix.m41);
+            curTransform = /** @type {?} */ (transformMatrix.m41);
         }
         else if (matrix.length === 16) {
             // Crazy IE10 Matrix
@@ -60553,18 +61215,18 @@ function onGestureStart(s, _plt, ev) {
     }
     if (!z.gesture.slide) {
         if (ev.currentTarget && ((ev.currentTarget)).classList.contains(CLS.slide)) {
-            z.gesture.slide = (ev.currentTarget);
+            z.gesture.slide = /** @type {?} */ (ev.currentTarget);
         }
         if (!z.gesture.slide) {
             z.gesture.slide = s._slides[s._activeIndex];
         }
-        z.gesture.image = (z.gesture.slide.querySelector('img, svg, canvas, ion-img'));
-        z.gesture.imageWrap = (z.gesture.image.closest('.' + CLS.zoomContainer));
+        z.gesture.image = /** @type {?} */ (z.gesture.slide.querySelector('img, svg, canvas, ion-img'));
+        z.gesture.imageWrap = /** @type {?} */ (z.gesture.image.closest('.' + CLS.zoomContainer));
         if (!z.gesture.imageWrap) {
             z.gesture.image = undefined;
             return;
         }
-        z.gesture.zoomMax = parseInt(z.gesture.imageWrap.getAttribute('data-swiper-zoom') || (s.zoomMax), 10);
+        z.gesture.zoomMax = parseInt(z.gesture.imageWrap.getAttribute('data-swiper-zoom') || /** @type {?} */ (s.zoomMax), 10);
     }
     transition(z.gesture.image, 0);
     z.isScaling = true;
@@ -60795,8 +61457,8 @@ function toggleZoom(s, plt) {
     var /** @type {?} */ ev = s.originalEvent;
     if (!z.gesture.slide) {
         z.gesture.slide = s.clickedSlide ? s.clickedSlide : s._slides[s._activeIndex];
-        z.gesture.image = (z.gesture.slide.querySelector('img, svg, canvas, ion-img'));
-        z.gesture.imageWrap = (z.gesture.image.closest('.' + CLS.zoomContainer));
+        z.gesture.image = /** @type {?} */ (z.gesture.slide.querySelector('img, svg, canvas, ion-img'));
+        z.gesture.imageWrap = /** @type {?} */ (z.gesture.image.closest('.' + CLS.zoomContainer));
     }
     if (!z.gesture.image)
         return;
@@ -60837,7 +61499,7 @@ function toggleZoom(s, plt) {
     }
     else {
         // Zoom In
-        z.scale = z.currentScale = parseInt(z.gesture.imageWrap.getAttribute('data-swiper-zoom') || (s.zoomMax), 10);
+        z.scale = z.currentScale = parseInt(z.gesture.imageWrap.getAttribute('data-swiper-zoom') || /** @type {?} */ (s.zoomMax), 10);
         if (ev) {
             slideWidth = z.gesture.slide.offsetWidth;
             slideHeight = z.gesture.slide.offsetHeight;
@@ -61039,10 +61701,10 @@ function initSwiper(s, plt) {
         s.virtualTranslate = true;
     }
     // Wrapper
-    s._wrapper = (s.container.querySelector('.' + CLS.wrapper));
+    s._wrapper = /** @type {?} */ (s.container.querySelector('.' + CLS.wrapper));
     // Pagination
     if (s.paginationType) {
-        s._paginationContainer = (s.container.querySelector('.swiper-pagination'));
+        s._paginationContainer = /** @type {?} */ (s.container.querySelector('.swiper-pagination'));
         if (s.paginationType === 'bullets') {
             s._paginationContainer.classList.add(CLS.paginationModifier + 'clickable');
         }
@@ -61131,7 +61793,7 @@ function autoplay(s, plt) {
     var /** @type {?} */ autoplayDelay = s.autoplay;
     var /** @type {?} */ activeSlide = s._slides[s._activeIndex];
     if (activeSlide.hasAttribute('data-swiper-autoplay')) {
-        autoplayDelay = ((activeSlide.getAttribute('data-swiper-autoplay') || s.autoplay));
+        autoplayDelay = /** @type {?} */ ((activeSlide.getAttribute('data-swiper-autoplay') || s.autoplay));
     }
     s._autoplayTimeoutId = plt.timeout(function () {
         s._zone.run(function () {
@@ -61389,7 +62051,7 @@ function updateSlidesSize(s, plt) {
                 slideSize = round(slideSize);
         }
         else {
-            slideSize = (s._renderedSize - ((s.slidesPerView) - 1) * spaceBetween) / (s.slidesPerView);
+            slideSize = (s._renderedSize - ((s.slidesPerView) - 1) * spaceBetween) / /** @type {?} */ (s.slidesPerView);
             if (s.roundLengths)
                 slideSize = round(slideSize);
             if (isHorizontal(s)) {
@@ -61641,7 +62303,7 @@ function fixLoop(s, plt) {
         newIndex = newIndex + s.loopedSlides;
         slideTo(s, plt, newIndex, 0, false, true);
     }
-    else if ((s.slidesPerView === 'auto' && s._activeIndex >= s.loopedSlides * 2) || (s._activeIndex > s._slides.length - (s.slidesPerView) * 2)) {
+    else if ((s.slidesPerView === 'auto' && s._activeIndex >= s.loopedSlides * 2) || (s._activeIndex > s._slides.length - /** @type {?} */ (s.slidesPerView) * 2)) {
         // Fix For Positive Oversliding
         newIndex = -s._slides.length + s._activeIndex + s.loopedSlides;
         newIndex = newIndex + s.loopedSlides;
@@ -62155,7 +62817,7 @@ function findElementInEvent(e, selector) {
     var /** @type {?} */ el = (e.target);
     if (!el.matches(selector)) {
         if (typeof selector === 'string') {
-            el = (el.closest(selector));
+            el = /** @type {?} */ (el.closest(selector));
         }
         else if (selector.nodeType) {
             var /** @type {?} */ parentEl = el.parentElement;
@@ -62797,7 +63459,7 @@ function doResize(s, plt, forceUpdatePagination) {
     s._allowSwipeToNext = allowSwipeToNext;
 }
 
-var __extends$79 = (undefined && undefined.__extends) || (function () {
+var __extends$76 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -62929,8 +63591,8 @@ var __extends$79 = (undefined && undefined.__extends) || (function () {
  *
  * Licensed under MIT
  */
-var Slides = (function (_super) {
-    __extends$79(Slides, _super);
+var Slides = /** @class */ (function (_super) {
+    __extends$76(Slides, _super);
     /**
      * @param {?} config
      * @param {?} _plt
@@ -63797,63 +64459,63 @@ var Slides = (function (_super) {
         destroySwiper(this);
         this.enableKeyboardControl(false);
     };
+    Slides.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-slides',
+                    template: '<div class="swiper-container" [attr.dir]="_rtl? \'rtl\' : null">' +
+                        '<div class="swiper-wrapper">' +
+                        '<ng-content></ng-content>' +
+                        '</div>' +
+                        '<div [class.hide]="!pager" class="swiper-pagination"></div>' +
+                        '</div>',
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Slides.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: NgZone, },
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    Slides.propDecorators = {
+        'autoplay': [{ type: Input },],
+        'control': [{ type: Input },],
+        'effect': [{ type: Input },],
+        'direction': [{ type: Input },],
+        'initialSlide': [{ type: Input },],
+        'loop': [{ type: Input },],
+        'pager': [{ type: Input },],
+        'dir': [{ type: Input },],
+        'paginationType': [{ type: Input },],
+        'parallax': [{ type: Input },],
+        'speed': [{ type: Input },],
+        'zoom': [{ type: Input },],
+        'spaceBetween': [{ type: Input },],
+        'slidesPerView': [{ type: Input },],
+        'centeredSlides': [{ type: Input },],
+        'ionSlideWillChange': [{ type: Output },],
+        'ionSlideDidChange': [{ type: Output },],
+        'ionSlideDrag': [{ type: Output },],
+        'ionSlideReachStart': [{ type: Output },],
+        'ionSlideReachEnd': [{ type: Output },],
+        'ionSlideAutoplay': [{ type: Output },],
+        'ionSlideAutoplayStart': [{ type: Output },],
+        'ionSlideAutoplayStop': [{ type: Output },],
+        'ionSlideNextStart': [{ type: Output },],
+        'ionSlidePrevStart': [{ type: Output },],
+        'ionSlideNextEnd': [{ type: Output },],
+        'ionSlidePrevEnd': [{ type: Output },],
+        'ionSlideTap': [{ type: Output },],
+        'ionSlideDoubleTap': [{ type: Output },],
+    };
     return Slides;
 }(Ion));
-Slides.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-slides',
-                template: '<div class="swiper-container" [attr.dir]="_rtl? \'rtl\' : null">' +
-                    '<div class="swiper-wrapper">' +
-                    '<ng-content></ng-content>' +
-                    '</div>' +
-                    '<div [class.hide]="!pager" class="swiper-pagination"></div>' +
-                    '</div>',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Slides.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: NgZone, },
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-Slides.propDecorators = {
-    'autoplay': [{ type: Input },],
-    'control': [{ type: Input },],
-    'effect': [{ type: Input },],
-    'direction': [{ type: Input },],
-    'initialSlide': [{ type: Input },],
-    'loop': [{ type: Input },],
-    'pager': [{ type: Input },],
-    'dir': [{ type: Input },],
-    'paginationType': [{ type: Input },],
-    'parallax': [{ type: Input },],
-    'speed': [{ type: Input },],
-    'zoom': [{ type: Input },],
-    'spaceBetween': [{ type: Input },],
-    'slidesPerView': [{ type: Input },],
-    'centeredSlides': [{ type: Input },],
-    'ionSlideWillChange': [{ type: Output },],
-    'ionSlideDidChange': [{ type: Output },],
-    'ionSlideDrag': [{ type: Output },],
-    'ionSlideReachStart': [{ type: Output },],
-    'ionSlideReachEnd': [{ type: Output },],
-    'ionSlideAutoplay': [{ type: Output },],
-    'ionSlideAutoplayStart': [{ type: Output },],
-    'ionSlideAutoplayStop': [{ type: Output },],
-    'ionSlideNextStart': [{ type: Output },],
-    'ionSlidePrevStart': [{ type: Output },],
-    'ionSlideNextEnd': [{ type: Output },],
-    'ionSlidePrevEnd': [{ type: Output },],
-    'ionSlideTap': [{ type: Output },],
-    'ionSlideDoubleTap': [{ type: Output },],
-};
 var slidesId = -1;
 
 /**
@@ -63868,7 +64530,7 @@ var slidesId = -1;
  * \@demo /docs/demos/src/slides/
  * @see {\@link /docs/api/components/slides/Slides/ Slides API Docs}
  */
-var Slide = (function () {
+var Slide = /** @class */ (function () {
     /**
      * @param {?} elementRef
      * @param {?} renderer
@@ -63886,28 +64548,28 @@ var Slide = (function () {
     Slide.prototype.ngOnDestroy = function () {
         this._slides.update(10);
     };
+    Slide.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-slide',
+                    template: '<div class="slide-zoom">' +
+                        '<ng-content></ng-content>' +
+                        '</div>',
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Slide.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Slides, },
+    ]; };
     return Slide;
 }());
-Slide.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-slide',
-                template: '<div class="slide-zoom">' +
-                    '<ng-content></ng-content>' +
-                    '</div>',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Slide.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Slides, },
-]; };
 
-var __extends$80 = (undefined && undefined.__extends) || (function () {
+var __extends$77 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -64010,8 +64672,8 @@ var __extends$80 = (undefined && undefined.__extends) || (function () {
  * }
  * ```
  */
-var Spinner = (function (_super) {
-    __extends$80(Spinner, _super);
+var Spinner = /** @class */ (function (_super) {
+    __extends$77(Spinner, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -64125,37 +64787,37 @@ var Spinner = (function (_super) {
         data.style.animationDuration = duration + 'ms';
         return data;
     };
+    Spinner.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-spinner',
+                    template: '<svg viewBox="0 0 64 64" *ngFor="let i of _c" [ngStyle]="i.style">' +
+                        '<circle [attr.r]="i.r" transform="translate(32,32)"></circle>' +
+                        '</svg>' +
+                        '<svg viewBox="0 0 64 64" *ngFor="let i of _l" [ngStyle]="i.style">' +
+                        '<line [attr.y1]="i.y1" [attr.y2]="i.y2" transform="translate(32,32)"></line>' +
+                        '</svg>',
+                    host: {
+                        '[class.spinner-paused]': '_paused'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Spinner.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    Spinner.propDecorators = {
+        'name': [{ type: Input },],
+        'duration': [{ type: Input },],
+        'paused': [{ type: Input },],
+    };
     return Spinner;
 }(Ion));
-Spinner.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-spinner',
-                template: '<svg viewBox="0 0 64 64" *ngFor="let i of _c" [ngStyle]="i.style">' +
-                    '<circle [attr.r]="i.r" transform="translate(32,32)"></circle>' +
-                    '</svg>' +
-                    '<svg viewBox="0 0 64 64" *ngFor="let i of _l" [ngStyle]="i.style">' +
-                    '<line [attr.y1]="i.y1" [attr.y2]="i.y2" transform="translate(32,32)"></line>' +
-                    '</svg>',
-                host: {
-                    '[class.spinner-paused]': '_paused'
-                },
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Spinner.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-Spinner.propDecorators = {
-    'name': [{ type: Input },],
-    'duration': [{ type: Input },],
-    'paused': [{ type: Input },],
-};
 var SPINNERS = {
     ios: {
         dur: 1000,
@@ -64255,7 +64917,7 @@ var SPINNERS = {
 /**
  * @hidden
  */
-var TabHighlight = (function () {
+var TabHighlight = /** @class */ (function () {
     /**
      * @param {?} _elementRef
      * @param {?} _dom
@@ -64289,22 +64951,22 @@ var TabHighlight = (function () {
             });
         }, 32);
     };
+    TabHighlight.decorators = [
+        { type: Directive, args: [{
+                    selector: '.tab-highlight'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    TabHighlight.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: DomController, },
+    ]; };
     return TabHighlight;
 }());
-TabHighlight.decorators = [
-    { type: Directive, args: [{
-                selector: '.tab-highlight'
-            },] },
-];
-/**
- * @nocollapse
- */
-TabHighlight.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: DomController, },
-]; };
 
-var __extends$82 = (undefined && undefined.__extends) || (function () {
+var __extends$79 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -64446,8 +65108,8 @@ var __extends$82 = (undefined && undefined.__extends) || (function () {
  * @see {\@link ../../config/Config Config API Docs}
  *
  */
-var Tabs = (function (_super) {
-    __extends$82(Tabs, _super);
+var Tabs = /** @class */ (function (_super) {
+    __extends$79(Tabs, _super);
     /**
      * @param {?} parent
      * @param {?} viewCtrl
@@ -64905,49 +65567,49 @@ var Tabs = (function (_super) {
         });
         return isPresent(tab) ? tab.index : fallbackIndex;
     };
+    Tabs.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-tabs',
+                    template: '<div class="tabbar" role="tablist" #tabbar>' +
+                        '<a *ngFor="let t of _tabs" [tab]="t" class="tab-button" role="tab" href="#" (ionSelect)="select(t)"></a>' +
+                        '<div class="tab-highlight"></div>' +
+                        '</div>' +
+                        '<ng-content></ng-content>' +
+                        '<div #portal tab-portal></div>',
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [{ provide: RootNode, useExisting: forwardRef(function () { return Tabs; }) }]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Tabs.ctorParameters = function () { return [
+        { type: NavController, decorators: [{ type: Optional },] },
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: App, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Platform, },
+        { type: Renderer, },
+        { type: DeepLinker, },
+        { type: Keyboard, },
+    ]; };
+    Tabs.propDecorators = {
+        'name': [{ type: Input },],
+        'selectedIndex': [{ type: Input },],
+        'tabsLayout': [{ type: Input },],
+        'tabsPlacement': [{ type: Input },],
+        'tabsHighlight': [{ type: Input },],
+        'ionChange': [{ type: Output },],
+        '_highlight': [{ type: ViewChild, args: [TabHighlight,] },],
+        '_tabbar': [{ type: ViewChild, args: ['tabbar',] },],
+        'portal': [{ type: ViewChild, args: ['portal', { read: ViewContainerRef },] },],
+    };
     return Tabs;
 }(Ion));
-Tabs.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-tabs',
-                template: '<div class="tabbar" role="tablist" #tabbar>' +
-                    '<a *ngFor="let t of _tabs" [tab]="t" class="tab-button" role="tab" href="#" (ionSelect)="select(t)"></a>' +
-                    '<div class="tab-highlight"></div>' +
-                    '</div>' +
-                    '<ng-content></ng-content>' +
-                    '<div #portal tab-portal></div>',
-                encapsulation: ViewEncapsulation.None,
-                providers: [{ provide: RootNode, useExisting: forwardRef(function () { return Tabs; }) }]
-            },] },
-];
-/**
- * @nocollapse
- */
-Tabs.ctorParameters = function () { return [
-    { type: NavController, decorators: [{ type: Optional },] },
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: App, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Platform, },
-    { type: Renderer, },
-    { type: DeepLinker, },
-    { type: Keyboard, },
-]; };
-Tabs.propDecorators = {
-    'name': [{ type: Input },],
-    'selectedIndex': [{ type: Input },],
-    'tabsLayout': [{ type: Input },],
-    'tabsPlacement': [{ type: Input },],
-    'tabsHighlight': [{ type: Input },],
-    'ionChange': [{ type: Output },],
-    '_highlight': [{ type: ViewChild, args: [TabHighlight,] },],
-    '_tabbar': [{ type: ViewChild, args: ['tabbar',] },],
-    'portal': [{ type: ViewChild, args: ['portal', { read: ViewContainerRef },] },],
-};
 var tabIds = -1;
 
-var __extends$81 = (undefined && undefined.__extends) || (function () {
+var __extends$78 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -65040,7 +65702,7 @@ var __extends$81 = (undefined && undefined.__extends) || (function () {
  * ```html
  * <ion-tabs>
  *   <ion-tab (ionSelect)="chat()" tabTitle="Show Modal"></ion-tab>
- * </ion-tabs>
+ * </ion-tabs>pop
  * ```
  *
  * ```ts
@@ -65063,8 +65725,8 @@ var __extends$81 = (undefined && undefined.__extends) || (function () {
  * @see {\@link ../../nav/Nav Nav API Docs}
  * @see {\@link ../../nav/NavController NavController API Docs}
  */
-var Tab = (function (_super) {
-    __extends$81(Tab, _super);
+var Tab = /** @class */ (function (_super) {
+    __extends$78(Tab, _super);
     /**
      * @param {?} parent
      * @param {?} app
@@ -65330,55 +65992,55 @@ var Tab = (function (_super) {
     Tab.prototype.goToRoot = function (opts) {
         return this.setRoot(this.root, this.rootParams, opts, null);
     };
+    Tab.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-tab',
+                    template: '<div #viewport></div><div class="nav-decor"></div>',
+                    host: {
+                        '[attr.id]': '_tabId',
+                        '[attr.aria-labelledby]': '_btnId',
+                        'role': 'tabpanel'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Tab.ctorParameters = function () { return [
+        { type: Tabs, },
+        { type: App, },
+        { type: Config, },
+        { type: Platform, },
+        { type: ElementRef, },
+        { type: NgZone, },
+        { type: Renderer, },
+        { type: ComponentFactoryResolver, },
+        { type: ChangeDetectorRef, },
+        { type: GestureController, },
+        { type: TransitionController, },
+        { type: DeepLinker, decorators: [{ type: Optional },] },
+        { type: DomController, },
+        { type: ErrorHandler, },
+    ]; };
+    Tab.propDecorators = {
+        'root': [{ type: Input },],
+        'rootParams': [{ type: Input },],
+        'tabUrlPath': [{ type: Input },],
+        'tabTitle': [{ type: Input },],
+        'tabIcon': [{ type: Input },],
+        'tabBadge': [{ type: Input },],
+        'tabBadgeStyle': [{ type: Input },],
+        'enabled': [{ type: Input },],
+        'show': [{ type: Input },],
+        'tabsHideOnSubPages': [{ type: Input },],
+        'ionSelect': [{ type: Output },],
+        '_vp': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
+    };
     return Tab;
 }(NavControllerBase));
-Tab.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-tab',
-                template: '<div #viewport></div><div class="nav-decor"></div>',
-                host: {
-                    '[attr.id]': '_tabId',
-                    '[attr.aria-labelledby]': '_btnId',
-                    'role': 'tabpanel'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Tab.ctorParameters = function () { return [
-    { type: Tabs, },
-    { type: App, },
-    { type: Config, },
-    { type: Platform, },
-    { type: ElementRef, },
-    { type: NgZone, },
-    { type: Renderer, },
-    { type: ComponentFactoryResolver, },
-    { type: ChangeDetectorRef, },
-    { type: GestureController, },
-    { type: TransitionController, },
-    { type: DeepLinker, decorators: [{ type: Optional },] },
-    { type: DomController, },
-    { type: ErrorHandler, },
-]; };
-Tab.propDecorators = {
-    'root': [{ type: Input },],
-    'rootParams': [{ type: Input },],
-    'tabUrlPath': [{ type: Input },],
-    'tabTitle': [{ type: Input },],
-    'tabIcon': [{ type: Input },],
-    'tabBadge': [{ type: Input },],
-    'tabBadgeStyle': [{ type: Input },],
-    'enabled': [{ type: Input },],
-    'show': [{ type: Input },],
-    'tabsHideOnSubPages': [{ type: Input },],
-    'ionSelect': [{ type: Output },],
-    '_vp': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
-};
 
-var __extends$83 = (undefined && undefined.__extends) || (function () {
+var __extends$80 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -65391,8 +66053,8 @@ var __extends$83 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var TabButton = (function (_super) {
-    __extends$83(TabButton, _super);
+var TabButton = /** @class */ (function (_super) {
+    __extends$80(TabButton, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -65431,48 +66093,48 @@ var TabButton = (function (_super) {
     TabButton.prototype.updateHref = function (href) {
         this.setElementAttribute('href', href);
     };
+    TabButton.decorators = [
+        { type: Component, args: [{
+                    selector: '.tab-button',
+                    template: '<ion-icon *ngIf="tab.tabIcon" [name]="tab.tabIcon" [isActive]="tab.isSelected" class="tab-button-icon"></ion-icon>' +
+                        '<span *ngIf="tab.tabTitle" class="tab-button-text">{{tab.tabTitle}}</span>' +
+                        '<ion-badge *ngIf="tab.tabBadge" class="tab-badge" [color]="tab.tabBadgeStyle">{{tab.tabBadge}}</ion-badge>' +
+                        '<div class="button-effect"></div>',
+                    host: {
+                        '[attr.id]': 'tab._btnId',
+                        '[attr.aria-controls]': 'tab._tabId',
+                        '[attr.aria-selected]': 'tab.isSelected',
+                        '[class.has-title]': 'hasTitle',
+                        '[class.has-icon]': 'hasIcon',
+                        '[class.has-title-only]': 'hasTitleOnly',
+                        '[class.icon-only]': 'hasIconOnly',
+                        '[class.has-badge]': 'hasBadge',
+                        '[class.disable-hover]': 'disHover',
+                        '[class.tab-disabled]': '!tab.enabled',
+                        '[class.tab-hidden]': '!tab.show',
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    TabButton.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    TabButton.propDecorators = {
+        'tab': [{ type: Input },],
+        'ionSelect': [{ type: Output },],
+        'onClick': [{ type: HostListener, args: ['click',] },],
+    };
     return TabButton;
 }(Ion));
-TabButton.decorators = [
-    { type: Component, args: [{
-                selector: '.tab-button',
-                template: '<ion-icon *ngIf="tab.tabIcon" [name]="tab.tabIcon" [isActive]="tab.isSelected" class="tab-button-icon"></ion-icon>' +
-                    '<span *ngIf="tab.tabTitle" class="tab-button-text">{{tab.tabTitle}}</span>' +
-                    '<ion-badge *ngIf="tab.tabBadge" class="tab-badge" [color]="tab.tabBadgeStyle">{{tab.tabBadge}}</ion-badge>' +
-                    '<div class="button-effect"></div>',
-                host: {
-                    '[attr.id]': 'tab._btnId',
-                    '[attr.aria-controls]': 'tab._tabId',
-                    '[attr.aria-selected]': 'tab.isSelected',
-                    '[class.has-title]': 'hasTitle',
-                    '[class.has-icon]': 'hasIcon',
-                    '[class.has-title-only]': 'hasTitleOnly',
-                    '[class.icon-only]': 'hasIconOnly',
-                    '[class.has-badge]': 'hasBadge',
-                    '[class.disable-hover]': 'disHover',
-                    '[class.tab-disabled]': '!tab.enabled',
-                    '[class.tab-hidden]': '!tab.show',
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-TabButton.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-TabButton.propDecorators = {
-    'tab': [{ type: Input },],
-    'ionSelect': [{ type: Output },],
-    'onClick': [{ type: HostListener, args: ['click',] },],
-};
 
 /**
  * @hidden
  */
-var ToastCmp = (function () {
+var ToastCmp = /** @class */ (function () {
     /**
      * @param {?} _viewCtrl
      * @param {?} _config
@@ -65542,42 +66204,42 @@ var ToastCmp = (function () {
         this.dismissTimeout = undefined;
         return this._viewCtrl.dismiss(null, role, { disableApp: false });
     };
+    ToastCmp.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-toast',
+                    template: '<div class="toast-wrapper" ' +
+                        '[class.toast-bottom]="d.position === \'bottom\'" ' +
+                        '[class.toast-middle]="d.position === \'middle\'" ' +
+                        '[class.toast-top]="d.position === \'top\'"> ' +
+                        '<div class="toast-container"> ' +
+                        '<div class="toast-message" id="{{hdrId}}" *ngIf="d.message">{{d.message}}</div> ' +
+                        '<button ion-button clear class="toast-button" *ngIf="d.showCloseButton" (click)="cbClick()"> ' +
+                        '{{ d.closeButtonText || \'Close\' }} ' +
+                        '</button> ' +
+                        '</div> ' +
+                        '</div>',
+                    host: {
+                        'role': 'dialog',
+                        '[attr.aria-labelledby]': 'hdrId',
+                        '[attr.aria-describedby]': 'descId',
+                    },
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ToastCmp.ctorParameters = function () { return [
+        { type: ViewController, },
+        { type: Config, },
+        { type: ElementRef, },
+        { type: NavParams, },
+        { type: Renderer, },
+    ]; };
     return ToastCmp;
 }());
-ToastCmp.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-toast',
-                template: '<div class="toast-wrapper" ' +
-                    '[class.toast-bottom]="d.position === \'bottom\'" ' +
-                    '[class.toast-middle]="d.position === \'middle\'" ' +
-                    '[class.toast-top]="d.position === \'top\'"> ' +
-                    '<div class="toast-container"> ' +
-                    '<div class="toast-message" id="{{hdrId}}" *ngIf="d.message">{{d.message}}</div> ' +
-                    '<button ion-button clear class="toast-button" *ngIf="d.showCloseButton" (click)="cbClick()"> ' +
-                    '{{ d.closeButtonText || \'Close\' }} ' +
-                    '</button> ' +
-                    '</div> ' +
-                    '</div>',
-                host: {
-                    'role': 'dialog',
-                    '[attr.aria-labelledby]': 'hdrId',
-                    '[attr.aria-describedby]': 'descId',
-                },
-            },] },
-];
-/**
- * @nocollapse
- */
-ToastCmp.ctorParameters = function () { return [
-    { type: ViewController, },
-    { type: Config, },
-    { type: ElementRef, },
-    { type: NavParams, },
-    { type: Renderer, },
-]; };
 var toastIds = -1;
 
-var __extends$85 = (undefined && undefined.__extends) || (function () {
+var __extends$82 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -65587,8 +66249,8 @@ var __extends$85 = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var ToastSlideIn = (function (_super) {
-    __extends$85(ToastSlideIn, _super);
+var ToastSlideIn = /** @class */ (function (_super) {
+    __extends$82(ToastSlideIn, _super);
     function ToastSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -65624,8 +66286,8 @@ var ToastSlideIn = (function (_super) {
     };
     return ToastSlideIn;
 }(Transition));
-var ToastSlideOut = (function (_super) {
-    __extends$85(ToastSlideOut, _super);
+var ToastSlideOut = /** @class */ (function (_super) {
+    __extends$82(ToastSlideOut, _super);
     function ToastSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -65655,8 +66317,8 @@ var ToastSlideOut = (function (_super) {
     };
     return ToastSlideOut;
 }(Transition));
-var ToastMdSlideIn = (function (_super) {
-    __extends$85(ToastMdSlideIn, _super);
+var ToastMdSlideIn = /** @class */ (function (_super) {
+    __extends$82(ToastMdSlideIn, _super);
     function ToastMdSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -65692,8 +66354,8 @@ var ToastMdSlideIn = (function (_super) {
     };
     return ToastMdSlideIn;
 }(Transition));
-var ToastMdSlideOut = (function (_super) {
-    __extends$85(ToastMdSlideOut, _super);
+var ToastMdSlideOut = /** @class */ (function (_super) {
+    __extends$82(ToastMdSlideOut, _super);
     function ToastMdSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -65723,8 +66385,8 @@ var ToastMdSlideOut = (function (_super) {
     };
     return ToastMdSlideOut;
 }(Transition));
-var ToastWpPopIn = (function (_super) {
-    __extends$85(ToastWpPopIn, _super);
+var ToastWpPopIn = /** @class */ (function (_super) {
+    __extends$82(ToastWpPopIn, _super);
     function ToastWpPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -65758,8 +66420,8 @@ var ToastWpPopIn = (function (_super) {
     };
     return ToastWpPopIn;
 }(Transition));
-var ToastWpPopOut = (function (_super) {
-    __extends$85(ToastWpPopOut, _super);
+var ToastWpPopOut = /** @class */ (function (_super) {
+    __extends$82(ToastWpPopOut, _super);
     function ToastWpPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -65799,7 +66461,7 @@ var ToastWpPopOut = (function (_super) {
 var TOAST_POSITION_TOP$1 = 'top';
 var TOAST_POSITION_MIDDLE$1 = 'middle';
 
-var __extends$84 = (undefined && undefined.__extends) || (function () {
+var __extends$81 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -65812,8 +66474,8 @@ var __extends$84 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var Toast = (function (_super) {
-    __extends$84(Toast, _super);
+var Toast = /** @class */ (function (_super) {
+    __extends$81(Toast, _super);
     /**
      * @param {?} app
      * @param {?=} opts
@@ -65985,7 +66647,7 @@ var TOAST_POSITION_BOTTOM = 'bottom';
  *
  * \@demo /docs/demos/src/toast/
  */
-var ToastController = (function () {
+var ToastController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -66003,20 +66665,20 @@ var ToastController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Toast(this._app, opts, this.config);
     };
+    ToastController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    ToastController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+    ]; };
     return ToastController;
 }());
-ToastController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-ToastController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-]; };
 
-var __extends$87 = (undefined && undefined.__extends) || (function () {
+var __extends$84 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -66029,8 +66691,8 @@ var __extends$87 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var ToggleGesture = (function (_super) {
-    __extends$87(ToggleGesture, _super);
+var ToggleGesture = /** @class */ (function (_super) {
+    __extends$84(ToggleGesture, _super);
     /**
      * @param {?} plt
      * @param {?} toggle
@@ -66083,7 +66745,7 @@ var ToggleGesture = (function (_super) {
     return ToggleGesture;
 }(PanGesture));
 
-var __extends$86 = (undefined && undefined.__extends) || (function () {
+var __extends$83 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -66130,8 +66792,8 @@ var __extends$86 = (undefined && undefined.__extends) || (function () {
  * \@demo /docs/demos/src/toggle/
  * @see {\@link /docs/components#toggle Toggle Component Docs}
  */
-var Toggle = (function (_super) {
-    __extends$86(Toggle, _super);
+var Toggle = /** @class */ (function (_super) {
+    __extends$83(Toggle, _super);
     /**
      * @param {?} form
      * @param {?} config
@@ -66289,53 +66951,53 @@ var Toggle = (function (_super) {
         _super.prototype.ngOnDestroy.call(this);
         this._gesture && this._gesture.destroy();
     };
+    Toggle.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-toggle',
+                    template: '<div class="toggle-icon">' +
+                        '<div class="toggle-inner"></div>' +
+                        '</div>' +
+                        '<button role="checkbox" ' +
+                        'type="button" ' +
+                        'ion-button="item-cover" ' +
+                        '[id]="id" ' +
+                        '[attr.aria-checked]="_value" ' +
+                        '[attr.aria-labelledby]="_labelId" ' +
+                        '[attr.aria-disabled]="_disabled" ' +
+                        'class="item-cover" disable-activated>' +
+                        '</button>',
+                    host: {
+                        '[class.toggle-disabled]': '_disabled',
+                        '[class.toggle-checked]': '_value',
+                        '[class.toggle-activated]': '_activated',
+                    },
+                    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Toggle, multi: true }],
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Toggle.ctorParameters = function () { return [
+        { type: Form, },
+        { type: Config, },
+        { type: Platform, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Haptic, },
+        { type: Item, decorators: [{ type: Optional },] },
+        { type: GestureController, },
+        { type: DomController, },
+        { type: NgZone, },
+    ]; };
+    Toggle.propDecorators = {
+        'checked': [{ type: Input },],
+        '_keyup': [{ type: HostListener, args: ['keyup', ['$event'],] },],
+    };
     return Toggle;
 }(BaseInput));
-Toggle.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-toggle',
-                template: '<div class="toggle-icon">' +
-                    '<div class="toggle-inner"></div>' +
-                    '</div>' +
-                    '<button role="checkbox" ' +
-                    'type="button" ' +
-                    'ion-button="item-cover" ' +
-                    '[id]="id" ' +
-                    '[attr.aria-checked]="_value" ' +
-                    '[attr.aria-labelledby]="_labelId" ' +
-                    '[attr.aria-disabled]="_disabled" ' +
-                    'class="item-cover" disable-activated>' +
-                    '</button>',
-                host: {
-                    '[class.toggle-disabled]': '_disabled',
-                    '[class.toggle-checked]': '_value',
-                    '[class.toggle-activated]': '_activated',
-                },
-                providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: Toggle, multi: true }],
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Toggle.ctorParameters = function () { return [
-    { type: Form, },
-    { type: Config, },
-    { type: Platform, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Haptic, },
-    { type: Item, decorators: [{ type: Optional },] },
-    { type: GestureController, },
-    { type: DomController, },
-    { type: NgZone, },
-]; };
-Toggle.propDecorators = {
-    'checked': [{ type: Input },],
-    '_keyup': [{ type: HostListener, args: ['keyup', ['$event'],] },],
-};
 
-var __extends$88 = (undefined && undefined.__extends) || (function () {
+var __extends$85 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -66364,8 +67026,8 @@ var __extends$88 = (undefined && undefined.__extends) || (function () {
  * ```
  *
  */
-var Footer = (function (_super) {
-    __extends$88(Footer, _super);
+var Footer = /** @class */ (function (_super) {
+    __extends$85(Footer, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -66377,24 +67039,24 @@ var Footer = (function (_super) {
         viewCtrl && viewCtrl._setFooter(_this);
         return _this;
     }
+    Footer.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-footer'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Footer.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: ViewController, decorators: [{ type: Optional },] },
+    ]; };
     return Footer;
 }(Ion));
-Footer.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-footer'
-            },] },
-];
-/**
- * @nocollapse
- */
-Footer.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: ViewController, decorators: [{ type: Optional },] },
-]; };
 
-var __extends$89 = (undefined && undefined.__extends) || (function () {
+var __extends$86 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -66427,8 +67089,8 @@ var __extends$89 = (undefined && undefined.__extends) || (function () {
  * ```
  *
  */
-var Header = (function (_super) {
-    __extends$89(Header, _super);
+var Header = /** @class */ (function (_super) {
+    __extends$86(Header, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -66440,24 +67102,24 @@ var Header = (function (_super) {
         viewCtrl && viewCtrl._setHeader(_this);
         return _this;
     }
+    Header.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-header'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Header.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: ViewController, decorators: [{ type: Optional },] },
+    ]; };
     return Header;
 }(Ion));
-Header.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-header'
-            },] },
-];
-/**
- * @nocollapse
- */
-Header.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: ViewController, decorators: [{ type: Optional },] },
-]; };
 
-var __extends$90 = (undefined && undefined.__extends) || (function () {
+var __extends$87 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -66555,8 +67217,8 @@ var __extends$90 = (undefined && undefined.__extends) || (function () {
  * \@demo /docs/demos/src/toolbar/
  * @see {\@link ../Navbar/ Navbar API Docs}
  */
-var Toolbar = (function (_super) {
-    __extends$90(Toolbar, _super);
+var Toolbar = /** @class */ (function (_super) {
+    __extends$87(Toolbar, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -66567,35 +67229,35 @@ var Toolbar = (function (_super) {
         _this._sbPadding = config.getBoolean('statusbarPadding');
         return _this;
     }
+    Toolbar.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-toolbar',
+                    template: '<div class="toolbar-background" [ngClass]="\'toolbar-background-\' + _mode"></div>' +
+                        '<ng-content select="[menuToggle],ion-buttons[left]"></ng-content>' +
+                        '<ng-content select="ion-buttons[start]"></ng-content>' +
+                        '<ng-content select="ion-buttons[end],ion-buttons[right]"></ng-content>' +
+                        '<div class="toolbar-content" [ngClass]="\'toolbar-content-\' + _mode">' +
+                        '<ng-content></ng-content>' +
+                        '</div>',
+                    host: {
+                        'class': 'toolbar',
+                        '[class.statusbar-padding]': '_sbPadding'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Toolbar.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
     return Toolbar;
 }(ToolbarBase));
-Toolbar.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-toolbar',
-                template: '<div class="toolbar-background" [ngClass]="\'toolbar-background-\' + _mode"></div>' +
-                    '<ng-content select="[menuToggle],ion-buttons[left]"></ng-content>' +
-                    '<ng-content select="ion-buttons[start]"></ng-content>' +
-                    '<ng-content select="ion-buttons[end],ion-buttons[right]"></ng-content>' +
-                    '<div class="toolbar-content" [ngClass]="\'toolbar-content-\' + _mode">' +
-                    '<ng-content></ng-content>' +
-                    '</div>',
-                host: {
-                    'class': 'toolbar',
-                    '[class.statusbar-padding]': '_sbPadding'
-                },
-                changeDetection: ChangeDetectionStrategy.OnPush,
-            },] },
-];
-/**
- * @nocollapse
- */
-Toolbar.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 
-var __extends$91 = (undefined && undefined.__extends) || (function () {
+var __extends$88 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -66608,8 +67270,8 @@ var __extends$91 = (undefined && undefined.__extends) || (function () {
 /**
  * @hidden
  */
-var ToolbarItem = (function (_super) {
-    __extends$91(ToolbarItem, _super);
+var ToolbarItem = /** @class */ (function (_super) {
+    __extends$88(ToolbarItem, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -66637,28 +67299,28 @@ var ToolbarItem = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    ToolbarItem.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-buttons,[menuToggle]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ToolbarItem.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Toolbar, decorators: [{ type: Optional },] },
+        { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
+    ]; };
+    ToolbarItem.propDecorators = {
+        '_buttons': [{ type: ContentChildren, args: [Button,] },],
+    };
     return ToolbarItem;
 }(Ion));
-ToolbarItem.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-buttons,[menuToggle]'
-            },] },
-];
-/**
- * @nocollapse
- */
-ToolbarItem.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Toolbar, decorators: [{ type: Optional },] },
-    { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
-]; };
-ToolbarItem.propDecorators = {
-    '_buttons': [{ type: ContentChildren, args: [Button,] },],
-};
 
-var __extends$92 = (undefined && undefined.__extends) || (function () {
+var __extends$89 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -66703,8 +67365,8 @@ var __extends$92 = (undefined && undefined.__extends) || (function () {
  *
  * \@demo /docs/demos/src/title/
  */
-var ToolbarTitle = (function (_super) {
-    __extends$92(ToolbarTitle, _super);
+var ToolbarTitle = /** @class */ (function (_super) {
+    __extends$89(ToolbarTitle, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -66725,28 +67387,28 @@ var ToolbarTitle = (function (_super) {
     ToolbarTitle.prototype.getTitleText = function () {
         return this._elementRef.nativeElement.textContent;
     };
+    ToolbarTitle.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-title',
+                    template: '<div class="toolbar-title" [ngClass]="\'toolbar-title-\' + _mode">' +
+                        '<ng-content></ng-content>' +
+                        '</div>',
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ToolbarTitle.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Toolbar, decorators: [{ type: Optional },] },
+        { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
+    ]; };
     return ToolbarTitle;
 }(Ion));
-ToolbarTitle.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-title',
-                template: '<div class="toolbar-title" [ngClass]="\'toolbar-title-\' + _mode">' +
-                    '<ng-content></ng-content>' +
-                    '</div>',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-ToolbarTitle.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Toolbar, decorators: [{ type: Optional },] },
-    { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
-]; };
 
 /**
  * \@name Thumbnail
@@ -66756,22 +67418,22 @@ ToolbarTitle.ctorParameters = function () { return [
  * Thumbnails can be place on the left or right side of an item with the `item-start` or `item-end` directive.
  * @see {\@link /docs/components/#thumbnail-list Thumbnail Component Docs}
  */
-var Thumbnail = (function () {
+var Thumbnail = /** @class */ (function () {
     function Thumbnail() {
     }
+    Thumbnail.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-thumbnail'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Thumbnail.ctorParameters = function () { return []; };
     return Thumbnail;
 }());
-Thumbnail.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-thumbnail'
-            },] },
-];
-/**
- * @nocollapse
- */
-Thumbnail.ctorParameters = function () { return []; };
 
-var __extends$93 = (undefined && undefined.__extends) || (function () {
+var __extends$90 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -66822,8 +67484,8 @@ var __extends$93 = (undefined && undefined.__extends) || (function () {
  * ```
  *
  */
-var Typography = (function (_super) {
-    __extends$93(Typography, _super);
+var Typography = /** @class */ (function (_super) {
+    __extends$90(Typography, _super);
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -66832,70 +67494,70 @@ var Typography = (function (_super) {
     function Typography(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'text') || this;
     }
+    Typography.decorators = [
+        { type: Directive, args: [{
+                    selector: '[ion-text]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Typography.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
     return Typography;
 }(Ion));
-Typography.decorators = [
-    { type: Directive, args: [{
-                selector: '[ion-text]'
-            },] },
-];
-/**
- * @nocollapse
- */
-Typography.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 
 /**
  * @hidden
  */
-var VirtualFooter = (function () {
+var VirtualFooter = /** @class */ (function () {
     /**
      * @param {?} templateRef
      */
     function VirtualFooter(templateRef) {
         this.templateRef = templateRef;
     }
+    VirtualFooter.decorators = [
+        { type: Directive, args: [{ selector: '[virtualFooter]' },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    VirtualFooter.ctorParameters = function () { return [
+        { type: TemplateRef, },
+    ]; };
     return VirtualFooter;
 }());
-VirtualFooter.decorators = [
-    { type: Directive, args: [{ selector: '[virtualFooter]' },] },
-];
-/**
- * @nocollapse
- */
-VirtualFooter.ctorParameters = function () { return [
-    { type: TemplateRef, },
-]; };
 
 /**
  * @hidden
  */
-var VirtualHeader = (function () {
+var VirtualHeader = /** @class */ (function () {
     /**
      * @param {?} templateRef
      */
     function VirtualHeader(templateRef) {
         this.templateRef = templateRef;
     }
+    VirtualHeader.decorators = [
+        { type: Directive, args: [{ selector: '[virtualHeader]' },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    VirtualHeader.ctorParameters = function () { return [
+        { type: TemplateRef, },
+    ]; };
     return VirtualHeader;
 }());
-VirtualHeader.decorators = [
-    { type: Directive, args: [{ selector: '[virtualHeader]' },] },
-];
-/**
- * @nocollapse
- */
-VirtualHeader.ctorParameters = function () { return [
-    { type: TemplateRef, },
-]; };
 
 /**
  * @hidden
  */
-var VirtualItem = (function () {
+var VirtualItem = /** @class */ (function () {
     /**
      * @param {?} templateRef
      * @param {?} viewContainer
@@ -66904,18 +67566,18 @@ var VirtualItem = (function () {
         this.templateRef = templateRef;
         this.viewContainer = viewContainer;
     }
+    VirtualItem.decorators = [
+        { type: Directive, args: [{ selector: '[virtualItem]' },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    VirtualItem.ctorParameters = function () { return [
+        { type: TemplateRef, },
+        { type: ViewContainerRef, },
+    ]; };
     return VirtualItem;
 }());
-VirtualItem.decorators = [
-    { type: Directive, args: [{ selector: '[virtualItem]' },] },
-];
-/**
- * @nocollapse
- */
-VirtualItem.ctorParameters = function () { return [
-    { type: TemplateRef, },
-    { type: ViewContainerRef, },
-]; };
 
 var PREVIOUS_CELL = {
     row: 0,
@@ -67488,7 +68150,7 @@ function getElement(node) {
     }
     return null;
 }
-var VirtualContext = (function () {
+var VirtualContext = /** @class */ (function () {
     /**
      * @param {?} $implicit
      * @param {?} index
@@ -67615,7 +68277,7 @@ var REQUIRED_DOM_READS = 2;
  * ### Approximate Widths and Heights
  *
  * If the height of items in the virtual scroll are not close to the
- * default size of 40px, it is extremely important to provide an value for
+ * default size of 40px, it is extremely important to provide a value for
  * approxItemHeight height. An exact pixel-perfect size is not necessary,
  * but without an estimate the virtual scroll will not render correctly.
  *
@@ -67738,7 +68400,7 @@ var REQUIRED_DOM_READS = 2;
  * dataset, so please make sure they're performant.
  *
  */
-var VirtualScroll = (function () {
+var VirtualScroll = /** @class */ (function () {
     /**
      * @param {?} _iterableDiffers
      * @param {?} _elementRef
@@ -68287,44 +68949,44 @@ var VirtualScroll = (function () {
         this._resizeSub = this._scrollEndSub = this._scrollSub = null;
         this._hdrFn = this._ftrFn = this._records = this._cells = this._nodes = this._data = null;
     };
+    VirtualScroll.decorators = [
+        { type: Directive, args: [{
+                    selector: '[virtualScroll]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    VirtualScroll.ctorParameters = function () { return [
+        { type: IterableDiffers, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: NgZone, },
+        { type: ChangeDetectorRef, },
+        { type: Content, },
+        { type: Platform, },
+        { type: ViewController, },
+        { type: Config, },
+        { type: DomController, },
+    ]; };
+    VirtualScroll.propDecorators = {
+        '_itmTmp': [{ type: ContentChild, args: [VirtualItem,] },],
+        '_hdrTmp': [{ type: ContentChild, args: [VirtualHeader,] },],
+        '_ftrTmp': [{ type: ContentChild, args: [VirtualFooter,] },],
+        'virtualScroll': [{ type: Input },],
+        'bufferRatio': [{ type: Input },],
+        'approxItemWidth': [{ type: Input },],
+        'approxItemHeight': [{ type: Input },],
+        'approxHeaderWidth': [{ type: Input },],
+        'approxHeaderHeight': [{ type: Input },],
+        'approxFooterWidth': [{ type: Input },],
+        'approxFooterHeight': [{ type: Input },],
+        'headerFn': [{ type: Input },],
+        'footerFn': [{ type: Input },],
+        'virtualTrackBy': [{ type: Input },],
+    };
     return VirtualScroll;
 }());
-VirtualScroll.decorators = [
-    { type: Directive, args: [{
-                selector: '[virtualScroll]'
-            },] },
-];
-/**
- * @nocollapse
- */
-VirtualScroll.ctorParameters = function () { return [
-    { type: IterableDiffers, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: NgZone, },
-    { type: ChangeDetectorRef, },
-    { type: Content, },
-    { type: Platform, },
-    { type: ViewController, },
-    { type: Config, },
-    { type: DomController, },
-]; };
-VirtualScroll.propDecorators = {
-    '_itmTmp': [{ type: ContentChild, args: [VirtualItem,] },],
-    '_hdrTmp': [{ type: ContentChild, args: [VirtualHeader,] },],
-    '_ftrTmp': [{ type: ContentChild, args: [VirtualFooter,] },],
-    'virtualScroll': [{ type: Input },],
-    'bufferRatio': [{ type: Input },],
-    'approxItemWidth': [{ type: Input },],
-    'approxItemHeight': [{ type: Input },],
-    'approxHeaderWidth': [{ type: Input },],
-    'approxHeaderHeight': [{ type: Input },],
-    'approxFooterWidth': [{ type: Input },],
-    'approxFooterHeight': [{ type: Input },],
-    'headerFn': [{ type: Input },],
-    'footerFn': [{ type: Input },],
-    'virtualTrackBy': [{ type: Input },],
-};
 var SCROLL_DIFFERENCE_MINIMUM = 40;
 var SCROLL_QUEUE_NO_CHANGES = 1;
 var SCROLL_QUEUE_CHANGE_DETECTION = 2;
@@ -68623,7 +69285,7 @@ function isActivatedDisabled(ev, activatableEle) {
     return false;
 }
 
-var Activator = (function () {
+var Activator = /** @class */ (function () {
     /**
      * @param {?} app
      * @param {?} config
@@ -68771,7 +69433,7 @@ var CLEAR_STATE_DEFERS = 80;
 /**
  * @hidden
  */
-var RippleActivator = (function () {
+var RippleActivator = /** @class */ (function () {
     /**
      * @param {?} app
      * @param {?} config
@@ -68929,7 +69591,7 @@ var TOUCH_DOWN_ACCEL = 300;
 /**
  * @hidden
  */
-var TapClick = (function () {
+var TapClick = /** @class */ (function () {
     /**
      * @param {?} config
      * @param {?} plt
@@ -69140,21 +69802,21 @@ var TapClick = (function () {
     TapClick.prototype.isDisabledNativeClick = function () {
         return this.disableClick > Date.now();
     };
+    TapClick.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    TapClick.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: DomController, },
+        { type: App, },
+        { type: GestureController, },
+    ]; };
     return TapClick;
 }());
-TapClick.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-TapClick.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: DomController, },
-    { type: App, },
-    { type: GestureController, },
-]; };
 /**
  * @param {?} ele
  * @return {?}
@@ -71147,7 +71809,7 @@ Manager.prototype = {
             //      that is being recognized.
             // 3.   allow if the recognizer is allowed to run simultaneous with the current recognized recognizer.
             //      this can be setup with the `recognizeWith()` method on the recognizer.
-            if (session.stopped !== FORCED_STOP && (!curRecognizer || recognizer == curRecognizer ||
+            if (session.stopped !== FORCED_STOP && (!curRecognizer || recognizer == curRecognizer || // 2
                 recognizer.canRecognizeWith(curRecognizer))) {
                 recognizer.recognize(inputData);
             }
@@ -71367,7 +72029,7 @@ win$1.Hammer = Hammer$1;
  *
  * TODO(mlynch): Re-enable the DOM event simulation that was causing issues (or verify hammer does this already, it might);
  */
-var Gesture = (function () {
+var Gesture = /** @class */ (function () {
     /**
      * @param {?} element
      * @param {?=} opts
@@ -71480,7 +72142,7 @@ var Gesture = (function () {
  * ```
  * \@demo /docs/demos/src/events/
  */
-var Events = (function () {
+var Events = /** @class */ (function () {
     function Events() {
         this._channels = [];
     }
@@ -71632,7 +72294,7 @@ function setupProvideEvents(plt, dom) {
     };
 }
 
-var __extends$94 = (undefined && undefined.__extends) || (function () {
+var __extends$91 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -71682,8 +72344,8 @@ var __extends$94 = (undefined && undefined.__extends) || (function () {
  *
  * More information about Angular's [`ErrorHandler`](https://angular.io/docs/ts/latest/api/core/index/ErrorHandler-class.html).
  */
-var IonicErrorHandler = (function (_super) {
-    __extends$94(IonicErrorHandler, _super);
+var IonicErrorHandler = /** @class */ (function (_super) {
+    __extends$91(IonicErrorHandler, _super);
     function IonicErrorHandler() {
         return _super.call(this, false) || this;
     }
@@ -72095,7 +72757,7 @@ function registerModeConfigs(config) {
     };
 }
 
-var __extends$95 = (undefined && undefined.__extends) || (function () {
+var __extends$92 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
         function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -72109,8 +72771,8 @@ var __extends$95 = (undefined && undefined.__extends) || (function () {
  * @hidden
  * This class overrides the default Angular gesture config.
  */
-var IonicGestureConfig = (function (_super) {
-    __extends$95(IonicGestureConfig, _super);
+var IonicGestureConfig = /** @class */ (function (_super) {
+    __extends$92(IonicGestureConfig, _super);
     function IonicGestureConfig() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
@@ -72125,20 +72787,20 @@ var IonicGestureConfig = (function (_super) {
         }
         return mc;
     };
+    IonicGestureConfig.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    IonicGestureConfig.ctorParameters = function () { return []; };
     return IonicGestureConfig;
 }(HammerGestureConfig));
-IonicGestureConfig.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-IonicGestureConfig.ctorParameters = function () { return []; };
 
 /**
  * @hidden
  */
-var ClickBlock = (function () {
+var ClickBlock = /** @class */ (function () {
     /**
      * @param {?} app
      * @param {?} config
@@ -72207,23 +72869,23 @@ var ClickBlock = (function () {
     ClickBlock.prototype._setElementClass = function (className, add) {
         this.renderer.setElementClass(this.elementRef.nativeElement, className, add);
     };
+    ClickBlock.decorators = [
+        { type: Directive, args: [{
+                    selector: '.click-block'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ClickBlock.ctorParameters = function () { return [
+        { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
+        { type: Config, },
+        { type: Platform, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
     return ClickBlock;
 }());
-ClickBlock.decorators = [
-    { type: Directive, args: [{
-                selector: '.click-block'
-            },] },
-];
-/**
- * @nocollapse
- */
-ClickBlock.ctorParameters = function () { return [
-    { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
-    { type: Config, },
-    { type: Platform, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
 
 /**
  * Import Angular
@@ -72274,7 +72936,7 @@ ClickBlock.ctorParameters = function () { return [
  * export class AppModule {}
  * ```
  */
-var IonicModule = (function () {
+var IonicModule = /** @class */ (function () {
     function IonicModule() {
     }
     /**
@@ -72298,7 +72960,7 @@ var IonicModule = (function () {
                 // useFactory: user values
                 { provide: PlatformConfigToken, useFactory: providePlatformConfigs },
                 // useFactory: ionic core providers
-                { provide: Platform, useFactory: setupPlatform, deps: [DOCUMENT, PlatformConfigToken, NgZone] },
+                { provide: Platform, useFactory: setupPlatform, deps: [DOCUMENT$1, PlatformConfigToken, NgZone] },
                 { provide: Config, useFactory: setupConfig, deps: [ConfigToken, Platform] },
                 // useFactory: ionic app initializers
                 { provide: APP_INITIALIZER, useFactory: registerModeConfigs, deps: [Config], multi: true },
@@ -72336,219 +72998,219 @@ var IonicModule = (function () {
             ]
         };
     };
+    IonicModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [
+                        ActionSheetCmp,
+                        AlertCmp,
+                        ClickBlock,
+                        IonicApp,
+                        OverlayPortal,
+                        Avatar,
+                        Backdrop,
+                        Badge,
+                        Button,
+                        Card,
+                        CardContent,
+                        CardHeader,
+                        CardTitle,
+                        Checkbox,
+                        Chip,
+                        Col,
+                        Content,
+                        DateTime,
+                        FabButton,
+                        FabContainer,
+                        FabList,
+                        Grid,
+                        Img,
+                        Icon,
+                        InfiniteScroll,
+                        InfiniteScrollContent,
+                        Item,
+                        ItemContent,
+                        ItemDivider,
+                        ItemGroup,
+                        ItemOptions,
+                        ItemReorder,
+                        ItemSliding,
+                        Label,
+                        List,
+                        ListHeader,
+                        Reorder,
+                        LoadingCmp,
+                        Menu,
+                        MenuClose,
+                        MenuToggle,
+                        ModalCmp,
+                        Nav,
+                        NavPop,
+                        NavPopAnchor,
+                        NavPush,
+                        NavPushAnchor,
+                        Note,
+                        Option,
+                        PickerCmp,
+                        PickerColumnCmp,
+                        PopoverCmp,
+                        RadioButton,
+                        RadioGroup,
+                        Range,
+                        RangeKnob,
+                        Refresher,
+                        RefresherContent,
+                        Row,
+                        Scroll,
+                        Searchbar,
+                        Segment,
+                        SegmentButton,
+                        Select,
+                        SelectPopover,
+                        ShowWhen,
+                        HideWhen,
+                        Slide,
+                        Slides,
+                        Spinner,
+                        SplitPane,
+                        Tab,
+                        TabButton,
+                        TabHighlight,
+                        Tabs,
+                        TextInput,
+                        Thumbnail,
+                        ToastCmp,
+                        Toggle,
+                        Footer,
+                        Header,
+                        Toolbar,
+                        ToolbarItem,
+                        ToolbarTitle,
+                        Navbar,
+                        Typography,
+                        VirtualFooter,
+                        VirtualHeader,
+                        VirtualItem,
+                        VirtualScroll
+                    ],
+                    imports: [
+                        CommonModule,
+                        FormsModule,
+                        ReactiveFormsModule,
+                    ],
+                    exports: [
+                        CommonModule,
+                        FormsModule,
+                        ReactiveFormsModule,
+                        ActionSheetCmp,
+                        AlertCmp,
+                        ClickBlock,
+                        IonicApp,
+                        OverlayPortal,
+                        Avatar,
+                        Backdrop,
+                        Badge,
+                        Button,
+                        Card,
+                        CardContent,
+                        CardHeader,
+                        CardTitle,
+                        Checkbox,
+                        Chip,
+                        Col,
+                        Content,
+                        DateTime,
+                        FabButton,
+                        FabContainer,
+                        FabList,
+                        Grid,
+                        Img,
+                        Icon,
+                        InfiniteScroll,
+                        InfiniteScrollContent,
+                        Item,
+                        ItemContent,
+                        ItemDivider,
+                        ItemGroup,
+                        ItemOptions,
+                        ItemReorder,
+                        ItemSliding,
+                        Label,
+                        List,
+                        ListHeader,
+                        Reorder,
+                        LoadingCmp,
+                        Menu,
+                        MenuClose,
+                        MenuToggle,
+                        ModalCmp,
+                        Nav,
+                        NavPop,
+                        NavPopAnchor,
+                        NavPush,
+                        NavPushAnchor,
+                        Note,
+                        Option,
+                        PickerCmp,
+                        PickerColumnCmp,
+                        PopoverCmp,
+                        RadioButton,
+                        RadioGroup,
+                        Range,
+                        RangeKnob,
+                        Refresher,
+                        RefresherContent,
+                        Row,
+                        Scroll,
+                        Searchbar,
+                        Segment,
+                        SegmentButton,
+                        Select,
+                        SelectPopover,
+                        ShowWhen,
+                        HideWhen,
+                        Slide,
+                        Slides,
+                        Spinner,
+                        SplitPane,
+                        Tab,
+                        TabButton,
+                        TabHighlight,
+                        Tabs,
+                        TextInput,
+                        Thumbnail,
+                        ToastCmp,
+                        Toggle,
+                        Footer,
+                        Header,
+                        Toolbar,
+                        ToolbarItem,
+                        ToolbarTitle,
+                        Navbar,
+                        Typography,
+                        VirtualFooter,
+                        VirtualHeader,
+                        VirtualItem,
+                        VirtualScroll
+                    ],
+                    entryComponents: [
+                        ActionSheetCmp,
+                        AlertCmp,
+                        IonicApp,
+                        LoadingCmp,
+                        ModalCmp,
+                        PickerCmp,
+                        PopoverCmp,
+                        SelectPopover,
+                        ToastCmp
+                    ]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    IonicModule.ctorParameters = function () { return []; };
     return IonicModule;
 }());
-IonicModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [
-                    ActionSheetCmp,
-                    AlertCmp,
-                    ClickBlock,
-                    IonicApp,
-                    OverlayPortal,
-                    Avatar,
-                    Backdrop,
-                    Badge,
-                    Button,
-                    Card,
-                    CardContent,
-                    CardHeader,
-                    CardTitle,
-                    Checkbox,
-                    Chip,
-                    Col,
-                    Content,
-                    DateTime,
-                    FabButton,
-                    FabContainer,
-                    FabList,
-                    Grid,
-                    Img,
-                    Icon,
-                    InfiniteScroll,
-                    InfiniteScrollContent,
-                    Item,
-                    ItemContent,
-                    ItemDivider,
-                    ItemGroup,
-                    ItemOptions,
-                    ItemReorder,
-                    ItemSliding,
-                    Label,
-                    List,
-                    ListHeader,
-                    Reorder,
-                    LoadingCmp,
-                    Menu,
-                    MenuClose,
-                    MenuToggle,
-                    ModalCmp,
-                    Nav,
-                    NavPop,
-                    NavPopAnchor,
-                    NavPush,
-                    NavPushAnchor,
-                    Note,
-                    Option,
-                    PickerCmp,
-                    PickerColumnCmp,
-                    PopoverCmp,
-                    RadioButton,
-                    RadioGroup,
-                    Range,
-                    RangeKnob,
-                    Refresher,
-                    RefresherContent,
-                    Row,
-                    Scroll,
-                    Searchbar,
-                    Segment,
-                    SegmentButton,
-                    Select,
-                    SelectPopover,
-                    ShowWhen,
-                    HideWhen,
-                    Slide,
-                    Slides,
-                    Spinner,
-                    SplitPane,
-                    Tab,
-                    TabButton,
-                    TabHighlight,
-                    Tabs,
-                    TextInput,
-                    Thumbnail,
-                    ToastCmp,
-                    Toggle,
-                    Footer,
-                    Header,
-                    Toolbar,
-                    ToolbarItem,
-                    ToolbarTitle,
-                    Navbar,
-                    Typography,
-                    VirtualFooter,
-                    VirtualHeader,
-                    VirtualItem,
-                    VirtualScroll
-                ],
-                imports: [
-                    CommonModule,
-                    FormsModule,
-                    ReactiveFormsModule,
-                ],
-                exports: [
-                    CommonModule,
-                    FormsModule,
-                    ReactiveFormsModule,
-                    ActionSheetCmp,
-                    AlertCmp,
-                    ClickBlock,
-                    IonicApp,
-                    OverlayPortal,
-                    Avatar,
-                    Backdrop,
-                    Badge,
-                    Button,
-                    Card,
-                    CardContent,
-                    CardHeader,
-                    CardTitle,
-                    Checkbox,
-                    Chip,
-                    Col,
-                    Content,
-                    DateTime,
-                    FabButton,
-                    FabContainer,
-                    FabList,
-                    Grid,
-                    Img,
-                    Icon,
-                    InfiniteScroll,
-                    InfiniteScrollContent,
-                    Item,
-                    ItemContent,
-                    ItemDivider,
-                    ItemGroup,
-                    ItemOptions,
-                    ItemReorder,
-                    ItemSliding,
-                    Label,
-                    List,
-                    ListHeader,
-                    Reorder,
-                    LoadingCmp,
-                    Menu,
-                    MenuClose,
-                    MenuToggle,
-                    ModalCmp,
-                    Nav,
-                    NavPop,
-                    NavPopAnchor,
-                    NavPush,
-                    NavPushAnchor,
-                    Note,
-                    Option,
-                    PickerCmp,
-                    PickerColumnCmp,
-                    PopoverCmp,
-                    RadioButton,
-                    RadioGroup,
-                    Range,
-                    RangeKnob,
-                    Refresher,
-                    RefresherContent,
-                    Row,
-                    Scroll,
-                    Searchbar,
-                    Segment,
-                    SegmentButton,
-                    Select,
-                    SelectPopover,
-                    ShowWhen,
-                    HideWhen,
-                    Slide,
-                    Slides,
-                    Spinner,
-                    SplitPane,
-                    Tab,
-                    TabButton,
-                    TabHighlight,
-                    Tabs,
-                    TextInput,
-                    Thumbnail,
-                    ToastCmp,
-                    Toggle,
-                    Footer,
-                    Header,
-                    Toolbar,
-                    ToolbarItem,
-                    ToolbarTitle,
-                    Navbar,
-                    Typography,
-                    VirtualFooter,
-                    VirtualHeader,
-                    VirtualItem,
-                    VirtualScroll
-                ],
-                entryComponents: [
-                    ActionSheetCmp,
-                    AlertCmp,
-                    IonicApp,
-                    LoadingCmp,
-                    ModalCmp,
-                    PickerCmp,
-                    PopoverCmp,
-                    SelectPopover,
-                    ToastCmp
-                ]
-            },] },
-];
-/**
- * @nocollapse
- */
-IonicModule.ctorParameters = function () { return []; };
 /**
  * \@name IonicPageModule
  * \@description
@@ -72577,7 +73239,7 @@ IonicModule.ctorParameters = function () { return []; };
  * export class HomePageModule { }
  * ```
  */
-var IonicPageModule = (function () {
+var IonicPageModule = /** @class */ (function () {
     function IonicPageModule() {
     }
     /**
@@ -72593,18 +73255,18 @@ var IonicPageModule = (function () {
             ]
         };
     };
+    IonicPageModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [IonicModule],
+                    exports: [IonicModule]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    IonicPageModule.ctorParameters = function () { return []; };
     return IonicPageModule;
 }());
-IonicPageModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [IonicModule],
-                exports: [IonicModule]
-            },] },
-];
-/**
- * @nocollapse
- */
-IonicPageModule.ctorParameters = function () { return []; };
 /**
  * @hidden
  * @param {?} platformLocationStrategy

@@ -1,4 +1,4 @@
-var PanRecognizer = (function () {
+var PanRecognizer = /** @class */ (function () {
     /**
      * @param {?} direction
      * @param {?} threshold

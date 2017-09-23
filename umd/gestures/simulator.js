@@ -9,7 +9,7 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var Simulate = (function () {
+    var Simulate = /** @class */ (function () {
         function Simulate() {
             this.index = 0;
             this.points = [];
@@ -106,7 +106,7 @@
         Simulate.prototype.velocity = function (vel) {
             var /** @type {?} */ p1 = this.getLastPoint();
             var /** @type {?} */ p2 = this.getPreviousPoint();
-            var /** @type {?} */ d = distance(p1, p2);
+            var /** @type {?} */ d = distance(p1.coord, p2.coord);
             return this.duration(d / vel);
         };
         /**

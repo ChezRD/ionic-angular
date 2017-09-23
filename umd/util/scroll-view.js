@@ -10,7 +10,7 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var dom_1 = require("./dom");
-    var ScrollView = (function () {
+    var ScrollView = /** @class */ (function () {
         /**
          * @param {?} _app
          * @param {?} _plt

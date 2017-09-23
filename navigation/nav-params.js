@@ -22,7 +22,7 @@
  * @see {\@link /docs/api/components/nav/Nav/ Nav API Docs}
  * @see {\@link /docs/api/components/nav/NavPush/ NavPush API Docs}
  */
-var NavParams = (function () {
+var NavParams = /** @class */ (function () {
     /**
      * @hidden
      * @param {?=} data

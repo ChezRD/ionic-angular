@@ -105,7 +105,7 @@ import { isTrueProperty } from '../../util/util';
  * }
  * ```
  */
-var Spinner = (function (_super) {
+var Spinner = /** @class */ (function (_super) {
     __extends(Spinner, _super);
     /**
      * @param {?} config
@@ -220,38 +220,38 @@ var Spinner = (function (_super) {
         data.style.animationDuration = duration + 'ms';
         return data;
     };
+    Spinner.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-spinner',
+                    template: '<svg viewBox="0 0 64 64" *ngFor="let i of _c" [ngStyle]="i.style">' +
+                        '<circle [attr.r]="i.r" transform="translate(32,32)"></circle>' +
+                        '</svg>' +
+                        '<svg viewBox="0 0 64 64" *ngFor="let i of _l" [ngStyle]="i.style">' +
+                        '<line [attr.y1]="i.y1" [attr.y2]="i.y2" transform="translate(32,32)"></line>' +
+                        '</svg>',
+                    host: {
+                        '[class.spinner-paused]': '_paused'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Spinner.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    Spinner.propDecorators = {
+        'name': [{ type: Input },],
+        'duration': [{ type: Input },],
+        'paused': [{ type: Input },],
+    };
     return Spinner;
 }(Ion));
 export { Spinner };
-Spinner.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-spinner',
-                template: '<svg viewBox="0 0 64 64" *ngFor="let i of _c" [ngStyle]="i.style">' +
-                    '<circle [attr.r]="i.r" transform="translate(32,32)"></circle>' +
-                    '</svg>' +
-                    '<svg viewBox="0 0 64 64" *ngFor="let i of _l" [ngStyle]="i.style">' +
-                    '<line [attr.y1]="i.y1" [attr.y2]="i.y2" transform="translate(32,32)"></line>' +
-                    '</svg>',
-                host: {
-                    '[class.spinner-paused]': '_paused'
-                },
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Spinner.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-Spinner.propDecorators = {
-    'name': [{ type: Input },],
-    'duration': [{ type: Input },],
-    'paused': [{ type: Input },],
-};
 function Spinner_tsickle_Closure_declarations() {
     /** @type {?} */
     Spinner.decorators;

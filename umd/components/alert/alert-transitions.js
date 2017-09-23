@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * Animations for alerts
      */
-    var AlertPopIn = (function (_super) {
+    var AlertPopIn = /** @class */ (function (_super) {
         __extends(AlertPopIn, _super);
         function AlertPopIn() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -47,7 +47,7 @@ var __extends = (this && this.__extends) || (function () {
         return AlertPopIn;
     }(transition_1.Transition));
     exports.AlertPopIn = AlertPopIn;
-    var AlertPopOut = (function (_super) {
+    var AlertPopOut = /** @class */ (function (_super) {
         __extends(AlertPopOut, _super);
         function AlertPopOut() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -70,7 +70,7 @@ var __extends = (this && this.__extends) || (function () {
         return AlertPopOut;
     }(transition_1.Transition));
     exports.AlertPopOut = AlertPopOut;
-    var AlertMdPopIn = (function (_super) {
+    var AlertMdPopIn = /** @class */ (function (_super) {
         __extends(AlertMdPopIn, _super);
         function AlertMdPopIn() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -93,7 +93,7 @@ var __extends = (this && this.__extends) || (function () {
         return AlertMdPopIn;
     }(transition_1.Transition));
     exports.AlertMdPopIn = AlertMdPopIn;
-    var AlertMdPopOut = (function (_super) {
+    var AlertMdPopOut = /** @class */ (function (_super) {
         __extends(AlertMdPopOut, _super);
         function AlertMdPopOut() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -116,7 +116,7 @@ var __extends = (this && this.__extends) || (function () {
         return AlertMdPopOut;
     }(transition_1.Transition));
     exports.AlertMdPopOut = AlertMdPopOut;
-    var AlertWpPopIn = (function (_super) {
+    var AlertWpPopIn = /** @class */ (function (_super) {
         __extends(AlertWpPopIn, _super);
         function AlertWpPopIn() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -139,7 +139,7 @@ var __extends = (this && this.__extends) || (function () {
         return AlertWpPopIn;
     }(transition_1.Transition));
     exports.AlertWpPopIn = AlertWpPopIn;
-    var AlertWpPopOut = (function (_super) {
+    var AlertWpPopOut = /** @class */ (function (_super) {
         __extends(AlertWpPopOut, _super);
         function AlertWpPopOut() {
             return _super !== null && _super.apply(this, arguments) || this;

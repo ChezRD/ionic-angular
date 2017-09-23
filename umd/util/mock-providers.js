@@ -77,7 +77,7 @@ var __extends = (this && this.__extends) || (function () {
         return new MockPlatform();
     }
     exports.mockPlatform = mockPlatform;
-    var MockPlatform = (function (_super) {
+    var MockPlatform = /** @class */ (function (_super) {
         __extends(MockPlatform, _super);
         function MockPlatform() {
             var _this = _super.call(this) || this;
@@ -229,7 +229,7 @@ var __extends = (this && this.__extends) || (function () {
         return new MockDomController(platform);
     }
     exports.mockDomController = mockDomController;
-    var MockDomController = (function (_super) {
+    var MockDomController = /** @class */ (function (_super) {
         __extends(MockDomController, _super);
         /**
          * @param {?} mockedPlatform
@@ -301,7 +301,7 @@ var __extends = (this && this.__extends) || (function () {
     exports.mockIonicApp = mockIonicApp;
     exports.mockTrasitionController = function (config) {
         var /** @type {?} */ platform = mockPlatform();
-        platform.raf = (function (callback) {
+        platform.raf = /** @type {?} */ (function (callback) {
             callback();
         });
         var /** @type {?} */ trnsCtrl = new transition_controller_1.TransitionController(platform, config);
@@ -350,7 +350,7 @@ var __extends = (this && this.__extends) || (function () {
         return new gesture_controller_1.GestureController(app);
     }
     exports.mockGestureController = mockGestureController;
-    var MockElementRef = (function () {
+    var MockElementRef = /** @class */ (function () {
         /**
          * @param {?} ele
          */
@@ -364,7 +364,7 @@ var __extends = (this && this.__extends) || (function () {
         /** @type {?} */
         MockElementRef.prototype.nativeElement;
     }
-    var MockElement = (function () {
+    var MockElement = /** @class */ (function () {
         function MockElement() {
             this.children = [];
             this.classList = new ClassList();
@@ -477,7 +477,7 @@ var __extends = (this && this.__extends) || (function () {
         /** @type {?} */
         MockElement.prototype.scrollHeight;
     }
-    var ClassList = (function () {
+    var ClassList = /** @class */ (function () {
         function ClassList() {
             this.classes = [];
         }
@@ -541,7 +541,7 @@ var __extends = (this && this.__extends) || (function () {
         return new MockElementRef(ele);
     }
     exports.mockElementRefEle = mockElementRefEle;
-    var MockRenderer = (function () {
+    var MockRenderer = /** @class */ (function () {
         function MockRenderer() {
         }
         /**
@@ -814,37 +814,37 @@ var __extends = (this && this.__extends) || (function () {
         return new haptic_1.Haptic(mockPlatform());
     }
     exports.mockHaptic = mockHaptic;
-    var MockView = (function () {
+    var MockView = /** @class */ (function () {
         function MockView() {
         }
         return MockView;
     }());
     exports.MockView = MockView;
-    var MockView1 = (function () {
+    var MockView1 = /** @class */ (function () {
         function MockView1() {
         }
         return MockView1;
     }());
     exports.MockView1 = MockView1;
-    var MockView2 = (function () {
+    var MockView2 = /** @class */ (function () {
         function MockView2() {
         }
         return MockView2;
     }());
     exports.MockView2 = MockView2;
-    var MockView3 = (function () {
+    var MockView3 = /** @class */ (function () {
         function MockView3() {
         }
         return MockView3;
     }());
     exports.MockView3 = MockView3;
-    var MockView4 = (function () {
+    var MockView4 = /** @class */ (function () {
         function MockView4() {
         }
         return MockView4;
     }());
     exports.MockView4 = MockView4;
-    var MockView5 = (function () {
+    var MockView5 = /** @class */ (function () {
         function MockView5() {
         }
         return MockView5;

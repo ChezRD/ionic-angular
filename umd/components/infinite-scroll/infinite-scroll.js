@@ -146,7 +146,7 @@
      * \@demo /docs/demos/src/infinite-scroll/
      *
      */
-    var InfiniteScroll = (function () {
+    var InfiniteScroll = /** @class */ (function () {
         /**
          * @param {?} _content
          * @param {?} _zone
@@ -417,28 +417,28 @@
         InfiniteScroll.prototype.ngOnDestroy = function () {
             this._setListeners(false);
         };
+        InfiniteScroll.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-infinite-scroll'
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        InfiniteScroll.ctorParameters = function () { return [
+            { type: content_1.Content, },
+            { type: core_1.NgZone, },
+            { type: core_1.ElementRef, },
+            { type: dom_controller_1.DomController, },
+        ]; };
+        InfiniteScroll.propDecorators = {
+            'threshold': [{ type: core_1.Input },],
+            'enabled': [{ type: core_1.Input },],
+            'position': [{ type: core_1.Input },],
+            'ionInfinite': [{ type: core_1.Output },],
+        };
         return InfiniteScroll;
     }());
-    InfiniteScroll.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-infinite-scroll'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    InfiniteScroll.ctorParameters = function () { return [
-        { type: content_1.Content, },
-        { type: core_1.NgZone, },
-        { type: core_1.ElementRef, },
-        { type: dom_controller_1.DomController, },
-    ]; };
-    InfiniteScroll.propDecorators = {
-        'threshold': [{ type: core_1.Input },],
-        'enabled': [{ type: core_1.Input },],
-        'position': [{ type: core_1.Input },],
-        'ionInfinite': [{ type: core_1.Output },],
-    };
     exports.InfiniteScroll = InfiniteScroll;
     function InfiniteScroll_tsickle_Closure_declarations() {
         /** @type {?} */

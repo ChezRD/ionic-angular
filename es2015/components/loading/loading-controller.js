@@ -44,6 +44,8 @@ import { Loading } from './loading';
  *
  * \@usage
  * ```ts
+ * import { LoadingController } from 'ionic-angular';
+ *
  * constructor(public loadingCtrl: LoadingController) {
  *
  * }

@@ -141,7 +141,7 @@ import { ViewController } from '../../navigation/view-controller';
  *
  * Licensed under MIT
  */
-var Slides = (function (_super) {
+var Slides = /** @class */ (function (_super) {
     __extends(Slides, _super);
     /**
      * @param {?} config
@@ -1009,64 +1009,64 @@ var Slides = (function (_super) {
         destroySwiper(this);
         this.enableKeyboardControl(false);
     };
+    Slides.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-slides',
+                    template: '<div class="swiper-container" [attr.dir]="_rtl? \'rtl\' : null">' +
+                        '<div class="swiper-wrapper">' +
+                        '<ng-content></ng-content>' +
+                        '</div>' +
+                        '<div [class.hide]="!pager" class="swiper-pagination"></div>' +
+                        '</div>',
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Slides.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: NgZone, },
+        { type: ViewController, decorators: [{ type: Optional },] },
+        { type: ElementRef, },
+        { type: Renderer, },
+    ]; };
+    Slides.propDecorators = {
+        'autoplay': [{ type: Input },],
+        'control': [{ type: Input },],
+        'effect': [{ type: Input },],
+        'direction': [{ type: Input },],
+        'initialSlide': [{ type: Input },],
+        'loop': [{ type: Input },],
+        'pager': [{ type: Input },],
+        'dir': [{ type: Input },],
+        'paginationType': [{ type: Input },],
+        'parallax': [{ type: Input },],
+        'speed': [{ type: Input },],
+        'zoom': [{ type: Input },],
+        'spaceBetween': [{ type: Input },],
+        'slidesPerView': [{ type: Input },],
+        'centeredSlides': [{ type: Input },],
+        'ionSlideWillChange': [{ type: Output },],
+        'ionSlideDidChange': [{ type: Output },],
+        'ionSlideDrag': [{ type: Output },],
+        'ionSlideReachStart': [{ type: Output },],
+        'ionSlideReachEnd': [{ type: Output },],
+        'ionSlideAutoplay': [{ type: Output },],
+        'ionSlideAutoplayStart': [{ type: Output },],
+        'ionSlideAutoplayStop': [{ type: Output },],
+        'ionSlideNextStart': [{ type: Output },],
+        'ionSlidePrevStart': [{ type: Output },],
+        'ionSlideNextEnd': [{ type: Output },],
+        'ionSlidePrevEnd': [{ type: Output },],
+        'ionSlideTap': [{ type: Output },],
+        'ionSlideDoubleTap': [{ type: Output },],
+    };
     return Slides;
 }(Ion));
 export { Slides };
-Slides.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-slides',
-                template: '<div class="swiper-container" [attr.dir]="_rtl? \'rtl\' : null">' +
-                    '<div class="swiper-wrapper">' +
-                    '<ng-content></ng-content>' +
-                    '</div>' +
-                    '<div [class.hide]="!pager" class="swiper-pagination"></div>' +
-                    '</div>',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Slides.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: NgZone, },
-    { type: ViewController, decorators: [{ type: Optional },] },
-    { type: ElementRef, },
-    { type: Renderer, },
-]; };
-Slides.propDecorators = {
-    'autoplay': [{ type: Input },],
-    'control': [{ type: Input },],
-    'effect': [{ type: Input },],
-    'direction': [{ type: Input },],
-    'initialSlide': [{ type: Input },],
-    'loop': [{ type: Input },],
-    'pager': [{ type: Input },],
-    'dir': [{ type: Input },],
-    'paginationType': [{ type: Input },],
-    'parallax': [{ type: Input },],
-    'speed': [{ type: Input },],
-    'zoom': [{ type: Input },],
-    'spaceBetween': [{ type: Input },],
-    'slidesPerView': [{ type: Input },],
-    'centeredSlides': [{ type: Input },],
-    'ionSlideWillChange': [{ type: Output },],
-    'ionSlideDidChange': [{ type: Output },],
-    'ionSlideDrag': [{ type: Output },],
-    'ionSlideReachStart': [{ type: Output },],
-    'ionSlideReachEnd': [{ type: Output },],
-    'ionSlideAutoplay': [{ type: Output },],
-    'ionSlideAutoplayStart': [{ type: Output },],
-    'ionSlideAutoplayStop': [{ type: Output },],
-    'ionSlideNextStart': [{ type: Output },],
-    'ionSlidePrevStart': [{ type: Output },],
-    'ionSlideNextEnd': [{ type: Output },],
-    'ionSlidePrevEnd': [{ type: Output },],
-    'ionSlideTap': [{ type: Output },],
-    'ionSlideDoubleTap': [{ type: Output },],
-};
 function Slides_tsickle_Closure_declarations() {
     /** @type {?} */
     Slides.decorators;

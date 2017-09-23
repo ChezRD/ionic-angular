@@ -16,7 +16,7 @@ import { ViewController } from '../../navigation/view-controller';
 /**
  * @hidden
  */
-var ModalImpl = (function (_super) {
+var ModalImpl = /** @class */ (function (_super) {
     __extends(ModalImpl, _super);
     /**
      * @param {?} app

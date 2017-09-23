@@ -32,7 +32,7 @@ var __extends = (this && this.__extends) || (function () {
      * @hidden
      * This class is for internal use only. It is not exported publicly.
      */
-    var NavControllerBase = (function (_super) {
+    var NavControllerBase = /** @class */ (function (_super) {
         __extends(NavControllerBase, _super);
         /**
          * @param {?} parent
@@ -1332,11 +1332,11 @@ var __extends = (this && this.__extends) || (function () {
             console.warn('(getActiveChildNav) is deprecated and will be removed in the next major release. Use getActiveChildNavs instead.');
             return this._children[this._children.length - 1];
         };
+        NavControllerBase.propDecorators = {
+            'swipeBackEnabled': [{ type: core_1.Input },],
+        };
         return NavControllerBase;
     }(ion_1.Ion));
-    NavControllerBase.propDecorators = {
-        'swipeBackEnabled': [{ type: core_1.Input },],
-    };
     exports.NavControllerBase = NavControllerBase;
     function NavControllerBase_tsickle_Closure_declarations() {
         /** @type {?} */

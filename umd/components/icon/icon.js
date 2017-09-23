@@ -54,7 +54,7 @@ var __extends = (this && this.__extends) || (function () {
      * @see {\@link /docs/components#icons Icon Component Docs}
      *
      */
-    var Icon = (function (_super) {
+    var Icon = /** @class */ (function (_super) {
         __extends(Icon, _super);
         /**
          * @param {?} config
@@ -226,31 +226,31 @@ var __extends = (this && this.__extends) || (function () {
                 .replace('-', ' ');
             this.setElementAttribute('aria-label', label);
         };
+        Icon.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-icon',
+                        host: {
+                            'role': 'img'
+                        }
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Icon.ctorParameters = function () { return [
+            { type: config_1.Config, },
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+        ]; };
+        Icon.propDecorators = {
+            'name': [{ type: core_1.Input },],
+            'ios': [{ type: core_1.Input },],
+            'md': [{ type: core_1.Input },],
+            'isActive': [{ type: core_1.Input },],
+            '_hidden': [{ type: core_1.HostBinding, args: ['class.hide',] },],
+        };
         return Icon;
     }(ion_1.Ion));
-    Icon.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-icon',
-                    host: {
-                        'role': 'img'
-                    }
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Icon.ctorParameters = function () { return [
-        { type: config_1.Config, },
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-    ]; };
-    Icon.propDecorators = {
-        'name': [{ type: core_1.Input },],
-        'ios': [{ type: core_1.Input },],
-        'md': [{ type: core_1.Input },],
-        'isActive': [{ type: core_1.Input },],
-        '_hidden': [{ type: core_1.HostBinding, args: ['class.hide',] },],
-    };
     exports.Icon = Icon;
     function Icon_tsickle_Closure_declarations() {
         /** @type {?} */

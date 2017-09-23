@@ -30,7 +30,7 @@
      *
      * ```
      */
-    var Haptic = (function () {
+    var Haptic = /** @class */ (function () {
         /**
          * @param {?} plt
          */
@@ -98,17 +98,17 @@
         Haptic.prototype.impact = function (options) {
             this._p && this._p.impact(options);
         };
+        Haptic.decorators = [
+            { type: core_1.Injectable },
+        ];
+        /**
+         * @nocollapse
+         */
+        Haptic.ctorParameters = function () { return [
+            { type: platform_1.Platform, },
+        ]; };
         return Haptic;
     }());
-    Haptic.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    Haptic.ctorParameters = function () { return [
-        { type: platform_1.Platform, },
-    ]; };
     exports.Haptic = Haptic;
     function Haptic_tsickle_Closure_declarations() {
         /** @type {?} */

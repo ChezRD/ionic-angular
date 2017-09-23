@@ -227,7 +227,7 @@
      *
      * \@demo /docs/demos/src/alert/
      */
-    var AlertController = (function () {
+    var AlertController = /** @class */ (function () {
         /**
          * @param {?} _app
          * @param {?} config
@@ -245,18 +245,18 @@
             if (opts === void 0) { opts = {}; }
             return new alert_1.Alert(this._app, opts, this.config);
         };
+        AlertController.decorators = [
+            { type: core_1.Injectable },
+        ];
+        /**
+         * @nocollapse
+         */
+        AlertController.ctorParameters = function () { return [
+            { type: app_1.App, },
+            { type: config_1.Config, },
+        ]; };
         return AlertController;
     }());
-    AlertController.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    AlertController.ctorParameters = function () { return [
-        { type: app_1.App, },
-        { type: config_1.Config, },
-    ]; };
     exports.AlertController = AlertController;
     function AlertController_tsickle_Closure_declarations() {
         /** @type {?} */

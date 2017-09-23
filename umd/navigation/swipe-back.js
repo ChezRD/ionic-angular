@@ -25,7 +25,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var SwipeBackGesture = (function (_super) {
+    var SwipeBackGesture = /** @class */ (function (_super) {
         __extends(SwipeBackGesture, _super);
         /**
          * @param {?} plt

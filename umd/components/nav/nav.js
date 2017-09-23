@@ -63,7 +63,7 @@ var __extends = (this && this.__extends) || (function () {
      * \@demo /docs/demos/src/navigation/
      * @see {\@link /docs/components#navigation Navigation Component Docs}
      */
-    var Nav = (function (_super) {
+    var Nav = /** @class */ (function (_super) {
         __extends(Nav, _super);
         /**
          * @param {?} viewCtrl
@@ -201,42 +201,42 @@ var __extends = (this && this.__extends) || (function () {
         Nav.prototype.getSecondaryIdentifier = function () {
             return null;
         };
+        Nav.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: 'ion-nav',
+                        template: '<div #viewport nav-viewport></div>' +
+                            '<div class="nav-decor"></div>',
+                        encapsulation: core_1.ViewEncapsulation.None,
+                        providers: [{ provide: split_pane_1.RootNode, useExisting: core_1.forwardRef(function () { return Nav; }) }]
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Nav.ctorParameters = function () { return [
+            { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
+            { type: nav_controller_1.NavController, decorators: [{ type: core_1.Optional },] },
+            { type: app_1.App, },
+            { type: config_1.Config, },
+            { type: platform_1.Platform, },
+            { type: core_1.ElementRef, },
+            { type: core_1.NgZone, },
+            { type: core_1.Renderer, },
+            { type: core_1.ComponentFactoryResolver, },
+            { type: gesture_controller_1.GestureController, },
+            { type: transition_controller_1.TransitionController, },
+            { type: deep_linker_1.DeepLinker, decorators: [{ type: core_1.Optional },] },
+            { type: dom_controller_1.DomController, },
+            { type: core_1.ErrorHandler, },
+        ]; };
+        Nav.propDecorators = {
+            '_vp': [{ type: core_1.ViewChild, args: ['viewport', { read: core_1.ViewContainerRef },] },],
+            'root': [{ type: core_1.Input },],
+            'rootParams': [{ type: core_1.Input },],
+            'name': [{ type: core_1.Input },],
+        };
         return Nav;
     }(nav_controller_base_1.NavControllerBase));
-    Nav.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ion-nav',
-                    template: '<div #viewport nav-viewport></div>' +
-                        '<div class="nav-decor"></div>',
-                    encapsulation: core_1.ViewEncapsulation.None,
-                    providers: [{ provide: split_pane_1.RootNode, useExisting: core_1.forwardRef(function () { return Nav; }) }]
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Nav.ctorParameters = function () { return [
-        { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
-        { type: nav_controller_1.NavController, decorators: [{ type: core_1.Optional },] },
-        { type: app_1.App, },
-        { type: config_1.Config, },
-        { type: platform_1.Platform, },
-        { type: core_1.ElementRef, },
-        { type: core_1.NgZone, },
-        { type: core_1.Renderer, },
-        { type: core_1.ComponentFactoryResolver, },
-        { type: gesture_controller_1.GestureController, },
-        { type: transition_controller_1.TransitionController, },
-        { type: deep_linker_1.DeepLinker, decorators: [{ type: core_1.Optional },] },
-        { type: dom_controller_1.DomController, },
-        { type: core_1.ErrorHandler, },
-    ]; };
-    Nav.propDecorators = {
-        '_vp': [{ type: core_1.ViewChild, args: ['viewport', { read: core_1.ViewContainerRef },] },],
-        'root': [{ type: core_1.Input },],
-        'rootParams': [{ type: core_1.Input },],
-        'name': [{ type: core_1.Input },],
-    };
     exports.Nav = Nav;
     function Nav_tsickle_Closure_declarations() {
         /** @type {?} */

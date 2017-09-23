@@ -14,7 +14,7 @@
     /**
      * @hidden
      */
-    var Form = (function () {
+    var Form = /** @class */ (function () {
         function Form() {
             this._focused = null;
             this._ids = -1;
@@ -81,15 +81,15 @@
         Form.prototype.nextId = function () {
             return ++this._ids;
         };
+        Form.decorators = [
+            { type: core_1.Injectable },
+        ];
+        /**
+         * @nocollapse
+         */
+        Form.ctorParameters = function () { return []; };
         return Form;
     }());
-    Form.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    Form.ctorParameters = function () { return []; };
     exports.Form = Form;
     function Form_tsickle_Closure_declarations() {
         /** @type {?} */
@@ -110,7 +110,7 @@
      * @hidden
      * @abstract
      */
-    var IonicTapInput = (function () {
+    var IonicTapInput = /** @class */ (function () {
         function IonicTapInput() {
         }
         /**
@@ -147,7 +147,7 @@
      * @hidden
      * @abstract
      */
-    var IonicFormInput = (function () {
+    var IonicFormInput = /** @class */ (function () {
         function IonicFormInput() {
         }
         /**

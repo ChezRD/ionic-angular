@@ -17,7 +17,7 @@ import { Toolbar } from './toolbar';
 /**
  * @hidden
  */
-var ToolbarItem = (function (_super) {
+var ToolbarItem = /** @class */ (function (_super) {
     __extends(ToolbarItem, _super);
     /**
      * @param {?} config
@@ -46,27 +46,27 @@ var ToolbarItem = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    ToolbarItem.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-buttons,[menuToggle]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ToolbarItem.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Toolbar, decorators: [{ type: Optional },] },
+        { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
+    ]; };
+    ToolbarItem.propDecorators = {
+        '_buttons': [{ type: ContentChildren, args: [Button,] },],
+    };
     return ToolbarItem;
 }(Ion));
 export { ToolbarItem };
-ToolbarItem.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-buttons,[menuToggle]'
-            },] },
-];
-/**
- * @nocollapse
- */
-ToolbarItem.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Toolbar, decorators: [{ type: Optional },] },
-    { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
-]; };
-ToolbarItem.propDecorators = {
-    '_buttons': [{ type: ContentChildren, args: [Button,] },],
-};
 function ToolbarItem_tsickle_Closure_declarations() {
     /** @type {?} */
     ToolbarItem.decorators;

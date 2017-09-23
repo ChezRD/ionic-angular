@@ -59,7 +59,7 @@ import { Ion } from '../ion';
  * @see {\@link ../../input/Input Input API Docs}
  *
  */
-var Label = (function (_super) {
+var Label = /** @class */ (function (_super) {
     __extends(Label, _super);
     /**
      * @param {?} config
@@ -107,29 +107,29 @@ var Label = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Label.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-label'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Label.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: undefined, decorators: [{ type: Attribute, args: ['floating',] },] },
+        { type: undefined, decorators: [{ type: Attribute, args: ['stacked',] },] },
+        { type: undefined, decorators: [{ type: Attribute, args: ['fixed',] },] },
+        { type: undefined, decorators: [{ type: Attribute, args: ['inset',] },] },
+    ]; };
+    Label.propDecorators = {
+        'id': [{ type: Input },],
+    };
     return Label;
 }(Ion));
 export { Label };
-Label.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-label'
-            },] },
-];
-/**
- * @nocollapse
- */
-Label.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: undefined, decorators: [{ type: Attribute, args: ['floating',] },] },
-    { type: undefined, decorators: [{ type: Attribute, args: ['stacked',] },] },
-    { type: undefined, decorators: [{ type: Attribute, args: ['fixed',] },] },
-    { type: undefined, decorators: [{ type: Attribute, args: ['inset',] },] },
-]; };
-Label.propDecorators = {
-    'id': [{ type: Input },],
-};
 function Label_tsickle_Closure_declarations() {
     /** @type {?} */
     Label.decorators;

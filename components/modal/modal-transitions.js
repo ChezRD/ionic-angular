@@ -13,7 +13,7 @@ import { PageTransition } from '../../transitions/page-transition';
 /**
  * Animations for modals
  */
-var ModalSlideIn = (function (_super) {
+var ModalSlideIn = /** @class */ (function (_super) {
     __extends(ModalSlideIn, _super);
     function ModalSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -40,7 +40,7 @@ var ModalSlideIn = (function (_super) {
     return ModalSlideIn;
 }(PageTransition));
 export { ModalSlideIn };
-var ModalSlideOut = (function (_super) {
+var ModalSlideOut = /** @class */ (function (_super) {
     __extends(ModalSlideOut, _super);
     function ModalSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -69,7 +69,7 @@ var ModalSlideOut = (function (_super) {
     return ModalSlideOut;
 }(PageTransition));
 export { ModalSlideOut };
-var ModalMDSlideIn = (function (_super) {
+var ModalMDSlideIn = /** @class */ (function (_super) {
     __extends(ModalMDSlideIn, _super);
     function ModalMDSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -94,7 +94,7 @@ var ModalMDSlideIn = (function (_super) {
     return ModalMDSlideIn;
 }(PageTransition));
 export { ModalMDSlideIn };
-var ModalMDSlideOut = (function (_super) {
+var ModalMDSlideOut = /** @class */ (function (_super) {
     __extends(ModalMDSlideOut, _super);
     function ModalMDSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;

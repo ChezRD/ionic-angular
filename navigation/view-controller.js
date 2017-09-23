@@ -19,7 +19,7 @@ import { NavParams } from './nav-params';
  * }
  * ```
  */
-var ViewController = (function () {
+var ViewController = /** @class */ (function () {
     /**
      * @param {?=} component
      * @param {?=} data
@@ -566,12 +566,12 @@ var ViewController = (function () {
             instance[methodName]();
         }
     };
+    ViewController.propDecorators = {
+        '_emitter': [{ type: Output },],
+    };
     return ViewController;
 }());
 export { ViewController };
-ViewController.propDecorators = {
-    '_emitter': [{ type: Output },],
-};
 function ViewController_tsickle_Closure_declarations() {
     /** @type {?} */
     ViewController.propDecorators;

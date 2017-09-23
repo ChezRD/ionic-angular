@@ -49,7 +49,7 @@ import { ErrorHandler } from '@angular/core';
  *
  * More information about Angular's [`ErrorHandler`](https://angular.io/docs/ts/latest/api/core/index/ErrorHandler-class.html).
  */
-var IonicErrorHandler = (function (_super) {
+var IonicErrorHandler = /** @class */ (function (_super) {
     __extends(IonicErrorHandler, _super);
     function IonicErrorHandler() {
         return _super.call(this, false) || this;

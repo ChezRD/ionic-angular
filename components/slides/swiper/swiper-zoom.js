@@ -77,18 +77,18 @@ function onGestureStart(s, _plt, ev) {
     }
     if (!z.gesture.slide) {
         if (ev.currentTarget && ((ev.currentTarget)).classList.contains(CLS.slide)) {
-            z.gesture.slide = (ev.currentTarget);
+            z.gesture.slide = /** @type {?} */ (ev.currentTarget);
         }
         if (!z.gesture.slide) {
             z.gesture.slide = s._slides[s._activeIndex];
         }
-        z.gesture.image = (z.gesture.slide.querySelector('img, svg, canvas, ion-img'));
-        z.gesture.imageWrap = (z.gesture.image.closest('.' + CLS.zoomContainer));
+        z.gesture.image = /** @type {?} */ (z.gesture.slide.querySelector('img, svg, canvas, ion-img'));
+        z.gesture.imageWrap = /** @type {?} */ (z.gesture.image.closest('.' + CLS.zoomContainer));
         if (!z.gesture.imageWrap) {
             z.gesture.image = undefined;
             return;
         }
-        z.gesture.zoomMax = parseInt(z.gesture.imageWrap.getAttribute('data-swiper-zoom') || (s.zoomMax), 10);
+        z.gesture.zoomMax = parseInt(z.gesture.imageWrap.getAttribute('data-swiper-zoom') || /** @type {?} */ (s.zoomMax), 10);
     }
     transition(z.gesture.image, 0);
     z.isScaling = true;
@@ -319,8 +319,8 @@ function toggleZoom(s, plt) {
     var /** @type {?} */ ev = s.originalEvent;
     if (!z.gesture.slide) {
         z.gesture.slide = s.clickedSlide ? s.clickedSlide : s._slides[s._activeIndex];
-        z.gesture.image = (z.gesture.slide.querySelector('img, svg, canvas, ion-img'));
-        z.gesture.imageWrap = (z.gesture.image.closest('.' + CLS.zoomContainer));
+        z.gesture.image = /** @type {?} */ (z.gesture.slide.querySelector('img, svg, canvas, ion-img'));
+        z.gesture.imageWrap = /** @type {?} */ (z.gesture.image.closest('.' + CLS.zoomContainer));
     }
     if (!z.gesture.image)
         return;
@@ -361,7 +361,7 @@ function toggleZoom(s, plt) {
     }
     else {
         // Zoom In
-        z.scale = z.currentScale = parseInt(z.gesture.imageWrap.getAttribute('data-swiper-zoom') || (s.zoomMax), 10);
+        z.scale = z.currentScale = parseInt(z.gesture.imageWrap.getAttribute('data-swiper-zoom') || /** @type {?} */ (s.zoomMax), 10);
         if (ev) {
             slideWidth = z.gesture.slide.offsetWidth;
             slideHeight = z.gesture.slide.offsetHeight;

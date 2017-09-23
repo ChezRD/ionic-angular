@@ -18,7 +18,7 @@
      *
      * \@demo /docs/demos/src/select/
      */
-    var Option = (function () {
+    var Option = /** @class */ (function () {
         /**
          * @param {?} _elementRef
          */
@@ -99,25 +99,25 @@
             enumerable: true,
             configurable: true
         });
+        Option.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-option'
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Option.ctorParameters = function () { return [
+            { type: core_1.ElementRef, },
+        ]; };
+        Option.propDecorators = {
+            'disabled': [{ type: core_1.Input },],
+            'selected': [{ type: core_1.Input },],
+            'value': [{ type: core_1.Input },],
+            'ionSelect': [{ type: core_1.Output },],
+        };
         return Option;
     }());
-    Option.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-option'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Option.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
-    ]; };
-    Option.propDecorators = {
-        'disabled': [{ type: core_1.Input },],
-        'selected': [{ type: core_1.Input },],
-        'value': [{ type: core_1.Input },],
-        'ionSelect': [{ type: core_1.Output },],
-    };
     exports.Option = Option;
     function Option_tsickle_Closure_declarations() {
         /** @type {?} */

@@ -25,7 +25,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var ItemDivider = (function (_super) {
+    var ItemDivider = /** @class */ (function (_super) {
         __extends(ItemDivider, _super);
         /**
          * @param {?} config
@@ -35,24 +35,24 @@ var __extends = (this && this.__extends) || (function () {
         function ItemDivider(config, elementRef, renderer) {
             return _super.call(this, config, elementRef, renderer, 'item-divider') || this;
         }
+        ItemDivider.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-item-divider',
+                        host: {
+                            'class': 'item-divider'
+                        }
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        ItemDivider.ctorParameters = function () { return [
+            { type: config_1.Config, },
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+        ]; };
         return ItemDivider;
     }(ion_1.Ion));
-    ItemDivider.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-item-divider',
-                    host: {
-                        'class': 'item-divider'
-                    }
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    ItemDivider.ctorParameters = function () { return [
-        { type: config_1.Config, },
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-    ]; };
     exports.ItemDivider = ItemDivider;
     function ItemDivider_tsickle_Closure_declarations() {
         /** @type {?} */

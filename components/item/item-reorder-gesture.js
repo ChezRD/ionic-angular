@@ -4,7 +4,7 @@ import { UIEventManager } from '../../gestures/ui-event-manager';
 /**
  * @hidden
  */
-var ItemReorderGesture = (function () {
+var ItemReorderGesture = /** @class */ (function () {
     /**
      * @param {?} plt
      * @param {?} reorderList

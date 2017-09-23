@@ -35,7 +35,7 @@
      * @see {\@link /docs/components#menus Menu Component Docs}
      * @see {\@link ../../menu/Menu Menu API Docs}
      */
-    var MenuClose = (function () {
+    var MenuClose = /** @class */ (function () {
         /**
          * @param {?} _menu
          */
@@ -50,23 +50,23 @@
             var /** @type {?} */ menu = this._menu.get(this.menuClose);
             menu && menu.close();
         };
+        MenuClose.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: '[menuClose]'
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        MenuClose.ctorParameters = function () { return [
+            { type: menu_controller_1.MenuController, },
+        ]; };
+        MenuClose.propDecorators = {
+            'menuClose': [{ type: core_1.Input },],
+            'close': [{ type: core_1.HostListener, args: ['click',] },],
+        };
         return MenuClose;
     }());
-    MenuClose.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: '[menuClose]'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    MenuClose.ctorParameters = function () { return [
-        { type: menu_controller_1.MenuController, },
-    ]; };
-    MenuClose.propDecorators = {
-        'menuClose': [{ type: core_1.Input },],
-        'close': [{ type: core_1.HostListener, args: ['click',] },],
-    };
     exports.MenuClose = MenuClose;
     function MenuClose_tsickle_Closure_declarations() {
         /** @type {?} */

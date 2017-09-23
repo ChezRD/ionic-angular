@@ -12,7 +12,7 @@ import { EventEmitter, Input, Output } from '@angular/core';
 import { deepCopy, isArray, isPresent, isString, isTrueProperty, isUndefined } from './util';
 import { Ion } from '../components/ion';
 import { TimeoutDebouncer } from './debouncer';
-var BaseInput = (function (_super) {
+var BaseInput = /** @class */ (function (_super) {
     __extends(BaseInput, _super);
     /**
      * @param {?} config
@@ -225,6 +225,7 @@ var BaseInput = (function (_super) {
         this._setFocus(false);
         this._fireTouched();
         this.ionBlur.emit(this);
+        this._onTouched && this._onTouched();
     };
     /**
      * @hidden
@@ -355,15 +356,15 @@ var BaseInput = (function (_super) {
             item.setElementClass('item-input-has-value', hasValue);
         }
     };
+    BaseInput.propDecorators = {
+        'ionFocus': [{ type: Output },],
+        'ionChange': [{ type: Output },],
+        'ionBlur': [{ type: Output },],
+        'disabled': [{ type: Input },],
+    };
     return BaseInput;
 }(Ion));
 export { BaseInput };
-BaseInput.propDecorators = {
-    'ionFocus': [{ type: Output },],
-    'ionChange': [{ type: Output },],
-    'ionBlur': [{ type: Output },],
-    'disabled': [{ type: Input },],
-};
 function BaseInput_tsickle_Closure_declarations() {
     /** @type {?} */
     BaseInput.propDecorators;

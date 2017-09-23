@@ -111,7 +111,7 @@ import { removeArrayItem } from '../../util/util';
  * @see {\@link ../Menu Menu API Docs}
  *
  */
-var MenuController = (function () {
+var MenuController = /** @class */ (function () {
     function MenuController() {
         this._menus = [];
     }

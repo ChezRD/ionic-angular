@@ -177,7 +177,7 @@
         var /** @type {?} */ el = (e.target);
         if (!el.matches(selector)) {
             if (typeof selector === 'string') {
-                el = (el.closest(selector));
+                el = /** @type {?} */ (el.closest(selector));
             }
             else if (selector.nodeType) {
                 var /** @type {?} */ parentEl = el.parentElement;

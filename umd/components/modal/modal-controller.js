@@ -142,7 +142,7 @@
      * \@demo /docs/demos/src/modal/
      * @see {\@link /docs/components#modals Modal Component Docs}
      */
-    var ModalController = (function () {
+    var ModalController = /** @class */ (function () {
         /**
          * @param {?} _app
          * @param {?} config
@@ -166,19 +166,19 @@
             if (opts === void 0) { opts = {}; }
             return new modal_1.Modal(this._app, component, data, opts, this.config, this.deepLinker);
         };
+        ModalController.decorators = [
+            { type: core_1.Injectable },
+        ];
+        /**
+         * @nocollapse
+         */
+        ModalController.ctorParameters = function () { return [
+            { type: app_1.App, },
+            { type: config_1.Config, },
+            { type: deep_linker_1.DeepLinker, },
+        ]; };
         return ModalController;
     }());
-    ModalController.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    ModalController.ctorParameters = function () { return [
-        { type: app_1.App, },
-        { type: config_1.Config, },
-        { type: deep_linker_1.DeepLinker, },
-    ]; };
     exports.ModalController = ModalController;
     function ModalController_tsickle_Closure_declarations() {
         /** @type {?} */

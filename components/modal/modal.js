@@ -13,7 +13,7 @@ import { ModalImpl } from './modal-impl';
 /**
  * @hidden
  */
-var Modal = (function (_super) {
+var Modal = /** @class */ (function (_super) {
     __extends(Modal, _super);
     /**
      * @param {?} app

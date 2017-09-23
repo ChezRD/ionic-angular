@@ -102,7 +102,7 @@ import { TransitionController } from '../../transitions/transition-controller';
  * ```html
  * <ion-tabs>
  *   <ion-tab (ionSelect)="chat()" tabTitle="Show Modal"></ion-tab>
- * </ion-tabs>
+ * </ion-tabs>pop
  * ```
  *
  * ```ts
@@ -125,7 +125,7 @@ import { TransitionController } from '../../transitions/transition-controller';
  * @see {\@link ../../nav/Nav Nav API Docs}
  * @see {\@link ../../nav/NavController NavController API Docs}
  */
-var Tab = (function (_super) {
+var Tab = /** @class */ (function (_super) {
     __extends(Tab, _super);
     /**
      * @param {?} parent
@@ -392,54 +392,54 @@ var Tab = (function (_super) {
     Tab.prototype.goToRoot = function (opts) {
         return this.setRoot(this.root, this.rootParams, opts, null);
     };
+    Tab.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-tab',
+                    template: '<div #viewport></div><div class="nav-decor"></div>',
+                    host: {
+                        '[attr.id]': '_tabId',
+                        '[attr.aria-labelledby]': '_btnId',
+                        'role': 'tabpanel'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Tab.ctorParameters = function () { return [
+        { type: Tabs, },
+        { type: App, },
+        { type: Config, },
+        { type: Platform, },
+        { type: ElementRef, },
+        { type: NgZone, },
+        { type: Renderer, },
+        { type: ComponentFactoryResolver, },
+        { type: ChangeDetectorRef, },
+        { type: GestureController, },
+        { type: TransitionController, },
+        { type: DeepLinker, decorators: [{ type: Optional },] },
+        { type: DomController, },
+        { type: ErrorHandler, },
+    ]; };
+    Tab.propDecorators = {
+        'root': [{ type: Input },],
+        'rootParams': [{ type: Input },],
+        'tabUrlPath': [{ type: Input },],
+        'tabTitle': [{ type: Input },],
+        'tabIcon': [{ type: Input },],
+        'tabBadge': [{ type: Input },],
+        'tabBadgeStyle': [{ type: Input },],
+        'enabled': [{ type: Input },],
+        'show': [{ type: Input },],
+        'tabsHideOnSubPages': [{ type: Input },],
+        'ionSelect': [{ type: Output },],
+        '_vp': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
+    };
     return Tab;
 }(NavControllerBase));
 export { Tab };
-Tab.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-tab',
-                template: '<div #viewport></div><div class="nav-decor"></div>',
-                host: {
-                    '[attr.id]': '_tabId',
-                    '[attr.aria-labelledby]': '_btnId',
-                    'role': 'tabpanel'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Tab.ctorParameters = function () { return [
-    { type: Tabs, },
-    { type: App, },
-    { type: Config, },
-    { type: Platform, },
-    { type: ElementRef, },
-    { type: NgZone, },
-    { type: Renderer, },
-    { type: ComponentFactoryResolver, },
-    { type: ChangeDetectorRef, },
-    { type: GestureController, },
-    { type: TransitionController, },
-    { type: DeepLinker, decorators: [{ type: Optional },] },
-    { type: DomController, },
-    { type: ErrorHandler, },
-]; };
-Tab.propDecorators = {
-    'root': [{ type: Input },],
-    'rootParams': [{ type: Input },],
-    'tabUrlPath': [{ type: Input },],
-    'tabTitle': [{ type: Input },],
-    'tabIcon': [{ type: Input },],
-    'tabBadge': [{ type: Input },],
-    'tabBadgeStyle': [{ type: Input },],
-    'enabled': [{ type: Input },],
-    'show': [{ type: Input },],
-    'tabsHideOnSubPages': [{ type: Input },],
-    'ionSelect': [{ type: Output },],
-    '_vp': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
-};
 function Tab_tsickle_Closure_declarations() {
     /** @type {?} */
     Tab.decorators;

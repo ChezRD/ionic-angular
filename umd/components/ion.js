@@ -13,7 +13,7 @@
     /**
      * @hidden
      */
-    var Ion = (function () {
+    var Ion = /** @class */ (function () {
         /**
          * @param {?} config
          * @param {?} elementRef
@@ -155,12 +155,12 @@
         Ion.prototype.getNativeElement = function () {
             return this._elementRef.nativeElement;
         };
+        Ion.propDecorators = {
+            'color': [{ type: core_1.Input },],
+            'mode': [{ type: core_1.Input },],
+        };
         return Ion;
     }());
-    Ion.propDecorators = {
-        'color': [{ type: core_1.Input },],
-        'mode': [{ type: core_1.Input },],
-    };
     exports.Ion = Ion;
     function Ion_tsickle_Closure_declarations() {
         /** @type {?} */

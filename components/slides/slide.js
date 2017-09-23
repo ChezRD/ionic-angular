@@ -12,7 +12,7 @@ import { Slides } from './slides';
  * \@demo /docs/demos/src/slides/
  * @see {\@link /docs/api/components/slides/Slides/ Slides API Docs}
  */
-var Slide = (function () {
+var Slide = /** @class */ (function () {
     /**
      * @param {?} elementRef
      * @param {?} renderer
@@ -30,27 +30,27 @@ var Slide = (function () {
     Slide.prototype.ngOnDestroy = function () {
         this._slides.update(10);
     };
+    Slide.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-slide',
+                    template: '<div class="slide-zoom">' +
+                        '<ng-content></ng-content>' +
+                        '</div>',
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Slide.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Slides, },
+    ]; };
     return Slide;
 }());
 export { Slide };
-Slide.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-slide',
-                template: '<div class="slide-zoom">' +
-                    '<ng-content></ng-content>' +
-                    '</div>',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Slide.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Slides, },
-]; };
 function Slide_tsickle_Closure_declarations() {
     /** @type {?} */
     Slide.decorators;

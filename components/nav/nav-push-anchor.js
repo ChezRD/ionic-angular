@@ -4,7 +4,7 @@ import { NavPush } from './nav-push';
 /**
  * @hidden
  */
-var NavPushAnchor = (function () {
+var NavPushAnchor = /** @class */ (function () {
     /**
      * @param {?} host
      * @param {?} linker
@@ -30,24 +30,24 @@ var NavPushAnchor = (function () {
     NavPushAnchor.prototype.ngAfterContentInit = function () {
         this.updateHref();
     };
+    NavPushAnchor.decorators = [
+        { type: Directive, args: [{
+                    selector: 'a[navPush]',
+                    host: {
+                        '[attr.href]': '_href'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NavPushAnchor.ctorParameters = function () { return [
+        { type: NavPush, decorators: [{ type: Host },] },
+        { type: DeepLinker, decorators: [{ type: Optional },] },
+    ]; };
     return NavPushAnchor;
 }());
 export { NavPushAnchor };
-NavPushAnchor.decorators = [
-    { type: Directive, args: [{
-                selector: 'a[navPush]',
-                host: {
-                    '[attr.href]': '_href'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-NavPushAnchor.ctorParameters = function () { return [
-    { type: NavPush, decorators: [{ type: Host },] },
-    { type: DeepLinker, decorators: [{ type: Optional },] },
-]; };
 function NavPushAnchor_tsickle_Closure_declarations() {
     /** @type {?} */
     NavPushAnchor.decorators;

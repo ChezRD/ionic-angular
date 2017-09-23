@@ -36,7 +36,7 @@ import { isPresent, isTrueProperty } from '../../util/util';
  * @see {\@link /docs/components#segment Segment Component Docs}
  * @see {\@link /docs/api/components/segment/Segment/ Segment API Docs}
  */
-var SegmentButton = (function () {
+var SegmentButton = /** @class */ (function () {
     function SegmentButton() {
         this.isActive = false;
         this._disabled = false;
@@ -81,35 +81,35 @@ var SegmentButton = (function () {
             console.warn('<ion-segment-button> requires a "value" attribute');
         }
     };
+    SegmentButton.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-segment-button',
+                    template: '<ng-content></ng-content>' +
+                        '<div class="button-effect"></div>',
+                    host: {
+                        'tappable': '',
+                        'class': 'segment-button',
+                        'role': 'button',
+                        '[class.segment-button-disabled]': '_disabled',
+                        '[class.segment-activated]': 'isActive',
+                        '[attr.aria-pressed]': 'isActive'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    SegmentButton.ctorParameters = function () { return []; };
+    SegmentButton.propDecorators = {
+        'value': [{ type: Input },],
+        'ionSelect': [{ type: Output },],
+        'disabled': [{ type: Input },],
+        'onClick': [{ type: HostListener, args: ['click',] },],
+    };
     return SegmentButton;
 }());
 export { SegmentButton };
-SegmentButton.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-segment-button',
-                template: '<ng-content></ng-content>' +
-                    '<div class="button-effect"></div>',
-                host: {
-                    'tappable': '',
-                    'class': 'segment-button',
-                    'role': 'button',
-                    '[class.segment-button-disabled]': '_disabled',
-                    '[class.segment-activated]': 'isActive',
-                    '[attr.aria-pressed]': 'isActive'
-                },
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-SegmentButton.ctorParameters = function () { return []; };
-SegmentButton.propDecorators = {
-    'value': [{ type: Input },],
-    'ionSelect': [{ type: Output },],
-    'disabled': [{ type: Input },],
-    'onClick': [{ type: HostListener, args: ['click',] },],
-};
 function SegmentButton_tsickle_Closure_declarations() {
     /** @type {?} */
     SegmentButton.decorators;

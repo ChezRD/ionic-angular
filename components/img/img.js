@@ -86,7 +86,7 @@ import { Platform } from '../../platform/platform';
  * currently working on.
  *
  */
-var Img = (function () {
+var Img = /** @class */ (function () {
     /**
      * @param {?} _elementRef
      * @param {?} _renderer
@@ -390,35 +390,35 @@ var Img = (function () {
         this._unreg && this._unreg();
         this._content && this._content.removeImg(this);
     };
+    Img.decorators = [
+        { type: Component, args: [{
+                    selector: 'ion-img',
+                    template: '<img>',
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Img.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Platform, },
+        { type: Content, decorators: [{ type: Optional },] },
+        { type: DomController, },
+    ]; };
+    Img.propDecorators = {
+        'src': [{ type: Input },],
+        'bounds': [{ type: Input },],
+        'cache': [{ type: Input },],
+        'width': [{ type: Input },],
+        'height': [{ type: Input },],
+        'alt': [{ type: Input },],
+    };
     return Img;
 }());
 export { Img };
-Img.decorators = [
-    { type: Component, args: [{
-                selector: 'ion-img',
-                template: '<img>',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-            },] },
-];
-/**
- * @nocollapse
- */
-Img.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Platform, },
-    { type: Content, decorators: [{ type: Optional },] },
-    { type: DomController, },
-]; };
-Img.propDecorators = {
-    'src': [{ type: Input },],
-    'bounds': [{ type: Input },],
-    'cache': [{ type: Input },],
-    'width': [{ type: Input },],
-    'height': [{ type: Input },],
-    'alt': [{ type: Input },],
-};
 function Img_tsickle_Closure_declarations() {
     /** @type {?} */
     Img.decorators;

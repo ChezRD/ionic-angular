@@ -116,7 +116,7 @@ var __extends = (this && this.__extends) || (function () {
      * }
      * ```
      */
-    var Spinner = (function (_super) {
+    var Spinner = /** @class */ (function (_super) {
         __extends(Spinner, _super);
         /**
          * @param {?} config
@@ -231,37 +231,37 @@ var __extends = (this && this.__extends) || (function () {
             data.style.animationDuration = duration + 'ms';
             return data;
         };
+        Spinner.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: 'ion-spinner',
+                        template: '<svg viewBox="0 0 64 64" *ngFor="let i of _c" [ngStyle]="i.style">' +
+                            '<circle [attr.r]="i.r" transform="translate(32,32)"></circle>' +
+                            '</svg>' +
+                            '<svg viewBox="0 0 64 64" *ngFor="let i of _l" [ngStyle]="i.style">' +
+                            '<line [attr.y1]="i.y1" [attr.y2]="i.y2" transform="translate(32,32)"></line>' +
+                            '</svg>',
+                        host: {
+                            '[class.spinner-paused]': '_paused'
+                        },
+                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                        encapsulation: core_1.ViewEncapsulation.None,
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Spinner.ctorParameters = function () { return [
+            { type: config_1.Config, },
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+        ]; };
+        Spinner.propDecorators = {
+            'name': [{ type: core_1.Input },],
+            'duration': [{ type: core_1.Input },],
+            'paused': [{ type: core_1.Input },],
+        };
         return Spinner;
     }(ion_1.Ion));
-    Spinner.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ion-spinner',
-                    template: '<svg viewBox="0 0 64 64" *ngFor="let i of _c" [ngStyle]="i.style">' +
-                        '<circle [attr.r]="i.r" transform="translate(32,32)"></circle>' +
-                        '</svg>' +
-                        '<svg viewBox="0 0 64 64" *ngFor="let i of _l" [ngStyle]="i.style">' +
-                        '<line [attr.y1]="i.y1" [attr.y2]="i.y2" transform="translate(32,32)"></line>' +
-                        '</svg>',
-                    host: {
-                        '[class.spinner-paused]': '_paused'
-                    },
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core_1.ViewEncapsulation.None,
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Spinner.ctorParameters = function () { return [
-        { type: config_1.Config, },
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-    ]; };
-    Spinner.propDecorators = {
-        'name': [{ type: core_1.Input },],
-        'duration': [{ type: core_1.Input },],
-        'paused': [{ type: core_1.Input },],
-    };
     exports.Spinner = Spinner;
     function Spinner_tsickle_Closure_declarations() {
         /** @type {?} */

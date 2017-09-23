@@ -1,5 +1,5 @@
 import { isActivatedDisabled } from './activator-base';
-var Activator = (function () {
+var Activator = /** @class */ (function () {
     /**
      * @param {?} app
      * @param {?} config

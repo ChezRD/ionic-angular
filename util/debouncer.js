@@ -1,4 +1,4 @@
-var TimeoutDebouncer = (function () {
+var TimeoutDebouncer = /** @class */ (function () {
     /**
      * @param {?} wait
      */

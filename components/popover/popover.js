@@ -13,7 +13,7 @@ import { PopoverImpl } from './popover-impl';
 /**
  * @hidden
  */
-var Popover = (function (_super) {
+var Popover = /** @class */ (function (_super) {
     __extends(Popover, _super);
     /**
      * @param {?} app

@@ -26,7 +26,7 @@ var __extends = (this && this.__extends) || (function () {
     var /** @type {?} */ OFF_BOTTOM = '40px';
     var /** @type {?} */ CENTER = '0px';
     var /** @type {?} */ SHOW_BACK_BTN_CSS = 'show-back-button';
-    var MDTransition = (function (_super) {
+    var MDTransition = /** @class */ (function (_super) {
         __extends(MDTransition, _super);
         function MDTransition() {
             return _super !== null && _super.apply(this, arguments) || this;

@@ -615,7 +615,7 @@ export class Content extends Ion {
         let /** @type {?} */ parentEle = ele.parentElement;
         let /** @type {?} */ children = parentEle.children;
         for (var /** @type {?} */ i = children.length - 1; i >= 0; i--) {
-            ele = (children[i]);
+            ele = /** @type {?} */ (children[i]);
             tagName = ele.tagName;
             if (tagName === 'ION-CONTENT') {
                 scrollEvent.contentElement = ele;
@@ -644,7 +644,7 @@ export class Content extends Ion {
         let /** @type {?} */ tabbarEle;
         while (ele && ele.tagName !== 'ION-MODAL' && !ele.classList.contains('tab-subpage')) {
             if (ele.tagName === 'ION-TABS') {
-                tabbarEle = (ele.firstElementChild);
+                tabbarEle = /** @type {?} */ (ele.firstElementChild);
                 // ******** DOM READ ****************
                 this._tabbarHeight = tabbarEle.clientHeight;
                 if (this._tabsPlacement === null) {

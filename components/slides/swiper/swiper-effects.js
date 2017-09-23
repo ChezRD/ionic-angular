@@ -21,7 +21,7 @@ export var /** @type {?} */ SWIPER_EFFECTS = {
                 var /** @type {?} */ slideOpacity = s.fade.crossFade ?
                     Math.max(1 - Math.abs(slide.progress), 0) :
                     1 + Math.min(Math.max(slide.progress, -1), 0);
-                slide.style.opacity = (slideOpacity);
+                slide.style.opacity = /** @type {?} */ (slideOpacity);
                 transform(slide, 'translate3d(' + tx + 'px, ' + ty + 'px, 0px)');
             }
         },
@@ -63,7 +63,7 @@ export var /** @type {?} */ SWIPER_EFFECTS = {
                 else if (s._rtl) {
                     rotateY = -rotateY;
                 }
-                slide.style.zIndex = (-Math.abs(Math.round(progress))) + s._slides.length;
+                slide.style.zIndex = /** @type {?} */ (-Math.abs(Math.round(progress))) + s._slides.length;
                 if (s.flip.slideShadows) {
                     // Set shadows
                     var /** @type {?} */ shadowBefore = ((isHorizontal(s) ? slide.querySelector('.swiper-slide-shadow-left') : slide.querySelector('.swiper-slide-shadow-top')));
@@ -79,10 +79,10 @@ export var /** @type {?} */ SWIPER_EFFECTS = {
                         slide.appendChild(shadowAfter);
                     }
                     if (shadowBefore) {
-                        shadowBefore.style.opacity = (Math.max(-progress, 0));
+                        shadowBefore.style.opacity = /** @type {?} */ (Math.max(-progress, 0));
                     }
                     if (shadowAfter) {
-                        shadowAfter.style.opacity = (Math.max(progress, 0));
+                        shadowAfter.style.opacity = /** @type {?} */ (Math.max(progress, 0));
                     }
                 }
                 transform(slide, 'translate3d(' + tx + 'px, ' + ty + 'px, 0px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)');
@@ -117,7 +117,7 @@ export var /** @type {?} */ SWIPER_EFFECTS = {
             var /** @type {?} */ cubeShadow;
             if (s.cube.shadow) {
                 if (isHorizontal(s)) {
-                    cubeShadow = (s._wrapper.querySelector('.swiper-cube-shadow'));
+                    cubeShadow = /** @type {?} */ (s._wrapper.querySelector('.swiper-cube-shadow'));
                     if (!cubeShadow) {
                         cubeShadow = plt.doc().createElement('div');
                         cubeShadow.className = 'swiper-cube-shadow';
@@ -126,7 +126,7 @@ export var /** @type {?} */ SWIPER_EFFECTS = {
                     cubeShadow.style.height = s.renderedWidth + 'px';
                 }
                 else {
-                    cubeShadow = (s.container.querySelector('.swiper-cube-shadow'));
+                    cubeShadow = /** @type {?} */ (s.container.querySelector('.swiper-cube-shadow'));
                     if (!cubeShadow) {
                         cubeShadow = plt.doc().createElement('div');
                         cubeShadow.className = 'swiper-cube-shadow';
@@ -189,9 +189,9 @@ export var /** @type {?} */ SWIPER_EFFECTS = {
                         slide.appendChild(shadowAfter);
                     }
                     if (shadowBefore)
-                        shadowBefore.style.opacity = (Math.max(-progress, 0));
+                        shadowBefore.style.opacity = /** @type {?} */ (Math.max(-progress, 0));
                     if (shadowAfter)
-                        shadowAfter.style.opacity = (Math.max(progress, 0));
+                        shadowAfter.style.opacity = /** @type {?} */ (Math.max(progress, 0));
                 }
             }
             s._wrapper.style.transformOrigin = s._wrapper.style.webkitTransformOrigin = '50% 50% -' + (s._renderedSize / 2) + 'px';
@@ -257,7 +257,7 @@ export var /** @type {?} */ SWIPER_EFFECTS = {
                     rotateX = 0;
                 var /** @type {?} */ slideTransform = 'translate3d(' + translateX + 'px,' + translateY + 'px,' + translateZ + 'px)  rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
                 transform(slide, slideTransform);
-                slide.style.zIndex = (-Math.abs(Math.round(offsetMultiplier))) + 1;
+                slide.style.zIndex = /** @type {?} */ (-Math.abs(Math.round(offsetMultiplier))) + 1;
                 if (s.coverflow.slideShadows) {
                     // Set shadows
                     var /** @type {?} */ shadowBefore = ((isHorizontal(s) ? slide.querySelector('.swiper-slide-shadow-left') : slide.querySelector('.swiper-slide-shadow-top')));
@@ -273,10 +273,10 @@ export var /** @type {?} */ SWIPER_EFFECTS = {
                         slide.appendChild(shadowAfter);
                     }
                     if (shadowBefore) {
-                        shadowBefore.style.opacity = ((offsetMultiplier > 0 ? offsetMultiplier : 0));
+                        shadowBefore.style.opacity = /** @type {?} */ ((offsetMultiplier > 0 ? offsetMultiplier : 0));
                     }
                     if (shadowAfter) {
-                        shadowAfter.style.opacity = (((-offsetMultiplier) > 0 ? -offsetMultiplier : 0));
+                        shadowAfter.style.opacity = /** @type {?} */ (((-offsetMultiplier) > 0 ? -offsetMultiplier : 0));
                     }
                 }
             }

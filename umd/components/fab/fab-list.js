@@ -38,7 +38,7 @@
      * \@demo /docs/demos/src/fab/
      * @see {\@link /docs/components#fab Fab Component Docs}
      */
-    var FabList = (function () {
+    var FabList = /** @class */ (function () {
         /**
          * @param {?} _elementRef
          * @param {?} _renderer
@@ -104,25 +104,25 @@
         FabList.prototype.setElementClass = function (className, add) {
             this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
         };
+        FabList.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-fab-list',
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        FabList.ctorParameters = function () { return [
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+            { type: config_1.Config, },
+            { type: platform_1.Platform, },
+        ]; };
+        FabList.propDecorators = {
+            '_setbuttons': [{ type: core_1.ContentChildren, args: [fab_1.FabButton,] },],
+        };
         return FabList;
     }());
-    FabList.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-fab-list',
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    FabList.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-        { type: config_1.Config, },
-        { type: platform_1.Platform, },
-    ]; };
-    FabList.propDecorators = {
-        '_setbuttons': [{ type: core_1.ContentChildren, args: [fab_1.FabButton,] },],
-    };
     exports.FabList = FabList;
     function FabList_tsickle_Closure_declarations() {
         /** @type {?} */

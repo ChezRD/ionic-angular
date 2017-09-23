@@ -15,7 +15,7 @@ import { ViewController } from '../../navigation/view-controller';
 /**
  * @hidden
  */
-var ActionSheet = (function (_super) {
+var ActionSheet = /** @class */ (function (_super) {
     __extends(ActionSheet, _super);
     /**
      * @param {?} app

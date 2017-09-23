@@ -13,24 +13,24 @@
     /**
      * @hidden
      */
-    var VirtualHeader = (function () {
+    var VirtualHeader = /** @class */ (function () {
         /**
          * @param {?} templateRef
          */
         function VirtualHeader(templateRef) {
             this.templateRef = templateRef;
         }
+        VirtualHeader.decorators = [
+            { type: core_1.Directive, args: [{ selector: '[virtualHeader]' },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        VirtualHeader.ctorParameters = function () { return [
+            { type: core_1.TemplateRef, },
+        ]; };
         return VirtualHeader;
     }());
-    VirtualHeader.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[virtualHeader]' },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    VirtualHeader.ctorParameters = function () { return [
-        { type: core_1.TemplateRef, },
-    ]; };
     exports.VirtualHeader = VirtualHeader;
     function VirtualHeader_tsickle_Closure_declarations() {
         /** @type {?} */

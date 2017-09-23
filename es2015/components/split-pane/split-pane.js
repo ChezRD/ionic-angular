@@ -31,7 +31,7 @@ export class RootNode {
      * @param {?} visible
      * @return {?}
      */
-    paneChanged(visible) { }
+    paneChanged?(visible) { }
 }
 /**
  * \@name SplitPane

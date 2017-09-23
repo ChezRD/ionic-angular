@@ -69,7 +69,7 @@ import { SegmentButton } from './segment-button';
  * @see {\@link /docs/components#segment Segment Component Docs}
  * @see [Angular Forms](http://learnangular2.com/forms/)
  */
-var Segment = (function (_super) {
+var Segment = /** @class */ (function (_super) {
     __extends(Segment, _super);
     /**
      * @param {?} config
@@ -111,29 +111,29 @@ var Segment = (function (_super) {
             button.isActive = (button.value === value);
         }
     };
+    Segment.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-segment',
+                    host: {
+                        '[class.segment-disabled]': '_disabled'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Segment.ctorParameters = function () { return [
+        { type: Config, },
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: NgControl, decorators: [{ type: Optional },] },
+    ]; };
+    Segment.propDecorators = {
+        '_buttons': [{ type: ContentChildren, args: [SegmentButton,] },],
+    };
     return Segment;
 }(BaseInput));
 export { Segment };
-Segment.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-segment',
-                host: {
-                    '[class.segment-disabled]': '_disabled'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Segment.ctorParameters = function () { return [
-    { type: Config, },
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: NgControl, decorators: [{ type: Optional },] },
-]; };
-Segment.propDecorators = {
-    '_buttons': [{ type: ContentChildren, args: [SegmentButton,] },],
-};
 function Segment_tsickle_Closure_declarations() {
     /** @type {?} */
     Segment.decorators;

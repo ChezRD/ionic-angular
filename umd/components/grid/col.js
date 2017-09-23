@@ -33,23 +33,23 @@
      *
      *
      */
-    var Col = (function () {
+    var Col = /** @class */ (function () {
         function Col() {
         }
+        Col.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-col, [ion-col]',
+                        host: {
+                            'class': 'col'
+                        }
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Col.ctorParameters = function () { return []; };
         return Col;
     }());
-    Col.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-col, [ion-col]',
-                    host: {
-                        'class': 'col'
-                    }
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Col.ctorParameters = function () { return []; };
     exports.Col = Col;
     function Col_tsickle_Closure_declarations() {
         /** @type {?} */

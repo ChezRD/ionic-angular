@@ -1,7 +1,7 @@
 /**
  * @hidden
  */
-var PointerEvents = (function () {
+var PointerEvents = /** @class */ (function () {
     /**
      * @param {?} plt
      * @param {?} ele

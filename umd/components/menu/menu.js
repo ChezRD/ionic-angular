@@ -188,7 +188,7 @@
      * @see {\@link ../../nav/Nav Nav API Docs}
      * @see {\@link ../../nav/NavController NavController API Docs}
      */
-    var Menu = (function () {
+    var Menu = /** @class */ (function () {
         /**
          * @param {?} _menuCtrl
          * @param {?} _elementRef
@@ -655,7 +655,7 @@
          * @return {?}
          */
         Menu.prototype.getMenuElement = function () {
-            return (this.getNativeElement().querySelector('.menu-inner'));
+            return /** @type {?} */ (this.getNativeElement().querySelector('.menu-inner'));
         };
         /**
          * @hidden
@@ -723,51 +723,51 @@
             this._type = null;
             this._cntEle = null;
         };
+        Menu.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: 'ion-menu',
+                        template: '<div class="menu-inner"><ng-content></ng-content></div>' +
+                            '<ion-backdrop></ion-backdrop>',
+                        host: {
+                            'role': 'navigation'
+                        },
+                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                        encapsulation: core_1.ViewEncapsulation.None,
+                        providers: [{ provide: split_pane_1.RootNode, useExisting: core_1.forwardRef(function () { return Menu; }) }]
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Menu.ctorParameters = function () { return [
+            { type: menu_controller_1.MenuController, },
+            { type: core_1.ElementRef, },
+            { type: config_1.Config, },
+            { type: platform_1.Platform, },
+            { type: core_1.Renderer, },
+            { type: keyboard_1.Keyboard, },
+            { type: gesture_controller_1.GestureController, },
+            { type: dom_controller_1.DomController, },
+            { type: app_1.App, },
+        ]; };
+        Menu.propDecorators = {
+            'backdrop': [{ type: core_1.ViewChild, args: [backdrop_1.Backdrop,] },],
+            'menuContent': [{ type: core_1.ContentChild, args: [content_1.Content,] },],
+            'menuNav': [{ type: core_1.ContentChild, args: [nav_1.Nav,] },],
+            'content': [{ type: core_1.Input },],
+            'id': [{ type: core_1.Input },],
+            'type': [{ type: core_1.Input },],
+            'enabled': [{ type: core_1.Input },],
+            'side': [{ type: core_1.Input },],
+            'swipeEnabled': [{ type: core_1.Input },],
+            'persistent': [{ type: core_1.Input },],
+            'maxEdgeStart': [{ type: core_1.Input },],
+            'ionDrag': [{ type: core_1.Output },],
+            'ionOpen': [{ type: core_1.Output },],
+            'ionClose': [{ type: core_1.Output },],
+        };
         return Menu;
     }());
-    Menu.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ion-menu',
-                    template: '<div class="menu-inner"><ng-content></ng-content></div>' +
-                        '<ion-backdrop></ion-backdrop>',
-                    host: {
-                        'role': 'navigation'
-                    },
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core_1.ViewEncapsulation.None,
-                    providers: [{ provide: split_pane_1.RootNode, useExisting: core_1.forwardRef(function () { return Menu; }) }]
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Menu.ctorParameters = function () { return [
-        { type: menu_controller_1.MenuController, },
-        { type: core_1.ElementRef, },
-        { type: config_1.Config, },
-        { type: platform_1.Platform, },
-        { type: core_1.Renderer, },
-        { type: keyboard_1.Keyboard, },
-        { type: gesture_controller_1.GestureController, },
-        { type: dom_controller_1.DomController, },
-        { type: app_1.App, },
-    ]; };
-    Menu.propDecorators = {
-        'backdrop': [{ type: core_1.ViewChild, args: [backdrop_1.Backdrop,] },],
-        'menuContent': [{ type: core_1.ContentChild, args: [content_1.Content,] },],
-        'menuNav': [{ type: core_1.ContentChild, args: [nav_1.Nav,] },],
-        'content': [{ type: core_1.Input },],
-        'id': [{ type: core_1.Input },],
-        'type': [{ type: core_1.Input },],
-        'enabled': [{ type: core_1.Input },],
-        'side': [{ type: core_1.Input },],
-        'swipeEnabled': [{ type: core_1.Input },],
-        'persistent': [{ type: core_1.Input },],
-        'maxEdgeStart': [{ type: core_1.Input },],
-        'ionDrag': [{ type: core_1.Output },],
-        'ionOpen': [{ type: core_1.Output },],
-        'ionClose': [{ type: core_1.Output },],
-    };
     exports.Menu = Menu;
     function Menu_tsickle_Closure_declarations() {
         /** @type {?} */

@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * Animations for modals
      */
-    var ModalSlideIn = (function (_super) {
+    var ModalSlideIn = /** @class */ (function (_super) {
         __extends(ModalSlideIn, _super);
         function ModalSlideIn() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -51,7 +51,7 @@ var __extends = (this && this.__extends) || (function () {
         return ModalSlideIn;
     }(page_transition_1.PageTransition));
     exports.ModalSlideIn = ModalSlideIn;
-    var ModalSlideOut = (function (_super) {
+    var ModalSlideOut = /** @class */ (function (_super) {
         __extends(ModalSlideOut, _super);
         function ModalSlideOut() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -80,7 +80,7 @@ var __extends = (this && this.__extends) || (function () {
         return ModalSlideOut;
     }(page_transition_1.PageTransition));
     exports.ModalSlideOut = ModalSlideOut;
-    var ModalMDSlideIn = (function (_super) {
+    var ModalMDSlideIn = /** @class */ (function (_super) {
         __extends(ModalMDSlideIn, _super);
         function ModalMDSlideIn() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -105,7 +105,7 @@ var __extends = (this && this.__extends) || (function () {
         return ModalMDSlideIn;
     }(page_transition_1.PageTransition));
     exports.ModalMDSlideIn = ModalMDSlideIn;
-    var ModalMDSlideOut = (function (_super) {
+    var ModalMDSlideOut = /** @class */ (function (_super) {
         __extends(ModalMDSlideOut, _super);
         function ModalMDSlideOut() {
             return _super !== null && _super.apply(this, arguments) || this;

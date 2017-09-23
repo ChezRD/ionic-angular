@@ -19,7 +19,7 @@ import { Platform } from './platform';
  * }
  * ```
  */
-var Keyboard = (function () {
+var Keyboard = /** @class */ (function () {
     /**
      * @param {?} config
      * @param {?} _plt
@@ -276,21 +276,21 @@ var Keyboard = (function () {
         }
         return false;
     };
+    Keyboard.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    Keyboard.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: NgZone, },
+        { type: DomController, },
+    ]; };
     return Keyboard;
 }());
 export { Keyboard };
-Keyboard.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-Keyboard.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: NgZone, },
-    { type: DomController, },
-]; };
 function Keyboard_tsickle_Closure_declarations() {
     /** @type {?} */
     Keyboard.decorators;

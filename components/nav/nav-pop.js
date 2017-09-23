@@ -20,7 +20,7 @@ import { NavController } from '../../navigation/nav-controller';
  * @see {\@link /docs/components#navigation Navigation Component Docs}
  * @see {\@link ../NavPush NavPush API Docs}
  */
-var NavPop = (function () {
+var NavPop = /** @class */ (function () {
     /**
      * @param {?} _nav
      */
@@ -44,23 +44,23 @@ var NavPop = (function () {
         }
         return true;
     };
+    NavPop.decorators = [
+        { type: Directive, args: [{
+                    selector: '[navPop]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NavPop.ctorParameters = function () { return [
+        { type: NavController, decorators: [{ type: Optional },] },
+    ]; };
+    NavPop.propDecorators = {
+        'onClick': [{ type: HostListener, args: ['click',] },],
+    };
     return NavPop;
 }());
 export { NavPop };
-NavPop.decorators = [
-    { type: Directive, args: [{
-                selector: '[navPop]'
-            },] },
-];
-/**
- * @nocollapse
- */
-NavPop.ctorParameters = function () { return [
-    { type: NavController, decorators: [{ type: Optional },] },
-]; };
-NavPop.propDecorators = {
-    'onClick': [{ type: HostListener, args: ['click',] },],
-};
 function NavPop_tsickle_Closure_declarations() {
     /** @type {?} */
     NavPop.decorators;

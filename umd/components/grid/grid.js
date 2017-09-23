@@ -544,23 +544,23 @@
      * ```
      *
      */
-    var Grid = (function () {
+    var Grid = /** @class */ (function () {
         function Grid() {
         }
+        Grid.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-grid, [ion-grid]',
+                        host: {
+                            'class': 'grid'
+                        }
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Grid.ctorParameters = function () { return []; };
         return Grid;
     }());
-    Grid.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-grid, [ion-grid]',
-                    host: {
-                        'class': 'grid'
-                    }
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Grid.ctorParameters = function () { return []; };
     exports.Grid = Grid;
     function Grid_tsickle_Closure_declarations() {
         /** @type {?} */

@@ -27,7 +27,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var Picker = (function (_super) {
+    var Picker = /** @class */ (function (_super) {
         __extends(Picker, _super);
         /**
          * @param {?} app
@@ -112,11 +112,11 @@ var __extends = (this && this.__extends) || (function () {
             if (navOptions === void 0) { navOptions = {}; }
             return this._app.present(this, navOptions);
         };
+        Picker.propDecorators = {
+            'ionChange': [{ type: core_1.Output },],
+        };
         return Picker;
     }(view_controller_1.ViewController));
-    Picker.propDecorators = {
-        'ionChange': [{ type: core_1.Output },],
-    };
     exports.Picker = Picker;
     function Picker_tsickle_Closure_declarations() {
         /** @type {?} */

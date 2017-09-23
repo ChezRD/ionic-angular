@@ -52,7 +52,7 @@ import { Platform } from '../../platform/platform';
  * @see {\@link ../HideWhen HideWhen API Docs}
  * @see {\@link ../../../platform/Platform Platform API Docs}
  */
-var ShowWhen = (function (_super) {
+var ShowWhen = /** @class */ (function (_super) {
     __extends(ShowWhen, _super);
     /**
      * @param {?} showWhen
@@ -62,26 +62,26 @@ var ShowWhen = (function (_super) {
     function ShowWhen(showWhen, plt, zone) {
         return _super.call(this, showWhen, plt, zone) || this;
     }
+    // ngOnDestroy is implemented in DisplayWhen
+    ShowWhen.decorators = [
+        { type: Directive, args: [{
+                    selector: '[showWhen]',
+                    host: {
+                        '[class.hidden-show-when]': '!isMatch'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ShowWhen.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Attribute, args: ['showWhen',] },] },
+        { type: Platform, },
+        { type: NgZone, },
+    ]; };
     return ShowWhen;
 }(DisplayWhen));
 export { ShowWhen };
-// ngOnDestroy is implemented in DisplayWhen
-ShowWhen.decorators = [
-    { type: Directive, args: [{
-                selector: '[showWhen]',
-                host: {
-                    '[class.hidden-show-when]': '!isMatch'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-ShowWhen.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Attribute, args: ['showWhen',] },] },
-    { type: Platform, },
-    { type: NgZone, },
-]; };
 function ShowWhen_tsickle_Closure_declarations() {
     /** @type {?} */
     ShowWhen.decorators;

@@ -27,7 +27,7 @@ import { FabButton } from './fab';
  * \@demo /docs/demos/src/fab/
  * @see {\@link /docs/components#fab Fab Component Docs}
  */
-var FabList = (function () {
+var FabList = /** @class */ (function () {
     /**
      * @param {?} _elementRef
      * @param {?} _renderer
@@ -93,26 +93,26 @@ var FabList = (function () {
     FabList.prototype.setElementClass = function (className, add) {
         this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
     };
+    FabList.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-fab-list',
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    FabList.ctorParameters = function () { return [
+        { type: ElementRef, },
+        { type: Renderer, },
+        { type: Config, },
+        { type: Platform, },
+    ]; };
+    FabList.propDecorators = {
+        '_setbuttons': [{ type: ContentChildren, args: [FabButton,] },],
+    };
     return FabList;
 }());
 export { FabList };
-FabList.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-fab-list',
-            },] },
-];
-/**
- * @nocollapse
- */
-FabList.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: Renderer, },
-    { type: Config, },
-    { type: Platform, },
-]; };
-FabList.propDecorators = {
-    '_setbuttons': [{ type: ContentChildren, args: [FabButton,] },],
-};
 function FabList_tsickle_Closure_declarations() {
     /** @type {?} */
     FabList.decorators;

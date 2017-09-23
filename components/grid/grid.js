@@ -533,24 +533,24 @@ import { Directive } from '@angular/core';
  * ```
  *
  */
-var Grid = (function () {
+var Grid = /** @class */ (function () {
     function Grid() {
     }
+    Grid.decorators = [
+        { type: Directive, args: [{
+                    selector: 'ion-grid, [ion-grid]',
+                    host: {
+                        'class': 'grid'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Grid.ctorParameters = function () { return []; };
     return Grid;
 }());
 export { Grid };
-Grid.decorators = [
-    { type: Directive, args: [{
-                selector: 'ion-grid, [ion-grid]',
-                host: {
-                    'class': 'grid'
-                }
-            },] },
-];
-/**
- * @nocollapse
- */
-Grid.ctorParameters = function () { return []; };
 function Grid_tsickle_Closure_declarations() {
     /** @type {?} */
     Grid.decorators;

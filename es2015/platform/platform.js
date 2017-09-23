@@ -484,7 +484,7 @@ export class Platform {
      * @return {?}
      */
     getElementFromPoint(x, y) {
-        return (this._doc['elementFromPoint'](x, y));
+        return /** @type {?} */ (this._doc['elementFromPoint'](x, y));
     }
     /**
      * @hidden

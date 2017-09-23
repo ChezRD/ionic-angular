@@ -590,7 +590,7 @@
         }
         return null;
     }
-    var VirtualContext = (function () {
+    var VirtualContext = /** @class */ (function () {
         /**
          * @param {?} $implicit
          * @param {?} index

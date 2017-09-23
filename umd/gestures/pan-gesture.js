@@ -16,7 +16,7 @@
     /**
      * @hidden
      */
-    var PanGesture = (function () {
+    var PanGesture = /** @class */ (function () {
         /**
          * @param {?} plt
          * @param {?} element

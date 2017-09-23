@@ -15,7 +15,7 @@
     /**
      * @hidden
      */
-    var ItemReorderGesture = (function () {
+    var ItemReorderGesture = /** @class */ (function () {
         /**
          * @param {?} plt
          * @param {?} reorderList

@@ -44,6 +44,8 @@ import { Loading } from './loading';
  *
  * \@usage
  * ```ts
+ * import { LoadingController } from 'ionic-angular';
+ *
  * constructor(public loadingCtrl: LoadingController) {
  *
  * }
@@ -111,7 +113,7 @@ import { Loading } from './loading';
  * \@demo /docs/demos/src/loading/
  * @see {\@link /docs/api/components/spinner/Spinner Spinner API Docs}
  */
-var LoadingController = (function () {
+var LoadingController = /** @class */ (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -129,19 +131,19 @@ var LoadingController = (function () {
         if (opts === void 0) { opts = {}; }
         return new Loading(this._app, opts, this.config);
     };
+    LoadingController.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    LoadingController.ctorParameters = function () { return [
+        { type: App, },
+        { type: Config, },
+    ]; };
     return LoadingController;
 }());
 export { LoadingController };
-LoadingController.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-LoadingController.ctorParameters = function () { return [
-    { type: App, },
-    { type: Config, },
-]; };
 function LoadingController_tsickle_Closure_declarations() {
     /** @type {?} */
     LoadingController.decorators;

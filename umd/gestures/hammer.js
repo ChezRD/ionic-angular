@@ -1951,7 +1951,7 @@
                 //      that is being recognized.
                 // 3.   allow if the recognizer is allowed to run simultaneous with the current recognized recognizer.
                 //      this can be setup with the `recognizeWith()` method on the recognizer.
-                if (session.stopped !== FORCED_STOP && (!curRecognizer || recognizer == curRecognizer ||
+                if (session.stopped !== FORCED_STOP && (!curRecognizer || recognizer == curRecognizer || // 2
                     recognizer.canRecognizeWith(curRecognizer))) {
                     recognizer.recognize(inputData);
                 }

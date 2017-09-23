@@ -19,7 +19,7 @@
      * \@description
      *
      */
-    var PickerController = (function () {
+    var PickerController = /** @class */ (function () {
         /**
          * @param {?} _app
          * @param {?} config
@@ -37,18 +37,18 @@
             if (opts === void 0) { opts = {}; }
             return new picker_1.Picker(this._app, opts, this.config);
         };
+        PickerController.decorators = [
+            { type: core_1.Injectable },
+        ];
+        /**
+         * @nocollapse
+         */
+        PickerController.ctorParameters = function () { return [
+            { type: app_1.App, },
+            { type: config_1.Config, },
+        ]; };
         return PickerController;
     }());
-    PickerController.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    PickerController.ctorParameters = function () { return [
-        { type: app_1.App, },
-        { type: config_1.Config, },
-    ]; };
     exports.PickerController = PickerController;
     function PickerController_tsickle_Closure_declarations() {
         /** @type {?} */

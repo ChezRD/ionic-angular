@@ -46,7 +46,7 @@ var __extends = (this && this.__extends) || (function () {
      * ```
      * {\@link /docs/api/components/api/components/item/item ion-item}
      */
-    var Note = (function (_super) {
+    var Note = /** @class */ (function (_super) {
         __extends(Note, _super);
         /**
          * @param {?} config
@@ -56,21 +56,21 @@ var __extends = (this && this.__extends) || (function () {
         function Note(config, elementRef, renderer) {
             return _super.call(this, config, elementRef, renderer, 'note') || this;
         }
+        Note.decorators = [
+            { type: core_1.Directive, args: [{
+                        selector: 'ion-note'
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        Note.ctorParameters = function () { return [
+            { type: config_1.Config, },
+            { type: core_1.ElementRef, },
+            { type: core_1.Renderer, },
+        ]; };
         return Note;
     }(ion_1.Ion));
-    Note.decorators = [
-        { type: core_1.Directive, args: [{
-                    selector: 'ion-note'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Note.ctorParameters = function () { return [
-        { type: config_1.Config, },
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-    ]; };
     exports.Note = Note;
     function Note_tsickle_Closure_declarations() {
         /** @type {?} */

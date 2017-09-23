@@ -13,7 +13,7 @@
     /**
      * @hidden
      */
-    var UIEventManager = (function () {
+    var UIEventManager = /** @class */ (function () {
         /**
          * @param {?} plt
          */

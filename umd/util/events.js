@@ -39,7 +39,7 @@
      * ```
      * \@demo /docs/demos/src/events/
      */
-    var Events = (function () {
+    var Events = /** @class */ (function () {
         function Events() {
             this._channels = [];
         }

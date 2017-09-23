@@ -16,7 +16,7 @@
     /**
      * @hidden
      */
-    var ToastCmp = (function () {
+    var ToastCmp = /** @class */ (function () {
         /**
          * @param {?} _viewCtrl
          * @param {?} _config
@@ -86,39 +86,39 @@
             this.dismissTimeout = undefined;
             return this._viewCtrl.dismiss(null, role, { disableApp: false });
         };
+        ToastCmp.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: 'ion-toast',
+                        template: '<div class="toast-wrapper" ' +
+                            '[class.toast-bottom]="d.position === \'bottom\'" ' +
+                            '[class.toast-middle]="d.position === \'middle\'" ' +
+                            '[class.toast-top]="d.position === \'top\'"> ' +
+                            '<div class="toast-container"> ' +
+                            '<div class="toast-message" id="{{hdrId}}" *ngIf="d.message">{{d.message}}</div> ' +
+                            '<button ion-button clear class="toast-button" *ngIf="d.showCloseButton" (click)="cbClick()"> ' +
+                            '{{ d.closeButtonText || \'Close\' }} ' +
+                            '</button> ' +
+                            '</div> ' +
+                            '</div>',
+                        host: {
+                            'role': 'dialog',
+                            '[attr.aria-labelledby]': 'hdrId',
+                            '[attr.aria-describedby]': 'descId',
+                        },
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        ToastCmp.ctorParameters = function () { return [
+            { type: view_controller_1.ViewController, },
+            { type: config_1.Config, },
+            { type: core_1.ElementRef, },
+            { type: nav_params_1.NavParams, },
+            { type: core_1.Renderer, },
+        ]; };
         return ToastCmp;
     }());
-    ToastCmp.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ion-toast',
-                    template: '<div class="toast-wrapper" ' +
-                        '[class.toast-bottom]="d.position === \'bottom\'" ' +
-                        '[class.toast-middle]="d.position === \'middle\'" ' +
-                        '[class.toast-top]="d.position === \'top\'"> ' +
-                        '<div class="toast-container"> ' +
-                        '<div class="toast-message" id="{{hdrId}}" *ngIf="d.message">{{d.message}}</div> ' +
-                        '<button ion-button clear class="toast-button" *ngIf="d.showCloseButton" (click)="cbClick()"> ' +
-                        '{{ d.closeButtonText || \'Close\' }} ' +
-                        '</button> ' +
-                        '</div> ' +
-                        '</div>',
-                    host: {
-                        'role': 'dialog',
-                        '[attr.aria-labelledby]': 'hdrId',
-                        '[attr.aria-describedby]': 'descId',
-                    },
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    ToastCmp.ctorParameters = function () { return [
-        { type: view_controller_1.ViewController, },
-        { type: config_1.Config, },
-        { type: core_1.ElementRef, },
-        { type: nav_params_1.NavParams, },
-        { type: core_1.Renderer, },
-    ]; };
     exports.ToastCmp = ToastCmp;
     function ToastCmp_tsickle_Closure_declarations() {
         /** @type {?} */

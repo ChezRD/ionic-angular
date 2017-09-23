@@ -13,7 +13,7 @@ import { Transition } from '../../transitions/transition';
 /**
  * Animations for loading
  */
-var LoadingPopIn = (function (_super) {
+var LoadingPopIn = /** @class */ (function (_super) {
     __extends(LoadingPopIn, _super);
     function LoadingPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -36,7 +36,7 @@ var LoadingPopIn = (function (_super) {
     return LoadingPopIn;
 }(Transition));
 export { LoadingPopIn };
-var LoadingPopOut = (function (_super) {
+var LoadingPopOut = /** @class */ (function (_super) {
     __extends(LoadingPopOut, _super);
     function LoadingPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -59,7 +59,7 @@ var LoadingPopOut = (function (_super) {
     return LoadingPopOut;
 }(Transition));
 export { LoadingPopOut };
-var LoadingMdPopIn = (function (_super) {
+var LoadingMdPopIn = /** @class */ (function (_super) {
     __extends(LoadingMdPopIn, _super);
     function LoadingMdPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -82,7 +82,7 @@ var LoadingMdPopIn = (function (_super) {
     return LoadingMdPopIn;
 }(Transition));
 export { LoadingMdPopIn };
-var LoadingMdPopOut = (function (_super) {
+var LoadingMdPopOut = /** @class */ (function (_super) {
     __extends(LoadingMdPopOut, _super);
     function LoadingMdPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -105,7 +105,7 @@ var LoadingMdPopOut = (function (_super) {
     return LoadingMdPopOut;
 }(Transition));
 export { LoadingMdPopOut };
-var LoadingWpPopIn = (function (_super) {
+var LoadingWpPopIn = /** @class */ (function (_super) {
     __extends(LoadingWpPopIn, _super);
     function LoadingWpPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -128,7 +128,7 @@ var LoadingWpPopIn = (function (_super) {
     return LoadingWpPopIn;
 }(Transition));
 export { LoadingWpPopIn };
-var LoadingWpPopOut = (function (_super) {
+var LoadingWpPopOut = /** @class */ (function (_super) {
     __extends(LoadingWpPopOut, _super);
     function LoadingWpPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;

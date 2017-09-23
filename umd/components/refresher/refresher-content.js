@@ -15,7 +15,7 @@
     /**
      * @hidden
      */
-    var RefresherContent = (function () {
+    var RefresherContent = /** @class */ (function () {
         /**
          * @param {?} r
          * @param {?} _config
@@ -36,42 +36,42 @@
                 this.refreshingSpinner = this._config.get('ionRefreshingSpinner', this._config.get('spinner', 'ios'));
             }
         };
+        RefresherContent.decorators = [
+            { type: core_1.Component, args: [{
+                        selector: 'ion-refresher-content',
+                        template: '<div class="refresher-pulling">' +
+                            '<div class="refresher-pulling-icon" *ngIf="pullingIcon">' +
+                            '<ion-icon [name]="pullingIcon"></ion-icon>' +
+                            '</div>' +
+                            '<div class="refresher-pulling-text" [innerHTML]="pullingText" *ngIf="pullingText"></div>' +
+                            '</div>' +
+                            '<div class="refresher-refreshing">' +
+                            '<div class="refresher-refreshing-icon">' +
+                            '<ion-spinner [name]="refreshingSpinner"></ion-spinner>' +
+                            '</div>' +
+                            '<div class="refresher-refreshing-text" [innerHTML]="refreshingText" *ngIf="refreshingText"></div>' +
+                            '</div>',
+                        host: {
+                            '[attr.state]': 'r.state'
+                        },
+                        encapsulation: core_1.ViewEncapsulation.None,
+                    },] },
+        ];
+        /**
+         * @nocollapse
+         */
+        RefresherContent.ctorParameters = function () { return [
+            { type: refresher_1.Refresher, },
+            { type: config_1.Config, },
+        ]; };
+        RefresherContent.propDecorators = {
+            'pullingIcon': [{ type: core_1.Input },],
+            'pullingText': [{ type: core_1.Input },],
+            'refreshingSpinner': [{ type: core_1.Input },],
+            'refreshingText': [{ type: core_1.Input },],
+        };
         return RefresherContent;
     }());
-    RefresherContent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ion-refresher-content',
-                    template: '<div class="refresher-pulling">' +
-                        '<div class="refresher-pulling-icon" *ngIf="pullingIcon">' +
-                        '<ion-icon [name]="pullingIcon"></ion-icon>' +
-                        '</div>' +
-                        '<div class="refresher-pulling-text" [innerHTML]="pullingText" *ngIf="pullingText"></div>' +
-                        '</div>' +
-                        '<div class="refresher-refreshing">' +
-                        '<div class="refresher-refreshing-icon">' +
-                        '<ion-spinner [name]="refreshingSpinner"></ion-spinner>' +
-                        '</div>' +
-                        '<div class="refresher-refreshing-text" [innerHTML]="refreshingText" *ngIf="refreshingText"></div>' +
-                        '</div>',
-                    host: {
-                        '[attr.state]': 'r.state'
-                    },
-                    encapsulation: core_1.ViewEncapsulation.None,
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    RefresherContent.ctorParameters = function () { return [
-        { type: refresher_1.Refresher, },
-        { type: config_1.Config, },
-    ]; };
-    RefresherContent.propDecorators = {
-        'pullingIcon': [{ type: core_1.Input },],
-        'pullingText': [{ type: core_1.Input },],
-        'refreshingSpinner': [{ type: core_1.Input },],
-        'refreshingText': [{ type: core_1.Input },],
-    };
     exports.RefresherContent = RefresherContent;
     function RefresherContent_tsickle_Closure_declarations() {
         /** @type {?} */

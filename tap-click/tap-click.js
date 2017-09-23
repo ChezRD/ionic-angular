@@ -12,7 +12,7 @@ import { UIEventManager } from '../gestures/ui-event-manager';
 /**
  * @hidden
  */
-var TapClick = (function () {
+var TapClick = /** @class */ (function () {
     /**
      * @param {?} config
      * @param {?} plt
@@ -223,22 +223,22 @@ var TapClick = (function () {
     TapClick.prototype.isDisabledNativeClick = function () {
         return this.disableClick > Date.now();
     };
+    TapClick.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    TapClick.ctorParameters = function () { return [
+        { type: Config, },
+        { type: Platform, },
+        { type: DomController, },
+        { type: App, },
+        { type: GestureController, },
+    ]; };
     return TapClick;
 }());
 export { TapClick };
-TapClick.decorators = [
-    { type: Injectable },
-];
-/**
- * @nocollapse
- */
-TapClick.ctorParameters = function () { return [
-    { type: Config, },
-    { type: Platform, },
-    { type: DomController, },
-    { type: App, },
-    { type: GestureController, },
-]; };
 function TapClick_tsickle_Closure_declarations() {
     /** @type {?} */
     TapClick.decorators;
