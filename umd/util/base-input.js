@@ -236,7 +236,6 @@ var __extends = (this && this.__extends) || (function () {
             this._setFocus(false);
             this._fireTouched();
             this.ionBlur.emit(this);
-            this._onTouched && this._onTouched();
         };
         /**
          * @hidden

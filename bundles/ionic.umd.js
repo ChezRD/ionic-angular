@@ -42198,7 +42198,6 @@ var BaseInput = /** @class */ (function (_super) {
         this._setFocus(false);
         this._fireTouched();
         this.ionBlur.emit(this);
-        this._onTouched && this._onTouched();
     };
     /**
      * @hidden
@@ -49772,14 +49771,11 @@ var InfiniteScroll = /** @class */ (function () {
         if (this.state === STATE_LOADING || this.state === STATE_DISABLED) {
             return 1;
         }
-        if (!ev) {
-            return 2;
-        }
-        if (ev && ev.timeStamp && this._lastCheck + 32 > ev.timeStamp) {
+        if (this._lastCheck + 32 > ev.timeStamp) {
             // no need to check less than every XXms
             return 2;
         }
-        this._lastCheck = ev && ev.timeStamp ? ev.timeStamp : Date.now();
+        this._lastCheck = ev.timeStamp;
         // ******** DOM READ ****************
         var /** @type {?} */ infiniteHeight = this._elementRef.nativeElement.scrollHeight;
         if (!infiniteHeight) {
@@ -68847,7 +68843,7 @@ var VirtualScroll = /** @class */ (function () {
     VirtualScroll.prototype.scrollUpdate = function (ev) {
         var _this = this;
         // set the scroll top from the scroll event
-        this._data.scrollTop = ev ? ev.scrollTop : 0;
+        this._data.scrollTop = ev.scrollTop;
         // there is a queue system so that we can
         // spread out the work over multiple frames
         var /** @type {?} */ queue = this._queue;

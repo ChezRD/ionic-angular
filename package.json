@@ -1,6 +1,6 @@
 {
   "name": "ionic-angular",
-  "version": "3.6.1-clone-201709231751",
+  "version": "3.6.1-clone-201709242319",
   "description": "A powerful framework for building mobile and progressive web apps with JavaScript and Angular",
   "keywords": [
     "ionic",
@@ -22,15 +22,15 @@
   "module": "index.js",
   "es2015": "es2015/index.js",
   "peerDependencies": {
-    "@angular/common": "^4.3.6",
-    "@angular/compiler": "^4.3.6",
-    "@angular/compiler-cli": "^4.3.6",
-    "@angular/core": "^4.3.6",
-    "@angular/forms": "^4.3.6",
-    "@angular/http": "^4.3.6",
-    "@angular/platform-browser": "^4.3.6",
-    "@angular/platform-browser-dynamic": "^4.3.6",
-    "rxjs": "^5.4.3",
-    "zone.js": "^0.8.17"
+    "@angular/common": "4.3.6",
+    "@angular/compiler": "4.3.6",
+    "@angular/compiler-cli": "4.3.6",
+    "@angular/core": "4.3.6",
+    "@angular/forms": "4.3.6",
+    "@angular/http": "4.3.6",
+    "@angular/platform-browser": "4.3.6",
+    "@angular/platform-browser-dynamic": "4.3.6",
+    "rxjs": "5.4.3",
+    "zone.js": "0.8.17"
   }
 }
