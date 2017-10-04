@@ -9,7 +9,7 @@ import { removeArrayItem } from '../util/util';
 /**
  * @hidden
  */
-var DomDebouncer = /** @class */ (function () {
+var DomDebouncer = (function () {
     /**
      * @param {?} dom
      */
@@ -70,7 +70,7 @@ function DomDebouncer_tsickle_Closure_declarations() {
 /**
  * @hidden
  */
-var DomController = /** @class */ (function () {
+var DomController = (function () {
     /**
      * @param {?} plt
      */
@@ -167,18 +167,18 @@ var DomController = /** @class */ (function () {
             throw err;
         }
     };
-    DomController.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    DomController.ctorParameters = function () { return [
-        { type: Platform, },
-    ]; };
     return DomController;
 }());
 export { DomController };
+DomController.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+DomController.ctorParameters = function () { return [
+    { type: Platform, },
+]; };
 function DomController_tsickle_Closure_declarations() {
     /** @type {?} */
     DomController.decorators;

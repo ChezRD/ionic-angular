@@ -110,7 +110,7 @@ var __extends = (this && this.__extends) || (function () {
      * \@demo /docs/demos/src/chip/
      *
      */
-    var Chip = /** @class */ (function (_super) {
+    var Chip = (function (_super) {
         __extends(Chip, _super);
         /**
          * @param {?} config
@@ -120,21 +120,21 @@ var __extends = (this && this.__extends) || (function () {
         function Chip(config, elementRef, renderer) {
             return _super.call(this, config, elementRef, renderer, 'chip') || this;
         }
-        Chip.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-chip'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Chip.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-        ]; };
         return Chip;
     }(ion_1.Ion));
+    Chip.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-chip'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Chip.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+    ]; };
     exports.Chip = Chip;
     function Chip_tsickle_Closure_declarations() {
         /** @type {?} */

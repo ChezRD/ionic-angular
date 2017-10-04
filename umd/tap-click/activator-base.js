@@ -12,7 +12,7 @@
     /**
      * @abstract
      */
-    var ActivatorBase = /** @class */ (function () {
+    var ActivatorBase = (function () {
         function ActivatorBase() {
         }
         /**

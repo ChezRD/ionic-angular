@@ -18,7 +18,7 @@
     /**
      * @hidden
      */
-    var ModalCmp = /** @class */ (function () {
+    var ModalCmp = (function () {
         /**
          * @param {?} _cfr
          * @param {?} _renderer
@@ -122,33 +122,33 @@
             (void 0) /* assert */;
             this._gestureBlocker.destroy();
         };
-        ModalCmp.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-modal',
-                        template: '<ion-backdrop (click)="_bdClick()" [class.backdrop-no-tappable]="!_bdDismiss"></ion-backdrop>' +
-                            '<div class="modal-wrapper">' +
-                            '<div #viewport nav-viewport></div>' +
-                            '</div>'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        ModalCmp.ctorParameters = function () { return [
-            { type: core_1.ComponentFactoryResolver, },
-            { type: core_1.Renderer, },
-            { type: core_1.ElementRef, },
-            { type: nav_params_1.NavParams, },
-            { type: view_controller_1.ViewController, },
-            { type: gesture_controller_1.GestureController, },
-            { type: module_loader_1.ModuleLoader, },
-        ]; };
-        ModalCmp.propDecorators = {
-            '_viewport': [{ type: core_1.ViewChild, args: ['viewport', { read: core_1.ViewContainerRef },] },],
-            '_keyUp': [{ type: core_1.HostListener, args: ['body:keyup', ['$event'],] },],
-        };
         return ModalCmp;
     }());
+    ModalCmp.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-modal',
+                    template: '<ion-backdrop (click)="_bdClick()" [class.backdrop-no-tappable]="!_bdDismiss"></ion-backdrop>' +
+                        '<div class="modal-wrapper">' +
+                        '<div #viewport nav-viewport></div>' +
+                        '</div>'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ModalCmp.ctorParameters = function () { return [
+        { type: core_1.ComponentFactoryResolver, },
+        { type: core_1.Renderer, },
+        { type: core_1.ElementRef, },
+        { type: nav_params_1.NavParams, },
+        { type: view_controller_1.ViewController, },
+        { type: gesture_controller_1.GestureController, },
+        { type: module_loader_1.ModuleLoader, },
+    ]; };
+    ModalCmp.propDecorators = {
+        '_viewport': [{ type: core_1.ViewChild, args: ['viewport', { read: core_1.ViewContainerRef },] },],
+        '_keyUp': [{ type: core_1.HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     exports.ModalCmp = ModalCmp;
     function ModalCmp_tsickle_Closure_declarations() {
         /** @type {?} */

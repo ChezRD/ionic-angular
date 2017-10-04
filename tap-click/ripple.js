@@ -4,7 +4,7 @@ import { hasPointerMoved, pointerCoord } from '../util/dom';
 /**
  * @hidden
  */
-var RippleActivator = /** @class */ (function () {
+var RippleActivator = (function () {
     /**
      * @param {?} app
      * @param {?} config

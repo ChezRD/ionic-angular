@@ -350,7 +350,7 @@
      * @see {\@link /docs/components#navigation Navigation Component Docs}
      * @abstract
      */
-    var NavController = /** @class */ (function () {
+    var NavController = (function () {
         function NavController() {
         }
         /**

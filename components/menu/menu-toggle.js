@@ -82,7 +82,7 @@ import { ViewController } from '../../navigation/view-controller';
  * @see {\@link /docs/components#menus Menu Component Docs}
  * @see {\@link ../../menu/Menu Menu API Docs}
  */
-var MenuToggle = /** @class */ (function () {
+var MenuToggle = (function () {
     /**
      * @param {?} _menu
      * @param {?} _viewCtrl
@@ -139,30 +139,30 @@ var MenuToggle = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    MenuToggle.decorators = [
-        { type: Directive, args: [{
-                    selector: '[menuToggle]',
-                    host: {
-                        '[hidden]': 'isHidden'
-                    }
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    MenuToggle.ctorParameters = function () { return [
-        { type: MenuController, },
-        { type: ViewController, decorators: [{ type: Optional },] },
-        { type: Button, decorators: [{ type: Optional },] },
-        { type: Navbar, decorators: [{ type: Optional },] },
-    ]; };
-    MenuToggle.propDecorators = {
-        'menuToggle': [{ type: Input },],
-        'toggle': [{ type: HostListener, args: ['click',] },],
-    };
     return MenuToggle;
 }());
 export { MenuToggle };
+MenuToggle.decorators = [
+    { type: Directive, args: [{
+                selector: '[menuToggle]',
+                host: {
+                    '[hidden]': 'isHidden'
+                }
+            },] },
+];
+/**
+ * @nocollapse
+ */
+MenuToggle.ctorParameters = function () { return [
+    { type: MenuController, },
+    { type: ViewController, decorators: [{ type: Optional },] },
+    { type: Button, decorators: [{ type: Optional },] },
+    { type: Navbar, decorators: [{ type: Optional },] },
+]; };
+MenuToggle.propDecorators = {
+    'menuToggle': [{ type: Input },],
+    'toggle': [{ type: HostListener, args: ['click',] },],
+};
 function MenuToggle_tsickle_Closure_declarations() {
     /** @type {?} */
     MenuToggle.decorators;

@@ -27,7 +27,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var Toast = /** @class */ (function (_super) {
+    var Toast = (function (_super) {
         __extends(Toast, _super);
         /**
          * @param {?} app

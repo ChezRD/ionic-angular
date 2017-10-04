@@ -63,7 +63,7 @@ export function mockQueryParams(url) {
 export function mockPlatform() {
     return new MockPlatform();
 }
-var MockPlatform = /** @class */ (function (_super) {
+var MockPlatform = (function (_super) {
     __extends(MockPlatform, _super);
     function MockPlatform() {
         var _this = _super.call(this) || this;
@@ -214,7 +214,7 @@ export function mockDomController(platform) {
     platform = platform || mockPlatform();
     return new MockDomController(platform);
 }
-var MockDomController = /** @class */ (function (_super) {
+var MockDomController = (function (_super) {
     __extends(MockDomController, _super);
     /**
      * @param {?} mockedPlatform
@@ -284,7 +284,7 @@ export function mockIonicApp(app, config, plt) {
 }
 export var /** @type {?} */ mockTrasitionController = function (config) {
     var /** @type {?} */ platform = mockPlatform();
-    platform.raf = /** @type {?} */ (function (callback) {
+    platform.raf = (function (callback) {
         callback();
     });
     var /** @type {?} */ trnsCtrl = new TransitionController(platform, config);
@@ -329,7 +329,7 @@ export function mockGestureController(app) {
     }
     return new GestureController(app);
 }
-var MockElementRef = /** @class */ (function () {
+var MockElementRef = (function () {
     /**
      * @param {?} ele
      */
@@ -343,7 +343,7 @@ function MockElementRef_tsickle_Closure_declarations() {
     /** @type {?} */
     MockElementRef.prototype.nativeElement;
 }
-var MockElement = /** @class */ (function () {
+var MockElement = (function () {
     function MockElement() {
         this.children = [];
         this.classList = new ClassList();
@@ -456,7 +456,7 @@ function MockElement_tsickle_Closure_declarations() {
     /** @type {?} */
     MockElement.prototype.scrollHeight;
 }
-var ClassList = /** @class */ (function () {
+var ClassList = (function () {
     function ClassList() {
         this.classes = [];
     }
@@ -518,7 +518,7 @@ export function mockElementRef() {
 export function mockElementRefEle(ele) {
     return new MockElementRef(ele);
 }
-var MockRenderer = /** @class */ (function () {
+var MockRenderer = (function () {
     function MockRenderer() {
     }
     /**
@@ -775,37 +775,37 @@ export function mockDeepLinkConfig(links) {
 export function mockHaptic() {
     return new Haptic(mockPlatform());
 }
-var MockView = /** @class */ (function () {
+var MockView = (function () {
     function MockView() {
     }
     return MockView;
 }());
 export { MockView };
-var MockView1 = /** @class */ (function () {
+var MockView1 = (function () {
     function MockView1() {
     }
     return MockView1;
 }());
 export { MockView1 };
-var MockView2 = /** @class */ (function () {
+var MockView2 = (function () {
     function MockView2() {
     }
     return MockView2;
 }());
 export { MockView2 };
-var MockView3 = /** @class */ (function () {
+var MockView3 = (function () {
     function MockView3() {
     }
     return MockView3;
 }());
 export { MockView3 };
-var MockView4 = /** @class */ (function () {
+var MockView4 = (function () {
     function MockView4() {
     }
     return MockView4;
 }());
 export { MockView4 };
-var MockView5 = /** @class */ (function () {
+var MockView5 = (function () {
     function MockView5() {
     }
     return MockView5;

@@ -136,7 +136,7 @@ var __extends = (this && this.__extends) || (function () {
      * @see {\@link ../../nav/Nav Nav API Docs}
      * @see {\@link ../../nav/NavController NavController API Docs}
      */
-    var Tab = /** @class */ (function (_super) {
+    var Tab = (function (_super) {
         __extends(Tab, _super);
         /**
          * @param {?} parent
@@ -403,53 +403,53 @@ var __extends = (this && this.__extends) || (function () {
         Tab.prototype.goToRoot = function (opts) {
             return this.setRoot(this.root, this.rootParams, opts, null);
         };
-        Tab.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-tab',
-                        template: '<div #viewport></div><div class="nav-decor"></div>',
-                        host: {
-                            '[attr.id]': '_tabId',
-                            '[attr.aria-labelledby]': '_btnId',
-                            'role': 'tabpanel'
-                        },
-                        encapsulation: core_1.ViewEncapsulation.None,
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Tab.ctorParameters = function () { return [
-            { type: tabs_1.Tabs, },
-            { type: app_1.App, },
-            { type: config_1.Config, },
-            { type: platform_1.Platform, },
-            { type: core_1.ElementRef, },
-            { type: core_1.NgZone, },
-            { type: core_1.Renderer, },
-            { type: core_1.ComponentFactoryResolver, },
-            { type: core_1.ChangeDetectorRef, },
-            { type: gesture_controller_1.GestureController, },
-            { type: transition_controller_1.TransitionController, },
-            { type: deep_linker_1.DeepLinker, decorators: [{ type: core_1.Optional },] },
-            { type: dom_controller_1.DomController, },
-            { type: core_1.ErrorHandler, },
-        ]; };
-        Tab.propDecorators = {
-            'root': [{ type: core_1.Input },],
-            'rootParams': [{ type: core_1.Input },],
-            'tabUrlPath': [{ type: core_1.Input },],
-            'tabTitle': [{ type: core_1.Input },],
-            'tabIcon': [{ type: core_1.Input },],
-            'tabBadge': [{ type: core_1.Input },],
-            'tabBadgeStyle': [{ type: core_1.Input },],
-            'enabled': [{ type: core_1.Input },],
-            'show': [{ type: core_1.Input },],
-            'tabsHideOnSubPages': [{ type: core_1.Input },],
-            'ionSelect': [{ type: core_1.Output },],
-            '_vp': [{ type: core_1.ViewChild, args: ['viewport', { read: core_1.ViewContainerRef },] },],
-        };
         return Tab;
     }(nav_controller_base_1.NavControllerBase));
+    Tab.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-tab',
+                    template: '<div #viewport></div><div class="nav-decor"></div>',
+                    host: {
+                        '[attr.id]': '_tabId',
+                        '[attr.aria-labelledby]': '_btnId',
+                        'role': 'tabpanel'
+                    },
+                    encapsulation: core_1.ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Tab.ctorParameters = function () { return [
+        { type: tabs_1.Tabs, },
+        { type: app_1.App, },
+        { type: config_1.Config, },
+        { type: platform_1.Platform, },
+        { type: core_1.ElementRef, },
+        { type: core_1.NgZone, },
+        { type: core_1.Renderer, },
+        { type: core_1.ComponentFactoryResolver, },
+        { type: core_1.ChangeDetectorRef, },
+        { type: gesture_controller_1.GestureController, },
+        { type: transition_controller_1.TransitionController, },
+        { type: deep_linker_1.DeepLinker, decorators: [{ type: core_1.Optional },] },
+        { type: dom_controller_1.DomController, },
+        { type: core_1.ErrorHandler, },
+    ]; };
+    Tab.propDecorators = {
+        'root': [{ type: core_1.Input },],
+        'rootParams': [{ type: core_1.Input },],
+        'tabUrlPath': [{ type: core_1.Input },],
+        'tabTitle': [{ type: core_1.Input },],
+        'tabIcon': [{ type: core_1.Input },],
+        'tabBadge': [{ type: core_1.Input },],
+        'tabBadgeStyle': [{ type: core_1.Input },],
+        'enabled': [{ type: core_1.Input },],
+        'show': [{ type: core_1.Input },],
+        'tabsHideOnSubPages': [{ type: core_1.Input },],
+        'ionSelect': [{ type: core_1.Output },],
+        '_vp': [{ type: core_1.ViewChild, args: ['viewport', { read: core_1.ViewContainerRef },] },],
+    };
     exports.Tab = Tab;
     function Tab_tsickle_Closure_declarations() {
         /** @type {?} */

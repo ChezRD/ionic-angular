@@ -36,7 +36,7 @@ var __extends = (this && this.__extends) || (function () {
      * @hidden
      * @abstract
      */
-    var RootNode = /** @class */ (function () {
+    var RootNode = (function () {
         function RootNode() {
         }
         /**
@@ -172,7 +172,7 @@ var __extends = (this && this.__extends) || (function () {
      *  ```
      *
      */
-    var SplitPane = /** @class */ (function (_super) {
+    var SplitPane = (function (_super) {
         __extends(SplitPane, _super);
         /**
          * @param {?} _zone
@@ -406,30 +406,30 @@ var __extends = (this && this.__extends) || (function () {
         SplitPane.prototype.initPane = function () {
             return true;
         };
-        SplitPane.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-split-pane',
-                        providers: [{ provide: RootNode, useExisting: core_1.forwardRef(function () { return SplitPane; }) }]
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        SplitPane.ctorParameters = function () { return [
-            { type: core_1.NgZone, },
-            { type: platform_1.Platform, },
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-        ]; };
-        SplitPane.propDecorators = {
-            '_setchildren': [{ type: core_1.ContentChildren, args: [RootNode, { descendants: false },] },],
-            'when': [{ type: core_1.Input },],
-            'enabled': [{ type: core_1.Input },],
-            'ionChange': [{ type: core_1.Output },],
-        };
         return SplitPane;
     }(ion_1.Ion));
+    SplitPane.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-split-pane',
+                    providers: [{ provide: RootNode, useExisting: core_1.forwardRef(function () { return SplitPane; }) }]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    SplitPane.ctorParameters = function () { return [
+        { type: core_1.NgZone, },
+        { type: platform_1.Platform, },
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+    ]; };
+    SplitPane.propDecorators = {
+        '_setchildren': [{ type: core_1.ContentChildren, args: [RootNode, { descendants: false },] },],
+        'when': [{ type: core_1.Input },],
+        'enabled': [{ type: core_1.Input },],
+        'ionChange': [{ type: core_1.Output },],
+    };
     exports.SplitPane = SplitPane;
     function SplitPane_tsickle_Closure_declarations() {
         /** @type {?} */

@@ -5,7 +5,7 @@ import { Platform } from '../../platform/platform';
 /**
  * @hidden
  */
-var ClickBlock = /** @class */ (function () {
+var ClickBlock = (function () {
     /**
      * @param {?} app
      * @param {?} config
@@ -74,24 +74,24 @@ var ClickBlock = /** @class */ (function () {
     ClickBlock.prototype._setElementClass = function (className, add) {
         this.renderer.setElementClass(this.elementRef.nativeElement, className, add);
     };
-    ClickBlock.decorators = [
-        { type: Directive, args: [{
-                    selector: '.click-block'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    ClickBlock.ctorParameters = function () { return [
-        { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
-        { type: Config, },
-        { type: Platform, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
     return ClickBlock;
 }());
 export { ClickBlock };
+ClickBlock.decorators = [
+    { type: Directive, args: [{
+                selector: '.click-block'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+ClickBlock.ctorParameters = function () { return [
+    { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
+    { type: Config, },
+    { type: Platform, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
 function ClickBlock_tsickle_Closure_declarations() {
     /** @type {?} */
     ClickBlock.decorators;

@@ -35,7 +35,7 @@ import { ViewController } from '../../navigation/view-controller';
  * ```
  *
  */
-var Header = /** @class */ (function (_super) {
+var Header = (function (_super) {
     __extends(Header, _super);
     /**
      * @param {?} config
@@ -48,23 +48,23 @@ var Header = /** @class */ (function (_super) {
         viewCtrl && viewCtrl._setHeader(_this);
         return _this;
     }
-    Header.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-header'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Header.ctorParameters = function () { return [
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-        { type: ViewController, decorators: [{ type: Optional },] },
-    ]; };
     return Header;
 }(Ion));
 export { Header };
+Header.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-header'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Header.ctorParameters = function () { return [
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+    { type: ViewController, decorators: [{ type: Optional },] },
+]; };
 function Header_tsickle_Closure_declarations() {
     /** @type {?} */
     Header.decorators;

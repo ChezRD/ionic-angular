@@ -167,7 +167,7 @@ var __extends = (this && this.__extends) || (function () {
      * @see {\@link ../../config/Config Config API Docs}
      *
      */
-    var Tabs = /** @class */ (function (_super) {
+    var Tabs = (function (_super) {
         __extends(Tabs, _super);
         /**
          * @param {?} parent
@@ -626,46 +626,46 @@ var __extends = (this && this.__extends) || (function () {
             });
             return util_1.isPresent(tab) ? tab.index : fallbackIndex;
         };
-        Tabs.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-tabs',
-                        template: '<div class="tabbar" role="tablist" #tabbar>' +
-                            '<a *ngFor="let t of _tabs" [tab]="t" class="tab-button" role="tab" href="#" (ionSelect)="select(t)"></a>' +
-                            '<div class="tab-highlight"></div>' +
-                            '</div>' +
-                            '<ng-content></ng-content>' +
-                            '<div #portal tab-portal></div>',
-                        encapsulation: core_1.ViewEncapsulation.None,
-                        providers: [{ provide: split_pane_1.RootNode, useExisting: core_1.forwardRef(function () { return Tabs; }) }]
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Tabs.ctorParameters = function () { return [
-            { type: nav_controller_1.NavController, decorators: [{ type: core_1.Optional },] },
-            { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
-            { type: app_1.App, },
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: platform_1.Platform, },
-            { type: core_1.Renderer, },
-            { type: deep_linker_1.DeepLinker, },
-            { type: keyboard_1.Keyboard, },
-        ]; };
-        Tabs.propDecorators = {
-            'name': [{ type: core_1.Input },],
-            'selectedIndex': [{ type: core_1.Input },],
-            'tabsLayout': [{ type: core_1.Input },],
-            'tabsPlacement': [{ type: core_1.Input },],
-            'tabsHighlight': [{ type: core_1.Input },],
-            'ionChange': [{ type: core_1.Output },],
-            '_highlight': [{ type: core_1.ViewChild, args: [tab_highlight_1.TabHighlight,] },],
-            '_tabbar': [{ type: core_1.ViewChild, args: ['tabbar',] },],
-            'portal': [{ type: core_1.ViewChild, args: ['portal', { read: core_1.ViewContainerRef },] },],
-        };
         return Tabs;
     }(ion_1.Ion));
+    Tabs.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-tabs',
+                    template: '<div class="tabbar" role="tablist" #tabbar>' +
+                        '<a *ngFor="let t of _tabs" [tab]="t" class="tab-button" role="tab" href="#" (ionSelect)="select(t)"></a>' +
+                        '<div class="tab-highlight"></div>' +
+                        '</div>' +
+                        '<ng-content></ng-content>' +
+                        '<div #portal tab-portal></div>',
+                    encapsulation: core_1.ViewEncapsulation.None,
+                    providers: [{ provide: split_pane_1.RootNode, useExisting: core_1.forwardRef(function () { return Tabs; }) }]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Tabs.ctorParameters = function () { return [
+        { type: nav_controller_1.NavController, decorators: [{ type: core_1.Optional },] },
+        { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
+        { type: app_1.App, },
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: platform_1.Platform, },
+        { type: core_1.Renderer, },
+        { type: deep_linker_1.DeepLinker, },
+        { type: keyboard_1.Keyboard, },
+    ]; };
+    Tabs.propDecorators = {
+        'name': [{ type: core_1.Input },],
+        'selectedIndex': [{ type: core_1.Input },],
+        'tabsLayout': [{ type: core_1.Input },],
+        'tabsPlacement': [{ type: core_1.Input },],
+        'tabsHighlight': [{ type: core_1.Input },],
+        'ionChange': [{ type: core_1.Output },],
+        '_highlight': [{ type: core_1.ViewChild, args: [tab_highlight_1.TabHighlight,] },],
+        '_tabbar': [{ type: core_1.ViewChild, args: ['tabbar',] },],
+        'portal': [{ type: core_1.ViewChild, args: ['portal', { read: core_1.ViewContainerRef },] },],
+    };
     exports.Tabs = Tabs;
     function Tabs_tsickle_Closure_declarations() {
         /** @type {?} */

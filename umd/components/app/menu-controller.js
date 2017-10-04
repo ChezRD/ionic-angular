@@ -122,7 +122,7 @@
      * @see {\@link ../Menu Menu API Docs}
      *
      */
-    var MenuController = /** @class */ (function () {
+    var MenuController = (function () {
         function MenuController() {
             this._menus = [];
         }

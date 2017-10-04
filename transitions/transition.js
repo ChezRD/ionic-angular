@@ -24,7 +24,7 @@ import { Animation } from '../animations/animation';
  * - RAF
  * - set inline TO styles - DOM WRITE
  */
-var Transition = /** @class */ (function (_super) {
+var Transition = (function (_super) {
     __extends(Transition, _super);
     /**
      * @param {?} plt

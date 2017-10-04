@@ -97,7 +97,7 @@
      * currently working on.
      *
      */
-    var Img = /** @class */ (function () {
+    var Img = (function () {
         /**
          * @param {?} _elementRef
          * @param {?} _renderer
@@ -401,34 +401,34 @@
             this._unreg && this._unreg();
             this._content && this._content.removeImg(this);
         };
-        Img.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-img',
-                        template: '<img>',
-                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                        encapsulation: core_1.ViewEncapsulation.None,
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Img.ctorParameters = function () { return [
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: platform_1.Platform, },
-            { type: content_1.Content, decorators: [{ type: core_1.Optional },] },
-            { type: dom_controller_1.DomController, },
-        ]; };
-        Img.propDecorators = {
-            'src': [{ type: core_1.Input },],
-            'bounds': [{ type: core_1.Input },],
-            'cache': [{ type: core_1.Input },],
-            'width': [{ type: core_1.Input },],
-            'height': [{ type: core_1.Input },],
-            'alt': [{ type: core_1.Input },],
-        };
         return Img;
     }());
+    Img.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-img',
+                    template: '<img>',
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core_1.ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Img.ctorParameters = function () { return [
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: platform_1.Platform, },
+        { type: content_1.Content, decorators: [{ type: core_1.Optional },] },
+        { type: dom_controller_1.DomController, },
+    ]; };
+    Img.propDecorators = {
+        'src': [{ type: core_1.Input },],
+        'bounds': [{ type: core_1.Input },],
+        'cache': [{ type: core_1.Input },],
+        'width': [{ type: core_1.Input },],
+        'height': [{ type: core_1.Input },],
+        'alt': [{ type: core_1.Input },],
+    };
     exports.Img = Img;
     function Img_tsickle_Closure_declarations() {
         /** @type {?} */

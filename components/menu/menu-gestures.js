@@ -13,7 +13,7 @@ import { SlideEdgeGesture } from '../../gestures/slide-edge-gesture';
 /**
  * Gesture attached to the content which the menu is assigned to
  */
-var MenuContentGesture = /** @class */ (function (_super) {
+var MenuContentGesture = (function (_super) {
     __extends(MenuContentGesture, _super);
     /**
      * @param {?} plt

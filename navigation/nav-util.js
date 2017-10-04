@@ -133,7 +133,7 @@ export function linkToSegment(navId, type, secondaryId, link) {
 /**
  * @hidden
  */
-var DeepLinkMetadata = /** @class */ (function () {
+var DeepLinkMetadata = (function () {
     function DeepLinkMetadata() {
     }
     return DeepLinkMetadata;

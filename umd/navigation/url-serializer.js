@@ -14,7 +14,7 @@
     /**
      * @hidden
      */
-    var UrlSerializer = /** @class */ (function () {
+    var UrlSerializer = (function () {
         /**
          * @param {?} _app
          * @param {?} config

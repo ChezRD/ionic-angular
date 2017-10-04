@@ -13,7 +13,7 @@
     /**
      * @hidden
      */
-    var Backdrop = /** @class */ (function () {
+    var Backdrop = (function () {
         /**
          * @param {?} _elementRef
          * @param {?} _renderer
@@ -36,25 +36,25 @@
         Backdrop.prototype.setElementClass = function (className, add) {
             this._renderer.setElementClass(this._elementRef.nativeElement, className, add);
         };
-        Backdrop.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-backdrop',
-                        host: {
-                            'role': 'presentation',
-                            'tappable': '',
-                            'disable-activated': ''
-                        },
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Backdrop.ctorParameters = function () { return [
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-        ]; };
         return Backdrop;
     }());
+    Backdrop.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-backdrop',
+                    host: {
+                        'role': 'presentation',
+                        'tappable': '',
+                        'disable-activated': ''
+                    },
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Backdrop.ctorParameters = function () { return [
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+    ]; };
     exports.Backdrop = Backdrop;
     function Backdrop_tsickle_Closure_declarations() {
         /** @type {?} */

@@ -28,7 +28,7 @@
      * ```
      * \@demo /docs/demos/src/scroll/
      */
-    var Scroll = /** @class */ (function () {
+    var Scroll = (function () {
         function Scroll() {
             this._scrollX = false;
             this._scrollY = false;
@@ -130,35 +130,35 @@
                 ele.removeEventListener('scroll', handler);
             };
         };
-        Scroll.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-scroll',
-                        template: '<div class="scroll-content" #scrollContent>' +
-                            '<div class="scroll-zoom-wrapper">' +
-                            '<ng-content></ng-content>' +
-                            '</div>' +
-                            '</div>',
-                        host: {
-                            '[class.scroll-x]': 'scrollX',
-                            '[class.scroll-y]': 'scrollY'
-                        },
-                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                        encapsulation: core_1.ViewEncapsulation.None,
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Scroll.ctorParameters = function () { return []; };
-        Scroll.propDecorators = {
-            'scrollX': [{ type: core_1.Input },],
-            'scrollY': [{ type: core_1.Input },],
-            'zoom': [{ type: core_1.Input },],
-            'maxZoom': [{ type: core_1.Input },],
-            '_scrollContent': [{ type: core_1.ViewChild, args: ['scrollContent', { read: core_1.ElementRef },] },],
-        };
         return Scroll;
     }());
+    Scroll.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-scroll',
+                    template: '<div class="scroll-content" #scrollContent>' +
+                        '<div class="scroll-zoom-wrapper">' +
+                        '<ng-content></ng-content>' +
+                        '</div>' +
+                        '</div>',
+                    host: {
+                        '[class.scroll-x]': 'scrollX',
+                        '[class.scroll-y]': 'scrollY'
+                    },
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core_1.ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Scroll.ctorParameters = function () { return []; };
+    Scroll.propDecorators = {
+        'scrollX': [{ type: core_1.Input },],
+        'scrollY': [{ type: core_1.Input },],
+        'zoom': [{ type: core_1.Input },],
+        'maxZoom': [{ type: core_1.Input },],
+        '_scrollContent': [{ type: core_1.ViewChild, args: ['scrollContent', { read: core_1.ElementRef },] },],
+    };
     exports.Scroll = Scroll;
     function Scroll_tsickle_Closure_declarations() {
         /** @type {?} */

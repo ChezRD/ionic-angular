@@ -13,13 +13,13 @@ import { Platform } from './platform';
  * \@usage
  * ```ts
  * export class MyClass {
- *   constructor(public keyboard: Keyboard) {
  *
- *   }
+ *   constructor(public keyboard: Keyboard) { }
+ *
  * }
  * ```
  */
-var Keyboard = /** @class */ (function () {
+var Keyboard = (function () {
     /**
      * @param {?} config
      * @param {?} _plt
@@ -276,21 +276,21 @@ var Keyboard = /** @class */ (function () {
         }
         return false;
     };
-    Keyboard.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    Keyboard.ctorParameters = function () { return [
-        { type: Config, },
-        { type: Platform, },
-        { type: NgZone, },
-        { type: DomController, },
-    ]; };
     return Keyboard;
 }());
 export { Keyboard };
+Keyboard.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+Keyboard.ctorParameters = function () { return [
+    { type: Config, },
+    { type: Platform, },
+    { type: NgZone, },
+    { type: DomController, },
+]; };
 function Keyboard_tsickle_Closure_declarations() {
     /** @type {?} */
     Keyboard.decorators;

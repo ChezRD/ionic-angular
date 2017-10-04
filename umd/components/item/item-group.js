@@ -13,20 +13,20 @@
     /**
      * @hidden
      */
-    var ItemGroup = /** @class */ (function () {
+    var ItemGroup = (function () {
         function ItemGroup() {
         }
-        ItemGroup.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-item-group'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        ItemGroup.ctorParameters = function () { return []; };
         return ItemGroup;
     }());
+    ItemGroup.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-item-group'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ItemGroup.ctorParameters = function () { return []; };
     exports.ItemGroup = ItemGroup;
     function ItemGroup_tsickle_Closure_declarations() {
         /** @type {?} */

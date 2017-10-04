@@ -63,7 +63,7 @@ var __extends = (this && this.__extends) || (function () {
      * ```
      *
      */
-    var Typography = /** @class */ (function (_super) {
+    var Typography = (function (_super) {
         __extends(Typography, _super);
         /**
          * @param {?} config
@@ -73,21 +73,21 @@ var __extends = (this && this.__extends) || (function () {
         function Typography(config, elementRef, renderer) {
             return _super.call(this, config, elementRef, renderer, 'text') || this;
         }
-        Typography.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: '[ion-text]'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Typography.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-        ]; };
         return Typography;
     }(ion_1.Ion));
+    Typography.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '[ion-text]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Typography.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+    ]; };
     exports.Typography = Typography;
     function Typography_tsickle_Closure_declarations() {
         /** @type {?} */

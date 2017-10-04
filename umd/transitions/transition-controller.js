@@ -16,7 +16,7 @@
     /**
      * @hidden
      */
-    var TransitionController = /** @class */ (function () {
+    var TransitionController = (function () {
         /**
          * @param {?} plt
          * @param {?} _config
@@ -32,7 +32,7 @@
          * @return {?}
          */
         TransitionController.prototype.getRootTrnsId = function (nav) {
-            nav = /** @type {?} */ (nav.parent);
+            nav = (nav.parent);
             while (nav) {
                 if (util_1.isPresent(nav._trnsId)) {
                     return nav._trnsId;
@@ -84,18 +84,18 @@
                 delete this._trns[trnsId];
             }
         };
-        TransitionController.decorators = [
-            { type: core_1.Injectable },
-        ];
-        /**
-         * @nocollapse
-         */
-        TransitionController.ctorParameters = function () { return [
-            { type: platform_1.Platform, },
-            { type: config_1.Config, },
-        ]; };
         return TransitionController;
     }());
+    TransitionController.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    TransitionController.ctorParameters = function () { return [
+        { type: platform_1.Platform, },
+        { type: config_1.Config, },
+    ]; };
     exports.TransitionController = TransitionController;
     function TransitionController_tsickle_Closure_declarations() {
         /** @type {?} */

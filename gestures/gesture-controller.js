@@ -50,7 +50,7 @@ export var BLOCK_ALL = {
 /**
  * @hidden
  */
-var GestureController = /** @class */ (function () {
+var GestureController = (function () {
     /**
      * @param {?} _app
      */
@@ -221,18 +221,18 @@ var GestureController = /** @class */ (function () {
         var /** @type {?} */ disabled = this.disabledGestures[gestureName];
         return !!(disabled && disabled.size > 0);
     };
-    GestureController.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    GestureController.ctorParameters = function () { return [
-        { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
-    ]; };
     return GestureController;
 }());
 export { GestureController };
+GestureController.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+GestureController.ctorParameters = function () { return [
+    { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
+]; };
 function GestureController_tsickle_Closure_declarations() {
     /** @type {?} */
     GestureController.decorators;
@@ -257,7 +257,7 @@ function GestureController_tsickle_Closure_declarations() {
 /**
  * @hidden
  */
-var GestureDelegate = /** @class */ (function () {
+var GestureDelegate = (function () {
     /**
      * @param {?} name
      * @param {?} id
@@ -344,7 +344,7 @@ function GestureDelegate_tsickle_Closure_declarations() {
 /**
  * @hidden
  */
-var BlockerDelegate = /** @class */ (function () {
+var BlockerDelegate = (function () {
     /**
      * @param {?} id
      * @param {?} controller

@@ -96,7 +96,7 @@
      * \@demo /docs/demos/src/refresher/
      *
      */
-    var Refresher = /** @class */ (function () {
+    var Refresher = (function () {
         /**
          * @param {?} _plt
          * @param {?} _content
@@ -493,36 +493,36 @@
             this._events.destroy();
             this._gesture.destroy();
         };
-        Refresher.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-refresher',
-                        host: {
-                            '[class.refresher-active]': 'state !== "inactive"',
-                            '[style.top]': '_top'
-                        }
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Refresher.ctorParameters = function () { return [
-            { type: platform_1.Platform, },
-            { type: content_1.Content, decorators: [{ type: core_1.Host },] },
-            { type: core_1.NgZone, },
-            { type: gesture_controller_1.GestureController, },
-        ]; };
-        Refresher.propDecorators = {
-            'pullMin': [{ type: core_1.Input },],
-            'pullMax': [{ type: core_1.Input },],
-            'closeDuration': [{ type: core_1.Input },],
-            'snapbackDuration': [{ type: core_1.Input },],
-            'enabled': [{ type: core_1.Input },],
-            'ionRefresh': [{ type: core_1.Output },],
-            'ionPull': [{ type: core_1.Output },],
-            'ionStart': [{ type: core_1.Output },],
-        };
         return Refresher;
     }());
+    Refresher.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-refresher',
+                    host: {
+                        '[class.refresher-active]': 'state !== "inactive"',
+                        '[style.top]': '_top'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Refresher.ctorParameters = function () { return [
+        { type: platform_1.Platform, },
+        { type: content_1.Content, decorators: [{ type: core_1.Host },] },
+        { type: core_1.NgZone, },
+        { type: gesture_controller_1.GestureController, },
+    ]; };
+    Refresher.propDecorators = {
+        'pullMin': [{ type: core_1.Input },],
+        'pullMax': [{ type: core_1.Input },],
+        'closeDuration': [{ type: core_1.Input },],
+        'snapbackDuration': [{ type: core_1.Input },],
+        'enabled': [{ type: core_1.Input },],
+        'ionRefresh': [{ type: core_1.Output },],
+        'ionPull': [{ type: core_1.Output },],
+        'ionStart': [{ type: core_1.Output },],
+    };
     exports.Refresher = Refresher;
     function Refresher_tsickle_Closure_declarations() {
         /** @type {?} */

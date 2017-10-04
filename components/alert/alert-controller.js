@@ -48,12 +48,10 @@ import { Config } from '../../config/config';
  * ```ts
  * import { AlertController } from 'ionic-angular';
  *
- * constructor(private alertCtrl: AlertController) {
- *
- * }
+ * constructor(public alertCtrl: AlertController) { }
  *
  * presentAlert() {
- *   let alert = this.alertCtrl.create({
+ *   const alert = this.alertCtrl.create({
  *     title: 'Low battery',
  *     subTitle: '10% of battery remaining',
  *     buttons: ['Dismiss']
@@ -62,7 +60,7 @@ import { Config } from '../../config/config';
  * }
  *
  * presentConfirm() {
- *   let alert = this.alertCtrl.create({
+ *   const alert = this.alertCtrl.create({
  *     title: 'Confirm purchase',
  *     message: 'Do you want to buy this book?',
  *     buttons: [
@@ -85,7 +83,7 @@ import { Config } from '../../config/config';
  * }
  *
  * presentPrompt() {
- *   let alert = this.alertCtrl.create({
+ *   const alert = this.alertCtrl.create({
  *     title: 'Login',
  *     inputs: [
  *       {
@@ -178,14 +176,14 @@ import { Config } from '../../config/config';
  * out first, *then* start the next transition.
  *
  * ```ts
- * let alert = this.alertCtrl.create({
+ * const alert = this.alertCtrl.create({
  *   title: 'Hello',
  *   buttons: [{
  *     text: 'Ok',
  *     handler: () => {
  *       // user has clicked the alert button
  *       // begin the alert's dismiss transition
- *       let navTransition = alert.dismiss();
+ *       const navTransition = alert.dismiss();
  *
  *       // start some async method
  *       someAsyncOperation().then(() => {
@@ -216,7 +214,7 @@ import { Config } from '../../config/config';
  *
  * \@demo /docs/demos/src/alert/
  */
-var AlertController = /** @class */ (function () {
+var AlertController = (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -234,19 +232,19 @@ var AlertController = /** @class */ (function () {
         if (opts === void 0) { opts = {}; }
         return new Alert(this._app, opts, this.config);
     };
-    AlertController.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    AlertController.ctorParameters = function () { return [
-        { type: App, },
-        { type: Config, },
-    ]; };
     return AlertController;
 }());
 export { AlertController };
+AlertController.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+AlertController.ctorParameters = function () { return [
+    { type: App, },
+    { type: Config, },
+]; };
 function AlertController_tsickle_Closure_declarations() {
     /** @type {?} */
     AlertController.decorators;

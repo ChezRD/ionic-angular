@@ -207,7 +207,7 @@ import { VirtualHeader } from './virtual-header';
  * dataset, so please make sure they're performant.
  *
  */
-var VirtualScroll = /** @class */ (function () {
+var VirtualScroll = (function () {
     /**
      * @param {?} _iterableDiffers
      * @param {?} _elementRef
@@ -756,45 +756,45 @@ var VirtualScroll = /** @class */ (function () {
         this._resizeSub = this._scrollEndSub = this._scrollSub = null;
         this._hdrFn = this._ftrFn = this._records = this._cells = this._nodes = this._data = null;
     };
-    VirtualScroll.decorators = [
-        { type: Directive, args: [{
-                    selector: '[virtualScroll]'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    VirtualScroll.ctorParameters = function () { return [
-        { type: IterableDiffers, },
-        { type: ElementRef, },
-        { type: Renderer, },
-        { type: NgZone, },
-        { type: ChangeDetectorRef, },
-        { type: Content, },
-        { type: Platform, },
-        { type: ViewController, },
-        { type: Config, },
-        { type: DomController, },
-    ]; };
-    VirtualScroll.propDecorators = {
-        '_itmTmp': [{ type: ContentChild, args: [VirtualItem,] },],
-        '_hdrTmp': [{ type: ContentChild, args: [VirtualHeader,] },],
-        '_ftrTmp': [{ type: ContentChild, args: [VirtualFooter,] },],
-        'virtualScroll': [{ type: Input },],
-        'bufferRatio': [{ type: Input },],
-        'approxItemWidth': [{ type: Input },],
-        'approxItemHeight': [{ type: Input },],
-        'approxHeaderWidth': [{ type: Input },],
-        'approxHeaderHeight': [{ type: Input },],
-        'approxFooterWidth': [{ type: Input },],
-        'approxFooterHeight': [{ type: Input },],
-        'headerFn': [{ type: Input },],
-        'footerFn': [{ type: Input },],
-        'virtualTrackBy': [{ type: Input },],
-    };
     return VirtualScroll;
 }());
 export { VirtualScroll };
+VirtualScroll.decorators = [
+    { type: Directive, args: [{
+                selector: '[virtualScroll]'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+VirtualScroll.ctorParameters = function () { return [
+    { type: IterableDiffers, },
+    { type: ElementRef, },
+    { type: Renderer, },
+    { type: NgZone, },
+    { type: ChangeDetectorRef, },
+    { type: Content, },
+    { type: Platform, },
+    { type: ViewController, },
+    { type: Config, },
+    { type: DomController, },
+]; };
+VirtualScroll.propDecorators = {
+    '_itmTmp': [{ type: ContentChild, args: [VirtualItem,] },],
+    '_hdrTmp': [{ type: ContentChild, args: [VirtualHeader,] },],
+    '_ftrTmp': [{ type: ContentChild, args: [VirtualFooter,] },],
+    'virtualScroll': [{ type: Input },],
+    'bufferRatio': [{ type: Input },],
+    'approxItemWidth': [{ type: Input },],
+    'approxItemHeight': [{ type: Input },],
+    'approxHeaderWidth': [{ type: Input },],
+    'approxHeaderHeight': [{ type: Input },],
+    'approxFooterWidth': [{ type: Input },],
+    'approxFooterHeight': [{ type: Input },],
+    'headerFn': [{ type: Input },],
+    'footerFn': [{ type: Input },],
+    'virtualTrackBy': [{ type: Input },],
+};
 function VirtualScroll_tsickle_Closure_declarations() {
     /** @type {?} */
     VirtualScroll.decorators;

@@ -80,7 +80,7 @@ var __extends = (this && this.__extends) || (function () {
      * @see {\@link /docs/components#segment Segment Component Docs}
      * @see [Angular Forms](http://learnangular2.com/forms/)
      */
-    var Segment = /** @class */ (function (_super) {
+    var Segment = (function (_super) {
         __extends(Segment, _super);
         /**
          * @param {?} config
@@ -122,28 +122,28 @@ var __extends = (this && this.__extends) || (function () {
                 button.isActive = (button.value === value);
             }
         };
-        Segment.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-segment',
-                        host: {
-                            '[class.segment-disabled]': '_disabled'
-                        }
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Segment.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: forms_1.NgControl, decorators: [{ type: core_1.Optional },] },
-        ]; };
-        Segment.propDecorators = {
-            '_buttons': [{ type: core_1.ContentChildren, args: [segment_button_1.SegmentButton,] },],
-        };
         return Segment;
     }(base_input_1.BaseInput));
+    Segment.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-segment',
+                    host: {
+                        '[class.segment-disabled]': '_disabled'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Segment.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: forms_1.NgControl, decorators: [{ type: core_1.Optional },] },
+    ]; };
+    Segment.propDecorators = {
+        '_buttons': [{ type: core_1.ContentChildren, args: [segment_button_1.SegmentButton,] },],
+    };
     exports.Segment = Segment;
     function Segment_tsickle_Closure_declarations() {
         /** @type {?} */

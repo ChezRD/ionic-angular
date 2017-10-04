@@ -57,12 +57,10 @@
      * ```ts
      * import { LoadingController } from 'ionic-angular';
      *
-     * constructor(public loadingCtrl: LoadingController) {
-     *
-     * }
+     * constructor(public loadingCtrl: LoadingController) { }
      *
      * presentLoadingDefault() {
-     *   let loading = this.loadingCtrl.create({
+     *   const loading = this.loadingCtrl.create({
      *     content: 'Please wait...'
      *   });
      *
@@ -74,7 +72,7 @@
      * }
      *
      * presentLoadingCustom() {
-     *   let loading = this.loadingCtrl.create({
+     *   const loading = this.loadingCtrl.create({
      *     spinner: 'hide',
      *     content: `
      *       <div class="custom-spinner-container">
@@ -91,7 +89,7 @@
      * }
      *
      * presentLoadingText() {
-     *   let loading = this.loadingCtrl.create({
+     *   const loading = this.loadingCtrl.create({
      *     spinner: 'hide',
      *     content: 'Loading Please Wait...'
      *   });
@@ -124,7 +122,7 @@
      * \@demo /docs/demos/src/loading/
      * @see {\@link /docs/api/components/spinner/Spinner Spinner API Docs}
      */
-    var LoadingController = /** @class */ (function () {
+    var LoadingController = (function () {
         /**
          * @param {?} _app
          * @param {?} config
@@ -142,18 +140,18 @@
             if (opts === void 0) { opts = {}; }
             return new loading_1.Loading(this._app, opts, this.config);
         };
-        LoadingController.decorators = [
-            { type: core_1.Injectable },
-        ];
-        /**
-         * @nocollapse
-         */
-        LoadingController.ctorParameters = function () { return [
-            { type: app_1.App, },
-            { type: config_1.Config, },
-        ]; };
         return LoadingController;
     }());
+    LoadingController.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    LoadingController.ctorParameters = function () { return [
+        { type: app_1.App, },
+        { type: config_1.Config, },
+    ]; };
     exports.LoadingController = LoadingController;
     function LoadingController_tsickle_Closure_declarations() {
         /** @type {?} */

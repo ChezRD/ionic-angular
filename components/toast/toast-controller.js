@@ -36,12 +36,10 @@ import { Toast } from './toast';
  * ```ts
  * import { ToastController } from 'ionic-angular';
  *
- * constructor(private toastCtrl: ToastController) {
- *
- * }
+ * constructor(public toastCtrl: ToastController) { }
  *
  * presentToast() {
- *   let toast = this.toastCtrl.create({
+ *   const toast = this.toastCtrl.create({
  *     message: 'User was added successfully',
  *     duration: 3000,
  *     position: 'top'
@@ -67,7 +65,7 @@ import { Toast } from './toast';
  *
  * \@demo /docs/demos/src/toast/
  */
-var ToastController = /** @class */ (function () {
+var ToastController = (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -85,19 +83,19 @@ var ToastController = /** @class */ (function () {
         if (opts === void 0) { opts = {}; }
         return new Toast(this._app, opts, this.config);
     };
-    ToastController.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    ToastController.ctorParameters = function () { return [
-        { type: App, },
-        { type: Config, },
-    ]; };
     return ToastController;
 }());
 export { ToastController };
+ToastController.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+ToastController.ctorParameters = function () { return [
+    { type: App, },
+    { type: Config, },
+]; };
 function ToastController_tsickle_Closure_declarations() {
     /** @type {?} */
     ToastController.decorators;

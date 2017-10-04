@@ -3,7 +3,7 @@ import { removeArrayItem } from './util';
 /**
  * @hidden
  */
-var Form = /** @class */ (function () {
+var Form = (function () {
     function Form() {
         this._focused = null;
         this._ids = -1;
@@ -70,16 +70,16 @@ var Form = /** @class */ (function () {
     Form.prototype.nextId = function () {
         return ++this._ids;
     };
-    Form.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    Form.ctorParameters = function () { return []; };
     return Form;
 }());
 export { Form };
+Form.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+Form.ctorParameters = function () { return []; };
 function Form_tsickle_Closure_declarations() {
     /** @type {?} */
     Form.decorators;
@@ -99,7 +99,7 @@ function Form_tsickle_Closure_declarations() {
  * @hidden
  * @abstract
  */
-var IonicTapInput = /** @class */ (function () {
+var IonicTapInput = (function () {
     function IonicTapInput() {
     }
     /**
@@ -136,7 +136,7 @@ export { IonicTapInput };
  * @hidden
  * @abstract
  */
-var IonicFormInput = /** @class */ (function () {
+var IonicFormInput = (function () {
     function IonicFormInput() {
     }
     /**

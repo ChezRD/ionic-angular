@@ -23,7 +23,7 @@
      * \@demo /docs/demos/src/slides/
      * @see {\@link /docs/api/components/slides/Slides/ Slides API Docs}
      */
-    var Slide = /** @class */ (function () {
+    var Slide = (function () {
         /**
          * @param {?} elementRef
          * @param {?} renderer
@@ -41,26 +41,26 @@
         Slide.prototype.ngOnDestroy = function () {
             this._slides.update(10);
         };
-        Slide.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-slide',
-                        template: '<div class="slide-zoom">' +
-                            '<ng-content></ng-content>' +
-                            '</div>',
-                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                        encapsulation: core_1.ViewEncapsulation.None,
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Slide.ctorParameters = function () { return [
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: slides_1.Slides, },
-        ]; };
         return Slide;
     }());
+    Slide.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-slide',
+                    template: '<div class="slide-zoom">' +
+                        '<ng-content></ng-content>' +
+                        '</div>',
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core_1.ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Slide.ctorParameters = function () { return [
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: slides_1.Slides, },
+    ]; };
     exports.Slide = Slide;
     function Slide_tsickle_Closure_declarations() {
         /** @type {?} */

@@ -102,7 +102,7 @@ var __extends = (this && this.__extends) || (function () {
      *
      * \@demo /docs/demos/src/range/
      */
-    var Range = /** @class */ (function (_super) {
+    var Range = (function (_super) {
         __extends(Range, _super);
         /**
          * @param {?} form
@@ -599,53 +599,53 @@ var __extends = (this && this.__extends) || (function () {
             _super.prototype.ngOnDestroy.call(this);
             this._events.destroy();
         };
-        Range.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-range',
-                        template: '<ng-content select="[range-left]"></ng-content>' +
-                            '<div class="range-slider" #slider>' +
-                            '<div class="range-tick" *ngFor="let t of _ticks" [style.left]="t.left" [class.range-tick-active]="t.active" role="presentation"></div>' +
-                            '<div class="range-bar" role="presentation"></div>' +
-                            '<div class="range-bar range-bar-active" [style.left]="_barL" [style.right]="_barR" #bar role="presentation"></div>' +
-                            '<div class="range-knob-handle" (ionIncrease)="_keyChg(true, false)" (ionDecrease)="_keyChg(false, false)" [ratio]="_ratioA" [val]="_valA" [pin]="_pin" [pressed]="_pressedA" [min]="_min" [max]="_max" [disabled]="_disabled" [labelId]="_labelId"></div>' +
-                            '<div class="range-knob-handle" (ionIncrease)="_keyChg(true, true)" (ionDecrease)="_keyChg(false, true)" [ratio]="_ratioB" [val]="_valB" [pin]="_pin" [pressed]="_pressedB" [min]="_min" [max]="_max" [disabled]="_disabled" [labelId]="_labelId" *ngIf="_dual"></div>' +
-                            '</div>' +
-                            '<ng-content select="[range-right]"></ng-content>',
-                        host: {
-                            '[class.range-disabled]': '_disabled',
-                            '[class.range-pressed]': '_pressed',
-                            '[class.range-has-pin]': '_pin'
-                        },
-                        providers: [{ provide: forms_1.NG_VALUE_ACCESSOR, useExisting: Range, multi: true }],
-                        encapsulation: core_1.ViewEncapsulation.None,
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Range.ctorParameters = function () { return [
-            { type: form_1.Form, },
-            { type: haptic_1.Haptic, },
-            { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
-            { type: config_1.Config, },
-            { type: platform_1.Platform, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: dom_controller_1.DomController, },
-            { type: core_1.ChangeDetectorRef, },
-        ]; };
-        Range.propDecorators = {
-            '_slider': [{ type: core_1.ViewChild, args: ['slider',] },],
-            'min': [{ type: core_1.Input },],
-            'max': [{ type: core_1.Input },],
-            'step': [{ type: core_1.Input },],
-            'snaps': [{ type: core_1.Input },],
-            'pin': [{ type: core_1.Input },],
-            'debounce': [{ type: core_1.Input },],
-            'dualKnobs': [{ type: core_1.Input },],
-        };
         return Range;
     }(base_input_1.BaseInput));
+    Range.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-range',
+                    template: '<ng-content select="[range-left]"></ng-content>' +
+                        '<div class="range-slider" #slider>' +
+                        '<div class="range-tick" *ngFor="let t of _ticks" [style.left]="t.left" [class.range-tick-active]="t.active" role="presentation"></div>' +
+                        '<div class="range-bar" role="presentation"></div>' +
+                        '<div class="range-bar range-bar-active" [style.left]="_barL" [style.right]="_barR" #bar role="presentation"></div>' +
+                        '<div class="range-knob-handle" (ionIncrease)="_keyChg(true, false)" (ionDecrease)="_keyChg(false, false)" [ratio]="_ratioA" [val]="_valA" [pin]="_pin" [pressed]="_pressedA" [min]="_min" [max]="_max" [disabled]="_disabled" [labelId]="_labelId"></div>' +
+                        '<div class="range-knob-handle" (ionIncrease)="_keyChg(true, true)" (ionDecrease)="_keyChg(false, true)" [ratio]="_ratioB" [val]="_valB" [pin]="_pin" [pressed]="_pressedB" [min]="_min" [max]="_max" [disabled]="_disabled" [labelId]="_labelId" *ngIf="_dual"></div>' +
+                        '</div>' +
+                        '<ng-content select="[range-right]"></ng-content>',
+                    host: {
+                        '[class.range-disabled]': '_disabled',
+                        '[class.range-pressed]': '_pressed',
+                        '[class.range-has-pin]': '_pin'
+                    },
+                    providers: [{ provide: forms_1.NG_VALUE_ACCESSOR, useExisting: Range, multi: true }],
+                    encapsulation: core_1.ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Range.ctorParameters = function () { return [
+        { type: form_1.Form, },
+        { type: haptic_1.Haptic, },
+        { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
+        { type: config_1.Config, },
+        { type: platform_1.Platform, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: dom_controller_1.DomController, },
+        { type: core_1.ChangeDetectorRef, },
+    ]; };
+    Range.propDecorators = {
+        '_slider': [{ type: core_1.ViewChild, args: ['slider',] },],
+        'min': [{ type: core_1.Input },],
+        'max': [{ type: core_1.Input },],
+        'step': [{ type: core_1.Input },],
+        'snaps': [{ type: core_1.Input },],
+        'pin': [{ type: core_1.Input },],
+        'debounce': [{ type: core_1.Input },],
+        'dualKnobs': [{ type: core_1.Input },],
+    };
     exports.Range = Range;
     function Range_tsickle_Closure_declarations() {
         /** @type {?} */

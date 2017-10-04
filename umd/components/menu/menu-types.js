@@ -28,7 +28,7 @@ var __extends = (this && this.__extends) || (function () {
      * type will provide their own animations for open and close
      * and registers itself with Menu.
      */
-    var MenuType = /** @class */ (function () {
+    var MenuType = (function () {
         /**
          * @param {?} plt
          */
@@ -119,7 +119,7 @@ var __extends = (this && this.__extends) || (function () {
      * The content slides over to reveal the menu underneath.
      * The menu itself, which is under the content, does not move.
      */
-    var MenuRevealType = /** @class */ (function (_super) {
+    var MenuRevealType = (function (_super) {
         __extends(MenuRevealType, _super);
         /**
          * @param {?} menu
@@ -142,7 +142,7 @@ var __extends = (this && this.__extends) || (function () {
      * The content slides over to reveal the menu underneath.
      * The menu itself also slides over to reveal its bad self.
      */
-    var MenuPushType = /** @class */ (function (_super) {
+    var MenuPushType = (function (_super) {
         __extends(MenuPushType, _super);
         /**
          * @param {?} menu
@@ -180,7 +180,7 @@ var __extends = (this && this.__extends) || (function () {
      * The menu slides over the content. The content
      * itself, which is under the menu, does not move.
      */
-    var MenuOverlayType = /** @class */ (function (_super) {
+    var MenuOverlayType = (function (_super) {
         __extends(MenuOverlayType, _super);
         /**
          * @param {?} menu

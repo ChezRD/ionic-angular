@@ -103,6 +103,34 @@ import { ViewController } from '../../navigation/view-controller';
  * }
  * ```
  *
+ * ### Zooming
+ * If your slides contain images, you can enable zooming on them by setting `zoom="true" and
+ * wrapping each image in a `div` with the class `swiper-zoom-container`. Zoom supports
+ * `img`, `svg`, `canvas`, and `ion-img`.
+ *
+ * ```html
+ * <ion-slidesj zoom="true">
+ *   <ion-slide>
+ *     <div class="swiper-zoom-container">
+ *       <img src="assets/img/dog.jpg">
+ *     </div>
+ *     <ion-label>Woof</ion-label>
+ *   </ion-slide>
+ *   <ion-slide>
+ *     <div class="swiper-zoom-container">
+ *       <img src="assets/img/cat.jpg">
+ *     </div>
+ *     <ion-label>Meow</ion-label>
+ *   </ion-slide>
+ *   <ion-slide>
+ *     <div class="swiper-zoom-container">
+ *       <img src="assets/img/fish.jpg">
+ *     </div>
+ *     <ion-label>Just keep swimming</ion-label>
+ *   </ion-slide>
+ * </ion-slides>
+ * ```
+ *
  * \@advanced
  *
  * There are several options available to create customized slides. Ionic exposes
@@ -141,7 +169,7 @@ import { ViewController } from '../../navigation/view-controller';
  *
  * Licensed under MIT
  */
-var Slides = /** @class */ (function (_super) {
+var Slides = (function (_super) {
     __extends(Slides, _super);
     /**
      * @param {?} config
@@ -1009,64 +1037,64 @@ var Slides = /** @class */ (function (_super) {
         destroySwiper(this);
         this.enableKeyboardControl(false);
     };
-    Slides.decorators = [
-        { type: Component, args: [{
-                    selector: 'ion-slides',
-                    template: '<div class="swiper-container" [attr.dir]="_rtl? \'rtl\' : null">' +
-                        '<div class="swiper-wrapper">' +
-                        '<ng-content></ng-content>' +
-                        '</div>' +
-                        '<div [class.hide]="!pager" class="swiper-pagination"></div>' +
-                        '</div>',
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None,
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Slides.ctorParameters = function () { return [
-        { type: Config, },
-        { type: Platform, },
-        { type: NgZone, },
-        { type: ViewController, decorators: [{ type: Optional },] },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
-    Slides.propDecorators = {
-        'autoplay': [{ type: Input },],
-        'control': [{ type: Input },],
-        'effect': [{ type: Input },],
-        'direction': [{ type: Input },],
-        'initialSlide': [{ type: Input },],
-        'loop': [{ type: Input },],
-        'pager': [{ type: Input },],
-        'dir': [{ type: Input },],
-        'paginationType': [{ type: Input },],
-        'parallax': [{ type: Input },],
-        'speed': [{ type: Input },],
-        'zoom': [{ type: Input },],
-        'spaceBetween': [{ type: Input },],
-        'slidesPerView': [{ type: Input },],
-        'centeredSlides': [{ type: Input },],
-        'ionSlideWillChange': [{ type: Output },],
-        'ionSlideDidChange': [{ type: Output },],
-        'ionSlideDrag': [{ type: Output },],
-        'ionSlideReachStart': [{ type: Output },],
-        'ionSlideReachEnd': [{ type: Output },],
-        'ionSlideAutoplay': [{ type: Output },],
-        'ionSlideAutoplayStart': [{ type: Output },],
-        'ionSlideAutoplayStop': [{ type: Output },],
-        'ionSlideNextStart': [{ type: Output },],
-        'ionSlidePrevStart': [{ type: Output },],
-        'ionSlideNextEnd': [{ type: Output },],
-        'ionSlidePrevEnd': [{ type: Output },],
-        'ionSlideTap': [{ type: Output },],
-        'ionSlideDoubleTap': [{ type: Output },],
-    };
     return Slides;
 }(Ion));
 export { Slides };
+Slides.decorators = [
+    { type: Component, args: [{
+                selector: 'ion-slides',
+                template: '<div class="swiper-container" [attr.dir]="_rtl? \'rtl\' : null">' +
+                    '<div class="swiper-wrapper">' +
+                    '<ng-content></ng-content>' +
+                    '</div>' +
+                    '<div [class.hide]="!pager" class="swiper-pagination"></div>' +
+                    '</div>',
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                encapsulation: ViewEncapsulation.None,
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Slides.ctorParameters = function () { return [
+    { type: Config, },
+    { type: Platform, },
+    { type: NgZone, },
+    { type: ViewController, decorators: [{ type: Optional },] },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
+Slides.propDecorators = {
+    'autoplay': [{ type: Input },],
+    'control': [{ type: Input },],
+    'effect': [{ type: Input },],
+    'direction': [{ type: Input },],
+    'initialSlide': [{ type: Input },],
+    'loop': [{ type: Input },],
+    'pager': [{ type: Input },],
+    'dir': [{ type: Input },],
+    'paginationType': [{ type: Input },],
+    'parallax': [{ type: Input },],
+    'speed': [{ type: Input },],
+    'zoom': [{ type: Input },],
+    'spaceBetween': [{ type: Input },],
+    'slidesPerView': [{ type: Input },],
+    'centeredSlides': [{ type: Input },],
+    'ionSlideWillChange': [{ type: Output },],
+    'ionSlideDidChange': [{ type: Output },],
+    'ionSlideDrag': [{ type: Output },],
+    'ionSlideReachStart': [{ type: Output },],
+    'ionSlideReachEnd': [{ type: Output },],
+    'ionSlideAutoplay': [{ type: Output },],
+    'ionSlideAutoplayStart': [{ type: Output },],
+    'ionSlideAutoplayStop': [{ type: Output },],
+    'ionSlideNextStart': [{ type: Output },],
+    'ionSlidePrevStart': [{ type: Output },],
+    'ionSlideNextEnd': [{ type: Output },],
+    'ionSlidePrevEnd': [{ type: Output },],
+    'ionSlideTap': [{ type: Output },],
+    'ionSlideDoubleTap': [{ type: Output },],
+};
 function Slides_tsickle_Closure_declarations() {
     /** @type {?} */
     Slides.decorators;

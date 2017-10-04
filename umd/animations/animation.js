@@ -13,7 +13,7 @@
     /**
      * @hidden
      */
-    var Animation = /** @class */ (function () {
+    var Animation = (function () {
         /**
          * @param {?} plt
          * @param {?=} ele

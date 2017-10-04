@@ -64,7 +64,7 @@
      * @see {\@link /docs/components#radio Radio Component Docs}
      * @see {\@link ../RadioButton RadioButton API Docs}
      */
-    var RadioGroup = /** @class */ (function () {
+    var RadioGroup = (function () {
         /**
          * @param {?} _renderer
          * @param {?} _elementRef
@@ -264,30 +264,30 @@
         RadioGroup.prototype.setDisabledState = function (isDisabled) {
             this.disabled = isDisabled;
         };
-        RadioGroup.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: '[radio-group]',
-                        host: {
-                            'role': 'radiogroup'
-                        },
-                        providers: [{ provide: forms_1.NG_VALUE_ACCESSOR, useExisting: RadioGroup, multi: true }],
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        RadioGroup.ctorParameters = function () { return [
-            { type: core_1.Renderer, },
-            { type: core_1.ElementRef, },
-            { type: core_1.ChangeDetectorRef, },
-        ]; };
-        RadioGroup.propDecorators = {
-            'disabled': [{ type: core_1.Input },],
-            'ionChange': [{ type: core_1.Output },],
-            '_header': [{ type: core_1.ContentChild, args: [list_header_1.ListHeader,] },],
-        };
         return RadioGroup;
     }());
+    RadioGroup.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '[radio-group]',
+                    host: {
+                        'role': 'radiogroup'
+                    },
+                    providers: [{ provide: forms_1.NG_VALUE_ACCESSOR, useExisting: RadioGroup, multi: true }],
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    RadioGroup.ctorParameters = function () { return [
+        { type: core_1.Renderer, },
+        { type: core_1.ElementRef, },
+        { type: core_1.ChangeDetectorRef, },
+    ]; };
+    RadioGroup.propDecorators = {
+        'disabled': [{ type: core_1.Input },],
+        'ionChange': [{ type: core_1.Output },],
+        '_header': [{ type: core_1.ContentChild, args: [list_header_1.ListHeader,] },],
+    };
     exports.RadioGroup = RadioGroup;
     function RadioGroup_tsickle_Closure_declarations() {
         /** @type {?} */

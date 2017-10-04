@@ -14,7 +14,7 @@
     /**
      * @hidden
      */
-    var Reorder = /** @class */ (function () {
+    var Reorder = (function () {
         /**
          * @param {?} elementRef
          */
@@ -37,23 +37,23 @@
             ev.preventDefault();
             ev.stopPropagation();
         };
-        Reorder.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-reorder',
-                        template: "<ion-icon name=\"reorder\"></ion-icon>"
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Reorder.ctorParameters = function () { return [
-            { type: core_1.ElementRef, },
-        ]; };
-        Reorder.propDecorators = {
-            'onClick': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
-        };
         return Reorder;
     }());
+    Reorder.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-reorder',
+                    template: "<ion-icon name=\"reorder\"></ion-icon>"
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Reorder.ctorParameters = function () { return [
+        { type: core_1.ElementRef, },
+    ]; };
+    Reorder.propDecorators = {
+        'onClick': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
+    };
     exports.Reorder = Reorder;
     function Reorder_tsickle_Closure_declarations() {
         /** @type {?} */

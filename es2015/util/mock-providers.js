@@ -259,7 +259,7 @@ export function mockIonicApp(app, config, plt) {
 }
 export const /** @type {?} */ mockTrasitionController = function (config) {
     let /** @type {?} */ platform = mockPlatform();
-    platform.raf = /** @type {?} */ (function (callback) {
+    platform.raf = (function (callback) {
         callback();
     });
     let /** @type {?} */ trnsCtrl = new TransitionController(platform, config);

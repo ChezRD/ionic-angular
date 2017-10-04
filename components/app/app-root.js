@@ -19,7 +19,7 @@ export var /** @type {?} */ AppRootToken = new OpaqueToken('USERROOT');
 /**
  * @hidden
  */
-var IonicApp = /** @class */ (function (_super) {
+var IonicApp = (function (_super) {
     __extends(IonicApp, _super);
     /**
      * @param {?} _userCmp
@@ -165,39 +165,39 @@ var IonicApp = /** @class */ (function (_super) {
             return Promise.resolve(false);
         }
     };
-    IonicApp.decorators = [
-        { type: Component, args: [{
-                    selector: 'ion-app',
-                    template: '<div #viewport app-viewport></div>' +
-                        '<div #modalPortal overlay-portal></div>' +
-                        '<div #overlayPortal overlay-portal></div>' +
-                        '<div #loadingPortal class="loading-portal" overlay-portal></div>' +
-                        '<div #toastPortal class="toast-portal" [overlay-portal]="10000"></div>' +
-                        '<div class="click-block"></div>'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    IonicApp.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Inject, args: [AppRootToken,] },] },
-        { type: ComponentFactoryResolver, },
-        { type: ElementRef, },
-        { type: Renderer, },
-        { type: Config, },
-        { type: Platform, },
-        { type: App, },
-    ]; };
-    IonicApp.propDecorators = {
-        '_viewport': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
-        '_modalPortal': [{ type: ViewChild, args: ['modalPortal', { read: OverlayPortal },] },],
-        '_overlayPortal': [{ type: ViewChild, args: ['overlayPortal', { read: OverlayPortal },] },],
-        '_loadingPortal': [{ type: ViewChild, args: ['loadingPortal', { read: OverlayPortal },] },],
-        '_toastPortal': [{ type: ViewChild, args: ['toastPortal', { read: OverlayPortal },] },],
-    };
     return IonicApp;
 }(Ion));
 export { IonicApp };
+IonicApp.decorators = [
+    { type: Component, args: [{
+                selector: 'ion-app',
+                template: '<div #viewport app-viewport></div>' +
+                    '<div #modalPortal overlay-portal></div>' +
+                    '<div #overlayPortal overlay-portal></div>' +
+                    '<div #loadingPortal class="loading-portal" overlay-portal></div>' +
+                    '<div #toastPortal class="toast-portal" [overlay-portal]="10000"></div>' +
+                    '<div class="click-block"></div>'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+IonicApp.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Inject, args: [AppRootToken,] },] },
+    { type: ComponentFactoryResolver, },
+    { type: ElementRef, },
+    { type: Renderer, },
+    { type: Config, },
+    { type: Platform, },
+    { type: App, },
+]; };
+IonicApp.propDecorators = {
+    '_viewport': [{ type: ViewChild, args: ['viewport', { read: ViewContainerRef },] },],
+    '_modalPortal': [{ type: ViewChild, args: ['modalPortal', { read: OverlayPortal },] },],
+    '_overlayPortal': [{ type: ViewChild, args: ['overlayPortal', { read: OverlayPortal },] },],
+    '_loadingPortal': [{ type: ViewChild, args: ['loadingPortal', { read: OverlayPortal },] },],
+    '_toastPortal': [{ type: ViewChild, args: ['toastPortal', { read: OverlayPortal },] },],
+};
 function IonicApp_tsickle_Closure_declarations() {
     /** @type {?} */
     IonicApp.decorators;

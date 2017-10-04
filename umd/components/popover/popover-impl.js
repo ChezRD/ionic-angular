@@ -26,7 +26,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var PopoverImpl = /** @class */ (function (_super) {
+    var PopoverImpl = (function (_super) {
         __extends(PopoverImpl, _super);
         /**
          * @param {?} app

@@ -27,7 +27,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var Loading = /** @class */ (function (_super) {
+    var Loading = (function (_super) {
         __extends(Loading, _super);
         /**
          * @param {?} app

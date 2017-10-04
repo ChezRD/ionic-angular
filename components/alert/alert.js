@@ -15,7 +15,7 @@ import { ViewController } from '../../navigation/view-controller';
 /**
  * @hidden
  */
-var Alert = /** @class */ (function (_super) {
+var Alert = (function (_super) {
     __extends(Alert, _super);
     /**
      * @param {?} app

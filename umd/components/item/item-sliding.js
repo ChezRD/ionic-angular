@@ -122,7 +122,7 @@
      * @see {\@link ../Item Item API Docs}
      * @see {\@link ../../list/List List API Docs}
      */
-    var ItemSliding = /** @class */ (function () {
+    var ItemSliding = (function () {
         /**
          * @param {?} list
          * @param {?} _plt
@@ -428,31 +428,31 @@
         ItemSliding.prototype.setElementClass = function (cssClass, shouldAdd) {
             this._renderer.setElementClass(this._elementRef.nativeElement, cssClass, shouldAdd);
         };
-        ItemSliding.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-item-sliding',
-                        template: "\n    <ng-content select=\"ion-item,[ion-item]\"></ng-content>\n    <ng-content select=\"ion-item-options\"></ng-content>\n  ",
-                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                        encapsulation: core_1.ViewEncapsulation.None
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        ItemSliding.ctorParameters = function () { return [
-            { type: list_1.List, decorators: [{ type: core_1.Optional },] },
-            { type: platform_1.Platform, },
-            { type: core_1.Renderer, },
-            { type: core_1.ElementRef, },
-            { type: core_1.NgZone, },
-        ]; };
-        ItemSliding.propDecorators = {
-            'item': [{ type: core_1.ContentChild, args: [item_1.Item,] },],
-            'ionDrag': [{ type: core_1.Output },],
-            '_itemOptions': [{ type: core_1.ContentChildren, args: [core_1.forwardRef(function () { return item_options_1.ItemOptions; }),] },],
-        };
         return ItemSliding;
     }());
+    ItemSliding.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-item-sliding',
+                    template: "\n    <ng-content select=\"ion-item,[ion-item]\"></ng-content>\n    <ng-content select=\"ion-item-options\"></ng-content>\n  ",
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core_1.ViewEncapsulation.None
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ItemSliding.ctorParameters = function () { return [
+        { type: list_1.List, decorators: [{ type: core_1.Optional },] },
+        { type: platform_1.Platform, },
+        { type: core_1.Renderer, },
+        { type: core_1.ElementRef, },
+        { type: core_1.NgZone, },
+    ]; };
+    ItemSliding.propDecorators = {
+        'item': [{ type: core_1.ContentChild, args: [item_1.Item,] },],
+        'ionDrag': [{ type: core_1.Output },],
+        '_itemOptions': [{ type: core_1.ContentChildren, args: [core_1.forwardRef(function () { return item_options_1.ItemOptions; }),] },],
+    };
     exports.ItemSliding = ItemSliding;
     function ItemSliding_tsickle_Closure_declarations() {
         /** @type {?} */

@@ -30,7 +30,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var IonicApp = /** @class */ (function (_super) {
+    var IonicApp = (function (_super) {
         __extends(IonicApp, _super);
         /**
          * @param {?} _userCmp
@@ -176,38 +176,38 @@ var __extends = (this && this.__extends) || (function () {
                 return Promise.resolve(false);
             }
         };
-        IonicApp.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-app',
-                        template: '<div #viewport app-viewport></div>' +
-                            '<div #modalPortal overlay-portal></div>' +
-                            '<div #overlayPortal overlay-portal></div>' +
-                            '<div #loadingPortal class="loading-portal" overlay-portal></div>' +
-                            '<div #toastPortal class="toast-portal" [overlay-portal]="10000"></div>' +
-                            '<div class="click-block"></div>'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        IonicApp.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: core_1.Inject, args: [exports.AppRootToken,] },] },
-            { type: core_1.ComponentFactoryResolver, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: config_1.Config, },
-            { type: platform_1.Platform, },
-            { type: app_1.App, },
-        ]; };
-        IonicApp.propDecorators = {
-            '_viewport': [{ type: core_1.ViewChild, args: ['viewport', { read: core_1.ViewContainerRef },] },],
-            '_modalPortal': [{ type: core_1.ViewChild, args: ['modalPortal', { read: overlay_portal_1.OverlayPortal },] },],
-            '_overlayPortal': [{ type: core_1.ViewChild, args: ['overlayPortal', { read: overlay_portal_1.OverlayPortal },] },],
-            '_loadingPortal': [{ type: core_1.ViewChild, args: ['loadingPortal', { read: overlay_portal_1.OverlayPortal },] },],
-            '_toastPortal': [{ type: core_1.ViewChild, args: ['toastPortal', { read: overlay_portal_1.OverlayPortal },] },],
-        };
         return IonicApp;
     }(ion_1.Ion));
+    IonicApp.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-app',
+                    template: '<div #viewport app-viewport></div>' +
+                        '<div #modalPortal overlay-portal></div>' +
+                        '<div #overlayPortal overlay-portal></div>' +
+                        '<div #loadingPortal class="loading-portal" overlay-portal></div>' +
+                        '<div #toastPortal class="toast-portal" [overlay-portal]="10000"></div>' +
+                        '<div class="click-block"></div>'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    IonicApp.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: core_1.Inject, args: [exports.AppRootToken,] },] },
+        { type: core_1.ComponentFactoryResolver, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: config_1.Config, },
+        { type: platform_1.Platform, },
+        { type: app_1.App, },
+    ]; };
+    IonicApp.propDecorators = {
+        '_viewport': [{ type: core_1.ViewChild, args: ['viewport', { read: core_1.ViewContainerRef },] },],
+        '_modalPortal': [{ type: core_1.ViewChild, args: ['modalPortal', { read: overlay_portal_1.OverlayPortal },] },],
+        '_overlayPortal': [{ type: core_1.ViewChild, args: ['overlayPortal', { read: overlay_portal_1.OverlayPortal },] },],
+        '_loadingPortal': [{ type: core_1.ViewChild, args: ['loadingPortal', { read: overlay_portal_1.OverlayPortal },] },],
+        '_toastPortal': [{ type: core_1.ViewChild, args: ['toastPortal', { read: overlay_portal_1.OverlayPortal },] },],
+    };
     exports.IonicApp = IonicApp;
     function IonicApp_tsickle_Closure_declarations() {
         /** @type {?} */

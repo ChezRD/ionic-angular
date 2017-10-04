@@ -85,7 +85,7 @@ import { UIEventManager } from '../../gestures/ui-event-manager';
  * \@demo /docs/demos/src/refresher/
  *
  */
-var Refresher = /** @class */ (function () {
+var Refresher = (function () {
     /**
      * @param {?} _plt
      * @param {?} _content
@@ -482,37 +482,37 @@ var Refresher = /** @class */ (function () {
         this._events.destroy();
         this._gesture.destroy();
     };
-    Refresher.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-refresher',
-                    host: {
-                        '[class.refresher-active]': 'state !== "inactive"',
-                        '[style.top]': '_top'
-                    }
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Refresher.ctorParameters = function () { return [
-        { type: Platform, },
-        { type: Content, decorators: [{ type: Host },] },
-        { type: NgZone, },
-        { type: GestureController, },
-    ]; };
-    Refresher.propDecorators = {
-        'pullMin': [{ type: Input },],
-        'pullMax': [{ type: Input },],
-        'closeDuration': [{ type: Input },],
-        'snapbackDuration': [{ type: Input },],
-        'enabled': [{ type: Input },],
-        'ionRefresh': [{ type: Output },],
-        'ionPull': [{ type: Output },],
-        'ionStart': [{ type: Output },],
-    };
     return Refresher;
 }());
 export { Refresher };
+Refresher.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-refresher',
+                host: {
+                    '[class.refresher-active]': 'state !== "inactive"',
+                    '[style.top]': '_top'
+                }
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Refresher.ctorParameters = function () { return [
+    { type: Platform, },
+    { type: Content, decorators: [{ type: Host },] },
+    { type: NgZone, },
+    { type: GestureController, },
+]; };
+Refresher.propDecorators = {
+    'pullMin': [{ type: Input },],
+    'pullMax': [{ type: Input },],
+    'closeDuration': [{ type: Input },],
+    'snapbackDuration': [{ type: Input },],
+    'enabled': [{ type: Input },],
+    'ionRefresh': [{ type: Output },],
+    'ionPull': [{ type: Output },],
+    'ionStart': [{ type: Output },],
+};
 function Refresher_tsickle_Closure_declarations() {
     /** @type {?} */
     Refresher.decorators;

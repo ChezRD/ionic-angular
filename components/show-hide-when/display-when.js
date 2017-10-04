@@ -1,7 +1,7 @@
 /**
  * @hidden
  */
-var DisplayWhen = /** @class */ (function () {
+var DisplayWhen = (function () {
     /**
      * @param {?} conditions
      * @param {?} _plt

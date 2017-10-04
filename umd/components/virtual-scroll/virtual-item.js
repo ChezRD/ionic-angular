@@ -13,7 +13,7 @@
     /**
      * @hidden
      */
-    var VirtualItem = /** @class */ (function () {
+    var VirtualItem = (function () {
         /**
          * @param {?} templateRef
          * @param {?} viewContainer
@@ -22,18 +22,18 @@
             this.templateRef = templateRef;
             this.viewContainer = viewContainer;
         }
-        VirtualItem.decorators = [
-            { type: core_1.Directive, args: [{ selector: '[virtualItem]' },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        VirtualItem.ctorParameters = function () { return [
-            { type: core_1.TemplateRef, },
-            { type: core_1.ViewContainerRef, },
-        ]; };
         return VirtualItem;
     }());
+    VirtualItem.decorators = [
+        { type: core_1.Directive, args: [{ selector: '[virtualItem]' },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    VirtualItem.ctorParameters = function () { return [
+        { type: core_1.TemplateRef, },
+        { type: core_1.ViewContainerRef, },
+    ]; };
     exports.VirtualItem = VirtualItem;
     function VirtualItem_tsickle_Closure_declarations() {
         /** @type {?} */

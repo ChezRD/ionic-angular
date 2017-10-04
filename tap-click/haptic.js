@@ -11,15 +11,16 @@ import { Platform } from '../platform/platform';
  *
  * \@usage
  * ```ts
- * export class MyClass{
- *  constructor(haptic: Haptic){
+ * export class MyClass {
+ *
+ *  constructor(haptic: Haptic) {
  *    haptic.selection();
  *  }
  * }
  *
  * ```
  */
-var Haptic = /** @class */ (function () {
+var Haptic = (function () {
     /**
      * @param {?} plt
      */
@@ -87,18 +88,18 @@ var Haptic = /** @class */ (function () {
     Haptic.prototype.impact = function (options) {
         this._p && this._p.impact(options);
     };
-    Haptic.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    Haptic.ctorParameters = function () { return [
-        { type: Platform, },
-    ]; };
     return Haptic;
 }());
 export { Haptic };
+Haptic.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+Haptic.ctorParameters = function () { return [
+    { type: Platform, },
+]; };
 function Haptic_tsickle_Closure_declarations() {
     /** @type {?} */
     Haptic.decorators;

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, NgZone, Optional, Output, Renderer, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, NgZone, Optional, Output, Renderer, ViewChild, ViewEncapsulation } from '@angular/core';
 import { App } from '../app/app';
 import { Config } from '../../config/config';
 import { DomController } from '../../platform/dom-controller';
@@ -615,7 +615,7 @@ export class Content extends Ion {
         let /** @type {?} */ parentEle = ele.parentElement;
         let /** @type {?} */ children = parentEle.children;
         for (var /** @type {?} */ i = children.length - 1; i >= 0; i--) {
-            ele = /** @type {?} */ (children[i]);
+            ele = (children[i]);
             tagName = ele.tagName;
             if (tagName === 'ION-CONTENT') {
                 scrollEvent.contentElement = ele;
@@ -644,7 +644,7 @@ export class Content extends Ion {
         let /** @type {?} */ tabbarEle;
         while (ele && ele.tagName !== 'ION-MODAL' && !ele.classList.contains('tab-subpage')) {
             if (ele.tagName === 'ION-TABS') {
-                tabbarEle = /** @type {?} */ (ele.firstElementChild);
+                tabbarEle = (ele.firstElementChild);
                 // ******** DOM READ ****************
                 this._tabbarHeight = tabbarEle.clientHeight;
                 if (this._tabsPlacement === null) {
@@ -846,6 +846,7 @@ Content.propDecorators = {
     'ionScrollEnd': [{ type: Output },],
     'fullscreen': [{ type: Input },],
     'scrollDownOnLoad': [{ type: Input },],
+    'resize': [{ type: HostListener, args: ['window:resize',] },],
 };
 function Content_tsickle_Closure_declarations() {
     /** @type {?} */

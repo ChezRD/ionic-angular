@@ -2,7 +2,7 @@ import { Compiler, Injectable } from '@angular/core';
 /**
  * NgModuleFactoryLoader that uses SystemJS to load NgModuleFactory
  */
-var NgModuleLoader = /** @class */ (function () {
+var NgModuleLoader = (function () {
     /**
      * @param {?} _compiler
      */
@@ -18,18 +18,18 @@ var NgModuleLoader = /** @class */ (function () {
         var /** @type {?} */ offlineMode = this._compiler instanceof Compiler;
         return offlineMode ? loadPrecompiledFactory(modulePath, ngModuleExport) : loadAndCompile(this._compiler, modulePath, ngModuleExport);
     };
-    NgModuleLoader.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    NgModuleLoader.ctorParameters = function () { return [
-        { type: Compiler, },
-    ]; };
     return NgModuleLoader;
 }());
 export { NgModuleLoader };
+NgModuleLoader.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+NgModuleLoader.ctorParameters = function () { return [
+    { type: Compiler, },
+]; };
 function NgModuleLoader_tsickle_Closure_declarations() {
     /** @type {?} */
     NgModuleLoader.decorators;

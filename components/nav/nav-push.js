@@ -43,7 +43,7 @@ import { NavController } from '../../navigation/nav-controller';
  * @see {\@link ../NavPop NavPop API Docs}
  *
  */
-var NavPush = /** @class */ (function () {
+var NavPush = (function () {
     /**
      * @param {?} _nav
      */
@@ -64,25 +64,25 @@ var NavPush = /** @class */ (function () {
         }
         return true;
     };
-    NavPush.decorators = [
-        { type: Directive, args: [{
-                    selector: '[navPush]'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    NavPush.ctorParameters = function () { return [
-        { type: NavController, decorators: [{ type: Optional },] },
-    ]; };
-    NavPush.propDecorators = {
-        'navPush': [{ type: Input },],
-        'navParams': [{ type: Input },],
-        'onClick': [{ type: HostListener, args: ['click',] },],
-    };
     return NavPush;
 }());
 export { NavPush };
+NavPush.decorators = [
+    { type: Directive, args: [{
+                selector: '[navPush]'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+NavPush.ctorParameters = function () { return [
+    { type: NavController, decorators: [{ type: Optional },] },
+]; };
+NavPush.propDecorators = {
+    'navPush': [{ type: Input },],
+    'navParams': [{ type: Input },],
+    'onClick': [{ type: HostListener, args: ['click',] },],
+};
 function NavPush_tsickle_Closure_declarations() {
     /** @type {?} */
     NavPush.decorators;

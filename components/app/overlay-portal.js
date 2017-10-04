@@ -20,7 +20,7 @@ import { TransitionController } from '../../transitions/transition-controller';
 /**
  * @hidden
  */
-var OverlayPortal = /** @class */ (function (_super) {
+var OverlayPortal = (function (_super) {
     __extends(OverlayPortal, _super);
     /**
      * @param {?} app
@@ -80,35 +80,35 @@ var OverlayPortal = /** @class */ (function (_super) {
     OverlayPortal.prototype.getSecondaryIdentifier = function () {
         return null;
     };
-    OverlayPortal.decorators = [
-        { type: Directive, args: [{
-                    selector: '[overlay-portal]',
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    OverlayPortal.ctorParameters = function () { return [
-        { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
-        { type: Config, },
-        { type: Platform, },
-        { type: ElementRef, },
-        { type: NgZone, },
-        { type: Renderer, },
-        { type: ComponentFactoryResolver, },
-        { type: GestureController, },
-        { type: TransitionController, },
-        { type: DeepLinker, decorators: [{ type: Optional },] },
-        { type: ViewContainerRef, },
-        { type: DomController, },
-        { type: ErrorHandler, },
-    ]; };
-    OverlayPortal.propDecorators = {
-        '_overlayPortal': [{ type: Input, args: ['overlay-portal',] },],
-    };
     return OverlayPortal;
 }(NavControllerBase));
 export { OverlayPortal };
+OverlayPortal.decorators = [
+    { type: Directive, args: [{
+                selector: '[overlay-portal]',
+            },] },
+];
+/**
+ * @nocollapse
+ */
+OverlayPortal.ctorParameters = function () { return [
+    { type: App, decorators: [{ type: Inject, args: [forwardRef(function () { return App; }),] },] },
+    { type: Config, },
+    { type: Platform, },
+    { type: ElementRef, },
+    { type: NgZone, },
+    { type: Renderer, },
+    { type: ComponentFactoryResolver, },
+    { type: GestureController, },
+    { type: TransitionController, },
+    { type: DeepLinker, decorators: [{ type: Optional },] },
+    { type: ViewContainerRef, },
+    { type: DomController, },
+    { type: ErrorHandler, },
+]; };
+OverlayPortal.propDecorators = {
+    '_overlayPortal': [{ type: Input, args: ['overlay-portal',] },],
+};
 function OverlayPortal_tsickle_Closure_declarations() {
     /** @type {?} */
     OverlayPortal.decorators;

@@ -1,6 +1,6 @@
 {
   "name": "ionic-angular",
-  "version": "3.6.1-clone-201709242319",
+  "version": "3.7.0-clone-201710040710",
   "description": "A powerful framework for building mobile and progressive web apps with JavaScript and Angular",
   "keywords": [
     "ionic",
@@ -15,22 +15,22 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ChezRD/ionic-angular.git"
+    "url": "https://github.com/ChezRD/ionic.git"
   },
   "license": "MIT",
   "main": "umd/index.js",
   "module": "index.js",
   "es2015": "es2015/index.js",
   "peerDependencies": {
-    "@angular/common": "4.3.6",
-    "@angular/compiler": "4.3.6",
-    "@angular/compiler-cli": "4.3.6",
-    "@angular/core": "4.3.6",
-    "@angular/forms": "4.3.6",
-    "@angular/http": "4.3.6",
-    "@angular/platform-browser": "4.3.6",
-    "@angular/platform-browser-dynamic": "4.3.6",
+    "@angular/common": "4.4.3",
+    "@angular/compiler": "4.4.3",
+    "@angular/compiler-cli": "4.4.3",
+    "@angular/core": "4.4.3",
+    "@angular/forms": "4.4.3",
+    "@angular/http": "4.4.3",
+    "@angular/platform-browser": "4.4.3",
+    "@angular/platform-browser-dynamic": "4.4.3",
     "rxjs": "5.4.3",
-    "zone.js": "0.8.17"
+    "zone.js": "0.8.18"
   }
 }

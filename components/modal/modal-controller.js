@@ -35,12 +35,10 @@ import { DeepLinker } from '../../navigation/deep-linker';
  * \@Component(...)
  * class HomePage {
  *
- *  constructor(public modalCtrl: ModalController) {
- *
- *  }
+ *  constructor(public modalCtrl: ModalController) { }
  *
  *  presentProfileModal() {
- *    let profileModal = this.modalCtrl.create(Profile, { userId: 8675309 });
+ *    const profileModal = this.modalCtrl.create(Profile, { userId: 8675309 });
  *    profileModal.present();
  *  }
  *
@@ -131,7 +129,7 @@ import { DeepLinker } from '../../navigation/deep-linker';
  * \@demo /docs/demos/src/modal/
  * @see {\@link /docs/components#modals Modal Component Docs}
  */
-var ModalController = /** @class */ (function () {
+var ModalController = (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -155,20 +153,20 @@ var ModalController = /** @class */ (function () {
         if (opts === void 0) { opts = {}; }
         return new Modal(this._app, component, data, opts, this.config, this.deepLinker);
     };
-    ModalController.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    ModalController.ctorParameters = function () { return [
-        { type: App, },
-        { type: Config, },
-        { type: DeepLinker, },
-    ]; };
     return ModalController;
 }());
 export { ModalController };
+ModalController.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+ModalController.ctorParameters = function () { return [
+    { type: App, },
+    { type: Config, },
+    { type: DeepLinker, },
+]; };
 function ModalController_tsickle_Closure_declarations() {
     /** @type {?} */
     ModalController.decorators;

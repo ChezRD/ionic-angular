@@ -10,7 +10,7 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var util_1 = require("../util/util");
-    var OverlayProxy = /** @class */ (function () {
+    var OverlayProxy = (function () {
         /**
          * @param {?} _app
          * @param {?} _component

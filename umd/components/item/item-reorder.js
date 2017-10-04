@@ -15,7 +15,7 @@
     var util_1 = require("../../util/util");
     var item_reorder_gesture_1 = require("./item-reorder-gesture");
     var platform_1 = require("../../platform/platform");
-    var ReorderIndexes = /** @class */ (function () {
+    var ReorderIndexes = (function () {
         /**
          * @param {?} from
          * @param {?} to
@@ -162,7 +162,7 @@
      * @see {\@link ../../list/List List API Docs}
      * @see {\@link ../Item Item API Docs}
      */
-    var ItemReorder = /** @class */ (function () {
+    var ItemReorder = (function () {
         /**
          * @param {?} _plt
          * @param {?} _dom
@@ -353,34 +353,34 @@
         ItemReorder.prototype.getNativeElement = function () {
             return this._element;
         };
-        ItemReorder.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-list[reorder],ion-item-group[reorder]',
-                        host: {
-                            '[class.reorder-enabled]': '_enableReorder',
-                            '[class.reorder-visible]': '_visibleReorder',
-                            '[class.reorder-side-start]': '_isStart'
-                        }
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        ItemReorder.ctorParameters = function () { return [
-            { type: platform_1.Platform, },
-            { type: dom_controller_1.DomController, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: core_1.NgZone, },
-            { type: content_1.Content, decorators: [{ type: core_1.Optional },] },
-        ]; };
-        ItemReorder.propDecorators = {
-            'ionItemReorder': [{ type: core_1.Output },],
-            'side': [{ type: core_1.Input, args: ['side',] },],
-            'reorder': [{ type: core_1.Input },],
-        };
         return ItemReorder;
     }());
+    ItemReorder.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-list[reorder],ion-item-group[reorder]',
+                    host: {
+                        '[class.reorder-enabled]': '_enableReorder',
+                        '[class.reorder-visible]': '_visibleReorder',
+                        '[class.reorder-side-start]': '_isStart'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ItemReorder.ctorParameters = function () { return [
+        { type: platform_1.Platform, },
+        { type: dom_controller_1.DomController, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: core_1.NgZone, },
+        { type: content_1.Content, decorators: [{ type: core_1.Optional },] },
+    ]; };
+    ItemReorder.propDecorators = {
+        'ionItemReorder': [{ type: core_1.Output },],
+        'side': [{ type: core_1.Input, args: ['side',] },],
+        'reorder': [{ type: core_1.Input },],
+    };
     exports.ItemReorder = ItemReorder;
     function ItemReorder_tsickle_Closure_declarations() {
         /** @type {?} */

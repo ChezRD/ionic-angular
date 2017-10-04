@@ -84,7 +84,7 @@ import { FabList } from './fab-list';
  * \@demo /docs/demos/src/fab/
  * @see {\@link /docs/components#fabs FAB Component Docs}
  */
-var FabContainer = /** @class */ (function () {
+var FabContainer = (function () {
     /**
      * @param {?} plt
      */
@@ -167,25 +167,25 @@ var FabContainer = /** @class */ (function () {
     FabContainer.prototype.ngOnDestroy = function () {
         this._events.destroy();
     };
-    FabContainer.decorators = [
-        { type: Component, args: [{
-                    selector: 'ion-fab',
-                    template: '<ng-content></ng-content>'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    FabContainer.ctorParameters = function () { return [
-        { type: Platform, },
-    ]; };
-    FabContainer.propDecorators = {
-        '_mainButton': [{ type: ContentChild, args: [FabButton,] },],
-        '_fabLists': [{ type: ContentChildren, args: [FabList,] },],
-    };
     return FabContainer;
 }());
 export { FabContainer };
+FabContainer.decorators = [
+    { type: Component, args: [{
+                selector: 'ion-fab',
+                template: '<ng-content></ng-content>'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+FabContainer.ctorParameters = function () { return [
+    { type: Platform, },
+]; };
+FabContainer.propDecorators = {
+    '_mainButton': [{ type: ContentChild, args: [FabButton,] },],
+    '_fabLists': [{ type: ContentChildren, args: [FabList,] },],
+};
 function FabContainer_tsickle_Closure_declarations() {
     /** @type {?} */
     FabContainer.decorators;

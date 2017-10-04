@@ -24,13 +24,13 @@
      * \@usage
      * ```ts
      * export class MyClass {
-     *   constructor(public keyboard: Keyboard) {
      *
-     *   }
+     *   constructor(public keyboard: Keyboard) { }
+     *
      * }
      * ```
      */
-    var Keyboard = /** @class */ (function () {
+    var Keyboard = (function () {
         /**
          * @param {?} config
          * @param {?} _plt
@@ -287,20 +287,20 @@
             }
             return false;
         };
-        Keyboard.decorators = [
-            { type: core_1.Injectable },
-        ];
-        /**
-         * @nocollapse
-         */
-        Keyboard.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: platform_1.Platform, },
-            { type: core_1.NgZone, },
-            { type: dom_controller_1.DomController, },
-        ]; };
         return Keyboard;
     }());
+    Keyboard.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    Keyboard.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: platform_1.Platform, },
+        { type: core_1.NgZone, },
+        { type: dom_controller_1.DomController, },
+    ]; };
     exports.Keyboard = Keyboard;
     function Keyboard_tsickle_Closure_declarations() {
         /** @type {?} */

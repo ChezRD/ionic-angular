@@ -13,7 +13,7 @@ import { WPTransition } from '../../transitions/transition-wp';
  * \@description
  * App is a utility class used in Ionic to get information about various aspects of an app
  */
-var App = /** @class */ (function () {
+var App = (function () {
     /**
      * @param {?} _config
      * @param {?} _plt
@@ -180,16 +180,16 @@ var App = /** @class */ (function () {
     App.prototype.getActiveNavs = function (rootNavId) {
         var /** @type {?} */ portal = this._appRoot._getPortal(Constants.PORTAL_MODAL);
         if (portal.length() > 0) {
-            return /** @type {?} */ (findTopNavs(portal));
+            return (findTopNavs(portal));
         }
         if (!this._rootNavs || !this._rootNavs.size) {
             return [];
         }
         if (this._rootNavs.size === 1) {
-            return /** @type {?} */ (findTopNavs(this._rootNavs.values().next().value));
+            return (findTopNavs(this._rootNavs.values().next().value));
         }
         if (rootNavId) {
-            return /** @type {?} */ (findTopNavs(this._rootNavs.get(rootNavId)));
+            return (findTopNavs(this._rootNavs.get(rootNavId)));
         }
         // fallback to just using all root names
         var /** @type {?} */ activeNavs = [];
@@ -197,7 +197,7 @@ var App = /** @class */ (function () {
             var /** @type {?} */ topNavs = findTopNavs(nav);
             activeNavs = activeNavs.concat(topNavs);
         });
-        return /** @type {?} */ (activeNavs);
+        return (activeNavs);
     };
     /**
      * @return {?}
@@ -393,20 +393,20 @@ var App = /** @class */ (function () {
         }
         return null;
     };
-    App.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    App.ctorParameters = function () { return [
-        { type: Config, },
-        { type: Platform, },
-        { type: MenuController, decorators: [{ type: Optional },] },
-    ]; };
     return App;
 }());
 export { App };
+App.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+App.ctorParameters = function () { return [
+    { type: Config, },
+    { type: Platform, },
+    { type: MenuController, decorators: [{ type: Optional },] },
+]; };
 function App_tsickle_Closure_declarations() {
     /** @type {?} */
     App.decorators;

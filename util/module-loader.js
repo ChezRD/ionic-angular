@@ -5,7 +5,7 @@ export var /** @type {?} */ LAZY_LOADED_TOKEN = new OpaqueToken('LZYCMP');
 /**
  * @hidden
  */
-var ModuleLoader = /** @class */ (function () {
+var ModuleLoader = (function () {
     /**
      * @param {?} _ngModuleLoader
      * @param {?} _injector
@@ -50,19 +50,19 @@ var ModuleLoader = /** @class */ (function () {
     ModuleLoader.prototype.getComponentFactoryResolver = function (component) {
         return this._cfrMap.get(component);
     };
-    ModuleLoader.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    ModuleLoader.ctorParameters = function () { return [
-        { type: NgModuleLoader, },
-        { type: Injector, },
-    ]; };
     return ModuleLoader;
 }());
 export { ModuleLoader };
+ModuleLoader.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+ModuleLoader.ctorParameters = function () { return [
+    { type: NgModuleLoader, },
+    { type: Injector, },
+]; };
 function ModuleLoader_tsickle_Closure_declarations() {
     /** @type {?} */
     ModuleLoader.decorators;

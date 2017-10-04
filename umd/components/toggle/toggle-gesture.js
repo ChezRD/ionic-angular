@@ -25,7 +25,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var ToggleGesture = /** @class */ (function (_super) {
+    var ToggleGesture = (function (_super) {
         __extends(ToggleGesture, _super);
         /**
          * @param {?} plt

@@ -6,7 +6,7 @@ import { DIRECTION_HORIZONTAL, DIRECTION_VERTICAL, Hammer } from './hammer';
  *
  * TODO(mlynch): Re-enable the DOM event simulation that was causing issues (or verify hammer does this already, it might);
  */
-var Gesture = /** @class */ (function () {
+var Gesture = (function () {
     /**
      * @param {?} element
      * @param {?=} opts

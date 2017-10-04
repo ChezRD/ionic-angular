@@ -59,7 +59,7 @@ var __extends = (this && this.__extends) || (function () {
      *
      * \@demo /docs/demos/src/title/
      */
-    var ToolbarTitle = /** @class */ (function (_super) {
+    var ToolbarTitle = (function (_super) {
         __extends(ToolbarTitle, _super);
         /**
          * @param {?} config
@@ -81,28 +81,28 @@ var __extends = (this && this.__extends) || (function () {
         ToolbarTitle.prototype.getTitleText = function () {
             return this._elementRef.nativeElement.textContent;
         };
-        ToolbarTitle.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-title',
-                        template: '<div class="toolbar-title" [ngClass]="\'toolbar-title-\' + _mode">' +
-                            '<ng-content></ng-content>' +
-                            '</div>',
-                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                        encapsulation: core_1.ViewEncapsulation.None,
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        ToolbarTitle.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: toolbar_1.Toolbar, decorators: [{ type: core_1.Optional },] },
-            { type: navbar_1.Navbar, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [core_1.forwardRef(function () { return navbar_1.Navbar; }),] },] },
-        ]; };
         return ToolbarTitle;
     }(ion_1.Ion));
+    ToolbarTitle.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-title',
+                    template: '<div class="toolbar-title" [ngClass]="\'toolbar-title-\' + _mode">' +
+                        '<ng-content></ng-content>' +
+                        '</div>',
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core_1.ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ToolbarTitle.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: toolbar_1.Toolbar, decorators: [{ type: core_1.Optional },] },
+        { type: navbar_1.Navbar, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [core_1.forwardRef(function () { return navbar_1.Navbar; }),] },] },
+    ]; };
     exports.ToolbarTitle = ToolbarTitle;
     function ToolbarTitle_tsickle_Closure_declarations() {
         /** @type {?} */

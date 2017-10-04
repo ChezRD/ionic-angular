@@ -18,7 +18,7 @@ import { Ion } from '../ion';
  * Badges are simple components in Ionic containing numbers or text. You can display a badge to indicate that there is new information associated with the item it is on.
  * @see {\@link /docs/components/#badges Badges Component Docs}
  */
-var Badge = /** @class */ (function (_super) {
+var Badge = (function (_super) {
     __extends(Badge, _super);
     /**
      * @param {?} config
@@ -28,22 +28,22 @@ var Badge = /** @class */ (function (_super) {
     function Badge(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'badge') || this;
     }
-    Badge.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-badge'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Badge.ctorParameters = function () { return [
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
     return Badge;
 }(Ion));
 export { Badge };
+Badge.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-badge'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Badge.ctorParameters = function () { return [
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
 function Badge_tsickle_Closure_declarations() {
     /** @type {?} */
     Badge.decorators;

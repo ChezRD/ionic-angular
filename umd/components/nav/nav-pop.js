@@ -31,7 +31,7 @@
      * @see {\@link /docs/components#navigation Navigation Component Docs}
      * @see {\@link ../NavPush NavPush API Docs}
      */
-    var NavPop = /** @class */ (function () {
+    var NavPop = (function () {
         /**
          * @param {?} _nav
          */
@@ -55,22 +55,22 @@
             }
             return true;
         };
-        NavPop.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: '[navPop]'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        NavPop.ctorParameters = function () { return [
-            { type: nav_controller_1.NavController, decorators: [{ type: core_1.Optional },] },
-        ]; };
-        NavPop.propDecorators = {
-            'onClick': [{ type: core_1.HostListener, args: ['click',] },],
-        };
         return NavPop;
     }());
+    NavPop.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '[navPop]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NavPop.ctorParameters = function () { return [
+        { type: nav_controller_1.NavController, decorators: [{ type: core_1.Optional },] },
+    ]; };
+    NavPop.propDecorators = {
+        'onClick': [{ type: core_1.HostListener, args: ['click',] },],
+    };
     exports.NavPop = NavPop;
     function NavPop_tsickle_Closure_declarations() {
         /** @type {?} */

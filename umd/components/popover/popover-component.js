@@ -19,7 +19,7 @@
     /**
      * @hidden
      */
-    var PopoverCmp = /** @class */ (function () {
+    var PopoverCmp = (function () {
         /**
          * @param {?} _cfr
          * @param {?} _elementRef
@@ -121,39 +121,39 @@
             (void 0) /* assert */;
             this._gestureBlocker.destroy();
         };
-        PopoverCmp.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-popover',
-                        template: '<ion-backdrop (click)="_bdClick()" [hidden]="!d.showBackdrop"></ion-backdrop>' +
-                            '<div class="popover-wrapper">' +
-                            '<div class="popover-arrow"></div>' +
-                            '<div class="popover-content">' +
-                            '<div class="popover-viewport">' +
-                            '<div #viewport nav-viewport></div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        PopoverCmp.ctorParameters = function () { return [
-            { type: core_1.ComponentFactoryResolver, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: config_1.Config, },
-            { type: nav_params_1.NavParams, },
-            { type: view_controller_1.ViewController, },
-            { type: gesture_controller_1.GestureController, },
-            { type: module_loader_1.ModuleLoader, },
-        ]; };
-        PopoverCmp.propDecorators = {
-            '_viewport': [{ type: core_1.ViewChild, args: ['viewport', { read: core_1.ViewContainerRef },] },],
-            '_keyUp': [{ type: core_1.HostListener, args: ['body:keyup', ['$event'],] },],
-        };
         return PopoverCmp;
     }());
+    PopoverCmp.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-popover',
+                    template: '<ion-backdrop (click)="_bdClick()" [hidden]="!d.showBackdrop"></ion-backdrop>' +
+                        '<div class="popover-wrapper">' +
+                        '<div class="popover-arrow"></div>' +
+                        '<div class="popover-content">' +
+                        '<div class="popover-viewport">' +
+                        '<div #viewport nav-viewport></div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    PopoverCmp.ctorParameters = function () { return [
+        { type: core_1.ComponentFactoryResolver, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: config_1.Config, },
+        { type: nav_params_1.NavParams, },
+        { type: view_controller_1.ViewController, },
+        { type: gesture_controller_1.GestureController, },
+        { type: module_loader_1.ModuleLoader, },
+    ]; };
+    PopoverCmp.propDecorators = {
+        '_viewport': [{ type: core_1.ViewChild, args: ['viewport', { read: core_1.ViewContainerRef },] },],
+        '_keyUp': [{ type: core_1.HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     exports.PopoverCmp = PopoverCmp;
     function PopoverCmp_tsickle_Closure_declarations() {
         /** @type {?} */

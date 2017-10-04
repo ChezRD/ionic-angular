@@ -23,7 +23,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var ToolbarBase = /** @class */ (function (_super) {
+    var ToolbarBase = (function (_super) {
         __extends(ToolbarBase, _super);
         /**
          * @param {?} config

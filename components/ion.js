@@ -2,7 +2,7 @@ import { Input } from '@angular/core';
 /**
  * @hidden
  */
-var Ion = /** @class */ (function () {
+var Ion = (function () {
     /**
      * @param {?} config
      * @param {?} elementRef
@@ -144,13 +144,13 @@ var Ion = /** @class */ (function () {
     Ion.prototype.getNativeElement = function () {
         return this._elementRef.nativeElement;
     };
-    Ion.propDecorators = {
-        'color': [{ type: Input },],
-        'mode': [{ type: Input },],
-    };
     return Ion;
 }());
 export { Ion };
+Ion.propDecorators = {
+    'color': [{ type: Input },],
+    'mode': [{ type: Input },],
+};
 function Ion_tsickle_Closure_declarations() {
     /** @type {?} */
     Ion.propDecorators;

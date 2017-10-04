@@ -93,7 +93,7 @@
      * @see {\@link /docs/components#menus Menu Component Docs}
      * @see {\@link ../../menu/Menu Menu API Docs}
      */
-    var MenuToggle = /** @class */ (function () {
+    var MenuToggle = (function () {
         /**
          * @param {?} _menu
          * @param {?} _viewCtrl
@@ -150,29 +150,29 @@
             enumerable: true,
             configurable: true
         });
-        MenuToggle.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: '[menuToggle]',
-                        host: {
-                            '[hidden]': 'isHidden'
-                        }
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        MenuToggle.ctorParameters = function () { return [
-            { type: menu_controller_1.MenuController, },
-            { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
-            { type: button_1.Button, decorators: [{ type: core_1.Optional },] },
-            { type: navbar_1.Navbar, decorators: [{ type: core_1.Optional },] },
-        ]; };
-        MenuToggle.propDecorators = {
-            'menuToggle': [{ type: core_1.Input },],
-            'toggle': [{ type: core_1.HostListener, args: ['click',] },],
-        };
         return MenuToggle;
     }());
+    MenuToggle.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '[menuToggle]',
+                    host: {
+                        '[hidden]': 'isHidden'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    MenuToggle.ctorParameters = function () { return [
+        { type: menu_controller_1.MenuController, },
+        { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
+        { type: button_1.Button, decorators: [{ type: core_1.Optional },] },
+        { type: navbar_1.Navbar, decorators: [{ type: core_1.Optional },] },
+    ]; };
+    MenuToggle.propDecorators = {
+        'menuToggle': [{ type: core_1.Input },],
+        'toggle': [{ type: core_1.HostListener, args: ['click',] },],
+    };
     exports.MenuToggle = MenuToggle;
     function MenuToggle_tsickle_Closure_declarations() {
         /** @type {?} */

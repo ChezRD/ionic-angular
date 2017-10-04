@@ -13,7 +13,7 @@ import { Transition } from './transition';
 /**
  * @hidden
  */
-var PageTransition = /** @class */ (function (_super) {
+var PageTransition = (function (_super) {
     __extends(PageTransition, _super);
     function PageTransition() {
         return _super !== null && _super.apply(this, arguments) || this;

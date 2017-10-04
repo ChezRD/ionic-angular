@@ -138,7 +138,7 @@ var __extends = (this && this.__extends) || (function () {
      * @see {\@link ../../fab/FabButton FabButton API Docs}
      * @see {\@link ../../fab/FabContainer FabContainer API Docs}
      */
-    var Button = /** @class */ (function (_super) {
+    var Button = (function (_super) {
         __extends(Button, _super);
         /**
          * @param {?} ionButton
@@ -412,42 +412,42 @@ var __extends = (this && this.__extends) || (function () {
                 }
             }
         };
-        Button.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: '[ion-button]',
-                        template: '<span class="button-inner">' +
-                            '<ng-content></ng-content>' +
-                            '</span>' +
-                            '<div class="button-effect"></div>',
-                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                        encapsulation: core_1.ViewEncapsulation.None,
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Button.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: core_1.Attribute, args: ['ion-button',] },] },
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-        ]; };
-        Button.propDecorators = {
-            'large': [{ type: core_1.Input },],
-            'small': [{ type: core_1.Input },],
-            'default': [{ type: core_1.Input },],
-            'outline': [{ type: core_1.Input },],
-            'clear': [{ type: core_1.Input },],
-            'solid': [{ type: core_1.Input },],
-            'round': [{ type: core_1.Input },],
-            'block': [{ type: core_1.Input },],
-            'full': [{ type: core_1.Input },],
-            'strong': [{ type: core_1.Input },],
-            'mode': [{ type: core_1.Input },],
-            'color': [{ type: core_1.Input },],
-        };
         return Button;
     }(ion_1.Ion));
+    Button.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: '[ion-button]',
+                    template: '<span class="button-inner">' +
+                        '<ng-content></ng-content>' +
+                        '</span>' +
+                        '<div class="button-effect"></div>',
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core_1.ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Button.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: core_1.Attribute, args: ['ion-button',] },] },
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+    ]; };
+    Button.propDecorators = {
+        'large': [{ type: core_1.Input },],
+        'small': [{ type: core_1.Input },],
+        'default': [{ type: core_1.Input },],
+        'outline': [{ type: core_1.Input },],
+        'clear': [{ type: core_1.Input },],
+        'solid': [{ type: core_1.Input },],
+        'round': [{ type: core_1.Input },],
+        'block': [{ type: core_1.Input },],
+        'full': [{ type: core_1.Input },],
+        'strong': [{ type: core_1.Input },],
+        'mode': [{ type: core_1.Input },],
+        'color': [{ type: core_1.Input },],
+    };
     exports.Button = Button;
     function Button_tsickle_Closure_declarations() {
         /** @type {?} */

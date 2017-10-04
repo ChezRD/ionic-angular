@@ -94,7 +94,7 @@ export function getElementIndex(ele) {
  */
 export function queryChildren(parentEle, query) {
     if (parentEle) {
-        return /** @type {?} */ (parentEle.querySelectorAll(query));
+        return (parentEle.querySelectorAll(query));
     }
     return [];
 }

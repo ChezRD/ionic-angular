@@ -13,7 +13,7 @@ import { Transition } from '../../transitions/transition';
 /**
  * Animations for alerts
  */
-var AlertPopIn = /** @class */ (function (_super) {
+var AlertPopIn = (function (_super) {
     __extends(AlertPopIn, _super);
     function AlertPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -36,7 +36,7 @@ var AlertPopIn = /** @class */ (function (_super) {
     return AlertPopIn;
 }(Transition));
 export { AlertPopIn };
-var AlertPopOut = /** @class */ (function (_super) {
+var AlertPopOut = (function (_super) {
     __extends(AlertPopOut, _super);
     function AlertPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -59,7 +59,7 @@ var AlertPopOut = /** @class */ (function (_super) {
     return AlertPopOut;
 }(Transition));
 export { AlertPopOut };
-var AlertMdPopIn = /** @class */ (function (_super) {
+var AlertMdPopIn = (function (_super) {
     __extends(AlertMdPopIn, _super);
     function AlertMdPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -82,7 +82,7 @@ var AlertMdPopIn = /** @class */ (function (_super) {
     return AlertMdPopIn;
 }(Transition));
 export { AlertMdPopIn };
-var AlertMdPopOut = /** @class */ (function (_super) {
+var AlertMdPopOut = (function (_super) {
     __extends(AlertMdPopOut, _super);
     function AlertMdPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -105,7 +105,7 @@ var AlertMdPopOut = /** @class */ (function (_super) {
     return AlertMdPopOut;
 }(Transition));
 export { AlertMdPopOut };
-var AlertWpPopIn = /** @class */ (function (_super) {
+var AlertWpPopIn = (function (_super) {
     __extends(AlertWpPopIn, _super);
     function AlertWpPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -128,7 +128,7 @@ var AlertWpPopIn = /** @class */ (function (_super) {
     return AlertWpPopIn;
 }(Transition));
 export { AlertWpPopIn };
-var AlertWpPopOut = /** @class */ (function (_super) {
+var AlertWpPopOut = (function (_super) {
     __extends(AlertWpPopOut, _super);
     function AlertWpPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;

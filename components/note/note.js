@@ -35,7 +35,7 @@ import { Ion } from '../ion';
  * ```
  * {\@link /docs/api/components/api/components/item/item ion-item}
  */
-var Note = /** @class */ (function (_super) {
+var Note = (function (_super) {
     __extends(Note, _super);
     /**
      * @param {?} config
@@ -45,22 +45,22 @@ var Note = /** @class */ (function (_super) {
     function Note(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'note') || this;
     }
-    Note.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-note'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Note.ctorParameters = function () { return [
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
     return Note;
 }(Ion));
 export { Note };
+Note.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-note'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Note.ctorParameters = function () { return [
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
 function Note_tsickle_Closure_declarations() {
     /** @type {?} */
     Note.decorators;

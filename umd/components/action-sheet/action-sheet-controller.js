@@ -47,10 +47,10 @@
      *
      * export class MyClass{
      *
-     *  constructor(public actionSheetCtrl: ActionSheetController) {}
+     *  constructor(public actionSheetCtrl: ActionSheetController) { }
      *
      *  presentActionSheet() {
-     *    let actionSheet = this.actionSheetCtrl.create({
+     *    const actionSheet = this.actionSheetCtrl.create({
      *      title: 'Modify your album',
      *      buttons: [
      *        {
@@ -123,7 +123,7 @@
      * out first, *then* start the next transition.
      *
      * ```ts
-     * let actionSheet = this.actionSheetCtrl.create({
+     * const actionSheet = this.actionSheetCtrl.create({
      *   title: 'Hello',
      *   buttons: [{
      *     text: 'Ok',
@@ -162,7 +162,7 @@
      * \@demo /docs/demos/src/action-sheet/
      * @see {\@link /docs/components#action-sheets ActionSheet Component Docs}
      */
-    var ActionSheetController = /** @class */ (function () {
+    var ActionSheetController = (function () {
         /**
          * @param {?} _app
          * @param {?} config
@@ -180,18 +180,18 @@
             if (opts === void 0) { opts = {}; }
             return new action_sheet_1.ActionSheet(this._app, opts, this.config);
         };
-        ActionSheetController.decorators = [
-            { type: core_1.Injectable },
-        ];
-        /**
-         * @nocollapse
-         */
-        ActionSheetController.ctorParameters = function () { return [
-            { type: app_1.App, },
-            { type: config_1.Config, },
-        ]; };
         return ActionSheetController;
     }());
+    ActionSheetController.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    ActionSheetController.ctorParameters = function () { return [
+        { type: app_1.App, },
+        { type: config_1.Config, },
+    ]; };
     exports.ActionSheetController = ActionSheetController;
     function ActionSheetController_tsickle_Closure_declarations() {
         /** @type {?} */

@@ -19,13 +19,13 @@ import { ErrorHandler } from '@angular/core';
  * ### IonicErrorHandler Example
  *
  * ```typescript
- * import { NgModule, ErrorHandler } from '\@angular/core';
+ * import { ErrorHandler, NgModule } from '\@angular/core';
  * import { IonicErrorHandler } from 'ionic-angular';
  *
  * \@NgModule({
  *   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]
  * })
- * class AppModule {}
+ * class AppModule { }
  * ```
  *
  *
@@ -44,12 +44,12 @@ import { ErrorHandler } from '@angular/core';
  * \@NgModule({
  *   providers: [{ provide: ErrorHandler, useClass: MyErrorHandler }]
  * })
- * class AppModule {}
+ * class AppModule { }
  * ```
  *
  * More information about Angular's [`ErrorHandler`](https://angular.io/docs/ts/latest/api/core/index/ErrorHandler-class.html).
  */
-var IonicErrorHandler = /** @class */ (function (_super) {
+var IonicErrorHandler = (function (_super) {
     __extends(IonicErrorHandler, _super);
     function IonicErrorHandler() {
         return _super.call(this, false) || this;

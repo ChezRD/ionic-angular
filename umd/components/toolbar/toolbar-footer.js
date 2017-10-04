@@ -42,7 +42,7 @@ var __extends = (this && this.__extends) || (function () {
      * ```
      *
      */
-    var Footer = /** @class */ (function (_super) {
+    var Footer = (function (_super) {
         __extends(Footer, _super);
         /**
          * @param {?} config
@@ -55,22 +55,22 @@ var __extends = (this && this.__extends) || (function () {
             viewCtrl && viewCtrl._setFooter(_this);
             return _this;
         }
-        Footer.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-footer'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Footer.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
-        ]; };
         return Footer;
     }(ion_1.Ion));
+    Footer.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-footer'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Footer.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
+    ]; };
     exports.Footer = Footer;
     function Footer_tsickle_Closure_declarations() {
         /** @type {?} */

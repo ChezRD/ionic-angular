@@ -21,7 +21,7 @@ var __extends = (this && this.__extends) || (function () {
     Object.defineProperty(exports, "__esModule", { value: true });
     var animation_1 = require("../../animations/animation");
     var transition_1 = require("../../transitions/transition");
-    var ActionSheetSlideIn = /** @class */ (function (_super) {
+    var ActionSheetSlideIn = (function (_super) {
         __extends(ActionSheetSlideIn, _super);
         function ActionSheetSlideIn() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -40,7 +40,7 @@ var __extends = (this && this.__extends) || (function () {
         return ActionSheetSlideIn;
     }(transition_1.Transition));
     exports.ActionSheetSlideIn = ActionSheetSlideIn;
-    var ActionSheetSlideOut = /** @class */ (function (_super) {
+    var ActionSheetSlideOut = (function (_super) {
         __extends(ActionSheetSlideOut, _super);
         function ActionSheetSlideOut() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -59,7 +59,7 @@ var __extends = (this && this.__extends) || (function () {
         return ActionSheetSlideOut;
     }(transition_1.Transition));
     exports.ActionSheetSlideOut = ActionSheetSlideOut;
-    var ActionSheetMdSlideIn = /** @class */ (function (_super) {
+    var ActionSheetMdSlideIn = (function (_super) {
         __extends(ActionSheetMdSlideIn, _super);
         function ActionSheetMdSlideIn() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -78,7 +78,7 @@ var __extends = (this && this.__extends) || (function () {
         return ActionSheetMdSlideIn;
     }(transition_1.Transition));
     exports.ActionSheetMdSlideIn = ActionSheetMdSlideIn;
-    var ActionSheetMdSlideOut = /** @class */ (function (_super) {
+    var ActionSheetMdSlideOut = (function (_super) {
         __extends(ActionSheetMdSlideOut, _super);
         function ActionSheetMdSlideOut() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -97,7 +97,7 @@ var __extends = (this && this.__extends) || (function () {
         return ActionSheetMdSlideOut;
     }(transition_1.Transition));
     exports.ActionSheetMdSlideOut = ActionSheetMdSlideOut;
-    var ActionSheetWpSlideIn = /** @class */ (function (_super) {
+    var ActionSheetWpSlideIn = (function (_super) {
         __extends(ActionSheetWpSlideIn, _super);
         function ActionSheetWpSlideIn() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -116,7 +116,7 @@ var __extends = (this && this.__extends) || (function () {
         return ActionSheetWpSlideIn;
     }(transition_1.Transition));
     exports.ActionSheetWpSlideIn = ActionSheetWpSlideIn;
-    var ActionSheetWpSlideOut = /** @class */ (function (_super) {
+    var ActionSheetWpSlideOut = (function (_super) {
         __extends(ActionSheetWpSlideOut, _super);
         function ActionSheetWpSlideOut() {
             return _super !== null && _super.apply(this, arguments) || this;

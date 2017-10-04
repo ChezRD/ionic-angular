@@ -99,7 +99,7 @@ import { Ion } from '../ion';
  * \@demo /docs/demos/src/chip/
  *
  */
-var Chip = /** @class */ (function (_super) {
+var Chip = (function (_super) {
     __extends(Chip, _super);
     /**
      * @param {?} config
@@ -109,22 +109,22 @@ var Chip = /** @class */ (function (_super) {
     function Chip(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'chip') || this;
     }
-    Chip.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-chip'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Chip.ctorParameters = function () { return [
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
     return Chip;
 }(Ion));
 export { Chip };
+Chip.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-chip'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Chip.ctorParameters = function () { return [
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
 function Chip_tsickle_Closure_declarations() {
     /** @type {?} */
     Chip.decorators;

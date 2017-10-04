@@ -63,7 +63,7 @@ var __extends = (this && this.__extends) || (function () {
      * @see {\@link ../ShowWhen ShowWhen API Docs}
      * @see {\@link ../../../platform/Platform Platform API Docs}
      */
-    var HideWhen = /** @class */ (function (_super) {
+    var HideWhen = (function (_super) {
         __extends(HideWhen, _super);
         /**
          * @param {?} hideWhen
@@ -73,24 +73,24 @@ var __extends = (this && this.__extends) || (function () {
         function HideWhen(hideWhen, plt, zone) {
             return _super.call(this, hideWhen, plt, zone) || this;
         }
-        HideWhen.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: '[hideWhen]',
-                        host: {
-                            '[class.hidden-hide-when]': 'isMatch'
-                        }
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        HideWhen.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: core_1.Attribute, args: ['hideWhen',] },] },
-            { type: platform_1.Platform, },
-            { type: core_1.NgZone, },
-        ]; };
         return HideWhen;
     }(display_when_1.DisplayWhen));
+    HideWhen.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '[hideWhen]',
+                    host: {
+                        '[class.hidden-hide-when]': 'isMatch'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    HideWhen.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: core_1.Attribute, args: ['hideWhen',] },] },
+        { type: platform_1.Platform, },
+        { type: core_1.NgZone, },
+    ]; };
     exports.HideWhen = HideWhen;
     function HideWhen_tsickle_Closure_declarations() {
         /** @type {?} */

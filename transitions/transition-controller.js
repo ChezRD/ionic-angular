@@ -5,7 +5,7 @@ import { Platform } from '../platform/platform';
 /**
  * @hidden
  */
-var TransitionController = /** @class */ (function () {
+var TransitionController = (function () {
     /**
      * @param {?} plt
      * @param {?} _config
@@ -21,7 +21,7 @@ var TransitionController = /** @class */ (function () {
      * @return {?}
      */
     TransitionController.prototype.getRootTrnsId = function (nav) {
-        nav = /** @type {?} */ (nav.parent);
+        nav = (nav.parent);
         while (nav) {
             if (isPresent(nav._trnsId)) {
                 return nav._trnsId;
@@ -73,19 +73,19 @@ var TransitionController = /** @class */ (function () {
             delete this._trns[trnsId];
         }
     };
-    TransitionController.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    TransitionController.ctorParameters = function () { return [
-        { type: Platform, },
-        { type: Config, },
-    ]; };
     return TransitionController;
 }());
 export { TransitionController };
+TransitionController.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+TransitionController.ctorParameters = function () { return [
+    { type: Platform, },
+    { type: Config, },
+]; };
 function TransitionController_tsickle_Closure_declarations() {
     /** @type {?} */
     TransitionController.decorators;

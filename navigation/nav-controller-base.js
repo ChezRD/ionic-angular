@@ -21,7 +21,7 @@ import { SwipeBackGesture } from './swipe-back';
  * @hidden
  * This class is for internal use only. It is not exported publicly.
  */
-var NavControllerBase = /** @class */ (function (_super) {
+var NavControllerBase = (function (_super) {
     __extends(NavControllerBase, _super);
     /**
      * @param {?} parent
@@ -1321,12 +1321,12 @@ var NavControllerBase = /** @class */ (function (_super) {
         console.warn('(getActiveChildNav) is deprecated and will be removed in the next major release. Use getActiveChildNavs instead.');
         return this._children[this._children.length - 1];
     };
-    NavControllerBase.propDecorators = {
-        'swipeBackEnabled': [{ type: Input },],
-    };
     return NavControllerBase;
 }(Ion));
 export { NavControllerBase };
+NavControllerBase.propDecorators = {
+    'swipeBackEnabled': [{ type: Input },],
+};
 function NavControllerBase_tsickle_Closure_declarations() {
     /** @type {?} */
     NavControllerBase.propDecorators;

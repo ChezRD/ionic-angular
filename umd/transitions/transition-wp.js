@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
     var page_transition_1 = require("./page-transition");
     var /** @type {?} */ SHOW_BACK_BTN_CSS = 'show-back-button';
     var /** @type {?} */ SCALE_SMALL = .95;
-    var WPTransition = /** @class */ (function (_super) {
+    var WPTransition = (function (_super) {
         __extends(WPTransition, _super);
         function WPTransition() {
             return _super !== null && _super.apply(this, arguments) || this;

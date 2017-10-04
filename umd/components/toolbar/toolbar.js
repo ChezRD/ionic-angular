@@ -110,7 +110,7 @@ var __extends = (this && this.__extends) || (function () {
      * \@demo /docs/demos/src/toolbar/
      * @see {\@link ../Navbar/ Navbar API Docs}
      */
-    var Toolbar = /** @class */ (function (_super) {
+    var Toolbar = (function (_super) {
         __extends(Toolbar, _super);
         /**
          * @param {?} config
@@ -122,33 +122,33 @@ var __extends = (this && this.__extends) || (function () {
             _this._sbPadding = config.getBoolean('statusbarPadding');
             return _this;
         }
-        Toolbar.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-toolbar',
-                        template: '<div class="toolbar-background" [ngClass]="\'toolbar-background-\' + _mode"></div>' +
-                            '<ng-content select="[menuToggle],ion-buttons[left]"></ng-content>' +
-                            '<ng-content select="ion-buttons[start]"></ng-content>' +
-                            '<ng-content select="ion-buttons[end],ion-buttons[right]"></ng-content>' +
-                            '<div class="toolbar-content" [ngClass]="\'toolbar-content-\' + _mode">' +
-                            '<ng-content></ng-content>' +
-                            '</div>',
-                        host: {
-                            'class': 'toolbar',
-                            '[class.statusbar-padding]': '_sbPadding'
-                        },
-                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Toolbar.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-        ]; };
         return Toolbar;
     }(toolbar_base_1.ToolbarBase));
+    Toolbar.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-toolbar',
+                    template: '<div class="toolbar-background" [ngClass]="\'toolbar-background-\' + _mode"></div>' +
+                        '<ng-content select="[menuToggle],ion-buttons[left]"></ng-content>' +
+                        '<ng-content select="ion-buttons[start]"></ng-content>' +
+                        '<ng-content select="ion-buttons[end],ion-buttons[right]"></ng-content>' +
+                        '<div class="toolbar-content" [ngClass]="\'toolbar-content-\' + _mode">' +
+                        '<ng-content></ng-content>' +
+                        '</div>',
+                    host: {
+                        'class': 'toolbar',
+                        '[class.statusbar-padding]': '_sbPadding'
+                    },
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Toolbar.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+    ]; };
     exports.Toolbar = Toolbar;
     function Toolbar_tsickle_Closure_declarations() {
         /** @type {?} */

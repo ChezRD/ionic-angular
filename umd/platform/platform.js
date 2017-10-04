@@ -37,7 +37,7 @@
      * ```
      * \@demo /docs/demos/src/platform/
      */
-    var Platform = /** @class */ (function () {
+    var Platform = (function () {
         function Platform() {
             var _this = this;
             this._versions = {};
@@ -71,9 +71,9 @@
              */
             this.resume = new core_1.EventEmitter();
             /**
-             * The resize event emits when the native platform pulls the application
-             * out from the background. This event would emit when a Cordova app comes
-             * out from the background, however, it would not fire on a standard web browser.
+             * The resize event emits when the browser window has changed dimensions. This
+             * could be from a browser window being physically resized, or from a device
+             * changing orientation.
              */
             this.resize = new core_1.EventEmitter();
             this._readyPromise = new Promise(function (res) { _this._readyResolve = res; });
@@ -499,7 +499,7 @@
          * @return {?}
          */
         Platform.prototype.getElementFromPoint = function (x, y) {
-            return /** @type {?} */ (this._doc['elementFromPoint'](x, y));
+            return (this._doc['elementFromPoint'](x, y));
         };
         /**
          * @hidden
@@ -1074,9 +1074,9 @@
          */
         Platform.prototype.resume;
         /**
-         * The resize event emits when the native platform pulls the application
-         * out from the background. This event would emit when a Cordova app comes
-         * out from the background, however, it would not fire on a standard web browser.
+         * The resize event emits when the browser window has changed dimensions. This
+         * could be from a browser window being physically resized, or from a device
+         * changing orientation.
          * @type {?}
          */
         Platform.prototype.resize;
@@ -1103,7 +1103,7 @@
     /**
      * @hidden
      */
-    var PlatformNode = /** @class */ (function () {
+    var PlatformNode = (function () {
         /**
          * @param {?} registry
          * @param {?} platformName

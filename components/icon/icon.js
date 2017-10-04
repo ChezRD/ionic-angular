@@ -43,7 +43,7 @@ import { Ion } from '../ion';
  * @see {\@link /docs/components#icons Icon Component Docs}
  *
  */
-var Icon = /** @class */ (function (_super) {
+var Icon = (function (_super) {
     __extends(Icon, _super);
     /**
      * @param {?} config
@@ -215,32 +215,32 @@ var Icon = /** @class */ (function (_super) {
             .replace('-', ' ');
         this.setElementAttribute('aria-label', label);
     };
-    Icon.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-icon',
-                    host: {
-                        'role': 'img'
-                    }
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Icon.ctorParameters = function () { return [
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
-    Icon.propDecorators = {
-        'name': [{ type: Input },],
-        'ios': [{ type: Input },],
-        'md': [{ type: Input },],
-        'isActive': [{ type: Input },],
-        '_hidden': [{ type: HostBinding, args: ['class.hide',] },],
-    };
     return Icon;
 }(Ion));
 export { Icon };
+Icon.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-icon',
+                host: {
+                    'role': 'img'
+                }
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Icon.ctorParameters = function () { return [
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
+Icon.propDecorators = {
+    'name': [{ type: Input },],
+    'ios': [{ type: Input },],
+    'md': [{ type: Input },],
+    'isActive': [{ type: Input },],
+    '_hidden': [{ type: HostBinding, args: ['class.hide',] },],
+};
 function Icon_tsickle_Closure_declarations() {
     /** @type {?} */
     Icon.decorators;

@@ -16,7 +16,7 @@
     /**
      * @hidden
      */
-    var DeepLinker = /** @class */ (function () {
+    var DeepLinker = (function () {
         /**
          * @param {?} _app
          * @param {?} _serializer

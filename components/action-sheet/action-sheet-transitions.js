@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import { Animation } from '../../animations/animation';
 import { Transition } from '../../transitions/transition';
-var ActionSheetSlideIn = /** @class */ (function (_super) {
+var ActionSheetSlideIn = (function (_super) {
     __extends(ActionSheetSlideIn, _super);
     function ActionSheetSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -29,7 +29,7 @@ var ActionSheetSlideIn = /** @class */ (function (_super) {
     return ActionSheetSlideIn;
 }(Transition));
 export { ActionSheetSlideIn };
-var ActionSheetSlideOut = /** @class */ (function (_super) {
+var ActionSheetSlideOut = (function (_super) {
     __extends(ActionSheetSlideOut, _super);
     function ActionSheetSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -48,7 +48,7 @@ var ActionSheetSlideOut = /** @class */ (function (_super) {
     return ActionSheetSlideOut;
 }(Transition));
 export { ActionSheetSlideOut };
-var ActionSheetMdSlideIn = /** @class */ (function (_super) {
+var ActionSheetMdSlideIn = (function (_super) {
     __extends(ActionSheetMdSlideIn, _super);
     function ActionSheetMdSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -67,7 +67,7 @@ var ActionSheetMdSlideIn = /** @class */ (function (_super) {
     return ActionSheetMdSlideIn;
 }(Transition));
 export { ActionSheetMdSlideIn };
-var ActionSheetMdSlideOut = /** @class */ (function (_super) {
+var ActionSheetMdSlideOut = (function (_super) {
     __extends(ActionSheetMdSlideOut, _super);
     function ActionSheetMdSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -86,7 +86,7 @@ var ActionSheetMdSlideOut = /** @class */ (function (_super) {
     return ActionSheetMdSlideOut;
 }(Transition));
 export { ActionSheetMdSlideOut };
-var ActionSheetWpSlideIn = /** @class */ (function (_super) {
+var ActionSheetWpSlideIn = (function (_super) {
     __extends(ActionSheetWpSlideIn, _super);
     function ActionSheetWpSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -105,7 +105,7 @@ var ActionSheetWpSlideIn = /** @class */ (function (_super) {
     return ActionSheetWpSlideIn;
 }(Transition));
 export { ActionSheetWpSlideIn };
-var ActionSheetWpSlideOut = /** @class */ (function (_super) {
+var ActionSheetWpSlideOut = (function (_super) {
     __extends(ActionSheetWpSlideOut, _super);
     function ActionSheetWpSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;

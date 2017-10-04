@@ -14,7 +14,7 @@
     /**
      * @hidden
      */
-    var TabHighlight = /** @class */ (function () {
+    var TabHighlight = (function () {
         /**
          * @param {?} _elementRef
          * @param {?} _dom
@@ -48,20 +48,20 @@
                 });
             }, 32);
         };
-        TabHighlight.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: '.tab-highlight'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        TabHighlight.ctorParameters = function () { return [
-            { type: core_1.ElementRef, },
-            { type: dom_controller_1.DomController, },
-        ]; };
         return TabHighlight;
     }());
+    TabHighlight.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '.tab-highlight'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    TabHighlight.ctorParameters = function () { return [
+        { type: core_1.ElementRef, },
+        { type: dom_controller_1.DomController, },
+    ]; };
     exports.TabHighlight = TabHighlight;
     function TabHighlight_tsickle_Closure_declarations() {
         /** @type {?} */

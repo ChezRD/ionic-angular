@@ -21,7 +21,7 @@ export class TransitionController {
      * @return {?}
      */
     getRootTrnsId(nav) {
-        nav = /** @type {?} */ (nav.parent);
+        nav = (nav.parent);
         while (nav) {
             if (isPresent(nav._trnsId)) {
                 return nav._trnsId;

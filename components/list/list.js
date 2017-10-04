@@ -51,7 +51,7 @@ import { Platform } from '../../platform/platform';
  * ```
  *
  */
-var List = /** @class */ (function (_super) {
+var List = (function (_super) {
     __extends(List, _super);
     /**
      * @param {?} config
@@ -127,28 +127,28 @@ var List = /** @class */ (function (_super) {
     List.prototype.destroy = function () {
         this._slidingGesture && this._slidingGesture.destroy();
     };
-    List.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-list',
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    List.ctorParameters = function () { return [
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-        { type: Platform, },
-        { type: GestureController, },
-        { type: DomController, },
-    ]; };
-    List.propDecorators = {
-        'sliding': [{ type: Input },],
-    };
     return List;
 }(Ion));
 export { List };
+List.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-list',
+            },] },
+];
+/**
+ * @nocollapse
+ */
+List.ctorParameters = function () { return [
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+    { type: Platform, },
+    { type: GestureController, },
+    { type: DomController, },
+]; };
+List.propDecorators = {
+    'sliding': [{ type: Input },],
+};
 function List_tsickle_Closure_declarations() {
     /** @type {?} */
     List.decorators;

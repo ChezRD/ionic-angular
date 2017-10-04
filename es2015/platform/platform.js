@@ -59,9 +59,9 @@ export class Platform {
          */
         this.resume = new EventEmitter();
         /**
-         * The resize event emits when the native platform pulls the application
-         * out from the background. This event would emit when a Cordova app comes
-         * out from the background, however, it would not fire on a standard web browser.
+         * The resize event emits when the browser window has changed dimensions. This
+         * could be from a browser window being physically resized, or from a device
+         * changing orientation.
          */
         this.resize = new EventEmitter();
         this._readyPromise = new Promise(res => { this._readyResolve = res; });
@@ -484,7 +484,7 @@ export class Platform {
      * @return {?}
      */
     getElementFromPoint(x, y) {
-        return /** @type {?} */ (this._doc['elementFromPoint'](x, y));
+        return (this._doc['elementFromPoint'](x, y));
     }
     /**
      * @hidden
@@ -1054,9 +1054,9 @@ function Platform_tsickle_Closure_declarations() {
      */
     Platform.prototype.resume;
     /**
-     * The resize event emits when the native platform pulls the application
-     * out from the background. This event would emit when a Cordova app comes
-     * out from the background, however, it would not fire on a standard web browser.
+     * The resize event emits when the browser window has changed dimensions. This
+     * could be from a browser window being physically resized, or from a device
+     * changing orientation.
      * @type {?}
      */
     Platform.prototype.resize;

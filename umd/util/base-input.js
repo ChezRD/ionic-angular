@@ -23,7 +23,7 @@ var __extends = (this && this.__extends) || (function () {
     var util_1 = require("./util");
     var ion_1 = require("../components/ion");
     var debouncer_1 = require("./debouncer");
-    var BaseInput = /** @class */ (function (_super) {
+    var BaseInput = (function (_super) {
         __extends(BaseInput, _super);
         /**
          * @param {?} config
@@ -366,14 +366,14 @@ var __extends = (this && this.__extends) || (function () {
                 item.setElementClass('item-input-has-value', hasValue);
             }
         };
-        BaseInput.propDecorators = {
-            'ionFocus': [{ type: core_1.Output },],
-            'ionChange': [{ type: core_1.Output },],
-            'ionBlur': [{ type: core_1.Output },],
-            'disabled': [{ type: core_1.Input },],
-        };
         return BaseInput;
     }(ion_1.Ion));
+    BaseInput.propDecorators = {
+        'ionFocus': [{ type: core_1.Output },],
+        'ionChange': [{ type: core_1.Output },],
+        'ionBlur': [{ type: core_1.Output },],
+        'disabled': [{ type: core_1.Input },],
+    };
     exports.BaseInput = BaseInput;
     function BaseInput_tsickle_Closure_declarations() {
         /** @type {?} */

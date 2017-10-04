@@ -104,7 +104,7 @@
         if (axis === 'x') {
             if (win.WebKitCSSMatrix) {
                 // Latest Chrome and webkits Fix
-                curTransform = /** @type {?} */ (transformMatrix.m41);
+                curTransform = (transformMatrix.m41);
             }
             else if (matrix.length === 16) {
                 // Crazy IE10 Matrix

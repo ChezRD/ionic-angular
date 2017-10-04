@@ -1,4 +1,4 @@
-var Simulate = /** @class */ (function () {
+var Simulate = (function () {
     function Simulate() {
         this.index = 0;
         this.points = [];

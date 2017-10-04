@@ -22,7 +22,7 @@ import { isRightSide } from '../../util/util';
  * </ion-item-sliding>
  * ```
  */
-var ItemOptions = /** @class */ (function () {
+var ItemOptions = (function () {
     /**
      * @param {?} _elementRef
      * @param {?} _plt
@@ -49,25 +49,25 @@ var ItemOptions = /** @class */ (function () {
     ItemOptions.prototype.width = function () {
         return this._elementRef.nativeElement.offsetWidth;
     };
-    ItemOptions.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-item-options',
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    ItemOptions.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: Platform, },
-    ]; };
-    ItemOptions.propDecorators = {
-        'side': [{ type: Input },],
-        'ionSwipe': [{ type: Output },],
-    };
     return ItemOptions;
 }());
 export { ItemOptions };
+ItemOptions.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-item-options',
+            },] },
+];
+/**
+ * @nocollapse
+ */
+ItemOptions.ctorParameters = function () { return [
+    { type: ElementRef, },
+    { type: Platform, },
+]; };
+ItemOptions.propDecorators = {
+    'side': [{ type: Input },],
+    'ionSwipe': [{ type: Output },],
+};
 function ItemOptions_tsickle_Closure_declarations() {
     /** @type {?} */
     ItemOptions.decorators;

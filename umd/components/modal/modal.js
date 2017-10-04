@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var Modal = /** @class */ (function (_super) {
+    var Modal = (function (_super) {
         __extends(Modal, _super);
         /**
          * @param {?} app

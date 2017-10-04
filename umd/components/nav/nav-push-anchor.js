@@ -15,7 +15,7 @@
     /**
      * @hidden
      */
-    var NavPushAnchor = /** @class */ (function () {
+    var NavPushAnchor = (function () {
         /**
          * @param {?} host
          * @param {?} linker
@@ -41,23 +41,23 @@
         NavPushAnchor.prototype.ngAfterContentInit = function () {
             this.updateHref();
         };
-        NavPushAnchor.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'a[navPush]',
-                        host: {
-                            '[attr.href]': '_href'
-                        }
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        NavPushAnchor.ctorParameters = function () { return [
-            { type: nav_push_1.NavPush, decorators: [{ type: core_1.Host },] },
-            { type: deep_linker_1.DeepLinker, decorators: [{ type: core_1.Optional },] },
-        ]; };
         return NavPushAnchor;
     }());
+    NavPushAnchor.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'a[navPush]',
+                    host: {
+                        '[attr.href]': '_href'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NavPushAnchor.ctorParameters = function () { return [
+        { type: nav_push_1.NavPush, decorators: [{ type: core_1.Host },] },
+        { type: deep_linker_1.DeepLinker, decorators: [{ type: core_1.Optional },] },
+    ]; };
     exports.NavPushAnchor = NavPushAnchor;
     function NavPushAnchor_tsickle_Closure_declarations() {
         /** @type {?} */

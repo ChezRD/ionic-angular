@@ -95,7 +95,7 @@
      * \@demo /docs/demos/src/fab/
      * @see {\@link /docs/components#fabs FAB Component Docs}
      */
-    var FabContainer = /** @class */ (function () {
+    var FabContainer = (function () {
         /**
          * @param {?} plt
          */
@@ -178,24 +178,24 @@
         FabContainer.prototype.ngOnDestroy = function () {
             this._events.destroy();
         };
-        FabContainer.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-fab',
-                        template: '<ng-content></ng-content>'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        FabContainer.ctorParameters = function () { return [
-            { type: platform_1.Platform, },
-        ]; };
-        FabContainer.propDecorators = {
-            '_mainButton': [{ type: core_1.ContentChild, args: [fab_1.FabButton,] },],
-            '_fabLists': [{ type: core_1.ContentChildren, args: [fab_list_1.FabList,] },],
-        };
         return FabContainer;
     }());
+    FabContainer.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-fab',
+                    template: '<ng-content></ng-content>'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    FabContainer.ctorParameters = function () { return [
+        { type: platform_1.Platform, },
+    ]; };
+    FabContainer.propDecorators = {
+        '_mainButton': [{ type: core_1.ContentChild, args: [fab_1.FabButton,] },],
+        '_fabLists': [{ type: core_1.ContentChildren, args: [fab_list_1.FabList,] },],
+    };
     exports.FabContainer = FabContainer;
     function FabContainer_tsickle_Closure_declarations() {
         /** @type {?} */

@@ -70,7 +70,7 @@ var __extends = (this && this.__extends) || (function () {
      * @see {\@link ../../input/Input Input API Docs}
      *
      */
-    var Label = /** @class */ (function (_super) {
+    var Label = (function (_super) {
         __extends(Label, _super);
         /**
          * @param {?} config
@@ -118,28 +118,28 @@ var __extends = (this && this.__extends) || (function () {
             enumerable: true,
             configurable: true
         });
-        Label.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-label'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Label.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: undefined, decorators: [{ type: core_1.Attribute, args: ['floating',] },] },
-            { type: undefined, decorators: [{ type: core_1.Attribute, args: ['stacked',] },] },
-            { type: undefined, decorators: [{ type: core_1.Attribute, args: ['fixed',] },] },
-            { type: undefined, decorators: [{ type: core_1.Attribute, args: ['inset',] },] },
-        ]; };
-        Label.propDecorators = {
-            'id': [{ type: core_1.Input },],
-        };
         return Label;
     }(ion_1.Ion));
+    Label.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-label'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Label.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: undefined, decorators: [{ type: core_1.Attribute, args: ['floating',] },] },
+        { type: undefined, decorators: [{ type: core_1.Attribute, args: ['stacked',] },] },
+        { type: undefined, decorators: [{ type: core_1.Attribute, args: ['fixed',] },] },
+        { type: undefined, decorators: [{ type: core_1.Attribute, args: ['inset',] },] },
+    ]; };
+    Label.propDecorators = {
+        'id': [{ type: core_1.Input },],
+    };
     exports.Label = Label;
     function Label_tsickle_Closure_declarations() {
         /** @type {?} */

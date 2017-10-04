@@ -16,7 +16,7 @@ import { ViewController } from '../../navigation/view-controller';
 /**
  * @hidden
  */
-var Picker = /** @class */ (function (_super) {
+var Picker = (function (_super) {
     __extends(Picker, _super);
     /**
      * @param {?} app
@@ -101,12 +101,12 @@ var Picker = /** @class */ (function (_super) {
         if (navOptions === void 0) { navOptions = {}; }
         return this._app.present(this, navOptions);
     };
-    Picker.propDecorators = {
-        'ionChange': [{ type: Output },],
-    };
     return Picker;
 }(ViewController));
 export { Picker };
+Picker.propDecorators = {
+    'ionChange': [{ type: Output },],
+};
 function Picker_tsickle_Closure_declarations() {
     /** @type {?} */
     Picker.propDecorators;

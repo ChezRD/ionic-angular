@@ -24,7 +24,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * Animations for pickers
      */
-    var PickerSlideIn = /** @class */ (function (_super) {
+    var PickerSlideIn = (function (_super) {
         __extends(PickerSlideIn, _super);
         function PickerSlideIn() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -43,7 +43,7 @@ var __extends = (this && this.__extends) || (function () {
         return PickerSlideIn;
     }(transition_1.Transition));
     exports.PickerSlideIn = PickerSlideIn;
-    var PickerSlideOut = /** @class */ (function (_super) {
+    var PickerSlideOut = (function (_super) {
         __extends(PickerSlideOut, _super);
         function PickerSlideOut() {
             return _super !== null && _super.apply(this, arguments) || this;

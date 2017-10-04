@@ -2,7 +2,7 @@ import { PointerEvents } from './pointer-events';
 /**
  * @hidden
  */
-var UIEventManager = /** @class */ (function () {
+var UIEventManager = (function () {
     /**
      * @param {?} plt
      */

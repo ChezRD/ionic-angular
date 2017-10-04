@@ -56,7 +56,7 @@ import { Ion } from '../ion';
  * \@demo /docs/demos/src/fab/
  * @see {\@link /docs/components#fabs FAB Component Docs}
  */
-var FabButton = /** @class */ (function (_super) {
+var FabButton = (function (_super) {
     __extends(FabButton, _super);
     /**
      * @param {?} config
@@ -74,29 +74,29 @@ var FabButton = /** @class */ (function (_super) {
     FabButton.prototype.setActiveClose = function (closeVisible) {
         this.setElementClass('fab-close-active', closeVisible);
     };
-    FabButton.decorators = [
-        { type: Component, args: [{
-                    selector: '[ion-fab]',
-                    template: '<ion-icon name="close" class="fab-close-icon"></ion-icon>' +
-                        '<span class="button-inner">' +
-                        '<ng-content></ng-content>' +
-                        '</span>' +
-                        '<div class="button-effect"></div>',
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None,
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    FabButton.ctorParameters = function () { return [
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
     return FabButton;
 }(Ion));
 export { FabButton };
+FabButton.decorators = [
+    { type: Component, args: [{
+                selector: '[ion-fab]',
+                template: '<ion-icon name="close" class="fab-close-icon"></ion-icon>' +
+                    '<span class="button-inner">' +
+                    '<ng-content></ng-content>' +
+                    '</span>' +
+                    '<div class="button-effect"></div>',
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                encapsulation: ViewEncapsulation.None,
+            },] },
+];
+/**
+ * @nocollapse
+ */
+FabButton.ctorParameters = function () { return [
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
 function FabButton_tsickle_Closure_declarations() {
     /** @type {?} */
     FabButton.decorators;

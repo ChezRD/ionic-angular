@@ -281,7 +281,7 @@ export class PickerColumnCmp {
         const /** @type {?} */ scaleStr = `scale(${this.scaleFactor})`;
         for (i = 0; i < length; i++) {
             button = children[i];
-            opt = /** @type {?} */ (this.col.options[i]);
+            opt = (this.col.options[i]);
             optOffset = (i * this.optHeight) + y;
             visible = true;
             transform = '';

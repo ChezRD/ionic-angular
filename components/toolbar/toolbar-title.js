@@ -48,7 +48,7 @@ import { Toolbar } from './toolbar';
  *
  * \@demo /docs/demos/src/title/
  */
-var ToolbarTitle = /** @class */ (function (_super) {
+var ToolbarTitle = (function (_super) {
     __extends(ToolbarTitle, _super);
     /**
      * @param {?} config
@@ -70,29 +70,29 @@ var ToolbarTitle = /** @class */ (function (_super) {
     ToolbarTitle.prototype.getTitleText = function () {
         return this._elementRef.nativeElement.textContent;
     };
-    ToolbarTitle.decorators = [
-        { type: Component, args: [{
-                    selector: 'ion-title',
-                    template: '<div class="toolbar-title" [ngClass]="\'toolbar-title-\' + _mode">' +
-                        '<ng-content></ng-content>' +
-                        '</div>',
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None,
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    ToolbarTitle.ctorParameters = function () { return [
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-        { type: Toolbar, decorators: [{ type: Optional },] },
-        { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
-    ]; };
     return ToolbarTitle;
 }(Ion));
 export { ToolbarTitle };
+ToolbarTitle.decorators = [
+    { type: Component, args: [{
+                selector: 'ion-title',
+                template: '<div class="toolbar-title" [ngClass]="\'toolbar-title-\' + _mode">' +
+                    '<ng-content></ng-content>' +
+                    '</div>',
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                encapsulation: ViewEncapsulation.None,
+            },] },
+];
+/**
+ * @nocollapse
+ */
+ToolbarTitle.ctorParameters = function () { return [
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+    { type: Toolbar, decorators: [{ type: Optional },] },
+    { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
+]; };
 function ToolbarTitle_tsickle_Closure_declarations() {
     /** @type {?} */
     ToolbarTitle.decorators;

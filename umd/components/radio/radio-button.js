@@ -61,7 +61,7 @@ var __extends = (this && this.__extends) || (function () {
      * @see {\@link /docs/components#radio Radio Component Docs}
      * @see {\@link ../RadioGroup RadioGroup API Docs}
      */
-    var RadioButton = /** @class */ (function (_super) {
+    var RadioButton = (function (_super) {
         __extends(RadioButton, _super);
         /**
          * @param {?} _form
@@ -221,48 +221,48 @@ var __extends = (this && this.__extends) || (function () {
             this._form.deregister(this);
             this._group && this._group.remove(this);
         };
-        RadioButton.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-radio',
-                        template: '<div class="radio-icon" [class.radio-checked]="_checked"> ' +
-                            '<div class="radio-inner"></div> ' +
-                            '</div> ' +
-                            '<button role="radio" ' +
-                            'type="button" ' +
-                            'ion-button="item-cover" ' +
-                            '[id]="id" ' +
-                            '[attr.aria-checked]="_checked" ' +
-                            '[attr.aria-labelledby]="_labelId" ' +
-                            '[attr.aria-disabled]="_disabled" ' +
-                            'class="item-cover"> ' +
-                            '</button>',
-                        host: {
-                            '[class.radio-disabled]': '_disabled'
-                        },
-                        encapsulation: core_1.ViewEncapsulation.None,
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        RadioButton.ctorParameters = function () { return [
-            { type: form_1.Form, },
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
-            { type: radio_group_1.RadioGroup, decorators: [{ type: core_1.Optional },] },
-        ]; };
-        RadioButton.propDecorators = {
-            'color': [{ type: core_1.Input },],
-            'ionSelect': [{ type: core_1.Output },],
-            'value': [{ type: core_1.Input },],
-            'checked': [{ type: core_1.Input },],
-            'disabled': [{ type: core_1.Input },],
-            '_click': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
-        };
         return RadioButton;
     }(ion_1.Ion));
+    RadioButton.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-radio',
+                    template: '<div class="radio-icon" [class.radio-checked]="_checked"> ' +
+                        '<div class="radio-inner"></div> ' +
+                        '</div> ' +
+                        '<button role="radio" ' +
+                        'type="button" ' +
+                        'ion-button="item-cover" ' +
+                        '[id]="id" ' +
+                        '[attr.aria-checked]="_checked" ' +
+                        '[attr.aria-labelledby]="_labelId" ' +
+                        '[attr.aria-disabled]="_disabled" ' +
+                        'class="item-cover"> ' +
+                        '</button>',
+                    host: {
+                        '[class.radio-disabled]': '_disabled'
+                    },
+                    encapsulation: core_1.ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    RadioButton.ctorParameters = function () { return [
+        { type: form_1.Form, },
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: item_1.Item, decorators: [{ type: core_1.Optional },] },
+        { type: radio_group_1.RadioGroup, decorators: [{ type: core_1.Optional },] },
+    ]; };
+    RadioButton.propDecorators = {
+        'color': [{ type: core_1.Input },],
+        'ionSelect': [{ type: core_1.Output },],
+        'value': [{ type: core_1.Input },],
+        'checked': [{ type: core_1.Input },],
+        'disabled': [{ type: core_1.Input },],
+        '_click': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
+    };
     exports.RadioButton = RadioButton;
     function RadioButton_tsickle_Closure_declarations() {
         /** @type {?} */

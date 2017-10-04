@@ -127,7 +127,7 @@ import { isTrueProperty } from '../../util/util';
  * @see {\@link ../../fab/FabButton FabButton API Docs}
  * @see {\@link ../../fab/FabContainer FabContainer API Docs}
  */
-var Button = /** @class */ (function (_super) {
+var Button = (function (_super) {
     __extends(Button, _super);
     /**
      * @param {?} ionButton
@@ -401,43 +401,43 @@ var Button = /** @class */ (function (_super) {
             }
         }
     };
-    Button.decorators = [
-        { type: Component, args: [{
-                    selector: '[ion-button]',
-                    template: '<span class="button-inner">' +
-                        '<ng-content></ng-content>' +
-                        '</span>' +
-                        '<div class="button-effect"></div>',
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None,
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Button.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Attribute, args: ['ion-button',] },] },
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
-    Button.propDecorators = {
-        'large': [{ type: Input },],
-        'small': [{ type: Input },],
-        'default': [{ type: Input },],
-        'outline': [{ type: Input },],
-        'clear': [{ type: Input },],
-        'solid': [{ type: Input },],
-        'round': [{ type: Input },],
-        'block': [{ type: Input },],
-        'full': [{ type: Input },],
-        'strong': [{ type: Input },],
-        'mode': [{ type: Input },],
-        'color': [{ type: Input },],
-    };
     return Button;
 }(Ion));
 export { Button };
+Button.decorators = [
+    { type: Component, args: [{
+                selector: '[ion-button]',
+                template: '<span class="button-inner">' +
+                    '<ng-content></ng-content>' +
+                    '</span>' +
+                    '<div class="button-effect"></div>',
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                encapsulation: ViewEncapsulation.None,
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Button.ctorParameters = function () { return [
+    { type: undefined, decorators: [{ type: Attribute, args: ['ion-button',] },] },
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
+Button.propDecorators = {
+    'large': [{ type: Input },],
+    'small': [{ type: Input },],
+    'default': [{ type: Input },],
+    'outline': [{ type: Input },],
+    'clear': [{ type: Input },],
+    'solid': [{ type: Input },],
+    'round': [{ type: Input },],
+    'block': [{ type: Input },],
+    'full': [{ type: Input },],
+    'strong': [{ type: Input },],
+    'mode': [{ type: Input },],
+    'color': [{ type: Input },],
+};
 function Button_tsickle_Closure_declarations() {
     /** @type {?} */
     Button.decorators;

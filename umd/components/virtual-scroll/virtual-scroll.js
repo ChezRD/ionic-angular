@@ -218,7 +218,7 @@
      * dataset, so please make sure they're performant.
      *
      */
-    var VirtualScroll = /** @class */ (function () {
+    var VirtualScroll = (function () {
         /**
          * @param {?} _iterableDiffers
          * @param {?} _elementRef
@@ -767,44 +767,44 @@
             this._resizeSub = this._scrollEndSub = this._scrollSub = null;
             this._hdrFn = this._ftrFn = this._records = this._cells = this._nodes = this._data = null;
         };
-        VirtualScroll.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: '[virtualScroll]'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        VirtualScroll.ctorParameters = function () { return [
-            { type: core_1.IterableDiffers, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: core_1.NgZone, },
-            { type: core_1.ChangeDetectorRef, },
-            { type: content_1.Content, },
-            { type: platform_1.Platform, },
-            { type: view_controller_1.ViewController, },
-            { type: config_1.Config, },
-            { type: dom_controller_1.DomController, },
-        ]; };
-        VirtualScroll.propDecorators = {
-            '_itmTmp': [{ type: core_1.ContentChild, args: [virtual_item_1.VirtualItem,] },],
-            '_hdrTmp': [{ type: core_1.ContentChild, args: [virtual_header_1.VirtualHeader,] },],
-            '_ftrTmp': [{ type: core_1.ContentChild, args: [virtual_footer_1.VirtualFooter,] },],
-            'virtualScroll': [{ type: core_1.Input },],
-            'bufferRatio': [{ type: core_1.Input },],
-            'approxItemWidth': [{ type: core_1.Input },],
-            'approxItemHeight': [{ type: core_1.Input },],
-            'approxHeaderWidth': [{ type: core_1.Input },],
-            'approxHeaderHeight': [{ type: core_1.Input },],
-            'approxFooterWidth': [{ type: core_1.Input },],
-            'approxFooterHeight': [{ type: core_1.Input },],
-            'headerFn': [{ type: core_1.Input },],
-            'footerFn': [{ type: core_1.Input },],
-            'virtualTrackBy': [{ type: core_1.Input },],
-        };
         return VirtualScroll;
     }());
+    VirtualScroll.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '[virtualScroll]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    VirtualScroll.ctorParameters = function () { return [
+        { type: core_1.IterableDiffers, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: core_1.NgZone, },
+        { type: core_1.ChangeDetectorRef, },
+        { type: content_1.Content, },
+        { type: platform_1.Platform, },
+        { type: view_controller_1.ViewController, },
+        { type: config_1.Config, },
+        { type: dom_controller_1.DomController, },
+    ]; };
+    VirtualScroll.propDecorators = {
+        '_itmTmp': [{ type: core_1.ContentChild, args: [virtual_item_1.VirtualItem,] },],
+        '_hdrTmp': [{ type: core_1.ContentChild, args: [virtual_header_1.VirtualHeader,] },],
+        '_ftrTmp': [{ type: core_1.ContentChild, args: [virtual_footer_1.VirtualFooter,] },],
+        'virtualScroll': [{ type: core_1.Input },],
+        'bufferRatio': [{ type: core_1.Input },],
+        'approxItemWidth': [{ type: core_1.Input },],
+        'approxItemHeight': [{ type: core_1.Input },],
+        'approxHeaderWidth': [{ type: core_1.Input },],
+        'approxHeaderHeight': [{ type: core_1.Input },],
+        'approxFooterWidth': [{ type: core_1.Input },],
+        'approxFooterHeight': [{ type: core_1.Input },],
+        'headerFn': [{ type: core_1.Input },],
+        'footerFn': [{ type: core_1.Input },],
+        'virtualTrackBy': [{ type: core_1.Input },],
+    };
     exports.VirtualScroll = VirtualScroll;
     function VirtualScroll_tsickle_Closure_declarations() {
         /** @type {?} */

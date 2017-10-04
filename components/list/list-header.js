@@ -14,7 +14,7 @@ import { Ion } from '../ion';
 /**
  * @hidden
  */
-var ListHeader = /** @class */ (function (_super) {
+var ListHeader = (function (_super) {
     __extends(ListHeader, _super);
     /**
      * @param {?} config
@@ -45,23 +45,23 @@ var ListHeader = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    ListHeader.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-list-header'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    ListHeader.ctorParameters = function () { return [
-        { type: Config, },
-        { type: Renderer, },
-        { type: ElementRef, },
-        { type: undefined, decorators: [{ type: Attribute, args: ['id',] },] },
-    ]; };
     return ListHeader;
 }(Ion));
 export { ListHeader };
+ListHeader.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-list-header'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+ListHeader.ctorParameters = function () { return [
+    { type: Config, },
+    { type: Renderer, },
+    { type: ElementRef, },
+    { type: undefined, decorators: [{ type: Attribute, args: ['id',] },] },
+]; };
 function ListHeader_tsickle_Closure_declarations() {
     /** @type {?} */
     ListHeader.decorators;

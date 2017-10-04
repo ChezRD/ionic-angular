@@ -23,7 +23,7 @@
     /**
      * @hidden
      */
-    var TapClick = /** @class */ (function () {
+    var TapClick = (function () {
         /**
          * @param {?} config
          * @param {?} plt
@@ -234,21 +234,21 @@
         TapClick.prototype.isDisabledNativeClick = function () {
             return this.disableClick > Date.now();
         };
-        TapClick.decorators = [
-            { type: core_1.Injectable },
-        ];
-        /**
-         * @nocollapse
-         */
-        TapClick.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: platform_1.Platform, },
-            { type: dom_controller_1.DomController, },
-            { type: app_1.App, },
-            { type: gesture_controller_1.GestureController, },
-        ]; };
         return TapClick;
     }());
+    TapClick.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    TapClick.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: platform_1.Platform, },
+        { type: dom_controller_1.DomController, },
+        { type: app_1.App, },
+        { type: gesture_controller_1.GestureController, },
+    ]; };
     exports.TapClick = TapClick;
     function TapClick_tsickle_Closure_declarations() {
         /** @type {?} */

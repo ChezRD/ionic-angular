@@ -15,7 +15,7 @@ import { ViewController } from '../../navigation/view-controller';
 /**
  * @hidden
  */
-var PopoverImpl = /** @class */ (function (_super) {
+var PopoverImpl = (function (_super) {
     __extends(PopoverImpl, _super);
     /**
      * @param {?} app

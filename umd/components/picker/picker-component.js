@@ -20,7 +20,7 @@
     /**
      * @hidden
      */
-    var PickerCmp = /** @class */ (function () {
+    var PickerCmp = (function () {
         /**
          * @param {?} _viewCtrl
          * @param {?} _elementRef
@@ -217,33 +217,33 @@
             (void 0) /* assert */;
             this._gestureBlocker.destroy();
         };
-        PickerCmp.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-picker-cmp',
-                        template: "\n    <ion-backdrop (click)=\"bdClick()\"></ion-backdrop>\n    <div class=\"picker-wrapper\">\n      <div class=\"picker-toolbar\">\n        <div *ngFor=\"let b of d.buttons\" class=\"picker-toolbar-button\" [ngClass]=\"b.cssRole\">\n          <button ion-button (click)=\"btnClick(b)\" [ngClass]=\"b.cssClass\" class=\"picker-button\" clear>\n            {{b.text}}\n          </button>\n        </div>\n      </div>\n      <div class=\"picker-columns\">\n        <div class=\"picker-above-highlight\"></div>\n        <div *ngFor=\"let c of d.columns\" [col]=\"c\" class=\"picker-col\" (ionChange)=\"_colChange($event)\"></div>\n        <div class=\"picker-below-highlight\"></div>\n      </div>\n    </div>\n  ",
-                        host: {
-                            'role': 'dialog'
-                        },
-                        encapsulation: core_1.ViewEncapsulation.None,
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        PickerCmp.ctorParameters = function () { return [
-            { type: view_controller_1.ViewController, },
-            { type: core_1.ElementRef, },
-            { type: config_1.Config, },
-            { type: gesture_controller_1.GestureController, },
-            { type: nav_params_1.NavParams, },
-            { type: core_1.Renderer, },
-        ]; };
-        PickerCmp.propDecorators = {
-            '_cols': [{ type: core_1.ViewChildren, args: [picker_column_1.PickerColumnCmp,] },],
-            '_keyUp': [{ type: core_1.HostListener, args: ['body:keyup', ['$event'],] },],
-        };
         return PickerCmp;
     }());
+    PickerCmp.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-picker-cmp',
+                    template: "\n    <ion-backdrop (click)=\"bdClick()\"></ion-backdrop>\n    <div class=\"picker-wrapper\">\n      <div class=\"picker-toolbar\">\n        <div *ngFor=\"let b of d.buttons\" class=\"picker-toolbar-button\" [ngClass]=\"b.cssRole\">\n          <button ion-button (click)=\"btnClick(b)\" [ngClass]=\"b.cssClass\" class=\"picker-button\" clear>\n            {{b.text}}\n          </button>\n        </div>\n      </div>\n      <div class=\"picker-columns\">\n        <div class=\"picker-above-highlight\"></div>\n        <div *ngFor=\"let c of d.columns\" [col]=\"c\" class=\"picker-col\" (ionChange)=\"_colChange($event)\"></div>\n        <div class=\"picker-below-highlight\"></div>\n      </div>\n    </div>\n  ",
+                    host: {
+                        'role': 'dialog'
+                    },
+                    encapsulation: core_1.ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    PickerCmp.ctorParameters = function () { return [
+        { type: view_controller_1.ViewController, },
+        { type: core_1.ElementRef, },
+        { type: config_1.Config, },
+        { type: gesture_controller_1.GestureController, },
+        { type: nav_params_1.NavParams, },
+        { type: core_1.Renderer, },
+    ]; };
+    PickerCmp.propDecorators = {
+        '_cols': [{ type: core_1.ViewChildren, args: [picker_column_1.PickerColumnCmp,] },],
+        '_keyUp': [{ type: core_1.HostListener, args: ['body:keyup', ['$event'],] },],
+    };
     exports.PickerCmp = PickerCmp;
     function PickerCmp_tsickle_Closure_declarations() {
         /** @type {?} */

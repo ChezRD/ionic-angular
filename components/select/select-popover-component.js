@@ -4,7 +4,7 @@ import { ViewController } from '../../navigation/view-controller';
 /**
  * @hidden
  */
-var SelectPopover = /** @class */ (function () {
+var SelectPopover = (function () {
     /**
      * @param {?} navParams
      * @param {?} viewController
@@ -41,21 +41,21 @@ var SelectPopover = /** @class */ (function () {
     SelectPopover.prototype.ngOnInit = function () {
         this.options = this.navParams.data.options;
     };
-    SelectPopover.decorators = [
-        { type: Component, args: [{
-                    template: "\n    <ion-list radio-group [(ngModel)]=\"value\">\n      <ion-item *ngFor=\"let option of options\">\n        <ion-label>{{option.text}}</ion-label>\n        <ion-radio [checked]=\"option.checked\" [value]=\"option.value\" [disabled]=\"option.disabled\"></ion-radio>\n      </ion-item>\n    </ion-list>\n  "
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    SelectPopover.ctorParameters = function () { return [
-        { type: NavParams, },
-        { type: ViewController, },
-    ]; };
     return SelectPopover;
 }());
 export { SelectPopover };
+SelectPopover.decorators = [
+    { type: Component, args: [{
+                template: "\n    <ion-list radio-group [(ngModel)]=\"value\">\n      <ion-item *ngFor=\"let option of options\">\n        <ion-label>{{option.text}}</ion-label>\n        <ion-radio [checked]=\"option.checked\" [value]=\"option.value\" [disabled]=\"option.disabled\"></ion-radio>\n      </ion-item>\n    </ion-list>\n  "
+            },] },
+];
+/**
+ * @nocollapse
+ */
+SelectPopover.ctorParameters = function () { return [
+    { type: NavParams, },
+    { type: ViewController, },
+]; };
 function SelectPopover_tsickle_Closure_declarations() {
     /** @type {?} */
     SelectPopover.decorators;

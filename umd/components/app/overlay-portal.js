@@ -31,7 +31,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var OverlayPortal = /** @class */ (function (_super) {
+    var OverlayPortal = (function (_super) {
         __extends(OverlayPortal, _super);
         /**
          * @param {?} app
@@ -91,34 +91,34 @@ var __extends = (this && this.__extends) || (function () {
         OverlayPortal.prototype.getSecondaryIdentifier = function () {
             return null;
         };
-        OverlayPortal.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: '[overlay-portal]',
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        OverlayPortal.ctorParameters = function () { return [
-            { type: app_1.App, decorators: [{ type: core_1.Inject, args: [core_1.forwardRef(function () { return app_1.App; }),] },] },
-            { type: config_1.Config, },
-            { type: platform_1.Platform, },
-            { type: core_1.ElementRef, },
-            { type: core_1.NgZone, },
-            { type: core_1.Renderer, },
-            { type: core_1.ComponentFactoryResolver, },
-            { type: gesture_controller_1.GestureController, },
-            { type: transition_controller_1.TransitionController, },
-            { type: deep_linker_1.DeepLinker, decorators: [{ type: core_1.Optional },] },
-            { type: core_1.ViewContainerRef, },
-            { type: dom_controller_1.DomController, },
-            { type: core_1.ErrorHandler, },
-        ]; };
-        OverlayPortal.propDecorators = {
-            '_overlayPortal': [{ type: core_1.Input, args: ['overlay-portal',] },],
-        };
         return OverlayPortal;
     }(nav_controller_base_1.NavControllerBase));
+    OverlayPortal.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '[overlay-portal]',
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    OverlayPortal.ctorParameters = function () { return [
+        { type: app_1.App, decorators: [{ type: core_1.Inject, args: [core_1.forwardRef(function () { return app_1.App; }),] },] },
+        { type: config_1.Config, },
+        { type: platform_1.Platform, },
+        { type: core_1.ElementRef, },
+        { type: core_1.NgZone, },
+        { type: core_1.Renderer, },
+        { type: core_1.ComponentFactoryResolver, },
+        { type: gesture_controller_1.GestureController, },
+        { type: transition_controller_1.TransitionController, },
+        { type: deep_linker_1.DeepLinker, decorators: [{ type: core_1.Optional },] },
+        { type: core_1.ViewContainerRef, },
+        { type: dom_controller_1.DomController, },
+        { type: core_1.ErrorHandler, },
+    ]; };
+    OverlayPortal.propDecorators = {
+        '_overlayPortal': [{ type: core_1.Input, args: ['overlay-portal',] },],
+    };
     exports.OverlayPortal = OverlayPortal;
     function OverlayPortal_tsickle_Closure_declarations() {
         /** @type {?} */

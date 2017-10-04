@@ -1,7 +1,7 @@
 /**
  * @hidden
  */
-var QueryParams = /** @class */ (function () {
+var QueryParams = (function () {
     function QueryParams() {
         this.data = {};
     }

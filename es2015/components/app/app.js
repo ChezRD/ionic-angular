@@ -178,16 +178,16 @@ export class App {
     getActiveNavs(rootNavId) {
         const /** @type {?} */ portal = this._appRoot._getPortal(Constants.PORTAL_MODAL);
         if (portal.length() > 0) {
-            return /** @type {?} */ (findTopNavs(portal));
+            return (findTopNavs(portal));
         }
         if (!this._rootNavs || !this._rootNavs.size) {
             return [];
         }
         if (this._rootNavs.size === 1) {
-            return /** @type {?} */ (findTopNavs(this._rootNavs.values().next().value));
+            return (findTopNavs(this._rootNavs.values().next().value));
         }
         if (rootNavId) {
-            return /** @type {?} */ (findTopNavs(this._rootNavs.get(rootNavId)));
+            return (findTopNavs(this._rootNavs.get(rootNavId)));
         }
         // fallback to just using all root names
         let /** @type {?} */ activeNavs = [];
@@ -195,7 +195,7 @@ export class App {
             const /** @type {?} */ topNavs = findTopNavs(nav);
             activeNavs = activeNavs.concat(topNavs);
         });
-        return /** @type {?} */ (activeNavs);
+        return (activeNavs);
     }
     /**
      * @return {?}

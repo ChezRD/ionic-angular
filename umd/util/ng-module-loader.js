@@ -13,7 +13,7 @@
     /**
      * NgModuleFactoryLoader that uses SystemJS to load NgModuleFactory
      */
-    var NgModuleLoader = /** @class */ (function () {
+    var NgModuleLoader = (function () {
         /**
          * @param {?} _compiler
          */
@@ -29,17 +29,17 @@
             var /** @type {?} */ offlineMode = this._compiler instanceof core_1.Compiler;
             return offlineMode ? loadPrecompiledFactory(modulePath, ngModuleExport) : loadAndCompile(this._compiler, modulePath, ngModuleExport);
         };
-        NgModuleLoader.decorators = [
-            { type: core_1.Injectable },
-        ];
-        /**
-         * @nocollapse
-         */
-        NgModuleLoader.ctorParameters = function () { return [
-            { type: core_1.Compiler, },
-        ]; };
         return NgModuleLoader;
     }());
+    NgModuleLoader.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgModuleLoader.ctorParameters = function () { return [
+        { type: core_1.Compiler, },
+    ]; };
     exports.NgModuleLoader = NgModuleLoader;
     function NgModuleLoader_tsickle_Closure_declarations() {
         /** @type {?} */

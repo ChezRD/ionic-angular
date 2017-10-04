@@ -3,7 +3,7 @@ import { findReorderItem } from './item-reorder-util';
 /**
  * @hidden
  */
-var Reorder = /** @class */ (function () {
+var Reorder = (function () {
     /**
      * @param {?} elementRef
      */
@@ -26,24 +26,24 @@ var Reorder = /** @class */ (function () {
         ev.preventDefault();
         ev.stopPropagation();
     };
-    Reorder.decorators = [
-        { type: Component, args: [{
-                    selector: 'ion-reorder',
-                    template: "<ion-icon name=\"reorder\"></ion-icon>"
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Reorder.ctorParameters = function () { return [
-        { type: ElementRef, },
-    ]; };
-    Reorder.propDecorators = {
-        'onClick': [{ type: HostListener, args: ['click', ['$event'],] },],
-    };
     return Reorder;
 }());
 export { Reorder };
+Reorder.decorators = [
+    { type: Component, args: [{
+                selector: 'ion-reorder',
+                template: "<ion-icon name=\"reorder\"></ion-icon>"
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Reorder.ctorParameters = function () { return [
+    { type: ElementRef, },
+]; };
+Reorder.propDecorators = {
+    'onClick': [{ type: HostListener, args: ['click', ['$event'],] },],
+};
 function Reorder_tsickle_Closure_declarations() {
     /** @type {?} */
     Reorder.decorators;

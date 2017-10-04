@@ -14,7 +14,7 @@ import { Ion } from '../ion';
 /**
  * @hidden
  */
-var CardContent = /** @class */ (function (_super) {
+var CardContent = (function (_super) {
     __extends(CardContent, _super);
     /**
      * @param {?} config
@@ -24,22 +24,22 @@ var CardContent = /** @class */ (function (_super) {
     function CardContent(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'card-content') || this;
     }
-    CardContent.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-card-content'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    CardContent.ctorParameters = function () { return [
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
     return CardContent;
 }(Ion));
 export { CardContent };
+CardContent.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-card-content'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+CardContent.ctorParameters = function () { return [
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
 function CardContent_tsickle_Closure_declarations() {
     /** @type {?} */
     CardContent.decorators;

@@ -16,7 +16,7 @@
     /**
      * @hidden
      */
-    var ClickBlock = /** @class */ (function () {
+    var ClickBlock = (function () {
         /**
          * @param {?} app
          * @param {?} config
@@ -85,23 +85,23 @@
         ClickBlock.prototype._setElementClass = function (className, add) {
             this.renderer.setElementClass(this.elementRef.nativeElement, className, add);
         };
-        ClickBlock.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: '.click-block'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        ClickBlock.ctorParameters = function () { return [
-            { type: app_1.App, decorators: [{ type: core_1.Inject, args: [core_1.forwardRef(function () { return app_1.App; }),] },] },
-            { type: config_1.Config, },
-            { type: platform_1.Platform, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-        ]; };
         return ClickBlock;
     }());
+    ClickBlock.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '.click-block'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    ClickBlock.ctorParameters = function () { return [
+        { type: app_1.App, decorators: [{ type: core_1.Inject, args: [core_1.forwardRef(function () { return app_1.App; }),] },] },
+        { type: config_1.Config, },
+        { type: platform_1.Platform, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+    ]; };
     exports.ClickBlock = ClickBlock;
     function ClickBlock_tsickle_Closure_declarations() {
         /** @type {?} */

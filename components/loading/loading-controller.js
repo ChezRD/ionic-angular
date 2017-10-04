@@ -46,12 +46,10 @@ import { Loading } from './loading';
  * ```ts
  * import { LoadingController } from 'ionic-angular';
  *
- * constructor(public loadingCtrl: LoadingController) {
- *
- * }
+ * constructor(public loadingCtrl: LoadingController) { }
  *
  * presentLoadingDefault() {
- *   let loading = this.loadingCtrl.create({
+ *   const loading = this.loadingCtrl.create({
  *     content: 'Please wait...'
  *   });
  *
@@ -63,7 +61,7 @@ import { Loading } from './loading';
  * }
  *
  * presentLoadingCustom() {
- *   let loading = this.loadingCtrl.create({
+ *   const loading = this.loadingCtrl.create({
  *     spinner: 'hide',
  *     content: `
  *       <div class="custom-spinner-container">
@@ -80,7 +78,7 @@ import { Loading } from './loading';
  * }
  *
  * presentLoadingText() {
- *   let loading = this.loadingCtrl.create({
+ *   const loading = this.loadingCtrl.create({
  *     spinner: 'hide',
  *     content: 'Loading Please Wait...'
  *   });
@@ -113,7 +111,7 @@ import { Loading } from './loading';
  * \@demo /docs/demos/src/loading/
  * @see {\@link /docs/api/components/spinner/Spinner Spinner API Docs}
  */
-var LoadingController = /** @class */ (function () {
+var LoadingController = (function () {
     /**
      * @param {?} _app
      * @param {?} config
@@ -131,19 +129,19 @@ var LoadingController = /** @class */ (function () {
         if (opts === void 0) { opts = {}; }
         return new Loading(this._app, opts, this.config);
     };
-    LoadingController.decorators = [
-        { type: Injectable },
-    ];
-    /**
-     * @nocollapse
-     */
-    LoadingController.ctorParameters = function () { return [
-        { type: App, },
-        { type: Config, },
-    ]; };
     return LoadingController;
 }());
 export { LoadingController };
+LoadingController.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+LoadingController.ctorParameters = function () { return [
+    { type: App, },
+    { type: Config, },
+]; };
 function LoadingController_tsickle_Closure_declarations() {
     /** @type {?} */
     LoadingController.decorators;

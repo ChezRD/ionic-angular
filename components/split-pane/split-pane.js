@@ -25,7 +25,7 @@ var /** @type {?} */ QUERY = {
  * @hidden
  * @abstract
  */
-var RootNode = /** @class */ (function () {
+var RootNode = (function () {
     function RootNode() {
     }
     /**
@@ -161,7 +161,7 @@ export { RootNode };
  *  ```
  *
  */
-var SplitPane = /** @class */ (function (_super) {
+var SplitPane = (function (_super) {
     __extends(SplitPane, _super);
     /**
      * @param {?} _zone
@@ -395,31 +395,31 @@ var SplitPane = /** @class */ (function (_super) {
     SplitPane.prototype.initPane = function () {
         return true;
     };
-    SplitPane.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-split-pane',
-                    providers: [{ provide: RootNode, useExisting: forwardRef(function () { return SplitPane; }) }]
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    SplitPane.ctorParameters = function () { return [
-        { type: NgZone, },
-        { type: Platform, },
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
-    SplitPane.propDecorators = {
-        '_setchildren': [{ type: ContentChildren, args: [RootNode, { descendants: false },] },],
-        'when': [{ type: Input },],
-        'enabled': [{ type: Input },],
-        'ionChange': [{ type: Output },],
-    };
     return SplitPane;
 }(Ion));
 export { SplitPane };
+SplitPane.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-split-pane',
+                providers: [{ provide: RootNode, useExisting: forwardRef(function () { return SplitPane; }) }]
+            },] },
+];
+/**
+ * @nocollapse
+ */
+SplitPane.ctorParameters = function () { return [
+    { type: NgZone, },
+    { type: Platform, },
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
+SplitPane.propDecorators = {
+    '_setchildren': [{ type: ContentChildren, args: [RootNode, { descendants: false },] },],
+    'when': [{ type: Input },],
+    'enabled': [{ type: Input },],
+    'ionChange': [{ type: Output },],
+};
 function SplitPane_tsickle_Closure_declarations() {
     /** @type {?} */
     SplitPane.decorators;

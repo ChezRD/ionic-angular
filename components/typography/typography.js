@@ -52,7 +52,7 @@ import { Ion } from '../ion';
  * ```
  *
  */
-var Typography = /** @class */ (function (_super) {
+var Typography = (function (_super) {
     __extends(Typography, _super);
     /**
      * @param {?} config
@@ -62,22 +62,22 @@ var Typography = /** @class */ (function (_super) {
     function Typography(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'text') || this;
     }
-    Typography.decorators = [
-        { type: Directive, args: [{
-                    selector: '[ion-text]'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Typography.ctorParameters = function () { return [
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-    ]; };
     return Typography;
 }(Ion));
 export { Typography };
+Typography.decorators = [
+    { type: Directive, args: [{
+                selector: '[ion-text]'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Typography.ctorParameters = function () { return [
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+]; };
 function Typography_tsickle_Closure_declarations() {
     /** @type {?} */
     Typography.decorators;

@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import { Animation } from '../../animations/animation';
 import { Transition } from '../../transitions/transition';
-var ToastSlideIn = /** @class */ (function (_super) {
+var ToastSlideIn = (function (_super) {
     __extends(ToastSlideIn, _super);
     function ToastSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -48,7 +48,7 @@ var ToastSlideIn = /** @class */ (function (_super) {
     return ToastSlideIn;
 }(Transition));
 export { ToastSlideIn };
-var ToastSlideOut = /** @class */ (function (_super) {
+var ToastSlideOut = (function (_super) {
     __extends(ToastSlideOut, _super);
     function ToastSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -80,7 +80,7 @@ var ToastSlideOut = /** @class */ (function (_super) {
     return ToastSlideOut;
 }(Transition));
 export { ToastSlideOut };
-var ToastMdSlideIn = /** @class */ (function (_super) {
+var ToastMdSlideIn = (function (_super) {
     __extends(ToastMdSlideIn, _super);
     function ToastMdSlideIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -118,7 +118,7 @@ var ToastMdSlideIn = /** @class */ (function (_super) {
     return ToastMdSlideIn;
 }(Transition));
 export { ToastMdSlideIn };
-var ToastMdSlideOut = /** @class */ (function (_super) {
+var ToastMdSlideOut = (function (_super) {
     __extends(ToastMdSlideOut, _super);
     function ToastMdSlideOut() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -150,7 +150,7 @@ var ToastMdSlideOut = /** @class */ (function (_super) {
     return ToastMdSlideOut;
 }(Transition));
 export { ToastMdSlideOut };
-var ToastWpPopIn = /** @class */ (function (_super) {
+var ToastWpPopIn = (function (_super) {
     __extends(ToastWpPopIn, _super);
     function ToastWpPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -186,7 +186,7 @@ var ToastWpPopIn = /** @class */ (function (_super) {
     return ToastWpPopIn;
 }(Transition));
 export { ToastWpPopIn };
-var ToastWpPopOut = /** @class */ (function (_super) {
+var ToastWpPopOut = (function (_super) {
     __extends(ToastWpPopOut, _super);
     function ToastWpPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;

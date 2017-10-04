@@ -28,7 +28,7 @@ export function updatePagination(s) {
         paginationHTML = '<span class="' + CLS.paginationProgressbar + '"></span>';
     }
     s._paginationContainer.innerHTML = paginationHTML;
-    s._bullets = /** @type {?} */ (s._paginationContainer.querySelectorAll('.' + CLS.bullet));
+    s._bullets = (s._paginationContainer.querySelectorAll('.' + CLS.bullet));
 }
 /**
  * @param {?} s
@@ -72,7 +72,7 @@ export function updatePaginationClasses(s) {
     }
     if (s.paginationType === 'fraction') {
         eachChild(s._paginationContainer, '.' + CLS.paginationCurrent, function (ele) {
-            ele.textContent = /** @type {?} */ ((current + 1));
+            ele.textContent = ((current + 1));
         });
         eachChild(s._paginationContainer, '.' + CLS.paginationTotal, function (ele) {
             ele.textContent = total;

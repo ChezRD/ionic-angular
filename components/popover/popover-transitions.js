@@ -13,7 +13,7 @@ import { PageTransition } from '../../transitions/page-transition';
 /**
  * Animations for popover
  */
-var PopoverTransition = /** @class */ (function (_super) {
+var PopoverTransition = (function (_super) {
     __extends(PopoverTransition, _super);
     function PopoverTransition() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -146,7 +146,7 @@ var PopoverTransition = /** @class */ (function (_super) {
     return PopoverTransition;
 }(PageTransition));
 export { PopoverTransition };
-var PopoverPopIn = /** @class */ (function (_super) {
+var PopoverPopIn = (function (_super) {
     __extends(PopoverPopIn, _super);
     function PopoverPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -179,7 +179,7 @@ var PopoverPopIn = /** @class */ (function (_super) {
     return PopoverPopIn;
 }(PopoverTransition));
 export { PopoverPopIn };
-var PopoverPopOut = /** @class */ (function (_super) {
+var PopoverPopOut = (function (_super) {
     __extends(PopoverPopOut, _super);
     function PopoverPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -202,7 +202,7 @@ var PopoverPopOut = /** @class */ (function (_super) {
     return PopoverPopOut;
 }(PopoverTransition));
 export { PopoverPopOut };
-var PopoverMdPopIn = /** @class */ (function (_super) {
+var PopoverMdPopIn = (function (_super) {
     __extends(PopoverMdPopIn, _super);
     function PopoverMdPopIn() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -235,7 +235,7 @@ var PopoverMdPopIn = /** @class */ (function (_super) {
     return PopoverMdPopIn;
 }(PopoverTransition));
 export { PopoverMdPopIn };
-var PopoverMdPopOut = /** @class */ (function (_super) {
+var PopoverMdPopOut = (function (_super) {
     __extends(PopoverMdPopOut, _super);
     function PopoverMdPopOut() {
         return _super !== null && _super.apply(this, arguments) || this;

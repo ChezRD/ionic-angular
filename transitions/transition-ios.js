@@ -19,7 +19,7 @@ var /** @type {?} */ TRANSLATEX = 'translateX';
 var /** @type {?} */ CENTER = '0%';
 var /** @type {?} */ OFF_OPACITY = 0.8;
 var /** @type {?} */ SHOW_BACK_BTN_CSS = 'show-back-button';
-var IOSTransition = /** @class */ (function (_super) {
+var IOSTransition = (function (_super) {
     __extends(IOSTransition, _super);
     function IOSTransition() {
         return _super !== null && _super.apply(this, arguments) || this;

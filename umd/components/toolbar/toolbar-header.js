@@ -46,7 +46,7 @@ var __extends = (this && this.__extends) || (function () {
      * ```
      *
      */
-    var Header = /** @class */ (function (_super) {
+    var Header = (function (_super) {
         __extends(Header, _super);
         /**
          * @param {?} config
@@ -59,22 +59,22 @@ var __extends = (this && this.__extends) || (function () {
             viewCtrl && viewCtrl._setHeader(_this);
             return _this;
         }
-        Header.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-header'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Header.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
-        ]; };
         return Header;
     }(ion_1.Ion));
+    Header.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-header'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Header.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: view_controller_1.ViewController, decorators: [{ type: core_1.Optional },] },
+    ]; };
     exports.Header = Header;
     function Header_tsickle_Closure_declarations() {
         /** @type {?} */

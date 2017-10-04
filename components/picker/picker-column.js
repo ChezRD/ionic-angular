@@ -10,7 +10,7 @@ import { UIEventManager } from '../../gestures/ui-event-manager';
 /**
  * @hidden
  */
-var PickerColumnCmp = /** @class */ (function () {
+var PickerColumnCmp = (function () {
     /**
      * @param {?} config
      * @param {?} _plt
@@ -282,7 +282,7 @@ var PickerColumnCmp = /** @class */ (function () {
         var /** @type {?} */ scaleStr = "scale(" + this.scaleFactor + ")";
         for (i = 0; i < length; i++) {
             button = children[i];
-            opt = /** @type {?} */ (this.col.options[i]);
+            opt = (this.col.options[i]);
             optOffset = (i * this.optHeight) + y;
             visible = true;
             transform = '';
@@ -378,45 +378,45 @@ var PickerColumnCmp = /** @class */ (function () {
             this.update(y, 150, true, false);
         }
     };
-    PickerColumnCmp.decorators = [
-        { type: Component, args: [{
-                    selector: '.picker-col',
-                    template: '<div *ngIf="col.prefix" class="picker-prefix" [style.width]="col.prefixWidth">{{col.prefix}}</div>' +
-                        '<div class="picker-opts" #colEle [style.max-width]="col.optionsWidth">' +
-                        '<button *ngFor="let o of col.options; let i=index"' +
-                        '[class.picker-opt-disabled]="o.disabled" ' +
-                        'class="picker-opt" disable-activated (click)="optClick($event, i)">' +
-                        '{{o.text}}' +
-                        '</button>' +
-                        '</div>' +
-                        '<div *ngIf="col.suffix" class="picker-suffix" [style.width]="col.suffixWidth">{{col.suffix}}</div>',
-                    host: {
-                        '[style.max-width]': 'col.columnWidth',
-                        '[class.picker-opts-left]': 'col.align=="left"',
-                        '[class.picker-opts-right]': 'col.align=="right"',
-                    }
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    PickerColumnCmp.ctorParameters = function () { return [
-        { type: Config, },
-        { type: Platform, },
-        { type: ElementRef, },
-        { type: NgZone, },
-        { type: Haptic, },
-        { type: Platform, },
-        { type: DomController, },
-    ]; };
-    PickerColumnCmp.propDecorators = {
-        'colEle': [{ type: ViewChild, args: ['colEle',] },],
-        'col': [{ type: Input },],
-        'ionChange': [{ type: Output },],
-    };
     return PickerColumnCmp;
 }());
 export { PickerColumnCmp };
+PickerColumnCmp.decorators = [
+    { type: Component, args: [{
+                selector: '.picker-col',
+                template: '<div *ngIf="col.prefix" class="picker-prefix" [style.width]="col.prefixWidth">{{col.prefix}}</div>' +
+                    '<div class="picker-opts" #colEle [style.max-width]="col.optionsWidth">' +
+                    '<button *ngFor="let o of col.options; let i=index"' +
+                    '[class.picker-opt-disabled]="o.disabled" ' +
+                    'class="picker-opt" disable-activated (click)="optClick($event, i)">' +
+                    '{{o.text}}' +
+                    '</button>' +
+                    '</div>' +
+                    '<div *ngIf="col.suffix" class="picker-suffix" [style.width]="col.suffixWidth">{{col.suffix}}</div>',
+                host: {
+                    '[style.max-width]': 'col.columnWidth',
+                    '[class.picker-opts-left]': 'col.align=="left"',
+                    '[class.picker-opts-right]': 'col.align=="right"',
+                }
+            },] },
+];
+/**
+ * @nocollapse
+ */
+PickerColumnCmp.ctorParameters = function () { return [
+    { type: Config, },
+    { type: Platform, },
+    { type: ElementRef, },
+    { type: NgZone, },
+    { type: Haptic, },
+    { type: Platform, },
+    { type: DomController, },
+]; };
+PickerColumnCmp.propDecorators = {
+    'colEle': [{ type: ViewChild, args: ['colEle',] },],
+    'col': [{ type: Input },],
+    'ionChange': [{ type: Output },],
+};
 function PickerColumnCmp_tsickle_Closure_declarations() {
     /** @type {?} */
     PickerColumnCmp.decorators;

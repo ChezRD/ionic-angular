@@ -62,7 +62,7 @@ var __extends = (this && this.__extends) || (function () {
      * ```
      *
      */
-    var List = /** @class */ (function (_super) {
+    var List = (function (_super) {
         __extends(List, _super);
         /**
          * @param {?} config
@@ -138,27 +138,27 @@ var __extends = (this && this.__extends) || (function () {
         List.prototype.destroy = function () {
             this._slidingGesture && this._slidingGesture.destroy();
         };
-        List.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-list',
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        List.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: platform_1.Platform, },
-            { type: gesture_controller_1.GestureController, },
-            { type: dom_controller_1.DomController, },
-        ]; };
-        List.propDecorators = {
-            'sliding': [{ type: core_1.Input },],
-        };
         return List;
     }(ion_1.Ion));
+    List.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-list',
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    List.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: platform_1.Platform, },
+        { type: gesture_controller_1.GestureController, },
+        { type: dom_controller_1.DomController, },
+    ]; };
+    List.propDecorators = {
+        'sliding': [{ type: core_1.Input },],
+    };
     exports.List = List;
     function List_tsickle_Closure_declarations() {
         /** @type {?} */

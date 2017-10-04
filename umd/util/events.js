@@ -21,7 +21,8 @@
      * import { Events } from 'ionic-angular';
      *
      * // first page (publish an event when a user is created)
-     * constructor(public events: Events) {}
+     * constructor(public events: Events) { }
+     *
      * createUser(user) {
      *   console.log('User created!')
      *   this.events.publish('user:created', user, Date.now());
@@ -39,7 +40,7 @@
      * ```
      * \@demo /docs/demos/src/events/
      */
-    var Events = /** @class */ (function () {
+    var Events = (function () {
         function Events() {
             this._channels = [];
         }

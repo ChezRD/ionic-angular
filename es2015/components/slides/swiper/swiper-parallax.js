@@ -31,13 +31,13 @@ function setParallaxTransform(s, el, progress) {
         pX = parseInt(pX, 10) * progress * rtlFactor + '%';
     }
     else {
-        pX = /** @type {?} */ (pX) * progress * rtlFactor + 'px';
+        pX = (pX) * progress * rtlFactor + 'px';
     }
     if ((pY).indexOf('%') >= 0) {
         pY = parseInt(pY, 10) * progress + '%';
     }
     else {
-        pY = /** @type {?} */ (pY) * progress + 'px';
+        pY = (pY) * progress + 'px';
     }
     transform(el, 'translate3d(' + pX + ', ' + pY + ',0px)');
 }

@@ -10,10 +10,12 @@
  * import { NavParams } from 'ionic-angular';
  *
  * export class MyClass{
- *  constructor(public navParams: NavParams){
+ *
+ *  constructor(navParams: NavParams){
  *    // userParams is an object we have in our nav-parameters
- *    this.navParams.get('userParams');
+ *    navParams.get('userParams');
  *  }
+ *
  * }
  * ```
  * \@demo /docs/demos/src/nav-params/
@@ -22,7 +24,7 @@
  * @see {\@link /docs/api/components/nav/Nav/ Nav API Docs}
  * @see {\@link /docs/api/components/nav/NavPush/ NavPush API Docs}
  */
-var NavParams = /** @class */ (function () {
+var NavParams = (function () {
     /**
      * @hidden
      * @param {?=} data

@@ -45,7 +45,7 @@ var __extends = (this && this.__extends) || (function () {
      * \@demo /docs/demos/src/searchbar/
      * @see {\@link /docs/components#searchbar Searchbar Component Docs}
      */
-    var Searchbar = /** @class */ (function (_super) {
+    var Searchbar = (function (_super) {
         __extends(Searchbar, _super);
         /**
          * @param {?} config
@@ -380,63 +380,63 @@ var __extends = (this && this.__extends) || (function () {
         Searchbar.prototype.setFocus = function () {
             this._renderer.invokeElementMethod(this._searchbarInput.nativeElement, 'focus');
         };
-        Searchbar.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-searchbar',
-                        template: '<div class="searchbar-input-container">' +
-                            '<button ion-button mode="md" (click)="cancelSearchbar($event)" (mousedown)="cancelSearchbar($event)" clear color="dark" class="searchbar-md-cancel" type="button">' +
-                            '<ion-icon name="md-arrow-back"></ion-icon>' +
-                            '</button>' +
-                            '<div #searchbarIcon class="searchbar-search-icon"></div>' +
-                            '<input #searchbarInput class="searchbar-input" (input)="inputChanged($event)" (blur)="inputBlurred()" (focus)="inputFocused()" ' +
-                            '[attr.placeholder]="placeholder" ' +
-                            '[attr.type]="type" ' +
-                            '[attr.autocomplete]="_autocomplete" ' +
-                            '[attr.autocorrect]="_autocorrect" ' +
-                            '[attr.spellcheck]="_spellcheck">' +
-                            '<button ion-button clear class="searchbar-clear-icon" [mode]="_mode" (click)="clearInput($event)" (mousedown)="clearInput($event)" type="button"></button>' +
-                            '</div>' +
-                            '<button ion-button #cancelButton mode="ios" [tabindex]="_isActive ? 1 : -1" clear (click)="cancelSearchbar($event)" (mousedown)="cancelSearchbar($event)" class="searchbar-ios-cancel" type="button">{{cancelButtonText}}</button>',
-                        host: {
-                            '[class.searchbar-animated]': '_animated',
-                            '[class.searchbar-has-value]': '_value',
-                            '[class.searchbar-active]': '_isActive',
-                            '[class.searchbar-show-cancel]': '_showCancelButton',
-                            '[class.searchbar-left-aligned]': '_shouldAlignLeft',
-                            '[class.searchbar-has-focus]': '_isFocus'
-                        },
-                        encapsulation: core_1.ViewEncapsulation.None
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Searchbar.ctorParameters = function () { return [
-            { type: config_1.Config, },
-            { type: platform_1.Platform, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: forms_1.NgControl, decorators: [{ type: core_1.Optional },] },
-        ]; };
-        Searchbar.propDecorators = {
-            'cancelButtonText': [{ type: core_1.Input },],
-            'showCancelButton': [{ type: core_1.Input },],
-            'debounce': [{ type: core_1.Input },],
-            'placeholder': [{ type: core_1.Input },],
-            'autocomplete': [{ type: core_1.Input },],
-            'autocorrect': [{ type: core_1.Input },],
-            'spellcheck': [{ type: core_1.Input },],
-            'type': [{ type: core_1.Input },],
-            'animated': [{ type: core_1.Input },],
-            'ionInput': [{ type: core_1.Output },],
-            'ionCancel': [{ type: core_1.Output },],
-            'ionClear': [{ type: core_1.Output },],
-            '_searchbarInput': [{ type: core_1.ViewChild, args: ['searchbarInput',] },],
-            '_searchbarIcon': [{ type: core_1.ViewChild, args: ['searchbarIcon',] },],
-            '_cancelButton': [{ type: core_1.ViewChild, args: ['cancelButton', { read: core_1.ElementRef },] },],
-        };
         return Searchbar;
     }(base_input_1.BaseInput));
+    Searchbar.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-searchbar',
+                    template: '<div class="searchbar-input-container">' +
+                        '<button ion-button mode="md" (click)="cancelSearchbar($event)" (mousedown)="cancelSearchbar($event)" clear color="dark" class="searchbar-md-cancel" type="button">' +
+                        '<ion-icon name="md-arrow-back"></ion-icon>' +
+                        '</button>' +
+                        '<div #searchbarIcon class="searchbar-search-icon"></div>' +
+                        '<input #searchbarInput class="searchbar-input" (input)="inputChanged($event)" (blur)="inputBlurred()" (focus)="inputFocused()" ' +
+                        '[attr.placeholder]="placeholder" ' +
+                        '[attr.type]="type" ' +
+                        '[attr.autocomplete]="_autocomplete" ' +
+                        '[attr.autocorrect]="_autocorrect" ' +
+                        '[attr.spellcheck]="_spellcheck">' +
+                        '<button ion-button clear class="searchbar-clear-icon" [mode]="_mode" (click)="clearInput($event)" (mousedown)="clearInput($event)" type="button"></button>' +
+                        '</div>' +
+                        '<button ion-button #cancelButton mode="ios" [tabindex]="_isActive ? 1 : -1" clear (click)="cancelSearchbar($event)" (mousedown)="cancelSearchbar($event)" class="searchbar-ios-cancel" type="button">{{cancelButtonText}}</button>',
+                    host: {
+                        '[class.searchbar-animated]': '_animated',
+                        '[class.searchbar-has-value]': '_value',
+                        '[class.searchbar-active]': '_isActive',
+                        '[class.searchbar-show-cancel]': '_showCancelButton',
+                        '[class.searchbar-left-aligned]': '_shouldAlignLeft',
+                        '[class.searchbar-has-focus]': '_isFocus'
+                    },
+                    encapsulation: core_1.ViewEncapsulation.None
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Searchbar.ctorParameters = function () { return [
+        { type: config_1.Config, },
+        { type: platform_1.Platform, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: forms_1.NgControl, decorators: [{ type: core_1.Optional },] },
+    ]; };
+    Searchbar.propDecorators = {
+        'cancelButtonText': [{ type: core_1.Input },],
+        'showCancelButton': [{ type: core_1.Input },],
+        'debounce': [{ type: core_1.Input },],
+        'placeholder': [{ type: core_1.Input },],
+        'autocomplete': [{ type: core_1.Input },],
+        'autocorrect': [{ type: core_1.Input },],
+        'spellcheck': [{ type: core_1.Input },],
+        'type': [{ type: core_1.Input },],
+        'animated': [{ type: core_1.Input },],
+        'ionInput': [{ type: core_1.Output },],
+        'ionCancel': [{ type: core_1.Output },],
+        'ionClear': [{ type: core_1.Output },],
+        '_searchbarInput': [{ type: core_1.ViewChild, args: ['searchbarInput',] },],
+        '_searchbarIcon': [{ type: core_1.ViewChild, args: ['searchbarIcon',] },],
+        '_cancelButton': [{ type: core_1.ViewChild, args: ['cancelButton', { read: core_1.ElementRef },] },],
+    };
     exports.Searchbar = Searchbar;
     function Searchbar_tsickle_Closure_declarations() {
         /** @type {?} */

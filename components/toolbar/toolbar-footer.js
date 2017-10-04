@@ -31,7 +31,7 @@ import { ViewController } from '../../navigation/view-controller';
  * ```
  *
  */
-var Footer = /** @class */ (function (_super) {
+var Footer = (function (_super) {
     __extends(Footer, _super);
     /**
      * @param {?} config
@@ -44,23 +44,23 @@ var Footer = /** @class */ (function (_super) {
         viewCtrl && viewCtrl._setFooter(_this);
         return _this;
     }
-    Footer.decorators = [
-        { type: Directive, args: [{
-                    selector: 'ion-footer'
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    Footer.ctorParameters = function () { return [
-        { type: Config, },
-        { type: ElementRef, },
-        { type: Renderer, },
-        { type: ViewController, decorators: [{ type: Optional },] },
-    ]; };
     return Footer;
 }(Ion));
 export { Footer };
+Footer.decorators = [
+    { type: Directive, args: [{
+                selector: 'ion-footer'
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Footer.ctorParameters = function () { return [
+    { type: Config, },
+    { type: ElementRef, },
+    { type: Renderer, },
+    { type: ViewController, decorators: [{ type: Optional },] },
+]; };
 function Footer_tsickle_Closure_declarations() {
     /** @type {?} */
     Footer.decorators;

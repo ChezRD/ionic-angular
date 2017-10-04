@@ -10,7 +10,7 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var activator_base_1 = require("./activator-base");
-    var Activator = /** @class */ (function () {
+    var Activator = (function () {
         /**
          * @param {?} app
          * @param {?} config

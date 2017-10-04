@@ -20,7 +20,7 @@
     /**
      * @hidden
      */
-    var DomDebouncer = /** @class */ (function () {
+    var DomDebouncer = (function () {
         /**
          * @param {?} dom
          */
@@ -81,7 +81,7 @@
     /**
      * @hidden
      */
-    var DomController = /** @class */ (function () {
+    var DomController = (function () {
         /**
          * @param {?} plt
          */
@@ -178,17 +178,17 @@
                 throw err;
             }
         };
-        DomController.decorators = [
-            { type: core_1.Injectable },
-        ];
-        /**
-         * @nocollapse
-         */
-        DomController.ctorParameters = function () { return [
-            { type: platform_1.Platform, },
-        ]; };
         return DomController;
     }());
+    DomController.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    DomController.ctorParameters = function () { return [
+        { type: platform_1.Platform, },
+    ]; };
     exports.DomController = DomController;
     function DomController_tsickle_Closure_declarations() {
         /** @type {?} */

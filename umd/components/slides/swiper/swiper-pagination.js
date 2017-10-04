@@ -39,7 +39,7 @@
             paginationHTML = '<span class="' + swiper_utils_1.CLS.paginationProgressbar + '"></span>';
         }
         s._paginationContainer.innerHTML = paginationHTML;
-        s._bullets = /** @type {?} */ (s._paginationContainer.querySelectorAll('.' + swiper_utils_1.CLS.bullet));
+        s._bullets = (s._paginationContainer.querySelectorAll('.' + swiper_utils_1.CLS.bullet));
     }
     exports.updatePagination = updatePagination;
     /**
@@ -84,7 +84,7 @@
         }
         if (s.paginationType === 'fraction') {
             swiper_utils_1.eachChild(s._paginationContainer, '.' + swiper_utils_1.CLS.paginationCurrent, function (ele) {
-                ele.textContent = /** @type {?} */ ((current + 1));
+                ele.textContent = ((current + 1));
             });
             swiper_utils_1.eachChild(s._paginationContainer, '.' + swiper_utils_1.CLS.paginationTotal, function (ele) {
                 ele.textContent = total;

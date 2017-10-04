@@ -5,7 +5,7 @@ import { NavPop } from './nav-pop';
 /**
  * @hidden
  */
-var NavPopAnchor = /** @class */ (function () {
+var NavPopAnchor = (function () {
     /**
      * @param {?} host
      * @param {?} linker
@@ -34,25 +34,25 @@ var NavPopAnchor = /** @class */ (function () {
     NavPopAnchor.prototype.ngAfterContentInit = function () {
         this.updateHref();
     };
-    NavPopAnchor.decorators = [
-        { type: Directive, args: [{
-                    selector: 'a[navPop]',
-                    host: {
-                        '[attr.href]': '_href'
-                    }
-                },] },
-    ];
-    /**
-     * @nocollapse
-     */
-    NavPopAnchor.ctorParameters = function () { return [
-        { type: NavPop, decorators: [{ type: Optional },] },
-        { type: DeepLinker, },
-        { type: ViewController, decorators: [{ type: Optional },] },
-    ]; };
     return NavPopAnchor;
 }());
 export { NavPopAnchor };
+NavPopAnchor.decorators = [
+    { type: Directive, args: [{
+                selector: 'a[navPop]',
+                host: {
+                    '[attr.href]': '_href'
+                }
+            },] },
+];
+/**
+ * @nocollapse
+ */
+NavPopAnchor.ctorParameters = function () { return [
+    { type: NavPop, decorators: [{ type: Optional },] },
+    { type: DeepLinker, },
+    { type: ViewController, decorators: [{ type: Optional },] },
+]; };
 function NavPopAnchor_tsickle_Closure_declarations() {
     /** @type {?} */
     NavPopAnchor.decorators;

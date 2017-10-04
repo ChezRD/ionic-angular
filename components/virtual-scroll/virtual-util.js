@@ -569,7 +569,7 @@ function getElement(node) {
     }
     return null;
 }
-var VirtualContext = /** @class */ (function () {
+var VirtualContext = (function () {
     /**
      * @param {?} $implicit
      * @param {?} index

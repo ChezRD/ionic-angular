@@ -1,5 +1,5 @@
 import { pointerCoord } from './dom';
-var ScrollView = /** @class */ (function () {
+var ScrollView = (function () {
     /**
      * @param {?} _app
      * @param {?} _plt

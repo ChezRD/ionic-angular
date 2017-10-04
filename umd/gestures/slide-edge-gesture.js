@@ -25,7 +25,7 @@ var __extends = (this && this.__extends) || (function () {
     /**
      * @hidden
      */
-    var SlideEdgeGesture = /** @class */ (function (_super) {
+    var SlideEdgeGesture = (function (_super) {
         __extends(SlideEdgeGesture, _super);
         /**
          * @param {?} plt

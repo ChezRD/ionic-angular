@@ -110,7 +110,7 @@
      */
     function queryChildren(parentEle, query) {
         if (parentEle) {
-            return /** @type {?} */ (parentEle.querySelectorAll(query));
+            return (parentEle.querySelectorAll(query));
         }
         return [];
     }

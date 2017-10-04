@@ -14,7 +14,7 @@
     /**
      * @hidden
      */
-    var RangeKnob = /** @class */ (function () {
+    var RangeKnob = (function () {
         function RangeKnob() {
             this.ionIncrease = new core_1.EventEmitter();
             this.ionDecrease = new core_1.EventEmitter();
@@ -49,45 +49,45 @@
                 ev.stopPropagation();
             }
         };
-        RangeKnob.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: '.range-knob-handle',
-                        template: '<div class="range-pin" *ngIf="pin" role="presentation">{{val}}</div>' +
-                            '<div class="range-knob" role="presentation"></div>',
-                        host: {
-                            '[class.range-knob-pressed]': 'pressed',
-                            '[class.range-knob-min]': 'val===min||val===undefined',
-                            '[class.range-knob-max]': 'val===max',
-                            '[style.left]': '_x',
-                            '[attr.aria-valuenow]': 'val',
-                            '[attr.aria-valuemin]': 'min',
-                            '[attr.aria-valuemax]': 'max',
-                            '[attr.aria-disabled]': 'disabled',
-                            '[attr.aria-labelledby]': 'labelId',
-                            '[tabindex]': 'disabled?-1:0',
-                            'role': 'slider'
-                        }
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        RangeKnob.ctorParameters = function () { return []; };
-        RangeKnob.propDecorators = {
-            'ratio': [{ type: core_1.Input },],
-            'pressed': [{ type: core_1.Input },],
-            'pin': [{ type: core_1.Input },],
-            'min': [{ type: core_1.Input },],
-            'max': [{ type: core_1.Input },],
-            'val': [{ type: core_1.Input },],
-            'disabled': [{ type: core_1.Input },],
-            'labelId': [{ type: core_1.Input },],
-            'ionIncrease': [{ type: core_1.Output },],
-            'ionDecrease': [{ type: core_1.Output },],
-            '_keyup': [{ type: core_1.HostListener, args: ['keydown', ['$event'],] },],
-        };
         return RangeKnob;
     }());
+    RangeKnob.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: '.range-knob-handle',
+                    template: '<div class="range-pin" *ngIf="pin" role="presentation">{{val}}</div>' +
+                        '<div class="range-knob" role="presentation"></div>',
+                    host: {
+                        '[class.range-knob-pressed]': 'pressed',
+                        '[class.range-knob-min]': 'val===min||val===undefined',
+                        '[class.range-knob-max]': 'val===max',
+                        '[style.left]': '_x',
+                        '[attr.aria-valuenow]': 'val',
+                        '[attr.aria-valuemin]': 'min',
+                        '[attr.aria-valuemax]': 'max',
+                        '[attr.aria-disabled]': 'disabled',
+                        '[attr.aria-labelledby]': 'labelId',
+                        '[tabindex]': 'disabled?-1:0',
+                        'role': 'slider'
+                    }
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    RangeKnob.ctorParameters = function () { return []; };
+    RangeKnob.propDecorators = {
+        'ratio': [{ type: core_1.Input },],
+        'pressed': [{ type: core_1.Input },],
+        'pin': [{ type: core_1.Input },],
+        'min': [{ type: core_1.Input },],
+        'max': [{ type: core_1.Input },],
+        'val': [{ type: core_1.Input },],
+        'disabled': [{ type: core_1.Input },],
+        'labelId': [{ type: core_1.Input },],
+        'ionIncrease': [{ type: core_1.Output },],
+        'ionDecrease': [{ type: core_1.Output },],
+        '_keyup': [{ type: core_1.HostListener, args: ['keydown', ['$event'],] },],
+    };
     exports.RangeKnob = RangeKnob;
     function RangeKnob_tsickle_Closure_declarations() {
         /** @type {?} */

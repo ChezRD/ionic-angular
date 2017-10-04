@@ -5,7 +5,7 @@ import { ViewController } from './view-controller';
 /**
  * @hidden
  */
-var DeepLinker = /** @class */ (function () {
+var DeepLinker = (function () {
     /**
      * @param {?} _app
      * @param {?} _serializer

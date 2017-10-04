@@ -18,20 +18,20 @@
      * Avatars can be placed on the left or right side of an item with the `item-start` or `item-end` directive.
      * @see {\@link /docs/components/#avatar-list Avatar Component Docs}
      */
-    var Avatar = /** @class */ (function () {
+    var Avatar = (function () {
         function Avatar() {
         }
-        Avatar.decorators = [
-            { type: core_1.Directive, args: [{
-                        selector: 'ion-avatar'
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Avatar.ctorParameters = function () { return []; };
         return Avatar;
     }());
+    Avatar.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: 'ion-avatar'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Avatar.ctorParameters = function () { return []; };
     exports.Avatar = Avatar;
     function Avatar_tsickle_Closure_declarations() {
         /** @type {?} */

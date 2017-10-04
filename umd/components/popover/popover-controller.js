@@ -115,7 +115,7 @@
      *
      * \@demo /docs/demos/src/popover/
      */
-    var PopoverController = /** @class */ (function () {
+    var PopoverController = (function () {
         /**
          * @param {?} _app
          * @param {?} config
@@ -138,19 +138,19 @@
             if (opts === void 0) { opts = {}; }
             return new popover_1.Popover(this._app, component, data, opts, this.config, this._deepLinker);
         };
-        PopoverController.decorators = [
-            { type: core_1.Injectable },
-        ];
-        /**
-         * @nocollapse
-         */
-        PopoverController.ctorParameters = function () { return [
-            { type: app_1.App, },
-            { type: config_1.Config, },
-            { type: deep_linker_1.DeepLinker, },
-        ]; };
         return PopoverController;
     }());
+    PopoverController.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    PopoverController.ctorParameters = function () { return [
+        { type: app_1.App, },
+        { type: config_1.Config, },
+        { type: deep_linker_1.DeepLinker, },
+    ]; };
     exports.PopoverController = PopoverController;
     function PopoverController_tsickle_Closure_declarations() {
         /** @type {?} */

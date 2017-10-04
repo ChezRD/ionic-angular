@@ -289,7 +289,7 @@ var __extends = (this && this.__extends) || (function () {
      * @see {\@link ../../list/List List API Docs}
      * @see {\@link ../ItemSliding ItemSliding API Docs}
      */
-    var Item = /** @class */ (function (_super) {
+    var Item = (function (_super) {
         __extends(Item, _super);
         /**
          * @param {?} form
@@ -437,47 +437,47 @@ var __extends = (this && this.__extends) || (function () {
             enumerable: true,
             configurable: true
         });
-        Item.decorators = [
-            { type: core_1.Component, args: [{
-                        selector: 'ion-list-header,ion-item,[ion-item],ion-item-divider',
-                        template: '<ng-content select="[item-start],[item-left],ion-checkbox:not([item-end]):not([item-right])"></ng-content>' +
-                            '<div class="item-inner">' +
-                            '<div class="input-wrapper">' +
-                            '<ng-content select="ion-label"></ng-content>' +
-                            '<ion-label *ngIf="_viewLabel">' +
-                            '<ng-content></ng-content>' +
-                            '</ion-label>' +
-                            '<ng-content select="ion-select,ion-input,ion-textarea,ion-datetime,ion-range,[item-content]"></ng-content>' +
-                            '</div>' +
-                            '<ng-content select="[item-end],[item-right],ion-radio,ion-toggle"></ng-content>' +
-                            '<ion-reorder *ngIf="_hasReorder"></ion-reorder>' +
-                            '</div>' +
-                            '<div class="button-effect"></div>',
-                        host: {
-                            'class': 'item'
-                        },
-                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                        encapsulation: core_1.ViewEncapsulation.None,
-                    },] },
-        ];
-        /**
-         * @nocollapse
-         */
-        Item.ctorParameters = function () { return [
-            { type: form_1.Form, },
-            { type: config_1.Config, },
-            { type: core_1.ElementRef, },
-            { type: core_1.Renderer, },
-            { type: item_reorder_1.ItemReorder, decorators: [{ type: core_1.Optional },] },
-        ]; };
-        Item.propDecorators = {
-            'contentLabel': [{ type: core_1.ContentChild, args: [label_1.Label,] },],
-            'viewLabel': [{ type: core_1.ViewChild, args: [label_1.Label,] },],
-            '_buttons': [{ type: core_1.ContentChildren, args: [button_1.Button,] },],
-            '_icons': [{ type: core_1.ContentChildren, args: [icon_1.Icon,] },],
-        };
         return Item;
     }(ion_1.Ion));
+    Item.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ion-list-header,ion-item,[ion-item],ion-item-divider',
+                    template: '<ng-content select="[item-start],[item-left],ion-checkbox:not([item-end]):not([item-right])"></ng-content>' +
+                        '<div class="item-inner">' +
+                        '<div class="input-wrapper">' +
+                        '<ng-content select="ion-label"></ng-content>' +
+                        '<ion-label *ngIf="_viewLabel">' +
+                        '<ng-content></ng-content>' +
+                        '</ion-label>' +
+                        '<ng-content select="ion-select,ion-input,ion-textarea,ion-datetime,ion-range,[item-content]"></ng-content>' +
+                        '</div>' +
+                        '<ng-content select="[item-end],[item-right],ion-radio,ion-toggle"></ng-content>' +
+                        '<ion-reorder *ngIf="_hasReorder"></ion-reorder>' +
+                        '</div>' +
+                        '<div class="button-effect"></div>',
+                    host: {
+                        'class': 'item'
+                    },
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core_1.ViewEncapsulation.None,
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    Item.ctorParameters = function () { return [
+        { type: form_1.Form, },
+        { type: config_1.Config, },
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: item_reorder_1.ItemReorder, decorators: [{ type: core_1.Optional },] },
+    ]; };
+    Item.propDecorators = {
+        'contentLabel': [{ type: core_1.ContentChild, args: [label_1.Label,] },],
+        'viewLabel': [{ type: core_1.ViewChild, args: [label_1.Label,] },],
+        '_buttons': [{ type: core_1.ContentChildren, args: [button_1.Button,] },],
+        '_icons': [{ type: core_1.ContentChildren, args: [icon_1.Icon,] },],
+    };
     exports.Item = Item;
     function Item_tsickle_Closure_declarations() {
         /** @type {?} */
