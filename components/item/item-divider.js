@@ -16,11 +16,6 @@ import { Ion } from '../ion';
  */
 var ItemDivider = (function (_super) {
     __extends(ItemDivider, _super);
-    /**
-     * @param {?} config
-     * @param {?} elementRef
-     * @param {?} renderer
-     */
     function ItemDivider(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'item-divider') || this;
     }
@@ -35,21 +30,10 @@ ItemDivider.decorators = [
                 }
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 ItemDivider.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
     { type: Renderer, },
 ]; };
-function ItemDivider_tsickle_Closure_declarations() {
-    /** @type {?} */
-    ItemDivider.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    ItemDivider.ctorParameters;
-}
 //# sourceMappingURL=item-divider.js.map

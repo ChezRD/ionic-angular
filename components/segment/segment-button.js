@@ -1,11 +1,11 @@
 import { Component, EventEmitter, HostListener, Input, Output, ViewEncapsulation } from '@angular/core';
 import { isPresent, isTrueProperty } from '../../util/util';
 /**
- * \@name SegmentButton
- * \@description
+ * @name SegmentButton
+ * @description
  * The child buttons of the `ion-segment` component. Each `ion-segment-button` must have a value.
  *
- * \@usage
+ * @usage
  *
  * ```html
  * <ion-content>
@@ -32,31 +32,26 @@ import { isPresent, isTrueProperty } from '../../util/util';
  * ```
  *
  *
- * \@demo /docs/demos/src/segment/
- * @see {\@link /docs/components#segment Segment Component Docs}
- * @see {\@link /docs/api/components/segment/Segment/ Segment API Docs}
+ * @demo /docs/demos/src/segment/
+ * @see {@link /docs/components#segment Segment Component Docs}
+ * @see {@link /docs/api/components/segment/Segment/ Segment API Docs}
  */
 var SegmentButton = (function () {
     function SegmentButton() {
         this.isActive = false;
         this._disabled = false;
         /**
-         * \@output {SegmentButton} Emitted when a segment button has been clicked.
+         * @output {SegmentButton} Emitted when a segment button has been clicked.
          */
         this.ionSelect = new EventEmitter();
     }
     Object.defineProperty(SegmentButton.prototype, "disabled", {
         /**
-         * \@input {boolean} If true, the user cannot interact with this element.
-         * @return {?}
+         * @input {boolean} If true, the user cannot interact with this element.
          */
         get: function () {
             return this._disabled;
         },
-        /**
-         * @param {?} val
-         * @return {?}
-         */
         set: function (val) {
             this._disabled = isTrueProperty(val);
         },
@@ -66,7 +61,6 @@ var SegmentButton = (function () {
     /**
      * @hidden
      * On click of a SegmentButton
-     * @return {?}
      */
     SegmentButton.prototype.onClick = function () {
         (void 0) /* console.debug */;
@@ -74,7 +68,6 @@ var SegmentButton = (function () {
     };
     /**
      * @hidden
-     * @return {?}
      */
     SegmentButton.prototype.ngOnInit = function () {
         if (!isPresent(this.value)) {
@@ -100,9 +93,7 @@ SegmentButton.decorators = [
                 encapsulation: ViewEncapsulation.None,
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 SegmentButton.ctorParameters = function () { return []; };
 SegmentButton.propDecorators = {
     'value': [{ type: Input },],
@@ -110,29 +101,4 @@ SegmentButton.propDecorators = {
     'disabled': [{ type: Input },],
     'onClick': [{ type: HostListener, args: ['click',] },],
 };
-function SegmentButton_tsickle_Closure_declarations() {
-    /** @type {?} */
-    SegmentButton.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    SegmentButton.ctorParameters;
-    /** @type {?} */
-    SegmentButton.propDecorators;
-    /** @type {?} */
-    SegmentButton.prototype.isActive;
-    /** @type {?} */
-    SegmentButton.prototype._disabled;
-    /**
-     * \@input {string} the value of the segment button. Required.
-     * @type {?}
-     */
-    SegmentButton.prototype.value;
-    /**
-     * \@output {SegmentButton} Emitted when a segment button has been clicked.
-     * @type {?}
-     */
-    SegmentButton.prototype.ionSelect;
-}
 //# sourceMappingURL=segment-button.js.map

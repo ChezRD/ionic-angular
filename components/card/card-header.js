@@ -16,11 +16,6 @@ import { Ion } from '../ion';
  */
 var CardHeader = (function (_super) {
     __extends(CardHeader, _super);
-    /**
-     * @param {?} config
-     * @param {?} elementRef
-     * @param {?} renderer
-     */
     function CardHeader(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'card-header') || this;
     }
@@ -32,21 +27,10 @@ CardHeader.decorators = [
                 selector: 'ion-card-header'
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 CardHeader.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
     { type: Renderer, },
 ]; };
-function CardHeader_tsickle_Closure_declarations() {
-    /** @type {?} */
-    CardHeader.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    CardHeader.ctorParameters;
-}
 //# sourceMappingURL=card-header.js.map

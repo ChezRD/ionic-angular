@@ -33,8 +33,8 @@ var __extends = (this && this.__extends) || (function () {
     var platform_1 = require("../../platform/platform");
     var toggle_gesture_1 = require("./toggle-gesture");
     /**
-     * \@name Toggle
-     * \@description
+     * @name Toggle
+     * @description
      * A toggle technically is the same thing as an HTML checkbox input,
      * except it looks different and is easier to use on a touch device.
      * Toggles can also have colors assigned to them, by adding any color
@@ -43,7 +43,7 @@ var __extends = (this && this.__extends) || (function () {
      * See the [Angular Docs](https://angular.io/docs/ts/latest/guide/forms.html)
      * for more info on forms and inputs.
      *
-     * \@usage
+     * @usage
      * ```html
      *
      *  <ion-list>
@@ -66,23 +66,11 @@ var __extends = (this && this.__extends) || (function () {
      *  </ion-list>
      * ```
      *
-     * \@demo /docs/demos/src/toggle/
-     * @see {\@link /docs/components#toggle Toggle Component Docs}
+     * @demo /docs/demos/src/toggle/
+     * @see {@link /docs/components#toggle Toggle Component Docs}
      */
     var Toggle = (function (_super) {
         __extends(Toggle, _super);
-        /**
-         * @param {?} form
-         * @param {?} config
-         * @param {?} _plt
-         * @param {?} elementRef
-         * @param {?} renderer
-         * @param {?} _haptic
-         * @param {?} item
-         * @param {?} _gestureCtrl
-         * @param {?} _domCtrl
-         * @param {?} _zone
-         */
         function Toggle(form, config, _plt, elementRef, renderer, _haptic, item, _gestureCtrl, _domCtrl, _zone) {
             var _this = _super.call(this, config, elementRef, renderer, 'toggle', false, form, item, null) || this;
             _this._plt = _plt;
@@ -95,16 +83,11 @@ var __extends = (this && this.__extends) || (function () {
         }
         Object.defineProperty(Toggle.prototype, "checked", {
             /**
-             * \@input {boolean} If true, the element is selected.
-             * @return {?}
+             * @input {boolean} If true, the element is selected.
              */
             get: function () {
                 return this.value;
             },
-            /**
-             * @param {?} val
-             * @return {?}
-             */
             set: function (val) {
                 this.value = val;
             },
@@ -113,7 +96,6 @@ var __extends = (this && this.__extends) || (function () {
         });
         /**
          * @hidden
-         * @return {?}
          */
         Toggle.prototype.ngAfterContentInit = function () {
             this._initialize();
@@ -122,21 +104,16 @@ var __extends = (this && this.__extends) || (function () {
         };
         /**
          * @hidden
-         * @return {?}
          */
         Toggle.prototype._inputUpdated = function () { };
         /**
          * @hidden
-         * @param {?} val
-         * @return {?}
          */
         Toggle.prototype._inputNormalize = function (val) {
             return util_1.isTrueProperty(val);
         };
         /**
          * @hidden
-         * @param {?} startX
-         * @return {?}
          */
         Toggle.prototype._onDragStart = function (startX) {
             var _this = this;
@@ -150,8 +127,6 @@ var __extends = (this && this.__extends) || (function () {
         };
         /**
          * @hidden
-         * @param {?} currentX
-         * @return {?}
          */
         Toggle.prototype._onDragMove = function (currentX) {
             var _this = this;
@@ -169,8 +144,6 @@ var __extends = (this && this.__extends) || (function () {
         };
         /**
          * @hidden
-         * @param {?} endX
-         * @return {?}
          */
         Toggle.prototype._onDragEnd = function (endX) {
             var _this = this;
@@ -191,13 +164,10 @@ var __extends = (this && this.__extends) || (function () {
         };
         /**
          * @hidden
-         * @param {?} currentX
-         * @param {?} margin
-         * @return {?}
          */
         Toggle.prototype._shouldToggle = function (currentX, margin) {
-            var /** @type {?} */ isLTR = !this._plt.isRTL;
-            var /** @type {?} */ startX = this._startX;
+            var isLTR = !this._plt.isRTL;
+            var startX = this._startX;
             if (this._value) {
                 return (isLTR && (startX + margin > currentX)) ||
                     (!isLTR && (startX - margin < currentX));
@@ -209,8 +179,6 @@ var __extends = (this && this.__extends) || (function () {
         };
         /**
          * @hidden
-         * @param {?} ev
-         * @return {?}
          */
         Toggle.prototype._keyup = function (ev) {
             if (ev.keyCode === key_1.KEY_SPACE || ev.keyCode === key_1.KEY_ENTER) {
@@ -222,7 +190,6 @@ var __extends = (this && this.__extends) || (function () {
         };
         /**
          * @hidden
-         * @return {?}
          */
         Toggle.prototype.ngOnDestroy = function () {
             _super.prototype.ngOnDestroy.call(this);
@@ -254,9 +221,7 @@ var __extends = (this && this.__extends) || (function () {
                     encapsulation: core_1.ViewEncapsulation.None,
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     Toggle.ctorParameters = function () { return [
         { type: form_1.Form, },
         { type: config_1.Config, },
@@ -274,32 +239,5 @@ var __extends = (this && this.__extends) || (function () {
         '_keyup': [{ type: core_1.HostListener, args: ['keyup', ['$event'],] },],
     };
     exports.Toggle = Toggle;
-    function Toggle_tsickle_Closure_declarations() {
-        /** @type {?} */
-        Toggle.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        Toggle.ctorParameters;
-        /** @type {?} */
-        Toggle.propDecorators;
-        /** @type {?} */
-        Toggle.prototype._activated;
-        /** @type {?} */
-        Toggle.prototype._startX;
-        /** @type {?} */
-        Toggle.prototype._gesture;
-        /** @type {?} */
-        Toggle.prototype._plt;
-        /** @type {?} */
-        Toggle.prototype._haptic;
-        /** @type {?} */
-        Toggle.prototype._gestureCtrl;
-        /** @type {?} */
-        Toggle.prototype._domCtrl;
-        /** @type {?} */
-        Toggle.prototype._zone;
-    }
 });
 //# sourceMappingURL=toggle.js.map

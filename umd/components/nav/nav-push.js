@@ -12,12 +12,12 @@
     var core_1 = require("@angular/core");
     var nav_controller_1 = require("../../navigation/nav-controller");
     /**
-     * \@name NavPush
-     * \@description
+     * @name NavPush
+     * @description
      * Directive to declaratively push a new page to the current nav
      * stack.
      *
-     * \@usage
+     * @usage
      * ```html
      * <button ion-button [navPush]="pushPage"></button>
      * ```
@@ -36,7 +36,7 @@
      * ```ts
      * import { LoginPage } from './login';
      *
-     * \@Component({
+     * @Component({
      *   template: `<button ion-button [navPush]="pushPage" [navParams]="params">Go</button>`
      * })
      * class MyPage {
@@ -49,15 +49,12 @@
      * }
      * ```
      *
-     * \@demo /docs/demos/src/navigation/
-     * @see {\@link /docs/components#navigation Navigation Component Docs}
-     * @see {\@link ../NavPop NavPop API Docs}
+     * @demo /docs/demos/src/navigation/
+     * @see {@link /docs/components#navigation Navigation Component Docs}
+     * @see {@link ../NavPop NavPop API Docs}
      *
      */
     var NavPush = (function () {
-        /**
-         * @param {?} _nav
-         */
         function NavPush(_nav) {
             this._nav = _nav;
             if (!_nav) {
@@ -66,7 +63,6 @@
         }
         /**
          * @hidden
-         * @return {?}
          */
         NavPush.prototype.onClick = function () {
             if (this._nav && this.navPush) {
@@ -82,9 +78,7 @@
                     selector: '[navPush]'
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     NavPush.ctorParameters = function () { return [
         { type: nav_controller_1.NavController, decorators: [{ type: core_1.Optional },] },
     ]; };
@@ -94,28 +88,5 @@
         'onClick': [{ type: core_1.HostListener, args: ['click',] },],
     };
     exports.NavPush = NavPush;
-    function NavPush_tsickle_Closure_declarations() {
-        /** @type {?} */
-        NavPush.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        NavPush.ctorParameters;
-        /** @type {?} */
-        NavPush.propDecorators;
-        /**
-         * \@input {Page | string} The component class or deeplink name you want to push onto the navigation stack.
-         * @type {?}
-         */
-        NavPush.prototype.navPush;
-        /**
-         * \@input {any} Any NavParams you want to pass along to the next view.
-         * @type {?}
-         */
-        NavPush.prototype.navParams;
-        /** @type {?} */
-        NavPush.prototype._nav;
-    }
 });
 //# sourceMappingURL=nav-push.js.map

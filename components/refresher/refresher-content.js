@@ -5,17 +5,12 @@ import { Refresher } from './refresher';
  * @hidden
  */
 var RefresherContent = (function () {
-    /**
-     * @param {?} r
-     * @param {?} _config
-     */
     function RefresherContent(r, _config) {
         this.r = r;
         this._config = _config;
     }
     /**
      * @hidden
-     * @return {?}
      */
     RefresherContent.prototype.ngOnInit = function () {
         if (!this.pullingIcon) {
@@ -49,9 +44,7 @@ RefresherContent.decorators = [
                 encapsulation: ViewEncapsulation.None,
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 RefresherContent.ctorParameters = function () { return [
     { type: Refresher, },
     { type: Config, },
@@ -62,39 +55,4 @@ RefresherContent.propDecorators = {
     'refreshingSpinner': [{ type: Input },],
     'refreshingText': [{ type: Input },],
 };
-function RefresherContent_tsickle_Closure_declarations() {
-    /** @type {?} */
-    RefresherContent.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    RefresherContent.ctorParameters;
-    /** @type {?} */
-    RefresherContent.propDecorators;
-    /**
-     * \@input {string} a static icon to display when you begin to pull down
-     * @type {?}
-     */
-    RefresherContent.prototype.pullingIcon;
-    /**
-     * \@input {string} the text you want to display when you begin to pull down
-     * @type {?}
-     */
-    RefresherContent.prototype.pullingText;
-    /**
-     * \@input {string} An animated SVG spinner that shows when refreshing begins
-     * @type {?}
-     */
-    RefresherContent.prototype.refreshingSpinner;
-    /**
-     * \@input {string} the text you want to display when performing a refresh
-     * @type {?}
-     */
-    RefresherContent.prototype.refreshingText;
-    /** @type {?} */
-    RefresherContent.prototype.r;
-    /** @type {?} */
-    RefresherContent.prototype._config;
-}
 //# sourceMappingURL=refresher-content.js.map

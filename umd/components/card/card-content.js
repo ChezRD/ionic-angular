@@ -27,11 +27,6 @@ var __extends = (this && this.__extends) || (function () {
      */
     var CardContent = (function (_super) {
         __extends(CardContent, _super);
-        /**
-         * @param {?} config
-         * @param {?} elementRef
-         * @param {?} renderer
-         */
         function CardContent(config, elementRef, renderer) {
             return _super.call(this, config, elementRef, renderer, 'card-content') || this;
         }
@@ -42,23 +37,12 @@ var __extends = (this && this.__extends) || (function () {
                     selector: 'ion-card-content'
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     CardContent.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
         { type: core_1.Renderer, },
     ]; };
     exports.CardContent = CardContent;
-    function CardContent_tsickle_Closure_declarations() {
-        /** @type {?} */
-        CardContent.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        CardContent.ctorParameters;
-    }
 });
 //# sourceMappingURL=card-content.js.map

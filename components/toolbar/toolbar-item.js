@@ -19,23 +19,12 @@ import { Toolbar } from './toolbar';
  */
 var ToolbarItem = (function (_super) {
     __extends(ToolbarItem, _super);
-    /**
-     * @param {?} config
-     * @param {?} elementRef
-     * @param {?} renderer
-     * @param {?} toolbar
-     * @param {?} navbar
-     */
     function ToolbarItem(config, elementRef, renderer, toolbar, navbar) {
         var _this = _super.call(this, config, elementRef, renderer, 'bar-buttons') || this;
         _this.inToolbar = !!(toolbar || navbar);
         return _this;
     }
     Object.defineProperty(ToolbarItem.prototype, "_buttons", {
-        /**
-         * @param {?} buttons
-         * @return {?}
-         */
         set: function (buttons) {
             if (this.inToolbar) {
                 buttons.forEach(function (button) {
@@ -54,9 +43,7 @@ ToolbarItem.decorators = [
                 selector: 'ion-buttons,[menuToggle]'
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 ToolbarItem.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
@@ -67,17 +54,4 @@ ToolbarItem.ctorParameters = function () { return [
 ToolbarItem.propDecorators = {
     '_buttons': [{ type: ContentChildren, args: [Button,] },],
 };
-function ToolbarItem_tsickle_Closure_declarations() {
-    /** @type {?} */
-    ToolbarItem.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    ToolbarItem.ctorParameters;
-    /** @type {?} */
-    ToolbarItem.propDecorators;
-    /** @type {?} */
-    ToolbarItem.prototype.inToolbar;
-}
 //# sourceMappingURL=toolbar-item.js.map

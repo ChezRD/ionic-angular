@@ -26,21 +26,12 @@ var __extends = (this && this.__extends) || (function () {
     var overlay_portal_1 = require("./overlay-portal");
     var platform_1 = require("../../platform/platform");
     var Constants = require("./app-constants");
-    exports.AppRootToken = new core_1.OpaqueToken('USERROOT');
+    exports.AppRootToken = new core_1.InjectionToken('USERROOT');
     /**
      * @hidden
      */
     var IonicApp = (function (_super) {
         __extends(IonicApp, _super);
-        /**
-         * @param {?} _userCmp
-         * @param {?} _cfr
-         * @param {?} elementRef
-         * @param {?} renderer
-         * @param {?} config
-         * @param {?} _plt
-         * @param {?} app
-         */
         function IonicApp(_userCmp, _cfr, elementRef, renderer, config, _plt, app) {
             var _this = _super.call(this, config, elementRef, renderer, 'app-root') || this;
             _this._userCmp = _userCmp;
@@ -51,26 +42,23 @@ var __extends = (this && this.__extends) || (function () {
             _this._stopScrollPlugin = window['IonicStopScroll'];
             return _this;
         }
-        /**
-         * @return {?}
-         */
         IonicApp.prototype.ngOnInit = function () {
             var _this = this;
             // load the user root component
             // into Ionic's root component
-            var /** @type {?} */ factory = this._cfr.resolveComponentFactory(this._userCmp);
-            var /** @type {?} */ componentRef = this._viewport.createComponent(factory);
+            var factory = this._cfr.resolveComponentFactory(this._userCmp);
+            var componentRef = this._viewport.createComponent(factory);
             this._renderer.setElementClass(componentRef.location.nativeElement, 'app-root', true);
             componentRef.changeDetectorRef.detectChanges();
             // set the mode class name
             // ios/md/wp
             this.setElementClass(this._config.get('mode'), true);
-            var /** @type {?} */ versions = this._plt.versions();
+            var versions = this._plt.versions();
             this._plt.platforms().forEach(function (platformName) {
                 // platform-ios
-                var /** @type {?} */ platformClass = 'platform-' + platformName;
+                var platformClass = 'platform-' + platformName;
                 _this.setElementClass(platformClass, true);
-                var /** @type {?} */ platformVersion = versions[platformName];
+                var platformVersion = versions[platformName];
                 if (platformVersion) {
                     // platform-ios9
                     platformClass += platformVersion.major;
@@ -92,8 +80,6 @@ var __extends = (this && this.__extends) || (function () {
         };
         /**
          * @hidden
-         * @param {?=} portal
-         * @return {?}
          */
         IonicApp.prototype._getPortal = function (portal) {
             if (portal === Constants.PORTAL_LOADING) {
@@ -109,20 +95,17 @@ var __extends = (this && this.__extends) || (function () {
             }
             return this._overlayPortal;
         };
-        /**
-         * @return {?}
-         */
         IonicApp.prototype._getActivePortal = function () {
-            var /** @type {?} */ defaultPortal = this._overlayPortal;
-            var /** @type {?} */ modalPortal = this._modalPortal;
-            var /** @type {?} */ hasModal = modalPortal.length() > 0;
-            var /** @type {?} */ hasDefault = defaultPortal.length() > 0;
+            var defaultPortal = this._overlayPortal;
+            var modalPortal = this._modalPortal;
+            var hasModal = modalPortal.length() > 0;
+            var hasDefault = defaultPortal.length() > 0;
             if (!hasModal && !hasDefault) {
                 return null;
             }
             else if (hasModal && hasDefault) {
-                var /** @type {?} */ defaultIndex = defaultPortal.getActive().getZIndex();
-                var /** @type {?} */ modalIndex = modalPortal.getActive().getZIndex();
+                var defaultIndex = defaultPortal.getActive().getZIndex();
+                var modalIndex = modalPortal.getActive().getZIndex();
                 if (defaultIndex > modalIndex) {
                     return defaultPortal;
                 }
@@ -138,10 +121,6 @@ var __extends = (this && this.__extends) || (function () {
                 return defaultPortal;
             }
         };
-        /**
-         * @param {?} shouldDisableScroll
-         * @return {?}
-         */
         IonicApp.prototype._disableScroll = function (shouldDisableScroll) {
             var _this = this;
             if (shouldDisableScroll) {
@@ -153,7 +132,7 @@ var __extends = (this && this.__extends) || (function () {
                 });
             }
             else {
-                var /** @type {?} */ plugin = this._stopScrollPlugin;
+                var plugin = this._stopScrollPlugin;
                 if (plugin && plugin.cancel) {
                     plugin.cancel();
                 }
@@ -162,9 +141,6 @@ var __extends = (this && this.__extends) || (function () {
                 this.setElementClass('disable-scroll', false);
             }
         };
-        /**
-         * @return {?}
-         */
         IonicApp.prototype.stopScroll = function () {
             var _this = this;
             if (this._stopScrollPlugin) {
@@ -189,9 +165,7 @@ var __extends = (this && this.__extends) || (function () {
                         '<div class="click-block"></div>'
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     IonicApp.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: core_1.Inject, args: [exports.AppRootToken,] },] },
         { type: core_1.ComponentFactoryResolver, },
@@ -209,36 +183,5 @@ var __extends = (this && this.__extends) || (function () {
         '_toastPortal': [{ type: core_1.ViewChild, args: ['toastPortal', { read: overlay_portal_1.OverlayPortal },] },],
     };
     exports.IonicApp = IonicApp;
-    function IonicApp_tsickle_Closure_declarations() {
-        /** @type {?} */
-        IonicApp.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        IonicApp.ctorParameters;
-        /** @type {?} */
-        IonicApp.propDecorators;
-        /** @type {?} */
-        IonicApp.prototype._stopScrollPlugin;
-        /** @type {?} */
-        IonicApp.prototype._tmr;
-        /** @type {?} */
-        IonicApp.prototype._viewport;
-        /** @type {?} */
-        IonicApp.prototype._modalPortal;
-        /** @type {?} */
-        IonicApp.prototype._overlayPortal;
-        /** @type {?} */
-        IonicApp.prototype._loadingPortal;
-        /** @type {?} */
-        IonicApp.prototype._toastPortal;
-        /** @type {?} */
-        IonicApp.prototype._userCmp;
-        /** @type {?} */
-        IonicApp.prototype._cfr;
-        /** @type {?} */
-        IonicApp.prototype._plt;
-    }
 });
 //# sourceMappingURL=app-root.js.map

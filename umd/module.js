@@ -1,6 +1,3 @@
-/**
- * Import Angular
- */
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);
@@ -12,6 +9,9 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * Import Angular
+     */
     var core_1 = require("@angular/core");
     var common_1 = require("@angular/common");
     var platform_browser_1 = require("@angular/platform-browser");
@@ -141,8 +141,8 @@
     var virtual_item_1 = require("./components/virtual-scroll/virtual-item");
     var virtual_scroll_1 = require("./components/virtual-scroll/virtual-scroll");
     /**
-     * \@name IonicModule
-     * \@description
+     * @name IonicModule
+     * @description
      * IonicModule is an [NgModule](https://angular.io/docs/ts/latest/guide/ngmodule.html) that bootstraps
      * an Ionic App. By passing a root component, IonicModule will make sure that all of the components,
      * directives, and providers from the framework are imported.
@@ -150,16 +150,16 @@
      * Any configuration for the app can be passed as the second argument to `forRoot`. This can be any
      * valid property from the [Config](/docs/api/config/Config/).
      *
-     * \@usage
+     * @usage
      * ```ts
-     * import { NgModule } from '\@angular/core';
+     * import { NgModule } from '@angular/core';
      *
      * import { IonicApp, IonicModule } from 'ionic-angular';
      *
      * import { MyApp } from './app.component';
      * import { HomePage } from '../pages/home/home';
      *
-     * \@NgModule({
+     * @NgModule({
      *   declarations: [
      *     MyApp,
      *     HomePage
@@ -185,10 +185,9 @@
         }
         /**
          * Set the root app component for you IonicModule
-         * @param {?} appRoot
-         * @param {?=} config
-         * @param {?=} deepLinkConfig
-         * @return {?}
+         * @param {any} appRoot The root AppComponent for this app.
+         * @param {any} config Config Options for the app. Accepts any config property.
+         * @param {any} deepLinkConfig Any configuration needed for the Ionic Deeplinker.
          */
         IonicModule.forRoot = function (appRoot, config, deepLinkConfig) {
             if (config === void 0) { config = null; }
@@ -451,35 +450,24 @@
                     ]
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     IonicModule.ctorParameters = function () { return []; };
     exports.IonicModule = IonicModule;
-    function IonicModule_tsickle_Closure_declarations() {
-        /** @type {?} */
-        IonicModule.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        IonicModule.ctorParameters;
-    }
     /**
-     * \@name IonicPageModule
-     * \@description
+     * @name IonicPageModule
+     * @description
      * IonicPageModule is an [NgModule](https://angular.io/docs/ts/latest/guide/ngmodule.html) that
      * bootstraps a child [IonicPage](../navigation/IonicPage/) in order to set up routing.
      *
-     * \@usage
+     * @usage
      * ```ts
-     * import { NgModule } from '\@angular/core';
+     * import { NgModule } from '@angular/core';
      *
      * import { IonicPageModule } from 'ionic-angular';
      *
      * import { HomePage } from './home';
      *
-     * \@NgModule({
+     * @NgModule({
      * 	declarations: [
      * 		HomePage
      * 	],
@@ -496,15 +484,11 @@
     var IonicPageModule = (function () {
         function IonicPageModule() {
         }
-        /**
-         * @param {?} page
-         * @return {?}
-         */
         IonicPageModule.forChild = function (page) {
             return {
                 ngModule: IonicPageModule,
                 providers: [
-                    { provide: /** @type {?} */ (module_loader_1.LAZY_LOADED_TOKEN), useValue: page },
+                    { provide: module_loader_1.LAZY_LOADED_TOKEN, useValue: page },
                     { provide: core_1.ANALYZE_FOR_ENTRY_COMPONENTS, useValue: page, multi: true },
                 ]
             };
@@ -517,26 +501,11 @@
                     exports: [IonicModule]
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     IonicPageModule.ctorParameters = function () { return []; };
     exports.IonicPageModule = IonicPageModule;
-    function IonicPageModule_tsickle_Closure_declarations() {
-        /** @type {?} */
-        IonicPageModule.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        IonicPageModule.ctorParameters;
-    }
     /**
      * @hidden
-     * @param {?} platformLocationStrategy
-     * @param {?} baseHref
-     * @param {?} config
-     * @return {?}
      */
     function provideLocationStrategy(platformLocationStrategy, baseHref, config) {
         return config.get('locationStrategy') === 'path' ?

@@ -6,13 +6,6 @@ import { ViewController } from '../../navigation/view-controller';
  * @hidden
  */
 var ToastCmp = (function () {
-    /**
-     * @param {?} _viewCtrl
-     * @param {?} _config
-     * @param {?} _elementRef
-     * @param {?} params
-     * @param {?} renderer
-     */
     function ToastCmp(_viewCtrl, _config, _elementRef, params, renderer) {
         this._viewCtrl = _viewCtrl;
         this._config = _config;
@@ -32,44 +25,31 @@ var ToastCmp = (function () {
             this.hdrId = 'toast-hdr-' + this.id;
         }
     }
-    /**
-     * @return {?}
-     */
     ToastCmp.prototype.ngAfterViewInit = function () {
         var _this = this;
         // if there's a `duration` set, automatically dismiss.
         if (this.d.duration) {
-            this.dismissTimeout = ((setTimeout(function () {
+            this.dismissTimeout = setTimeout(function () {
                 _this.dismiss('backdrop');
-            }, this.d.duration)));
+            }, this.d.duration);
         }
         this.enabled = true;
     };
-    /**
-     * @return {?}
-     */
     ToastCmp.prototype.ionViewDidEnter = function () {
         var activeElement = document.activeElement;
         if (activeElement) {
             activeElement.blur();
         }
-        var /** @type {?} */ focusableEle = this._elementRef.nativeElement.querySelector('button');
+        var focusableEle = this._elementRef.nativeElement.querySelector('button');
         if (focusableEle) {
             focusableEle.focus();
         }
     };
-    /**
-     * @return {?}
-     */
     ToastCmp.prototype.cbClick = function () {
         if (this.enabled) {
             this.dismiss('close');
         }
     };
-    /**
-     * @param {?} role
-     * @return {?}
-     */
     ToastCmp.prototype.dismiss = function (role) {
         clearTimeout(this.dismissTimeout);
         this.dismissTimeout = undefined;
@@ -99,9 +79,7 @@ ToastCmp.decorators = [
                 },
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 ToastCmp.ctorParameters = function () { return [
     { type: ViewController, },
     { type: Config, },
@@ -109,32 +87,5 @@ ToastCmp.ctorParameters = function () { return [
     { type: NavParams, },
     { type: Renderer, },
 ]; };
-function ToastCmp_tsickle_Closure_declarations() {
-    /** @type {?} */
-    ToastCmp.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    ToastCmp.ctorParameters;
-    /** @type {?} */
-    ToastCmp.prototype.d;
-    /** @type {?} */
-    ToastCmp.prototype.descId;
-    /** @type {?} */
-    ToastCmp.prototype.dismissTimeout;
-    /** @type {?} */
-    ToastCmp.prototype.enabled;
-    /** @type {?} */
-    ToastCmp.prototype.hdrId;
-    /** @type {?} */
-    ToastCmp.prototype.id;
-    /** @type {?} */
-    ToastCmp.prototype._viewCtrl;
-    /** @type {?} */
-    ToastCmp.prototype._config;
-    /** @type {?} */
-    ToastCmp.prototype._elementRef;
-}
-var /** @type {?} */ toastIds = -1;
+var toastIds = -1;
 //# sourceMappingURL=toast-component.js.map

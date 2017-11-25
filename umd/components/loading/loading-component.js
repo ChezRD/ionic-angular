@@ -17,17 +17,9 @@
     var nav_params_1 = require("../../navigation/nav-params");
     var view_controller_1 = require("../../navigation/view-controller");
     /**
-     * @hidden
-     */
+    * @hidden
+    */
     var LoadingCmp = (function () {
-        /**
-         * @param {?} _viewCtrl
-         * @param {?} _config
-         * @param {?} _elementRef
-         * @param {?} gestureCtrl
-         * @param {?} params
-         * @param {?} renderer
-         */
         function LoadingCmp(_viewCtrl, _config, _elementRef, gestureCtrl, params, renderer) {
             this._viewCtrl = _viewCtrl;
             this._config = _config;
@@ -44,9 +36,6 @@
             }
             this.id = (++loadingIds);
         }
-        /**
-         * @return {?}
-         */
         LoadingCmp.prototype.ngOnInit = function () {
             // If no spinner was passed in loading options we need to fall back
             // to the loadingSpinner in the app's config, then the mode spinner
@@ -56,21 +45,12 @@
             // If the user passed hide to the spinner we don't want to show it
             this.showSpinner = util_1.isDefined(this.d.spinner) && this.d.spinner !== 'hide';
         };
-        /**
-         * @return {?}
-         */
         LoadingCmp.prototype.ionViewWillEnter = function () {
             this.gestureBlocker.block();
         };
-        /**
-         * @return {?}
-         */
         LoadingCmp.prototype.ionViewDidLeave = function () {
             this.gestureBlocker.unblock();
         };
-        /**
-         * @return {?}
-         */
         LoadingCmp.prototype.ionViewDidEnter = function () {
             var _this = this;
             // If there is a duration, dismiss after that amount of time
@@ -78,36 +58,22 @@
                 this.durationTimeout = setTimeout(function () { return _this.dismiss('backdrop'); }, this.d.duration);
             }
         };
-        /**
-         * @param {?} ev
-         * @return {?}
-         */
         LoadingCmp.prototype.keyUp = function (ev) {
             if (this._viewCtrl.isLast() && ev.keyCode === key_1.KEY_ESCAPE) {
                 this.bdClick();
             }
         };
-        /**
-         * @return {?}
-         */
         LoadingCmp.prototype.bdClick = function () {
             if (this.d.enableBackdropDismiss) {
                 this.dismiss('backdrop');
             }
         };
-        /**
-         * @param {?} role
-         * @return {?}
-         */
         LoadingCmp.prototype.dismiss = function (role) {
             if (this.durationTimeout) {
                 clearTimeout(this.durationTimeout);
             }
             return this._viewCtrl.dismiss(null, role);
         };
-        /**
-         * @return {?}
-         */
         LoadingCmp.prototype.ngOnDestroy = function () {
             (void 0) /* assert */;
             this.gestureBlocker.destroy();
@@ -130,9 +96,7 @@
                     encapsulation: core_1.ViewEncapsulation.None,
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     LoadingCmp.ctorParameters = function () { return [
         { type: view_controller_1.ViewController, },
         { type: config_1.Config, },
@@ -145,31 +109,6 @@
         'keyUp': [{ type: core_1.HostListener, args: ['body:keyup', ['$event'],] },],
     };
     exports.LoadingCmp = LoadingCmp;
-    function LoadingCmp_tsickle_Closure_declarations() {
-        /** @type {?} */
-        LoadingCmp.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        LoadingCmp.ctorParameters;
-        /** @type {?} */
-        LoadingCmp.propDecorators;
-        /** @type {?} */
-        LoadingCmp.prototype.d;
-        /** @type {?} */
-        LoadingCmp.prototype.id;
-        /** @type {?} */
-        LoadingCmp.prototype.showSpinner;
-        /** @type {?} */
-        LoadingCmp.prototype.durationTimeout;
-        /** @type {?} */
-        LoadingCmp.prototype.gestureBlocker;
-        /** @type {?} */
-        LoadingCmp.prototype._viewCtrl;
-        /** @type {?} */
-        LoadingCmp.prototype._config;
-    }
-    var /** @type {?} */ loadingIds = -1;
+    var loadingIds = -1;
 });
 //# sourceMappingURL=loading-component.js.map

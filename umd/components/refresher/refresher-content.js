@@ -16,17 +16,12 @@
      * @hidden
      */
     var RefresherContent = (function () {
-        /**
-         * @param {?} r
-         * @param {?} _config
-         */
         function RefresherContent(r, _config) {
             this.r = r;
             this._config = _config;
         }
         /**
          * @hidden
-         * @return {?}
          */
         RefresherContent.prototype.ngOnInit = function () {
             if (!this.pullingIcon) {
@@ -59,9 +54,7 @@
                     encapsulation: core_1.ViewEncapsulation.None,
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     RefresherContent.ctorParameters = function () { return [
         { type: refresher_1.Refresher, },
         { type: config_1.Config, },
@@ -73,40 +66,5 @@
         'refreshingText': [{ type: core_1.Input },],
     };
     exports.RefresherContent = RefresherContent;
-    function RefresherContent_tsickle_Closure_declarations() {
-        /** @type {?} */
-        RefresherContent.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        RefresherContent.ctorParameters;
-        /** @type {?} */
-        RefresherContent.propDecorators;
-        /**
-         * \@input {string} a static icon to display when you begin to pull down
-         * @type {?}
-         */
-        RefresherContent.prototype.pullingIcon;
-        /**
-         * \@input {string} the text you want to display when you begin to pull down
-         * @type {?}
-         */
-        RefresherContent.prototype.pullingText;
-        /**
-         * \@input {string} An animated SVG spinner that shows when refreshing begins
-         * @type {?}
-         */
-        RefresherContent.prototype.refreshingSpinner;
-        /**
-         * \@input {string} the text you want to display when performing a refresh
-         * @type {?}
-         */
-        RefresherContent.prototype.refreshingText;
-        /** @type {?} */
-        RefresherContent.prototype.r;
-        /** @type {?} */
-        RefresherContent.prototype._config;
-    }
 });
 //# sourceMappingURL=refresher-content.js.map

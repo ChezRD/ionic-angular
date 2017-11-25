@@ -9,22 +9,14 @@ var RangeKnob = (function () {
         this.ionDecrease = new EventEmitter();
     }
     Object.defineProperty(RangeKnob.prototype, "ratio", {
-        /**
-         * @param {?} r
-         * @return {?}
-         */
         set: function (r) {
             this._x = r * 100 + "%";
         },
         enumerable: true,
         configurable: true
     });
-    /**
-     * @param {?} ev
-     * @return {?}
-     */
     RangeKnob.prototype._keyup = function (ev) {
-        var /** @type {?} */ keyCode = ev.keyCode;
+        var keyCode = ev.keyCode;
         if (keyCode === KEY_LEFT || keyCode === KEY_DOWN) {
             (void 0) /* console.debug */;
             this.ionDecrease.emit();
@@ -61,9 +53,7 @@ RangeKnob.decorators = [
                 }
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 RangeKnob.ctorParameters = function () { return []; };
 RangeKnob.propDecorators = {
     'ratio': [{ type: Input },],
@@ -78,35 +68,4 @@ RangeKnob.propDecorators = {
     'ionDecrease': [{ type: Output },],
     '_keyup': [{ type: HostListener, args: ['keydown', ['$event'],] },],
 };
-function RangeKnob_tsickle_Closure_declarations() {
-    /** @type {?} */
-    RangeKnob.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    RangeKnob.ctorParameters;
-    /** @type {?} */
-    RangeKnob.propDecorators;
-    /** @type {?} */
-    RangeKnob.prototype._x;
-    /** @type {?} */
-    RangeKnob.prototype.pressed;
-    /** @type {?} */
-    RangeKnob.prototype.pin;
-    /** @type {?} */
-    RangeKnob.prototype.min;
-    /** @type {?} */
-    RangeKnob.prototype.max;
-    /** @type {?} */
-    RangeKnob.prototype.val;
-    /** @type {?} */
-    RangeKnob.prototype.disabled;
-    /** @type {?} */
-    RangeKnob.prototype.labelId;
-    /** @type {?} */
-    RangeKnob.prototype.ionIncrease;
-    /** @type {?} */
-    RangeKnob.prototype.ionDecrease;
-}
 //# sourceMappingURL=range-knob.js.map

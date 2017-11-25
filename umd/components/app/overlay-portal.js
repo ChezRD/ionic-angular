@@ -33,21 +33,6 @@ var __extends = (this && this.__extends) || (function () {
      */
     var OverlayPortal = (function (_super) {
         __extends(OverlayPortal, _super);
-        /**
-         * @param {?} app
-         * @param {?} config
-         * @param {?} plt
-         * @param {?} elementRef
-         * @param {?} zone
-         * @param {?} renderer
-         * @param {?} cfr
-         * @param {?} gestureCtrl
-         * @param {?} transCtrl
-         * @param {?} linker
-         * @param {?} viewPort
-         * @param {?} domCtrl
-         * @param {?} errHandler
-         */
         function OverlayPortal(app, config, plt, elementRef, zone, renderer, cfr, gestureCtrl, transCtrl, linker, viewPort, domCtrl, errHandler) {
             var _this = _super.call(this, null, app, config, plt, elementRef, zone, renderer, cfr, gestureCtrl, transCtrl, linker, domCtrl, errHandler) || this;
             _this._isPortal = true;
@@ -63,30 +48,23 @@ var __extends = (this && this.__extends) || (function () {
             return _this;
         }
         Object.defineProperty(OverlayPortal.prototype, "_overlayPortal", {
-            /**
-             * @param {?} val
-             * @return {?}
-             */
             set: function (val) {
                 this._zIndexOffset = (val || 0);
             },
             enumerable: true,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         OverlayPortal.prototype.ngOnDestroy = function () {
             this.destroy();
         };
-        /**
-         * @return {?}
+        /*
+         * @private
          */
         OverlayPortal.prototype.getType = function () {
             return 'portal';
         };
-        /**
-         * @return {?}
+        /*
+         * @private
          */
         OverlayPortal.prototype.getSecondaryIdentifier = function () {
             return null;
@@ -98,9 +76,7 @@ var __extends = (this && this.__extends) || (function () {
                     selector: '[overlay-portal]',
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     OverlayPortal.ctorParameters = function () { return [
         { type: app_1.App, decorators: [{ type: core_1.Inject, args: [core_1.forwardRef(function () { return app_1.App; }),] },] },
         { type: config_1.Config, },
@@ -120,16 +96,5 @@ var __extends = (this && this.__extends) || (function () {
         '_overlayPortal': [{ type: core_1.Input, args: ['overlay-portal',] },],
     };
     exports.OverlayPortal = OverlayPortal;
-    function OverlayPortal_tsickle_Closure_declarations() {
-        /** @type {?} */
-        OverlayPortal.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        OverlayPortal.ctorParameters;
-        /** @type {?} */
-        OverlayPortal.propDecorators;
-    }
 });
 //# sourceMappingURL=overlay-portal.js.map

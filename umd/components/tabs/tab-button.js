@@ -27,11 +27,6 @@ var __extends = (this && this.__extends) || (function () {
      */
     var TabButton = (function (_super) {
         __extends(TabButton, _super);
-        /**
-         * @param {?} config
-         * @param {?} elementRef
-         * @param {?} renderer
-         */
         function TabButton(config, elementRef, renderer) {
             var _this = _super.call(this, config, elementRef, renderer) || this;
             _this.ionSelect = new core_1.EventEmitter();
@@ -39,9 +34,6 @@ var __extends = (this && this.__extends) || (function () {
             _this.layout = config.get('tabsLayout');
             return _this;
         }
-        /**
-         * @return {?}
-         */
         TabButton.prototype.ngOnInit = function () {
             this.tab.btn = this;
             this.layout = this.tab.parent.tabsLayout || this.layout;
@@ -51,17 +43,10 @@ var __extends = (this && this.__extends) || (function () {
             this.hasIconOnly = (this.hasIcon && !this.hasTitle);
             this.hasBadge = !!this.tab.tabBadge;
         };
-        /**
-         * @return {?}
-         */
         TabButton.prototype.onClick = function () {
             this.ionSelect.emit(this.tab);
             return false;
         };
-        /**
-         * @param {?} href
-         * @return {?}
-         */
         TabButton.prototype.updateHref = function (href) {
             this.setElementAttribute('href', href);
         };
@@ -89,9 +74,7 @@ var __extends = (this && this.__extends) || (function () {
                     }
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     TabButton.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
@@ -103,34 +86,5 @@ var __extends = (this && this.__extends) || (function () {
         'onClick': [{ type: core_1.HostListener, args: ['click',] },],
     };
     exports.TabButton = TabButton;
-    function TabButton_tsickle_Closure_declarations() {
-        /** @type {?} */
-        TabButton.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        TabButton.ctorParameters;
-        /** @type {?} */
-        TabButton.propDecorators;
-        /** @type {?} */
-        TabButton.prototype.disHover;
-        /** @type {?} */
-        TabButton.prototype.hasTitle;
-        /** @type {?} */
-        TabButton.prototype.hasIcon;
-        /** @type {?} */
-        TabButton.prototype.hasTitleOnly;
-        /** @type {?} */
-        TabButton.prototype.hasIconOnly;
-        /** @type {?} */
-        TabButton.prototype.hasBadge;
-        /** @type {?} */
-        TabButton.prototype.layout;
-        /** @type {?} */
-        TabButton.prototype.tab;
-        /** @type {?} */
-        TabButton.prototype.ionSelect;
-    }
 });
 //# sourceMappingURL=tab-button.js.map

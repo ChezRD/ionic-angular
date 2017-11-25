@@ -20,22 +20,14 @@
             this.ionDecrease = new core_1.EventEmitter();
         }
         Object.defineProperty(RangeKnob.prototype, "ratio", {
-            /**
-             * @param {?} r
-             * @return {?}
-             */
             set: function (r) {
                 this._x = r * 100 + "%";
             },
             enumerable: true,
             configurable: true
         });
-        /**
-         * @param {?} ev
-         * @return {?}
-         */
         RangeKnob.prototype._keyup = function (ev) {
-            var /** @type {?} */ keyCode = ev.keyCode;
+            var keyCode = ev.keyCode;
             if (keyCode === key_1.KEY_LEFT || keyCode === key_1.KEY_DOWN) {
                 (void 0) /* console.debug */;
                 this.ionDecrease.emit();
@@ -71,9 +63,7 @@
                     }
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     RangeKnob.ctorParameters = function () { return []; };
     RangeKnob.propDecorators = {
         'ratio': [{ type: core_1.Input },],
@@ -89,36 +79,5 @@
         '_keyup': [{ type: core_1.HostListener, args: ['keydown', ['$event'],] },],
     };
     exports.RangeKnob = RangeKnob;
-    function RangeKnob_tsickle_Closure_declarations() {
-        /** @type {?} */
-        RangeKnob.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        RangeKnob.ctorParameters;
-        /** @type {?} */
-        RangeKnob.propDecorators;
-        /** @type {?} */
-        RangeKnob.prototype._x;
-        /** @type {?} */
-        RangeKnob.prototype.pressed;
-        /** @type {?} */
-        RangeKnob.prototype.pin;
-        /** @type {?} */
-        RangeKnob.prototype.min;
-        /** @type {?} */
-        RangeKnob.prototype.max;
-        /** @type {?} */
-        RangeKnob.prototype.val;
-        /** @type {?} */
-        RangeKnob.prototype.disabled;
-        /** @type {?} */
-        RangeKnob.prototype.labelId;
-        /** @type {?} */
-        RangeKnob.prototype.ionIncrease;
-        /** @type {?} */
-        RangeKnob.prototype.ionDecrease;
-    }
 });
 //# sourceMappingURL=range-knob.js.map

@@ -23,36 +23,31 @@ var __extends = (this && this.__extends) || (function () {
     var config_1 = require("../../config/config");
     var ion_1 = require("../ion");
     /**
-     * \@name Note
-     * \@module ionic
-     * \@description
-     * A note is detailed item in an ion-item. It creates greyed out element that can be on the left or right side of an item.
-     * \@usage
-     *
-     * ```html
-     * <ion-content>
-     *   <ion-list>
-     *     <ion-item>
-     *       <ion-note item-start>
-     *         Left Note
-     *       </ion-note>
-     *       My Item
-     *       <ion-note item-end>
-     *         Right Note
-     *       </ion-note>
-     *     </ion-item>
-     *   </ion-list>
-     * </ion-content>
-     * ```
-     * {\@link /docs/api/components/api/components/item/item ion-item}
-     */
+      * @name Note
+      * @module ionic
+      * @description
+      * A note is detailed item in an ion-item. It creates greyed out element that can be on the left or right side of an item.
+      * @usage
+      *
+      * ```html
+      * <ion-content>
+      *   <ion-list>
+      *     <ion-item>
+      *       <ion-note item-start>
+      *         Left Note
+      *       </ion-note>
+      *       My Item
+      *       <ion-note item-end>
+      *         Right Note
+      *       </ion-note>
+      *     </ion-item>
+      *   </ion-list>
+      * </ion-content>
+      *```
+     * {@link /docs/api/components/api/components/item/item ion-item}
+      */
     var Note = (function (_super) {
         __extends(Note, _super);
-        /**
-         * @param {?} config
-         * @param {?} elementRef
-         * @param {?} renderer
-         */
         function Note(config, elementRef, renderer) {
             return _super.call(this, config, elementRef, renderer, 'note') || this;
         }
@@ -63,23 +58,12 @@ var __extends = (this && this.__extends) || (function () {
                     selector: 'ion-note'
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     Note.ctorParameters = function () { return [
         { type: config_1.Config, },
         { type: core_1.ElementRef, },
         { type: core_1.Renderer, },
     ]; };
     exports.Note = Note;
-    function Note_tsickle_Closure_declarations() {
-        /** @type {?} */
-        Note.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        Note.ctorParameters;
-    }
 });
 //# sourceMappingURL=note.js.map

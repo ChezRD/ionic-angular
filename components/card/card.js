@@ -12,15 +12,10 @@ import { Directive, ElementRef, Renderer } from '@angular/core';
 import { Config } from '../../config/config';
 import { Ion } from '../ion';
 /**
- * @hidden
- */
+  * @hidden
+  */
 var Card = (function (_super) {
     __extends(Card, _super);
-    /**
-     * @param {?} config
-     * @param {?} elementRef
-     * @param {?} renderer
-     */
     function Card(config, elementRef, renderer) {
         return _super.call(this, config, elementRef, renderer, 'card') || this;
     }
@@ -32,21 +27,10 @@ Card.decorators = [
                 selector: 'ion-card'
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 Card.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
     { type: Renderer, },
 ]; };
-function Card_tsickle_Closure_declarations() {
-    /** @type {?} */
-    Card.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    Card.ctorParameters;
-}
 //# sourceMappingURL=card.js.map

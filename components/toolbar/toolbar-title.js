@@ -14,11 +14,11 @@ import { Ion } from '../ion';
 import { Navbar } from './navbar';
 import { Toolbar } from './toolbar';
 /**
- * \@name Title
- * \@description
+ * @name Title
+ * @description
  * `ion-title` is a component that sets the title of the `Toolbar` or `Navbar`
  *
- * \@usage
+ * @usage
  *
  * ```html
  * <ion-header>
@@ -46,17 +46,10 @@ import { Toolbar } from './toolbar';
  * </ion-header>
  * ```
  *
- * \@demo /docs/demos/src/title/
+ * @demo /docs/demos/src/title/
  */
 var ToolbarTitle = (function (_super) {
     __extends(ToolbarTitle, _super);
-    /**
-     * @param {?} config
-     * @param {?} elementRef
-     * @param {?} renderer
-     * @param {?} toolbar
-     * @param {?} navbar
-     */
     function ToolbarTitle(config, elementRef, renderer, toolbar, navbar) {
         var _this = _super.call(this, config, elementRef, renderer, 'title') || this;
         toolbar && toolbar._setTitle(_this);
@@ -65,7 +58,6 @@ var ToolbarTitle = (function (_super) {
     }
     /**
      * @hidden
-     * @return {?}
      */
     ToolbarTitle.prototype.getTitleText = function () {
         return this._elementRef.nativeElement.textContent;
@@ -83,9 +75,7 @@ ToolbarTitle.decorators = [
                 encapsulation: ViewEncapsulation.None,
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 ToolbarTitle.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
@@ -93,13 +83,4 @@ ToolbarTitle.ctorParameters = function () { return [
     { type: Toolbar, decorators: [{ type: Optional },] },
     { type: Navbar, decorators: [{ type: Optional }, { type: Inject, args: [forwardRef(function () { return Navbar; }),] },] },
 ]; };
-function ToolbarTitle_tsickle_Closure_declarations() {
-    /** @type {?} */
-    ToolbarTitle.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    ToolbarTitle.ctorParameters;
-}
 //# sourceMappingURL=toolbar-title.js.map

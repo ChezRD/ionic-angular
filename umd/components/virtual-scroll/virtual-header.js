@@ -14,9 +14,6 @@
      * @hidden
      */
     var VirtualHeader = (function () {
-        /**
-         * @param {?} templateRef
-         */
         function VirtualHeader(templateRef) {
             this.templateRef = templateRef;
         }
@@ -25,23 +22,10 @@
     VirtualHeader.decorators = [
         { type: core_1.Directive, args: [{ selector: '[virtualHeader]' },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     VirtualHeader.ctorParameters = function () { return [
         { type: core_1.TemplateRef, },
     ]; };
     exports.VirtualHeader = VirtualHeader;
-    function VirtualHeader_tsickle_Closure_declarations() {
-        /** @type {?} */
-        VirtualHeader.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        VirtualHeader.ctorParameters;
-        /** @type {?} */
-        VirtualHeader.prototype.templateRef;
-    }
 });
 //# sourceMappingURL=virtual-header.js.map

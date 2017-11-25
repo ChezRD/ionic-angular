@@ -11,8 +11,8 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     var core_1 = require("@angular/core");
     /**
-     * @hidden
-     */
+      * @hidden
+      */
     var ItemGroup = (function () {
         function ItemGroup() {
         }
@@ -23,19 +23,8 @@
                     selector: 'ion-item-group'
                 },] },
     ];
-    /**
-     * @nocollapse
-     */
+    /** @nocollapse */
     ItemGroup.ctorParameters = function () { return []; };
     exports.ItemGroup = ItemGroup;
-    function ItemGroup_tsickle_Closure_declarations() {
-        /** @type {?} */
-        ItemGroup.decorators;
-        /**
-         * @nocollapse
-         * @type {?}
-         */
-        ItemGroup.ctorParameters;
-    }
 });
 //# sourceMappingURL=item-group.js.map

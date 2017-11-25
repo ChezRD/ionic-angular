@@ -16,11 +16,6 @@ import { Ion } from '../ion';
  */
 var TabButton = (function (_super) {
     __extends(TabButton, _super);
-    /**
-     * @param {?} config
-     * @param {?} elementRef
-     * @param {?} renderer
-     */
     function TabButton(config, elementRef, renderer) {
         var _this = _super.call(this, config, elementRef, renderer) || this;
         _this.ionSelect = new EventEmitter();
@@ -28,9 +23,6 @@ var TabButton = (function (_super) {
         _this.layout = config.get('tabsLayout');
         return _this;
     }
-    /**
-     * @return {?}
-     */
     TabButton.prototype.ngOnInit = function () {
         this.tab.btn = this;
         this.layout = this.tab.parent.tabsLayout || this.layout;
@@ -40,17 +32,10 @@ var TabButton = (function (_super) {
         this.hasIconOnly = (this.hasIcon && !this.hasTitle);
         this.hasBadge = !!this.tab.tabBadge;
     };
-    /**
-     * @return {?}
-     */
     TabButton.prototype.onClick = function () {
         this.ionSelect.emit(this.tab);
         return false;
     };
-    /**
-     * @param {?} href
-     * @return {?}
-     */
     TabButton.prototype.updateHref = function (href) {
         this.setElementAttribute('href', href);
     };
@@ -79,9 +64,7 @@ TabButton.decorators = [
                 }
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 TabButton.ctorParameters = function () { return [
     { type: Config, },
     { type: ElementRef, },
@@ -92,33 +75,4 @@ TabButton.propDecorators = {
     'ionSelect': [{ type: Output },],
     'onClick': [{ type: HostListener, args: ['click',] },],
 };
-function TabButton_tsickle_Closure_declarations() {
-    /** @type {?} */
-    TabButton.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    TabButton.ctorParameters;
-    /** @type {?} */
-    TabButton.propDecorators;
-    /** @type {?} */
-    TabButton.prototype.disHover;
-    /** @type {?} */
-    TabButton.prototype.hasTitle;
-    /** @type {?} */
-    TabButton.prototype.hasIcon;
-    /** @type {?} */
-    TabButton.prototype.hasTitleOnly;
-    /** @type {?} */
-    TabButton.prototype.hasIconOnly;
-    /** @type {?} */
-    TabButton.prototype.hasBadge;
-    /** @type {?} */
-    TabButton.prototype.layout;
-    /** @type {?} */
-    TabButton.prototype.tab;
-    /** @type {?} */
-    TabButton.prototype.ionSelect;
-}
 //# sourceMappingURL=tab-button.js.map

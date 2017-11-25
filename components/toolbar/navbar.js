@@ -16,8 +16,8 @@ import { NavController } from '../../navigation/nav-controller';
 import { ToolbarBase } from './toolbar-base';
 import { ViewController } from '../../navigation/view-controller';
 /**
- * \@name Navbar
- * \@description
+ * @name Navbar
+ * @description
  * Navbar acts as the navigational toolbar, which also comes with a back
  * button. A navbar can contain a `ion-title`, any number of buttons,
  * a segment, or a searchbar. Navbars must be placed within an
@@ -25,7 +25,7 @@ import { ViewController } from '../../navigation/view-controller';
  * It's important to note that navbar's are part of the dynamic navigation
  * stack. If you need a static toolbar, use ion-toolbar.
  *
- * \@usage
+ * @usage
  * ```html
  * <ion-header>
  *
@@ -48,19 +48,11 @@ import { ViewController } from '../../navigation/view-controller';
  * </ion-header>
  * ```
  *
- * \@demo /docs/demos/src/navbar/
- * @see {\@link ../../toolbar/Toolbar/ Toolbar API Docs}
+ * @demo /docs/demos/src/navbar/
+ * @see {@link ../../toolbar/Toolbar/ Toolbar API Docs}
  */
 var Navbar = (function (_super) {
     __extends(Navbar, _super);
-    /**
-     * @param {?} _app
-     * @param {?} viewCtrl
-     * @param {?} navCtrl
-     * @param {?} config
-     * @param {?} elementRef
-     * @param {?} renderer
-     */
     function Navbar(_app, viewCtrl, navCtrl, config, elementRef, renderer) {
         var _this = _super.call(this, config, elementRef, renderer) || this;
         _this._app = _app;
@@ -81,26 +73,17 @@ var Navbar = (function (_super) {
     }
     Object.defineProperty(Navbar.prototype, "hideBackButton", {
         /**
-         * \@input {boolean} If true, the back button will be hidden.
-         * @return {?}
+         * @input {boolean} If true, the back button will be hidden.
          */
         get: function () {
             return this._hideBb;
         },
-        /**
-         * @param {?} val
-         * @return {?}
-         */
         set: function (val) {
             this._hideBb = isTrueProperty(val);
         },
         enumerable: true,
         configurable: true
     });
-    /**
-     * @param {?} ev
-     * @return {?}
-     */
     Navbar.prototype.backButtonClick = function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
@@ -108,15 +91,12 @@ var Navbar = (function (_super) {
     };
     /**
      * Set the text of the Back Button in the Nav Bar. Defaults to "Back".
-     * @param {?} text
-     * @return {?}
      */
     Navbar.prototype.setBackButtonText = function (text) {
         this._backText = text;
     };
     /**
      * @hidden
-     * @return {?}
      */
     Navbar.prototype.didEnter = function () {
         try {
@@ -128,8 +108,6 @@ var Navbar = (function (_super) {
     };
     /**
      * @hidden
-     * @param {?} isHidden
-     * @return {?}
      */
     Navbar.prototype.setHidden = function (isHidden) {
         // used to display none/block the navbar
@@ -159,9 +137,7 @@ Navbar.decorators = [
                 }
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 Navbar.ctorParameters = function () { return [
     { type: App, },
     { type: ViewController, decorators: [{ type: Optional },] },
@@ -173,44 +149,4 @@ Navbar.ctorParameters = function () { return [
 Navbar.propDecorators = {
     'hideBackButton': [{ type: Input },],
 };
-function Navbar_tsickle_Closure_declarations() {
-    /** @type {?} */
-    Navbar.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    Navbar.ctorParameters;
-    /** @type {?} */
-    Navbar.propDecorators;
-    /**
-     * @hidden
-     * @type {?}
-     */
-    Navbar.prototype._backText;
-    /**
-     * @hidden
-     * @type {?}
-     */
-    Navbar.prototype._bbIcon;
-    /**
-     * @hidden
-     * @type {?}
-     */
-    Navbar.prototype._hidden;
-    /**
-     * @hidden
-     * @type {?}
-     */
-    Navbar.prototype._hideBb;
-    /**
-     * @hidden
-     * @type {?}
-     */
-    Navbar.prototype._sbPadding;
-    /** @type {?} */
-    Navbar.prototype._app;
-    /** @type {?} */
-    Navbar.prototype.navCtrl;
-}
 //# sourceMappingURL=navbar.js.map

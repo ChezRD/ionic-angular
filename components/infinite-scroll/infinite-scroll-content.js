@@ -5,17 +5,12 @@ import { InfiniteScroll } from './infinite-scroll';
  * @hidden
  */
 var InfiniteScrollContent = (function () {
-    /**
-     * @param {?} inf
-     * @param {?} _config
-     */
     function InfiniteScrollContent(inf, _config) {
         this.inf = inf;
         this._config = _config;
     }
     /**
      * @hidden
-     * @return {?}
      */
     InfiniteScrollContent.prototype.ngOnInit = function () {
         if (!this.loadingSpinner) {
@@ -40,9 +35,7 @@ InfiniteScrollContent.decorators = [
                 encapsulation: ViewEncapsulation.None,
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 InfiniteScrollContent.ctorParameters = function () { return [
     { type: InfiniteScroll, },
     { type: Config, },
@@ -51,29 +44,4 @@ InfiniteScrollContent.propDecorators = {
     'loadingSpinner': [{ type: Input },],
     'loadingText': [{ type: Input },],
 };
-function InfiniteScrollContent_tsickle_Closure_declarations() {
-    /** @type {?} */
-    InfiniteScrollContent.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    InfiniteScrollContent.ctorParameters;
-    /** @type {?} */
-    InfiniteScrollContent.propDecorators;
-    /**
-     * \@input {string} An animated SVG spinner that shows while loading.
-     * @type {?}
-     */
-    InfiniteScrollContent.prototype.loadingSpinner;
-    /**
-     * \@input {string} Optional text to display while loading.
-     * @type {?}
-     */
-    InfiniteScrollContent.prototype.loadingText;
-    /** @type {?} */
-    InfiniteScrollContent.prototype.inf;
-    /** @type {?} */
-    InfiniteScrollContent.prototype._config;
-}
 //# sourceMappingURL=infinite-scroll-content.js.map
