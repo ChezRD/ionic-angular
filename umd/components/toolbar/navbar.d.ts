@@ -4,6 +4,7 @@ import { Config } from '../../config/config';
 import { NavController } from '../../navigation/nav-controller';
 import { ToolbarBase } from './toolbar-base';
 import { ViewController } from '../../navigation/view-controller';
+import { OnChanges } from '@angular/core';
 /**
  * @name Navbar
  * @description
@@ -40,7 +41,7 @@ import { ViewController } from '../../navigation/view-controller';
  * @demo /docs/demos/src/navbar/
  * @see {@link ../../toolbar/Toolbar/ Toolbar API Docs}
  */
-export declare class Navbar extends ToolbarBase {
+export declare class Navbar extends ToolbarBase implements OnChanges {
     _app: App;
     private navCtrl;
     /**
@@ -77,6 +78,7 @@ export declare class Navbar extends ToolbarBase {
      * @hidden
      */
     didEnter(): void;
+    ngOnChanges(): void;
     /**
      * @hidden
      */

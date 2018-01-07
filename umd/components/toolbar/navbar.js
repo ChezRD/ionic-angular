@@ -117,6 +117,9 @@ var __extends = (this && this.__extends) || (function () {
                 console.error(e);
             }
         };
+        Navbar.prototype.ngOnChanges = function () {
+            this._app.setTitle(this.getTitleText());
+        };
         /**
          * @hidden
          */

@@ -90,6 +90,9 @@ export class Navbar extends ToolbarBase {
             console.error(e);
         }
     }
+    ngOnChanges() {
+        this._app.setTitle(this.getTitleText());
+    }
     /**
      * @hidden
      */

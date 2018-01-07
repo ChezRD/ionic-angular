@@ -106,6 +106,9 @@ var Navbar = (function (_super) {
             console.error(e);
         }
     };
+    Navbar.prototype.ngOnChanges = function () {
+        this._app.setTitle(this.getTitleText());
+    };
     /**
      * @hidden
      */
