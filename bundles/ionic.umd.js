@@ -27498,6 +27498,7 @@ var App = (function () {
     App.prototype.setTitle = function (val) {
         if (val !== this._title) {
             this._title = val;
+            document.title = val;
             this._titleSrv.setTitle(val);
         }
     };
