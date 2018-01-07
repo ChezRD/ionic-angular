@@ -29488,6 +29488,7 @@ var BlockerDelegate = (function () {
  *  | `ionViewCanEnter`   | boolean/Promise&lt;void&gt; | Runs before the view can enter. This can be used as a sort of "guard" in authenticated views where you need to check permissions before the view can enter                                                                                                     |
  *  | `ionViewCanLeave`   | boolean/Promise&lt;void&gt; | Runs before the view can leave. This can be used as a sort of "guard" in authenticated views where you need to check permissions before the view can leave                                                                                                     |
  *
+ * Those events are only fired on IonicPage, for classic Angular Component, use [Angular Lifecycle Hooks](https://angular.io/guide/lifecycle-hooks).
  *
  * ## Nav Guards
  *
@@ -32209,7 +32210,7 @@ AlertCmp.decorators = [
                     '<ng-template ngSwitchDefault>' +
                     '<div class="alert-input-group">' +
                     '<div *ngFor="let i of d.inputs" class="alert-input-wrapper">' +
-                    '<input [placeholder]="i.placeholder" [(ngModel)]="i.value" [type]="i.type" dir="auto" [min]="i.min" [max]="i.max" [attr.id]="i.id" class="alert-input">' +
+                    '<input [placeholder]="i.placeholder" [(ngModel)]="i.value" [type]="i.type" dir="auto" [min]="i.min" [max]="i.max" [attr.id]="i.id" [disabled]="i.disabled" class="alert-input">' +
                     '</div>' +
                     '</div>' +
                     '</ng-template>' +
@@ -32616,6 +32617,7 @@ var Alert = (function (_super) {
  *  | value       | `string`  | The input's value.                                              |
  *  | label       | `string`  | The input's label (only for radio/checkbox inputs)              |
  *  | checked     | `boolean` | Whether or not the input is checked.                            |
+ *  | disabled    | `boolean` | Whether or not the input is disabled.                           |
  *  | id          | `string`  | The input's id.                                                 |
  *
  *  Button options
