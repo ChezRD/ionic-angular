@@ -62777,7 +62777,7 @@ function writeToNodes(plt, nodes, cells, totalRecords) {
  * NO DOM
  */
 function adjustRendered(cells, data) {
-    var maxRenderHeight = (data.renderHeight - data.itmHeight);
+    var maxRenderHeight = ((data.renderHeight ? data.renderHeight : 0) - data.itmHeight);
     var totalCells = cells.length;
     var viewableRenderedPadding = (data.itmHeight < 90 ? VIEWABLE_RENDERED_PADDING : 0);
     if (data.scrollDiff > 0) {
@@ -63385,7 +63385,7 @@ var VirtualScroll = (function () {
     VirtualScroll.prototype.writeUpdate = function (needClean) {
         (void 0) /* console.debug */;
         var data = this._data;
-        var stopAtHeight = (data.scrollTop + data.renderHeight);
+        var stopAtHeight = (data.scrollTop + (data && data.renderHeight ? data.renderHeight : 0));
         data.scrollDiff = SCROLL_DIFFERENCE_MINIMUM + 1;
         processRecords(stopAtHeight, this._records, this._cells, this._hdrFn, this._ftrFn, this._data);
         // ******** DOM WRITE ****************
@@ -63515,7 +63515,7 @@ var VirtualScroll = (function () {
         this._lastCheck = data.scrollTop;
         if (diff > 0) {
             // load data we may not have processed yet
-            var stopAtHeight = (data.scrollTop + data.renderHeight);
+            var stopAtHeight = (data.scrollTop + (data.renderHeight ? data.renderHeight : 0));
             processRecords(stopAtHeight, records, cells, this._hdrFn, this._ftrFn, data);
         }
         // ******** DOM READ ****************

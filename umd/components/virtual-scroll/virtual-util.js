@@ -379,7 +379,7 @@
      * NO DOM
      */
     function adjustRendered(cells, data) {
-        var maxRenderHeight = (data.renderHeight - data.itmHeight);
+        var maxRenderHeight = ((data.renderHeight ? data.renderHeight : 0) - data.itmHeight);
         var totalCells = cells.length;
         var viewableRenderedPadding = (data.itmHeight < 90 ? VIEWABLE_RENDERED_PADDING : 0);
         if (data.scrollDiff > 0) {

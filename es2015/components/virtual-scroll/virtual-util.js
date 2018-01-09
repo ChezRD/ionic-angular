@@ -362,7 +362,7 @@ export function writeToNodes(plt, nodes, cells, totalRecords) {
  * NO DOM
  */
 export function adjustRendered(cells, data) {
-    const maxRenderHeight = (data.renderHeight - data.itmHeight);
+    const maxRenderHeight = ((data.renderHeight ? data.renderHeight : 0) - data.itmHeight);
     const totalCells = cells.length;
     const viewableRenderedPadding = (data.itmHeight < 90 ? VIEWABLE_RENDERED_PADDING : 0);
     if (data.scrollDiff > 0) {
