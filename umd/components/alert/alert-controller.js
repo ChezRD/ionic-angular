@@ -67,6 +67,7 @@
      *     subTitle: '10% of battery remaining',
      *     buttons: ['Dismiss']
      *   });
+     *   alert.onDidDismiss(() => console.log('Alert was dismissed by the user'));
      *   alert.present();
      * }
      *
@@ -90,6 +91,7 @@
      *       }
      *     ]
      *   });
+     *   alert.onDidDismiss(() => console.log('Alert was dismissed by the user'));
      *   alert.present();
      * }
      *
@@ -168,6 +170,11 @@
      *  | handler  | `any`    | Emitted when the button is pressed.                             |
      *  | cssClass | `string` | An additional CSS class for the button.                         |
      *  | role     | `string` | The buttons role, null or `cancel`.                             |
+     *
+     * ### Detecting dismissal
+     *
+     * Any dismissal of the alert (including backdrop) can be detected
+     * using the method `onDidDismiss(() => {})`.
      *
      * ### Dismissing And Async Navigation
      *

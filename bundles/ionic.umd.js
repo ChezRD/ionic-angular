@@ -24564,7 +24564,7 @@ var DIRECTION_SWITCH = 'switch';
 /**
  * @name MenuController
  * @description
- * The MenuController is a provider which makes it easy to control a [Menu](../../Menu/Menu/).
+ * The MenuController is a provider which makes it easy to control a [Menu](../../menu/Menu/).
  * Its methods can be used to display the menu, enable the menu, toggle the menu, and more.
  * The controller will grab a reference to the menu by the `side`, `id`, or, if neither
  * of these are passed to it, it will grab the first menu it finds.
@@ -24572,7 +24572,7 @@ var DIRECTION_SWITCH = 'switch';
  *
  * @usage
  *
- * Add a basic menu component to start with. See the [Menu](../../Menu/Menu/) API docs
+ * Add a basic menu component to start with. See the [Menu](../../menu/Menu/) API docs
  * for more information on adding menu components.
  *
  * ```html
@@ -24670,7 +24670,7 @@ var DIRECTION_SWITCH = 'switch';
  * @demo /docs/demos/src/menu/
  *
  * @see {@link /docs/components#menus Menu Component Docs}
- * @see {@link ../Menu Menu API Docs}
+ * @see {@link /docs/api/components/menu/Menu/ Menu API Docs}
  *
  */
 var MenuController = (function () {
@@ -31881,7 +31881,7 @@ var ActionSheet = (function (_super) {
  * | icon     | `icon`   | The buttons icons.                                                                                                                               |
  * | handler  | `any`    | An express the button should evaluate.                                                                                                           |
  * | cssClass | `string` | Additional classes for custom styles, separated by spaces.                                                                                       |
- * | role     | `string` | How the button should be displayed, `destructive` or `cancel`. If not role is provided, it will display the button without any additional styles.|
+ * | role     | `string` | How the button should be displayed, `destructive` or `cancel`. If no role is provided, it will display the button without any additional styles. |
  *
  *
  * ### Dismissing And Async Navigation
@@ -32528,6 +32528,7 @@ var Alert = (function (_super) {
  *     subTitle: '10% of battery remaining',
  *     buttons: ['Dismiss']
  *   });
+ *   alert.onDidDismiss(() => console.log('Alert was dismissed by the user'));
  *   alert.present();
  * }
  *
@@ -32551,6 +32552,7 @@ var Alert = (function (_super) {
  *       }
  *     ]
  *   });
+ *   alert.onDidDismiss(() => console.log('Alert was dismissed by the user'));
  *   alert.present();
  * }
  *
@@ -32629,6 +32631,11 @@ var Alert = (function (_super) {
  *  | handler  | `any`    | Emitted when the button is pressed.                             |
  *  | cssClass | `string` | An additional CSS class for the button.                         |
  *  | role     | `string` | The buttons role, null or `cancel`.                             |
+ *
+ * ### Detecting dismissal
+ *
+ * Any dismissal of the alert (including backdrop) can be detected
+ * using the method `onDidDismiss(() => {})`.
  *
  * ### Dismissing And Async Navigation
  *
@@ -49804,7 +49811,7 @@ Nav.propDecorators = {
  * <ion-nav #mycontent [root]="rootPage"></ion-nav>
  * ```
  *
- * To add a menu to an app, the `<ion-menu>` element should be added as a sibling to the `ion-nav` it will belongs
+ * To add a menu to an app, the `<ion-menu>` element should be added as a sibling to the `ion-nav` it will belong
  * to. A [local variable](https://angular.io/docs/ts/latest/guide/user-input.html#local-variables)
  * should be added to the `ion-nav` and passed to the `ion-menu`s `content` property.
  *
@@ -51084,20 +51091,32 @@ var ModuleLoader = (function () {
         var _this = this;
         (void 0) /* console.time */;
         var splitString = modulePath.split(SPLITTER);
-        var promise = this._promiseMap.get(modulePath);
-        if (!promise) {
-            promise = this._ngModuleLoader.load(splitString[0], splitString[1]);
-            this._promiseMap.set(modulePath, promise);
-        }
-        return promise.then(function (loadedModule) {
-            (void 0) /* console.timeEnd */;
-            var ref = loadedModule.create(_this._injector);
-            var component = ref.injector.get(LAZY_LOADED_TOKEN);
-            _this._cfrMap.set(component, ref.componentFactoryResolver);
-            return {
-                componentFactoryResolver: ref.componentFactoryResolver,
-                component: component
+        return new Promise(function (resolve) {
+            var promise = _this._promiseMap.get(modulePath);
+            var resolvePromisedModule = function (loadedModule) {
+                (void 0) /* console.timeEnd */;
+                var ref = loadedModule.create(_this._injector);
+                var component = ref.injector.get(LAZY_LOADED_TOKEN);
+                _this._cfrMap.set(component, ref.componentFactoryResolver);
+                resolve({
+                    componentFactoryResolver: ref.componentFactoryResolver,
+                    component: component
+                });
             };
+            var generatePromise = function (splitString) {
+                var promise = _this._ngModuleLoader.load(splitString[0], splitString[1]);
+                _this._promiseMap.set(modulePath, promise);
+                return promise;
+            };
+            if (!promise) {
+                promise = generatePromise(splitString);
+                promise.catch(function () {
+                    _this._promiseMap.delete(modulePath);
+                    promise = generatePromise(splitString);
+                    promise.then(function (loadedModule) { return resolvePromisedModule(loadedModule); });
+                });
+            }
+            promise.then(function (loadedModule) { return resolvePromisedModule(loadedModule); });
         });
     };
     ModuleLoader.prototype.getComponentFactoryResolver = function (component) {
@@ -63889,7 +63908,7 @@ var SCROLL_DIFFERENCE_MINIMUM = 40;
  *
  * In this example, if the app is launched at `http://localhost:8101/#/contact/contact-more-info` the displayed page
  * will be the `'ContactMoreInfoPage'`. It will show a back button that will go to the `'ContactDetailPage'` which
- * will also show a back button which will go to the `'Constact'` page.
+ * will also show a back button which will go to the `'Contact'` page.
  *
  * An example of an application with a set history stack is the Instagram application. Opening a link
  * to an image on Instagram will show the details for that image with a back button to the user's profile

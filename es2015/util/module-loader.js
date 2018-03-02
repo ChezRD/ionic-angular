@@ -16,20 +16,32 @@ export class ModuleLoader {
     load(modulePath) {
         (void 0) /* console.time */;
         const splitString = modulePath.split(SPLITTER);
-        let promise = this._promiseMap.get(modulePath);
-        if (!promise) {
-            promise = this._ngModuleLoader.load(splitString[0], splitString[1]);
-            this._promiseMap.set(modulePath, promise);
-        }
-        return promise.then(loadedModule => {
-            (void 0) /* console.timeEnd */;
-            const ref = loadedModule.create(this._injector);
-            const component = ref.injector.get(LAZY_LOADED_TOKEN);
-            this._cfrMap.set(component, ref.componentFactoryResolver);
-            return {
-                componentFactoryResolver: ref.componentFactoryResolver,
-                component: component
+        return new Promise((resolve) => {
+            let promise = this._promiseMap.get(modulePath);
+            const resolvePromisedModule = (loadedModule) => {
+                (void 0) /* console.timeEnd */;
+                const ref = loadedModule.create(this._injector);
+                const component = ref.injector.get(LAZY_LOADED_TOKEN);
+                this._cfrMap.set(component, ref.componentFactoryResolver);
+                resolve({
+                    componentFactoryResolver: ref.componentFactoryResolver,
+                    component: component
+                });
             };
+            const generatePromise = (splitString) => {
+                let promise = this._ngModuleLoader.load(splitString[0], splitString[1]);
+                this._promiseMap.set(modulePath, promise);
+                return promise;
+            };
+            if (!promise) {
+                promise = generatePromise(splitString);
+                promise.catch(() => {
+                    this._promiseMap.delete(modulePath);
+                    promise = generatePromise(splitString);
+                    promise.then(loadedModule => resolvePromisedModule(loadedModule));
+                });
+            }
+            promise.then(loadedModule => resolvePromisedModule(loadedModule));
         });
     }
     getComponentFactoryResolver(component) {
