@@ -1,6 +1,6 @@
 {
   "name": "ionic-angular",
-  "version": "3.9.3-clone-201803021853",
+  "version": "3.9.3-clone-201803061542",
   "description": "A powerful framework for building mobile and progressive web apps with JavaScript and Angular",
   "keywords": [
     "ionic",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ChezRD/ionic-angular.git"
+    "url": "https://github.com/ChezRD/ionic.git"
   },
   "license": "MIT",
   "main": "umd/index.js",
