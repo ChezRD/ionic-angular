@@ -41549,7 +41549,7 @@ var Content = (function (_super) {
     Content.prototype.scrollTo = function (x, y, duration, done) {
         if (duration === void 0) { duration = 300; }
         (void 0) /* console.debug */;
-        return this._scroll.scrollTo(x, y, duration, done);
+        return this._scroll && this._scroll.scrollTo(x, y, duration, done);
     };
     /**
      * Scroll to the top of the content component.
@@ -41560,7 +41560,7 @@ var Content = (function (_super) {
     Content.prototype.scrollToTop = function (duration) {
         if (duration === void 0) { duration = 300; }
         (void 0) /* console.debug */;
-        return this._scroll.scrollToTop(duration);
+        return this._scroll && this._scroll.scrollToTop(duration);
     };
     /**
      * Scroll to the bottom of the content component.
@@ -41571,7 +41571,7 @@ var Content = (function (_super) {
     Content.prototype.scrollToBottom = function (duration) {
         if (duration === void 0) { duration = 300; }
         (void 0) /* console.debug */;
-        return this._scroll.scrollToBottom(duration);
+        return this._scroll && this._scroll.scrollToBottom(duration);
     };
     Object.defineProperty(Content.prototype, "fullscreen", {
         /**

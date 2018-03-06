@@ -374,7 +374,7 @@ export class Content extends Ion {
      */
     scrollTo(x, y, duration = 300, done) {
         (void 0) /* console.debug */;
-        return this._scroll.scrollTo(x, y, duration, done);
+        return this._scroll && this._scroll.scrollTo(x, y, duration, done);
     }
     /**
      * Scroll to the top of the content component.
@@ -384,7 +384,7 @@ export class Content extends Ion {
      */
     scrollToTop(duration = 300) {
         (void 0) /* console.debug */;
-        return this._scroll.scrollToTop(duration);
+        return this._scroll && this._scroll.scrollToTop(duration);
     }
     /**
      * Scroll to the bottom of the content component.
@@ -394,7 +394,7 @@ export class Content extends Ion {
      */
     scrollToBottom(duration = 300) {
         (void 0) /* console.debug */;
-        return this._scroll.scrollToBottom(duration);
+        return this._scroll && this._scroll.scrollToBottom(duration);
     }
     /**
      * @input {boolean} If true, the content will scroll behind the headers

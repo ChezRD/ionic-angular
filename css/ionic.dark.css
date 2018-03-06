@@ -3,7 +3,7 @@
  * A powerful framework for building mobile and progressive web apps.
  * http://ionicframework.com/
  *
- * v3.9.3-clone-201803061542, Dark Theme
+ * v3.9.3-clone-201803062042, Dark Theme
  *
  * Licensed under the MIT license. Please see LICENSE for more information.
  */
@@ -1015,10 +1015,17 @@ ion-input :focus {
   transform: translate3d(0,  0,  0); }
 
 * {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box; }
+
+a {
   -webkit-touch-callout: none; }
+
+input[type="button"],
+[tappable],
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent; }
 
 html {
   width: 100%;

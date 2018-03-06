@@ -85,9 +85,18 @@ $screen-breakpoints: (
 
 * {
   box-sizing: border-box;
+}
+
+a{
+  -webkit-touch-callout: none;
+}
+
+input[type="button"],
+[tappable],
+button,
+a{
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
 }
 
 html {
