@@ -28,32 +28,23 @@
             var _this = this;
             (void 0) /* console.time */;
             var splitString = modulePath.split(SPLITTER);
-            return new Promise(function (resolve) {
-                var promise = _this._promiseMap.get(modulePath);
-                var resolvePromisedModule = function (loadedModule) {
-                    (void 0) /* console.timeEnd */;
-                    var ref = loadedModule.create(_this._injector);
-                    var component = ref.injector.get(exports.LAZY_LOADED_TOKEN);
-                    _this._cfrMap.set(component, ref.componentFactoryResolver);
-                    resolve({
-                        componentFactoryResolver: ref.componentFactoryResolver,
-                        component: component
-                    });
+            var promise = this._promiseMap.get(modulePath);
+            if (!promise) {
+                promise = this._ngModuleLoader.load(splitString[0], splitString[1]);
+                this._promiseMap.set(modulePath, promise);
+                promise.catch(function () {
+                    _this._promiseMap.delete(modulePath);
+                });
+            }
+            return promise.then(function (loadedModule) {
+                (void 0) /* console.timeEnd */;
+                var ref = loadedModule.create(_this._injector);
+                var component = ref.injector.get(exports.LAZY_LOADED_TOKEN);
+                _this._cfrMap.set(component, ref.componentFactoryResolver);
+                return {
+                    componentFactoryResolver: ref.componentFactoryResolver,
+                    component: component
                 };
-                var generatePromise = function (splitString) {
-                    var promise = _this._ngModuleLoader.load(splitString[0], splitString[1]);
-                    _this._promiseMap.set(modulePath, promise);
-                    return promise;
-                };
-                if (!promise) {
-                    promise = generatePromise(splitString);
-                    promise.catch(function () {
-                        _this._promiseMap.delete(modulePath);
-                        promise = generatePromise(splitString);
-                        promise.then(function (loadedModule) { return resolvePromisedModule(loadedModule); });
-                    });
-                }
-                promise.then(function (loadedModule) { return resolvePromisedModule(loadedModule); });
             });
         };
         ModuleLoader.prototype.getComponentFactoryResolver = function (component) {
