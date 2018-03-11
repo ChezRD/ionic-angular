@@ -237,11 +237,16 @@
             if (this.state === STATE_LOADING || this.state === STATE_DISABLED) {
                 return 1;
             }
-            if (ev && this._lastCheck + 32 > ev.timeStamp) {
-                // no need to check less than every XXms
+            try {
+                if (this._lastCheck + 32 > ev.timeStamp) {
+                    // no need to check less than every XXms
+                    return 2;
+                }
+                this._lastCheck = ev.timeStamp;
+            }
+            catch (e) {
                 return 2;
             }
-            this._lastCheck = ev.timeStamp;
             // ******** DOM READ ****************
             var infiniteHeight = this._elementRef.nativeElement.scrollHeight;
             if (!infiniteHeight) {
