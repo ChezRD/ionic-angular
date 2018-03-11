@@ -361,6 +361,16 @@
             // and they let go to begin refreshing
             this.ionRefresh.emit(this);
         };
+        Refresher.prototype.manualStart = function () {
+            if (this._content.contentTop > 0) {
+                var newTop = this._content.contentTop + 'px';
+                if (this._top !== newTop) {
+                    this._top = newTop;
+                }
+            }
+            this.state = STATE_REFRESHING;
+            this._setCss(this.pullMin, (this.snapbackDuration + 'ms'), true, '');
+        };
         /**
          * Call `complete()` when your async operation has completed.
          * For example, the `refreshing` state is while the app is performing

@@ -174,6 +174,7 @@ export declare class Refresher {
     _onMoveInZone(): 2 | 3 | 4;
     _onEnd(): void;
     _beginRefresh(): void;
+    manualStart(): void;
     /**
      * Call `complete()` when your async operation has completed.
      * For example, the `refreshing` state is while the app is performing
