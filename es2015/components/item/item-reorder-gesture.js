@@ -46,6 +46,7 @@ export class ItemReorderGesture {
         this.windowHeight = this.plt.height() - AUTO_SCROLL_MARGIN;
         this.lastScrollPosition = this.reorderList._scrollContent(0);
         this.offset = pointerCoord(ev);
+        this.originalRect = item.getBoundingClientRect();
         this.offset.y += this.lastScrollPosition;
         item.classList.add(ITEM_REORDER_ACTIVE);
         this.reorderList._reorderStart();
@@ -79,8 +80,21 @@ export class ItemReorderGesture {
                 this.emptyZone = true;
             }
         }
-        // Update selected item position
-        const ydiff = Math.round(posY - this.offset.y + scrollPosition);
+        let outer = this.reorderList.getNativeElement();
+        let inner = selectedItem;
+        let outerRect = outer.getBoundingClientRect();
+        let innerRect = inner.getBoundingClientRect();
+        let ydiff = Math.round(posY - this.offset.y + scrollPosition);
+        let outerTop = outerRect.top + (window.scrollY || window.pageYOffset);
+        let innerTop = this.originalRect.top + (window.scrollY || window.pageYOffset);
+        let difference = innerTop - outerTop;
+        let direction = posY - this.offset.y;
+        if (direction < 0) {
+            ydiff = Math.min(0, Math.max(ydiff, -difference));
+        }
+        else if (direction > 0) {
+            ydiff = Math.min(ydiff, Math.max(outerRect.height - difference - innerRect.height, 0));
+        }
         selectedItem.style[this.plt.Css.transform] = `translateY(${ydiff}px)`;
     }
     onDragEnd(ev) {

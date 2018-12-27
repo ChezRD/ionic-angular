@@ -8,6 +8,7 @@ export declare class ItemReorderGesture {
     private selectedItemEle;
     private selectedItemHeight;
     private offset;
+    private originalRect;
     private lastToIndex;
     private lastYcoord;
     private lastScrollPosition;

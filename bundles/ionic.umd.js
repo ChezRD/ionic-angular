@@ -27496,7 +27496,7 @@ var App = (function () {
      * @param {string} val  Value to set the document title to.
      */
     App.prototype.setTitle = function (val) {
-        if (val !== this._title) {
+        if (val !== this._title && val) {
             this._title = val;
             document.title = val;
             this._titleSrv.setTitle(val);
@@ -42137,6 +42137,7 @@ var ItemReorderGesture = (function () {
         this.windowHeight = this.plt.height() - AUTO_SCROLL_MARGIN;
         this.lastScrollPosition = this.reorderList._scrollContent(0);
         this.offset = pointerCoord(ev);
+        this.originalRect = item.getBoundingClientRect();
         this.offset.y += this.lastScrollPosition;
         item.classList.add(ITEM_REORDER_ACTIVE);
         this.reorderList._reorderStart();
@@ -42170,8 +42171,21 @@ var ItemReorderGesture = (function () {
                 this.emptyZone = true;
             }
         }
-        // Update selected item position
+        var outer = this.reorderList.getNativeElement();
+        var inner = selectedItem;
+        var outerRect = outer.getBoundingClientRect();
+        var innerRect = inner.getBoundingClientRect();
         var ydiff = Math.round(posY - this.offset.y + scrollPosition);
+        var outerTop = outerRect.top + (window.scrollY || window.pageYOffset);
+        var innerTop = this.originalRect.top + (window.scrollY || window.pageYOffset);
+        var difference = innerTop - outerTop;
+        var direction = posY - this.offset.y;
+        if (direction < 0) {
+            ydiff = Math.min(0, Math.max(ydiff, -difference));
+        }
+        else if (direction > 0) {
+            ydiff = Math.min(ydiff, Math.max(outerRect.height - difference - innerRect.height, 0));
+        }
         selectedItem.style[this.plt.Css.transform] = "translateY(" + ydiff + "px)";
     };
     ItemReorderGesture.prototype.onDragEnd = function (ev) {

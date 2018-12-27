@@ -72,7 +72,7 @@ var App = (function () {
      * @param {string} val  Value to set the document title to.
      */
     App.prototype.setTitle = function (val) {
-        if (val !== this._title) {
+        if (val !== this._title && val) {
             this._title = val;
             document.title = val;
             this._titleSrv.setTitle(val);
